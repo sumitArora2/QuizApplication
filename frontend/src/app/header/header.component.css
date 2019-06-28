@@ -1,0 +1,51 @@
+html, body, div, nav{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+nav{
+    display: block; 
+}
+
+body {
+    line-height: 1;
+}
+
+body, input,textarea {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-size: 14pt;
+    font-weight: 150;
+    line-height: 1.65;
+}
+
+/* nav par */
+.topnav {
+    /* overflow: hidden; */
+    background-color: #333;
+    padding-top: 0;
+    float:left;
+    width: 100%;
+    /* position: fixed; */
+    /* overflow: hidden; */
+    }
+    
+    .topnav a {
+    float: left;
+    /* display: block; */
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    }
+    
+    .topnav a:hover {
+    background-color:orangered;
+    color: black;
+    }
+    
+    
+    

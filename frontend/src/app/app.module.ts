@@ -4,29 +4,27 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { PrincipalDashboardComponent } from './principal-dashboard/principal-dashboard.component';
-import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
-import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard.component';
+import { AuthModule } from './auth/auth.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
-    SignupComponent,
     HeaderComponent,
-    FooterComponent,
-    PrincipalDashboardComponent,
-    StudentDashboardComponent,
-    TeacherDashboardComponent
+    FooterComponent
+ 
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AuthModule,
+    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
