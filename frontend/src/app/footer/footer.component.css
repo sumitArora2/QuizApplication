@@ -22,3 +22,26 @@
         font-size: 0.8em;
     }
 
+    @media screen and (max-width: 736px) {
+
+        #footer {
+            margin-top: 2em;
+        }
+
+            #footer:before {
+                margin-bottom: 2em;
+            }
+
+    }
+
+/* Footer */
+.footer {
+padding: 20px;
+text-align: center;
+background: orangered;
+/* margin-top: 20px; */
+}
+.footer h4{
+  text-align: center;
+  font-size: 15px;
+}
