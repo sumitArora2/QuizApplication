@@ -8,6 +8,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
 <<<<<<< HEAD
   title = 'frontend Changes';
-=======
-  title = 'hello';
 }
