@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardRouthingModule } from './dashboard-routing';
-import { PrincipalDashboardComponent } from './principal-dashboard/principal-dashboard.component';
-import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard.component';
-import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
+import { PrincipalDashboardModule } from './principal-dashboard/principal-dashboard.module';
+import { StudentDashboardModule } from './student-dashboard/student-dashboard.module';
+import { TeacherDashboardModule } from './teacher-dashboard/teacher-dashboard.module';
 
 @NgModule({
   declarations: [
-    PrincipalDashboardComponent,
-    TeacherDashboardComponent,
-    StudentDashboardComponent
   ],
   imports: [
     CommonModule,
-    DashboardRouthingModule
+    DashboardRouthingModule,
+    PrincipalDashboardModule,
+    StudentDashboardModule,
+    TeacherDashboardModule
   ]
 })
 export class DashboardModule { }
