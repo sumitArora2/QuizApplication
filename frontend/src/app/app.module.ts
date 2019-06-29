@@ -9,13 +9,14 @@ import { FooterComponent } from './footer/footer.component';
 import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShareModule } from './share/share.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
  
   ],
   imports: [
@@ -24,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     AuthModule,
-    DashboardModule
+    DashboardModule,
+    ShareModule
   ],
   providers: [],
   bootstrap: [AppComponent]

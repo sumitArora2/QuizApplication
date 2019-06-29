@@ -3,9 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PrincipalHomeComponent } from './principal-dashboard/principal-home/principal-home.component';
 import { TeacherHomeComponent } from './teacher-dashboard/teacher-home/teacher-home.component';
 import { StudentHomeComponent } from './student-dashboard/student-home/student-home.component';
-import { QuizComponent } from './student-dashboard/quiz/quiz.component';
-
-
+import { StudentQuizComponent } from './student-dashboard/student-quiz/student-quiz.component';
 
 const routes: Routes = [
  {
@@ -18,7 +16,7 @@ const routes: Routes = [
      path:'studentHome', component:StudentHomeComponent
  },
  {
-     path:'quiz', component:QuizComponent
+     path:'studentQuiz', component:StudentQuizComponent
  }
 ];
 
