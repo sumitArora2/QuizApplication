@@ -1,3 +1,4 @@
+import { TeacherQuizComponent } from './teacher-dashboard/teacher-quiz/teacher-quiz.component';
 import { ComplaintsComponent } from './principal-dashboard/complaints/complaints.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -7,7 +8,6 @@ import { StudentHomeComponent } from './student-dashboard/student-home/student-h
 import { DetailsComponent } from './details/details.component';
 
 
-
 const routes: Routes = [
  {
      path:'princiHome', component:PrincipalHomeComponent
@@ -15,6 +15,9 @@ const routes: Routes = [
  {
      path:'teacherHome', component:TeacherHomeComponent
  },
+ {
+  path:'teacherQuiz', component:TeacherQuizComponent
+},
  {
      path:'studentHome', component:StudentHomeComponent
  },
