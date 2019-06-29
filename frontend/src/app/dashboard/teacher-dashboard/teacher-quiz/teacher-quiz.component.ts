@@ -20,4 +20,7 @@ export class TeacherQuizComponent implements OnInit {
   AddOptions(add:any){
   this.newOption.push(add);
   }
+  AddAnotherPannel(add:any){
+   this.newQuestion.push(add);
+  }
 }

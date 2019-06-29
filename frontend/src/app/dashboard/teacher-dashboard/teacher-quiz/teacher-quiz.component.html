@@ -22,23 +22,33 @@
         <form>
           <div class="panel panel-default">
             <div class="panel-body">
-              <div class="form-group">
+              <div class="form-group base">
                 <label>Enter the question</label>
                 <input type="text" class="form-control" formControlName="name" placeholder="Enter question">
-                <div class="checkbox">
-                  <label><input type="checkbox" value="">Option 1</label>
-                  <button class="btn btn-primary" (click)="AddOptions(add)">Add</button>
-                  <div *ngFor="let option of newOption">
-                    <div class="checkbox">
-                      <label><input type="checkbox" value="">Option 1 </label>
+                <button class="btn btn-primary" type="button" (click)="AddOptions(1)">Add Options</button>
+                <div *ngFor="let option of newOption">
+                  <input type="text" class="form-control options" formControlName="name" placeholder="Enter the options">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Add a new pannel -->
+          <div class="panel panel-default" *ngFor="let newQues of newQuestion">
+                <div class="panel-body">
+                  <div class="form-group base">
+                    <label>Enter the question</label>
+                    <input type="text" class="form-control" formControlName="name" placeholder="Enter question">
+                    <button class="btn btn-primary" type="button" (click)="AddOptions(1)">Add Options</button>
+                    <div *ngFor="let option of newOption">
+                      <input type="text" class="form-control options" formControlName="name" placeholder="Enter the options">
                     </div>
                   </div>
                 </div>
               </div>
-
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-success" (click)="AddAnotherPannel(add)">Add another Question</button>
+              <br>
+              <br>
+              <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>
