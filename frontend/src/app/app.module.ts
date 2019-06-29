@@ -26,7 +26,9 @@ import { ProfileComponent } from './shared/profile/profile.component';
     FormsModule,
     ReactiveFormsModule,
     AuthModule,
-    DashboardModule
+    DashboardModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

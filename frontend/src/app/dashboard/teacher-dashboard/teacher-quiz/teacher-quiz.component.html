@@ -1,1 +1,49 @@
-<p>teacher-quiz works!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Quiz</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <!-- <div class="container"> -->
+        <!-- <h2>Stacked form</h2> -->
+        <form>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                <label>Enter the question</label>
+                <input type="text" class="form-control" formControlName="name" placeholder="Enter question">
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">Option 1</label>
+                  <button class="btn btn-primary" (click)="AddOptions(add)">Add</button>
+                  <div *ngFor="let option of newOption">
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="">Option 1 </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
