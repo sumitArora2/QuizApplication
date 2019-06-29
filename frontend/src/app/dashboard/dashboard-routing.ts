@@ -1,3 +1,4 @@
+import { ComplaintsComponent } from './principal-dashboard/complaints/complaints.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PrincipalHomeComponent } from './principal-dashboard/principal-home/principal-home.component';
@@ -19,7 +20,10 @@ const routes: Routes = [
  },
  {
    path:'details',component:DetailsComponent
- }
+ },
+ {
+  path:'complaints', component:ComplaintsComponent
+}
 ];
 
 @NgModule({
