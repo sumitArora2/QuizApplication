@@ -10,7 +10,6 @@ import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './shared/profile/profile.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +17,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    ProfileComponent,
-    PageNotFoundComponent
+    ProfileComponent
  
   ],
   imports: [
