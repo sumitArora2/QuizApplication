@@ -5,13 +5,51 @@
     height: 100vh;
     width: -webkit-fill-available;
     background-image: url("https://ak9.picdn.net/shutterstock/videos/21971689/thumb/1.jpg");
-    
+    width: 70%;
 }
 .container-fluid{
     height: inherit;
     margin-left: auto;
     margin-right: auto;
 }
+
+.allque{
+    float: right;
+    width: 30%;
+    padding-left:15px;
+    padding-right: 15px;
+    padding-top: 20px;
+    background: #17a2b8!important;
+    height: 100vh;
+
+}
+/* circul buttons */
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+  }
+  .btn-circle.btn-lg {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
+  }
+  .btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 35px;
+  }
+
 .nav-button {
     padding: 3px 12px;
     border-radius: 5px;
@@ -193,6 +231,15 @@
   
   .modal-body {
       min-height: 205px
+  }
+
+  .modal-dialog{
+      width: 600px;
+      padding-top: 25px;
+      padding-bottom: 0;
+      left:0;
+      right:0;
+      margin-bottom: 0;
   }
   #loadbar {
       position: absolute;
@@ -396,4 +443,6 @@
           background-color: #FFF
       }
   }
+
+  
   

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { QuizserviceService } from 'src/app/shared/quizservice.service';
 
 @Component({
   selector: 'app-student-quiz',
@@ -9,7 +10,9 @@ export class StudentQuizComponent implements OnInit {
   name = 'Angular 6';
   timeLeft: number = 60;
   interval;
-  constructor() { }
+  quizs:any;
+
+  constructor(private quizgenerate:QuizserviceService) { }
 
   ngOnInit() {
     this.interval = setInterval(() => {
@@ -19,6 +22,8 @@ export class StudentQuizComponent implements OnInit {
         this.timeLeft = 60;
       }
     },1000)
-  }
 
+
+    this.quizs = this.quizgenerate.getQuiz();
+  }
 }
