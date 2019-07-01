@@ -33,10 +33,14 @@
             </div>
           </div>
           <!-- Add a new pannel -->
-          <div class="panel panel-default" *ngFor="let newQues of newQuestion">
+          <div class="panel panel-default" *ngFor="let newQues of newQuestion let i=index">
                 <div class="panel-body">
                   <div class="form-group base">
-                    <label>Enter the question</label>
+                        <a (click)="removeQuestion(i)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                              </a>
+                              <br>
+                    <label>Enter the question {{i}}</label>
                     <input type="text" class="form-control" formControlName="name" placeholder="Enter question">
                     <button class="btn btn-primary" type="button" (click)="AddOptions(1)">Add Options</button>
                     <div *ngFor="let option of newOption">

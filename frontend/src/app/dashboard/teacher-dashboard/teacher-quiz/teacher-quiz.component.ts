@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class TeacherQuizComponent implements OnInit {
   newOption=[];
   // myForm:FormBuilder;
-  newQuestion=[]
+  newQuestion=[{}];
   constructor() { }
 
   ngOnInit() {
@@ -22,5 +22,12 @@ export class TeacherQuizComponent implements OnInit {
   }
   AddAnotherPannel(add:any){
    this.newQuestion.push(add);
+  }
+
+  removeQuestion(i){
+    console.log("the value of i is",i);
+    console.log("the value of index is",i.value);
+    
+   this.newQuestion.splice(i,1)
   }
 }
