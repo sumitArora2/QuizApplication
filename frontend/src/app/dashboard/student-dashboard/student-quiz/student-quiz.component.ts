@@ -18,7 +18,7 @@ export class StudentQuizComponent implements OnInit {
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
-      } else {
+      } else { 
         this.timeLeft = 60;
       }
     },1000)

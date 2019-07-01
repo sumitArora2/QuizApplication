@@ -30,7 +30,7 @@ export class QuizserviceService {
         ,"option2":"option Two"
         ,"option3":"option Three"
         ,"option4":"option Four"
-        ,"answer":"Two"
+        ,"answer":"Two" 
   } 
 ]
   constructor() { }
