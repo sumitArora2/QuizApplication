@@ -23,7 +23,8 @@ const routes: Routes = [
   },
   {
     path:'footer',component:FooterComponent
-  }
+  },
+  
 ];
 
 @NgModule({

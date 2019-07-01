@@ -7,6 +7,7 @@ import { TeacherHomeComponent } from './teacher-dashboard/teacher-home/teacher-h
 import { StudentHomeComponent } from './student-dashboard/student-home/student-home.component';
 import { StudentQuizComponent } from './student-dashboard/student-quiz/student-quiz.component';
 import { DetailsComponent } from './details/details.component';
+import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,9 @@ const routes: Routes = [
  },
  {
   path:'complaints', component:ComplaintsComponent
+},
+{
+  path:'**',component:PageNotFoundComponent
 }
 ];
 
