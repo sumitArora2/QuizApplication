@@ -36,12 +36,12 @@
           <div class="panel panel-default" *ngFor="let newQues of QuesService.getQuestions() let i=index">
                 <div class="panel-body">
                   <div class="form-group base">
-                        <a (click)="removeQuestion(i)">
+                        <a (click)="removeQuestion(newQues)">
                                 <span class="glyphicon glyphicon-trash"></span>
                               </a>
                               <br>
-                    <label>Enter the question {{i}}</label>
-                    <input type="text" class="form-control" formControlName="name" placeholder="Enter question">
+                    <label>Enter the question {{newQues.id}}</label>
+                    <input type="text" class="form-control" formControlName="name" value="{{sampleString}}" placeholder="Enter question">
                     <button class="btn btn-primary" type="button" (click)="AddOptions(1)">Add Options</button>
                     <div *ngFor="let option of newOption">
                       <input type="text" class="form-control options" formControlName="name" placeholder="Enter the options">

@@ -24,8 +24,8 @@ export class QuestionsService {
     return localStorageItem==null ? []:localStorageItem.questions;
   }
   //adding the questions in the local storage
-  public addQuestions(){
-   let question=new Ques(this.nextId);
+  public addQuestions(text:string){
+   let question=new Ques(this.nextId,text);
    let questions=this.getQuestions();
    questions.push(question)
    this.SetLocalStorageQuestions(questions);

@@ -1,3 +1,4 @@
+import { Ques } from './../../../classes/Ques';
 import { QuestionsService } from './../../../shared/services/questions.service';
 // import { FormGroup, FormBuilder, Form } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -11,14 +12,10 @@ export class TeacherQuizComponent implements OnInit {
   newOption=[];
   // myForm:FormBuilder;
   
-  constructor(private QuesService:QuestionsService) { }
-  newQuestion
+  constructor(public QuesService:QuestionsService) { }
+  question:Ques;
+  sampleString:string="";
   ngOnInit() {
-    // this.myForm=this.fb.group({
-    //   name:''
-    // })
-   // this.newQuestion=this.QuesService.getQuestions();
-    console.log("in quizzz",this.QuesService.getQuestions());
   }
   AddOptions(add:any){
   // this.newOption.push(add);
@@ -26,14 +23,10 @@ export class TeacherQuizComponent implements OnInit {
 
   }
   AddAnotherPannel(add:any){
-  this.QuesService.addQuestions();  
-  // this.newQuestion=this.QuesService.getQuestions();
+  this.QuesService.addQuestions(this.sampleString);  
 }
-
-  removeQuestion(i){
-    // console.log("the value of i is",i);
-    // console.log("the value of index is",i.value);
-    
-  //  this.newQuestion.splice(i,1)
+  removeQuestion(newQues){
+    console.log("ssss",newQues.id);
+   this.QuesService.removeQuestions(newQues.id);
   }
 }

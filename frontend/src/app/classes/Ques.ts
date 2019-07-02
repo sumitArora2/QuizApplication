@@ -1,9 +1,9 @@
 export class Ques{
     id:number;
-    // Questions:String;
+    Questions:String;
     
-    constructor(id:number){
+    constructor(id:number,Questions){
      this.id=id;
-    //  this.Questions=Questions;
+     this.Questions=Questions;
     }
 }
