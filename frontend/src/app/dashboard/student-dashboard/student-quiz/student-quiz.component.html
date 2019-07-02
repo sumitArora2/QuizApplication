@@ -1,6 +1,6 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <!-- circle button link -->
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -15,7 +15,7 @@
         <p class="time">{{timeLeft}} Seconds Left....</p> 
 </div>
 <div class="modal-dialog">
-    <div  *ngFor= "let quiz of quizs">
+    <!-- <div  *ngFor= "let quiz of quizs"> -->
 <div class="modal-content">
  <div class="modal-header">
     <h3><span class="label label-warning" id="qid">{{quiz.id}}</span> {{quiz.question}}</h3>
@@ -44,12 +44,15 @@
 </div>
 <div class="modal-footer text-muted">
 <div class="nav-buttons">
-        <button class="nav-button next" id="next">Next</button>
-    </div>
+        <button class="nav-button prv" id="prv" (click)="prvque()" style="visibility: hidden;">Previous</button>
+</div>
+<div class="nav-buttons">
+        <button class="nav-button next" id="next" (click)="nextque()">Next</button>
+</div>
 <span id="answer"></span>
 </div>
 </div>
-</div>
+<!-- </div> -->
 </div>
 </div>
 </div>
@@ -57,11 +60,11 @@
 <!-- all quetions options-->
 <div class="allque">
     <div class="modal-content">
-            <button type="button" class="btn btn-default btn-circle btn-lg"><i></i>1</button>
-            <button type="button" class="btn btn-default btn-circle btn-lg"><i></i>2</button>
-            <button type="button" class="btn btn-default btn-circle btn-lg"><i></i>3</button>
-            <button type="button" class="btn btn-default btn-circle btn-lg"><i></i>4</button>
-            <button type="button" class="btn btn-default btn-circle btn-lg"><i></i>5</button>
+            <button type="button" class="btn btn-default btn-circle btn-lg" (click)="getquestion(1)">1</button>
+            <button type="button" class="btn btn-default btn-circle btn-lg" (click)="getquestion(2)">2</button>
+            <button type="button" class="btn btn-default btn-circle btn-lg" (click)="getquestion(3)">3</button>
+            <button type="button" class="btn btn-default btn-circle btn-lg" (click)="getquestion(4)">4</button>
+            <button type="button" class="btn btn-default btn-circle btn-lg" (click)="getquestion(5)">5</button>
     </div>
        
 </div>

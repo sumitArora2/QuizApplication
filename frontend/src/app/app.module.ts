@@ -8,14 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-<<<<<<< HEAD
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ProfileComponent } from './shared/profile/profile.component';
-
-=======
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './shared/profile/profile.component';
->>>>>>> 5a90a3054e821d43c6126218c38cf7851302581e
 
 @NgModule({
   declarations: [
@@ -33,10 +27,6 @@ import { ProfileComponent } from './shared/profile/profile.component';
     ReactiveFormsModule,
     AuthModule,
     DashboardModule,
-<<<<<<< HEAD
-    
-=======
->>>>>>> 5a90a3054e821d43c6126218c38cf7851302581e
   ],
   providers: [],
   bootstrap: [AppComponent]
