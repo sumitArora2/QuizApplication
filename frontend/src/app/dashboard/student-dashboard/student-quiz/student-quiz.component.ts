@@ -44,12 +44,17 @@ export class StudentQuizComponent implements OnInit {
     if(this.nextId>1){
       document.getElementById("prv").style.visibility = "visible";
     }
-    else{
-      document.getElementById("prv").style.visibility = "hidden";
+    if(this.nextId == 5){
+      document.getElementById("next").style.visibility = "hidden";
     }
   }
   prvque(){
     this.quiz=this.quizgenerate.getquestionque(this.nextId-1);
     this.nextId=this.nextId-1;
+    if(this.nextId == 1)
+    {
+      document.getElementById("prv").style.visibility="hidden";
+      document.getElementById("next").style.visibility = "visible";
+    }
   }
 }
