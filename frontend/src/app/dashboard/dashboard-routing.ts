@@ -1,5 +1,4 @@
 import { TeacherQuizComponent } from './teacher-dashboard/teacher-quiz/teacher-quiz.component';
-import { ComplaintsComponent } from './principal-dashboard/complaints/complaints.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PrincipalHomeComponent } from './principal-dashboard/principal-home/principal-home.component';
@@ -8,6 +7,7 @@ import { StudentHomeComponent } from './student-dashboard/student-home/student-h
 import { StudentQuizComponent } from './student-dashboard/student-quiz/student-quiz.component';
 import { DetailsComponent } from './details/details.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { ComplaintsComponent } from './principal-dashboard/complaints/complaints.component';
 
 
 const routes: Routes = [
