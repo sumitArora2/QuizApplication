@@ -1,3 +1,4 @@
+import { QuestionsService } from './../../../shared/services/questions.service';
 // import { FormGroup, FormBuilder, Form } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,25 +10,30 @@ import { Component, OnInit } from '@angular/core';
 export class TeacherQuizComponent implements OnInit {
   newOption=[];
   // myForm:FormBuilder;
-  newQuestion=[{}];
-  constructor() { }
-
+  
+  constructor(private QuesService:QuestionsService) { }
+  newQuestion
   ngOnInit() {
     // this.myForm=this.fb.group({
     //   name:''
     // })
+   // this.newQuestion=this.QuesService.getQuestions();
+    console.log("in quizzz",this.QuesService.getQuestions());
   }
   AddOptions(add:any){
-  this.newOption.push(add);
+  // this.newOption.push(add);
+  
+
   }
   AddAnotherPannel(add:any){
-   this.newQuestion.push(add);
-  }
+  this.QuesService.addQuestions();  
+  // this.newQuestion=this.QuesService.getQuestions();
+}
 
   removeQuestion(i){
-    console.log("the value of i is",i);
-    console.log("the value of index is",i.value);
+    // console.log("the value of i is",i);
+    // console.log("the value of index is",i.value);
     
-   this.newQuestion.splice(i,1)
+  //  this.newQuestion.splice(i,1)
   }
 }

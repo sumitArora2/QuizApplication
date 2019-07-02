@@ -33,7 +33,7 @@
             </div>
           </div>
           <!-- Add a new pannel -->
-          <div class="panel panel-default" *ngFor="let newQues of newQuestion let i=index">
+          <div class="panel panel-default" *ngFor="let newQues of QuesService.getQuestions() let i=index">
                 <div class="panel-body">
                   <div class="form-group base">
                         <a (click)="removeQuestion(i)">
