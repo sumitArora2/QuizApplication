@@ -59,10 +59,8 @@ export class QuizserviceService {
   getquestionque(id){
     for(let q of this.Quizs)
     {
-      // console.log("getque");
       if(q.id==id)
       {
-        // console.log("data is "+q.option1);
         return q;
       }
     }
