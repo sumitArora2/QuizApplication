@@ -6,11 +6,8 @@ import { TeacherHomeComponent } from './teacher-dashboard/teacher-home/teacher-h
 import { StudentHomeComponent } from './student-dashboard/student-home/student-home.component';
 import { StudentQuizComponent } from './student-dashboard/student-quiz/student-quiz.component';
 import { DetailsComponent } from './details/details.component';
-<<<<<<< HEAD
-import { ComplaintsComponent } from './principal-dashboard/complaints/complaints.component';
-=======
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
->>>>>>> 34f1093c97c3fa8e2af504cc431621bcf63f7fe1
+import { ComplaintsComponent } from './principal-dashboard/complaints/complaints.component';
 
 
 const routes: Routes = [
@@ -33,14 +30,10 @@ const routes: Routes = [
    path:'details',component:DetailsComponent
  },
  {
-<<<<<<< HEAD
-  path:'complaints', component: ComplaintsComponent
-=======
   path:'complaints', component:ComplaintsComponent
 },
 {
   path:'**',component:PageNotFoundComponent
->>>>>>> 34f1093c97c3fa8e2af504cc431621bcf63f7fe1
 }
 ];
 
