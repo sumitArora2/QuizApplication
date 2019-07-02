@@ -7,9 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "express": "*",
+    "body-parser": "^1.19.0",
     "cors": "*",
-    "mongoose": "*"
+    "express": "*",
+    "mongoose": "*",
+    "nodemon": "*"
   },
   "author": "quiz team",
   "license": "ISC"
