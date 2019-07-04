@@ -17,42 +17,34 @@
     <h2>Quiz</h2>
     <div class="panel panel-default">
       <div class="panel-body">
-        <!-- <div class="container"> -->
-        <!-- <h2>Stacked form</h2> -->
-        <form>
-          <div class="panel panel-default">
-            <div class="panel-body">
+        <form [formGroup]="nestedForm">
+
+          <div class="panel panel-default" formArrayName="Questions">
+
+            <div class="panel-body" *ngFor="let question of nestedForm.get('Questions').controls; let QuesIdx=index;"
+              [formGroupName]="QuesIdx">
               <div class="form-group base">
+                <a (click)="removeQuestions(QuesIdx)">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </a>
                 <label>Enter the question</label>
-                <input type="text" class="form-control" formControlName="name" placeholder="Enter question">
-                <button class="btn btn-primary" type="button" (click)="AddOptions(1)">Add Options</button>
-                <div *ngFor="let option of newOption">
-                  <input type="text" class="form-control options" formControlName="name" placeholder="Enter the options">
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Add a new pannel -->
-          <div class="panel panel-default" *ngFor="let newQues of QuesService.getQuestions() let i=index">
-                <div class="panel-body">
-                  <div class="form-group base">
-                        <a (click)="removeQuestion(newQues)">
-                                <span class="glyphicon glyphicon-trash"></span>
-                              </a>
-                              <br>
-                    <label>Enter the question {{newQues.id}}</label>
-                    <input type="text" class="form-control" formControlName="name" value="{{sampleString}}" placeholder="Enter question">
-                    <button class="btn btn-primary" type="button" (click)="AddOptions(1)">Add Options</button>
-                    <div *ngFor="let option of newOption">
-                      <input type="text" class="form-control options" formControlName="name" placeholder="Enter the options">
-                    </div>
+                <input type="text" class="form-control" formControlName="question_name" placeholder="Enter question">
+                <div formArrayName="Options">
+                  <div *ngFor="let option of question.get('Options').controls;  let OptIdx=index"
+                    [formGroupName]="OptIdx">
+                    <input type="text" class="form-control options" formControlName="option_name"
+                      placeholder="Enter the options"> <a (click)="removeOptions(question,OptIdx)"><span class="glyphicon glyphicon-trash"></span>
+                        </a>
                   </div>
                 </div>
+                <button class="btn btn-primary" type="button" (click)="AddOptions(question)">Add Options</button>
               </div>
-              <button type="button" class="btn btn-success" (click)="AddAnotherPannel(add)">Add another Question</button>
-              <br>
-              <br>
-              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <button type="button" class="btn btn-success" (click)="AddQuestions()">Add another Question</button>
+          </div>
+          <br>
+          <br>
+          <button type="submit" class="btn btn-primary" (click)="submitForm(nestedForm.value)">Submit</button>
         </form>
       </div>
     </div>
@@ -61,3 +53,23 @@
 </body>
 
 </html>
+
+
+
+<!-- Add a new pannel -->
+<!-- <div class="panel panel-default" *ngFor="let newQues of QuesService.getQuestions() let i=index">
+                <div class="panel-body">
+                  <div class="form-group base">
+                        <a (click)="removeQuestion(newQues)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                              </a>
+                              <br>
+                    <label>Enter the question {{newQues.id}}</label>
+                    <input type="text" class="form-control" formControlName="name" value="{{sampleString}}" placeholder="Enter question">
+                    <button class="btn btn-primary" type="button" (click)="AddAnotherOptions(newQues.id)">Add Options</button>
+                    <div *ngFor="let option of QuesService.getOptions()">
+                      <input type="text" class="form-control options" formControlName="name" placeholder="Enter the options">
+                    </div>
+                  </div>
+                </div>
+              </div> -->
