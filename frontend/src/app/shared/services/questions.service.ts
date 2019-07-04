@@ -20,6 +20,7 @@ export class QuestionsService {
       this.nextId=maxId+1;
     }
    }
+   
   //get the questions from the local storage
   public getQuestions(){
     let localStorageItem=JSON.parse(localStorage.getItem('questions'));

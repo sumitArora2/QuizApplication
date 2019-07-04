@@ -16,35 +16,47 @@ export class TeacherQuizComponent implements OnInit {
   question: Ques;
   sampleString: string = "";
   nestedForm: FormGroup;
-  
+  Queslength:number
+  Optslength:number
   constructor(public QuesService: QuestionsService, private fb: FormBuilder) {
 
   }
 
   ngOnInit() {
+    this.Queslength=1;
+    this.Optslength=1;
     this.nestedForm = this.fb.group({
       Questions: this.fb.array([this.Questions]),
     });
   }
 
   get Questions():FormGroup{
+    // console.log("done for first time in india");
     return this.fb.group({
+      quesId:this.Queslength,
       question_name:"",
       Options:this.fb.array([this.Options])
     })
-   
+
   }
+
   get Options():FormGroup{
+    // console.log("done for second time in india");
     return this.fb.group({
-      option_name:""
+      optsId:this.Optslength,
+      option_name:"",
+      IsAnswer:false
     })
   }
   AddOptions(question){
+    this.Optslength++;
     question.get("Options").push(this.Options)
-   
   }
   AddQuestions(){
+    this.Queslength++;
     (this.nestedForm.get("Questions") as FormArray).push(this.Questions)
+    // console.log((this.nestedForm.get("Questions") as FormArray).length);
+    console.log((this.nestedForm.get("Questions") as FormArray).value);
   }
   removeQuestions(QuesIdx){
     console.log((this.nestedForm.get("Questions") as FormArray).removeAt(QuesIdx));
@@ -53,56 +65,11 @@ export class TeacherQuizComponent implements OnInit {
   // console.log( question.get("Options").at(id).value);
   console.log(question.get("Options").removeAt(id));
   }
+
   submitForm(data) {
     console.log(data);
+
   }
 }
-//   AddQuestionsGroup():FormGroup {
-//     return this.fb.group({
-//       question: "",
-//       OptionsGroup: this.fb.array([this.AddOptionsGroup()])
-//   })
-//   }
-//   AddQuestions() {
-//     this.QuestionsArray.push(this.AddQuestionsGroup());
-//   }
-
-
-//   removeQuestions(index) {
-//     this.QuestionsArray.removeAt(index);
-//   }
-  
-// //for options
-
-// AddOptions() {
-//   this.OptionsArray.push(this.AddOptionsGroup());
-// }
-// AddOptionsGroup() {
-//   return this.fb.group({
-//     Options: []
-//   })
-// }
-// removeOptions(index) {
-//     this.OptionsArray.removeAt(index);
-//   }
- 
-//   get OptionsArray() {
-//     console.log("this.nestedForm", <FormArray>this.AddQuestionsGroup().get('OptionsGroup'));
-//     return <FormArray>this.AddQuestionsGroup().get('OptionsGroup');
-
-//   }
-
-
-  //   AddAnotherOptions(data){
-  //   // console.log("id of question is",data);
-  //   this.QuesService.AddOptions(data);
-  //   }
-  //   AddAnotherPannel(add:any){
-  //   this.QuesService.addQuestions(this.sampleString);  
-  // }
-  //   removeQuestion(newQues){
-  //     console.log("ssss",newQues.id);
-  //    this.QuesService.removeQuestions(newQues.id);
-  //   }
 
 

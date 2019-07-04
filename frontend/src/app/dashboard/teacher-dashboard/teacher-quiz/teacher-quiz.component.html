@@ -27,18 +27,29 @@
                 <a (click)="removeQuestions(QuesIdx)">
                   <span class="glyphicon glyphicon-trash"></span>
                 </a>
-                <label>Enter the question</label>
+                <!-- <label  formControlName="quesId" for="{{QuesIdx}}"> {{QuesIdx}}</label> -->
+                <!-- <input type='text' formControlName="quesId" value="{{ QuesIdx }}"> -->
                 <input type="text" class="form-control" formControlName="question_name" placeholder="Enter question">
+                <br>
                 <div formArrayName="Options">
                   <div *ngFor="let option of question.get('Options').controls;  let OptIdx=index"
                     [formGroupName]="OptIdx">
                     <input type="text" class="form-control options" formControlName="option_name"
-                      placeholder="Enter the options"> <a (click)="removeOptions(question,OptIdx)"><span class="glyphicon glyphicon-trash"></span>
-                        </a>
+                      placeholder="Enter the options">
+                    <div class="checkbox">
+                      <label><input type="checkbox" name="check" formControlName="IsAnswer">True</label>
+                    </div>
+                    <a (click)="removeOptions(question,OptIdx)"><span class="glyphicon glyphicon-trash"></span>
+                    </a>
                   </div>
+                  <br>
                 </div>
+                
                 <button class="btn btn-primary" type="button" (click)="AddOptions(question)">Add Options</button>
               </div>
+              <hr>
+              <hr>
+              <br>
             </div>
             <button type="button" class="btn btn-success" (click)="AddQuestions()">Add another Question</button>
           </div>
