@@ -6,6 +6,8 @@ const config = require('./config/database');
 const bodyparser = require('body-parser');
 const passport=require('passport');
 const bcrypt=require('bcryptjs');
+const path=require('path');
+const cors=require('cors');
 
 const port=3000;
 

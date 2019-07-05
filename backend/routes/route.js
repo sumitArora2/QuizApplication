@@ -1,6 +1,5 @@
 const express =require('express');
 const router = express();
-// const users=require('../models/user');
 const config=require('../config/database');
 const passport=require('passport');
 const jwt=require('jsonwebtoken');
@@ -44,7 +43,7 @@ router.post('/authenticate', (req,res,next)=>{
             if(isMatch){
                 
                 const token=jwt.sign(user.toJSON(),config.secret,{
-                    expiresIn: 604800 
+                    expiresIn: 604800 //1 week 
                 });
                 res.json({
                     success:true,
@@ -61,4 +60,14 @@ router.post('/authenticate', (req,res,next)=>{
         });
     });
 });
+
+//Profile
+router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,next)=>{
+    res.json({user: req.user});
+})
+
+// router.get('/profile',(req, res,next)=>{
+//     console.log("aaaprofile partaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+//     res.send('Profle');
+// })
 module.exports=router;
