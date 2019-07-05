@@ -33,10 +33,13 @@ export class StudentQuizComponent implements OnInit {
     this.quiz=this.quizgenerate.getquestionque(id);
     this.nextId=id;
     if(id>1){
-      document.getElementById("prv").style.visibility = "visible";}
+      document.getElementById("prv").style.visibility = "visible";
+      document.getElementById("next").style.visibility = "visible";
+    }
     else{
         document.getElementById("prv").style.visibility = "hidden";
     }
+
   }
   nextque(){
     this.quiz=this.quizgenerate.getquestionque(this.nextId+1);
@@ -54,6 +57,9 @@ export class StudentQuizComponent implements OnInit {
     if(this.nextId == 1)
     {
       document.getElementById("prv").style.visibility="hidden";
+      document.getElementById("next").style.visibility = "visible";
+    }
+    else{
       document.getElementById("next").style.visibility = "visible";
     }
   }

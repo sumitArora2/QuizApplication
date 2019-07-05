@@ -4,6 +4,13 @@ const mongoose = require('mongoose');
 const route = require('./routes/route');
 const config = require('./config/database');
 const bodyparser = require('body-parser');
+const passport=require('passport');
+const bcrypt=require('bcryptjs');
+const path=require('path');
+const cors=require('cors');
+
+const port=3000;
+
 // on error
 mongoose.connection.on('error',(err)=>{
     console.log('database error',err);
@@ -12,7 +19,7 @@ mongoose.connection.on('error',(err)=>{
 
 // on connection
 mongoose.connection.on('connected',()=>{
-    console.log('database connected',);
+    console.log('database connected: ' +config.database);
 });
 // when database is disconnected
 mongoose.connection.on('disconnected',()=>{
@@ -31,4 +38,12 @@ app.get('/',(req,res)=>{
     res.send('hello');
 });
 
-app.listen(3000);
+//passport Middelware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
+
+app.listen(port,()=>{
+console.log('server start at port '+port);
+});
