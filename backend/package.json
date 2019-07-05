@@ -11,7 +11,11 @@
     "cors": "*",
     "express": "*",
     "mongoose": "*",
-    "nodemon": "*"
+    "nodemon": "*",
+    "jsonwebtoken": "*",
+    "passport": "*",
+    "passport-jwt": "*",
+    "bcryptjs": "*"
   },
   "author": "quiz team",
   "license": "ISC"
