@@ -11,10 +11,15 @@ const cors=require('cors');
 
 const port=3000;
 
+mongoose.connect(config.database,{ useNewUrlParser:true });
+
+
+
 // on error
 mongoose.connection.on('error',(err)=>{
     console.log('database error',err);
 });
+
 
 
 // on connection
@@ -25,15 +30,13 @@ mongoose.connection.on('connected',()=>{
 mongoose.connection.on('disconnected',()=>{
     console.log('database disconnected');
 });
-// app.use(express());
-// app.use(bodyparser.urlencoded({extended:true}));
+
 app.use(bodyparser.json());
-mongoose.connect(config.database);
 
-// fr implementing routes
-app.use('/apis',route);
+// for implementing routes
+app.use('/api',route);
 
-// fr implementing routes
+// for implementing routes for checking routes is working of not
 app.get('/',(req,res)=>{
     res.send('hello');
 });

@@ -4,17 +4,16 @@ const config=require('../config/database');
 const passport=require('passport');
 const jwt=require('jsonwebtoken');
 const User= require('../models/user');
+const Quiz=require('../models/quiz');
 const bcrypt=require('bcryptjs');
-
+var quiz=require('../controllers/quiz');
 
 router.post('/signup',(req,res,next)=>{
-    console.log(req.body);
        let newUser =new User({
          username:req.body.username,
         email:req.body.email,
        password:req.body.password
     });
-    console.log("comming");
     User.addUser(newUser,(err,data)=>{
         if(err){
             res.json({success:false,msg:'fail to register'+err});
@@ -24,6 +23,11 @@ router.post('/signup',(req,res,next)=>{
         }
     });
 });
+
+
+router.route('/question').post(quiz.addQuestion);
+
+
 
 //Autheticate login user
 router.post('/authenticate', (req,res,next)=>{
@@ -64,8 +68,9 @@ router.post('/authenticate', (req,res,next)=>{
 //Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,next)=>{
     res.json({user: req.user});
-})
+});
 
+<<<<<<< HEAD
 // router.get('/profile',(req, res,next)=>{
 //     console.log("aaaprofile partaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 //     res.send('Profle');
@@ -88,4 +93,6 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 // });
 // })
 
+=======
+>>>>>>> 13f97fb25f0d00cd72f34a935695ac9ffa2fae56
 module.exports=router;

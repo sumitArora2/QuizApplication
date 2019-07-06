@@ -26,14 +26,13 @@ const User =module.exports = mongoose.model('User',UserSchema);
 module.exports.getUserById= function(id,callback){
     User.findById(id,callback); 
 }
-// module.exports.addUser = function(newUser, callback){
-//     User.create(newUser,callback);
-// };
+
 module.exports.getUserByUsername=function(username,callback){
     const query={username: username};
     User.findOne(query, callback);
 }
 
+<<<<<<< HEAD
 const schema = Joi.object().keys({
     username: Joi.string().alphanum().min(3).max(30).required(),
     password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
@@ -42,6 +41,8 @@ const schema = Joi.object().keys({
 
 
 
+=======
+>>>>>>> 13f97fb25f0d00cd72f34a935695ac9ffa2fae56
 
 module.exports.addUser=function(newUser,callback){
     bcrypt.genSalt(10, (err,salt)=>{

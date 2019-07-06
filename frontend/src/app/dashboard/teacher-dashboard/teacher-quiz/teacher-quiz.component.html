@@ -27,7 +27,7 @@
                 <a (click)="removeQuestions(QuesIdx)">
                   <span class="glyphicon glyphicon-trash"></span>
                 </a>
-                <!-- <label  formControlName="quesId" for="{{QuesIdx}}"> {{QuesIdx}}</label> -->
+                <label>Enter the Question</label>
                 <!-- <input type='text' formControlName="quesId" value="{{ QuesIdx }}"> -->
                 <input type="text" class="form-control" formControlName="question_name" placeholder="Enter question">
                 <br>
@@ -36,8 +36,11 @@
                     [formGroupName]="OptIdx">
                     <input type="text" class="form-control options" formControlName="option_name"
                       placeholder="Enter the options">
-                    <div class="checkbox">
-                      <label><input type="checkbox" name="check" formControlName="IsAnswer">True</label>
+                    <div class="radio">
+                      <label>
+                          <input type="radio" formControlName="QuesIdx" name="QuesIdx" (click)="sendOptsId(QuesIdx,OptIdx)"/>
+                        <!-- <input type="checkbox" name="check" formControlName="IsAnswer"> -->
+                        {{option.IsAnswer}}</label>
                     </div>
                     <a (click)="removeOptions(question,OptIdx)"><span class="glyphicon glyphicon-trash"></span>
                     </a>
