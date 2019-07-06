@@ -70,4 +70,22 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 //     console.log("aaaprofile partaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 //     res.send('Profle');
 // })
+
+//signup Validations
+// router.post('/',(req,res)=>{
+//     console.log(req.body);
+//     const schema=Joi.object().keys({
+//         email: Joi.string().trim().email().required(),
+//         password: Joi.string.min(5).required()   
+//      });
+
+// Joi.validate(req.body,schema,(err,result)=>{
+//     if(err){
+//         res.send('an error has come');
+//     }
+//     console.log(result);
+//     res.send('successfully registed');
+// });
+// })
+
 module.exports=router;

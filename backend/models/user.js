@@ -1,18 +1,24 @@
 const mongoose = require('mongoose');
 const config = require('../config/database');
 const bcrypt=require('bcryptjs');
+const Joi=require('joi');
 const UserSchema =mongoose.Schema({
     username:{
         type:String,
-        required:true
+        required:true,
+        minlength:6,
+        maxlength:25,
+        unique:true
     },
     email:{
         type:String,
-        required:true
+        required:true,
+        unique: true
     },
     password:{
         type:String,
-        required:true
+        required:true,
+        minlength:6,
     }
 });
 const User =module.exports = mongoose.model('User',UserSchema);
@@ -28,10 +34,14 @@ module.exports.getUserByUsername=function(username,callback){
     User.findOne(query, callback);
 }
 
-// module.export.getUserByUsername= function(username,callback){
-//     const query={username:username}
-//     User.findOne(query,callback);
-// };
+const schema = Joi.object().keys({
+    username: Joi.string().alphanum().min(3).max(30).required(),
+    password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
+    email: Joi.string().email({ minDomainSegments: 2 }).regex(/^[a-zA-Z0-9]{3,30}$/)
+})
+
+
+
 
 module.exports.addUser=function(newUser,callback){
     bcrypt.genSalt(10, (err,salt)=>{
