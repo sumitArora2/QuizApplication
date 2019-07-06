@@ -4,9 +4,9 @@ const config=require('../config/database');
 const passport=require('passport');
 const jwt=require('jsonwebtoken');
 const User= require('../models/user');
+const Quiz=require('../models/quiz');
 const bcrypt=require('bcryptjs');
 router.post('/signup',(req,res,next)=>{
-    console.log(req.body);
        let newUser =new User({
          username:req.body.username,
         email:req.body.email,
@@ -22,6 +22,30 @@ router.post('/signup',(req,res,next)=>{
         }
     });
 });
+
+//for question posting into database
+router.post('/question',(req,res,next)=>{
+let newQuestion=new Quiz({
+   dept_name:req.body.dept_name,
+   question:{
+       ques_name:req.body.ques_name,
+       Options:{
+               opts_name:req.body.opts_name,
+               isAnswer:req.body.isAnswer
+           }
+   }
+});
+Quiz.addQuestion(newQuestion,(err,data)=>{
+if(err){
+    res.json({success:false,msg:'Failed to add the Question'+err});
+}else{
+    res.json({success:true,msg:'Question added successfully'+data});
+}
+});
+});
+
+
+
 
 //Autheticate login user
 router.post('/authenticate', (req,res,next)=>{
