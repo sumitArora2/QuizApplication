@@ -11,6 +11,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './shared/profile/profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HttpClient } from 'selenium-webdriver/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ReactiveFormsModule,
     AuthModule,
     DashboardModule,
+    HttpClient,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

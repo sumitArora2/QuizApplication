@@ -70,7 +70,6 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     res.json({user: req.user});
 });
 
-<<<<<<< HEAD
 // router.get('/profile',(req, res,next)=>{
 //     console.log("aaaprofile partaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 //     res.send('Profle');
@@ -93,6 +92,4 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 // });
 // })
 
-=======
->>>>>>> 13f97fb25f0d00cd72f34a935695ac9ffa2fae56
 module.exports=router;
