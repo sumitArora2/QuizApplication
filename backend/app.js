@@ -11,10 +11,15 @@ const cors=require('cors');
 
 const port=3000;
 
+mongoose.connect(config.database,{ useNewUrlParser:true });
+
+
+
 // on error
 mongoose.connection.on('error',(err)=>{
     console.log('database error',err);
 });
+
 
 
 // on connection
@@ -27,7 +32,6 @@ mongoose.connection.on('disconnected',()=>{
 });
 
 app.use(bodyparser.json());
-mongoose.connect(config.database);
 
 // for implementing routes
 app.use('/api',route);

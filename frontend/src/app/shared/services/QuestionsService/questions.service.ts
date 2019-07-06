@@ -1,4 +1,4 @@
-import { Ques } from './../../classes/Ques';
+import { Ques } from '../../../classes/Ques';
 import { Injectable } from '@angular/core';
 
 @Injectable({
