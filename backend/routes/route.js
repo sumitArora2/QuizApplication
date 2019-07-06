@@ -28,18 +28,14 @@ router.post('/signup',(req,res,next)=>{
 //for question posting into database
 router.post('/question',(req,res,next)=>{
 let newQuestion=new Quiz({
-   name:req.body.name,
-   question:[
-   {
-       name:req.body.name,
-       Options:[
-           {
-               name:req.body.name,
-               IsAnswer:req.body.IsAnswer
+   dept_name:req.body.dept_name,
+   question:{
+       ques_name:req.body.ques_name,
+       Options:{
+               opts_name:req.body.opts_name,
+               isAnswer:req.body.isAnswer
            }
-       ]
    }
-   ]
 });
 Quiz.addQuestion(newQuestion,(err,data)=>{
 if(err){

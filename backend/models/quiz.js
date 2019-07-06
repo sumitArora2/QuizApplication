@@ -1,32 +1,32 @@
 const mongoose = require('mongoose');
 const QustionSchema=mongoose.Schema({
-    name:{
+    dept_name:{
         type:String,
         required:true
     },
     question:[
         {
-            name:{
+            ques_name:{
                 type:String,
                 required:true
             },Options:[
                 {
-                    name:{
+                    opts_name:{
                         type:String,
                         required:true
                     },
-                    IsAnswer:{
+                    isAnswer:{
                         type:String,
-                        required:true,
+                        required:true
                     }
                 }
             ]
         }
-    ]
+]
 });
 const Quiz =module.exports = mongoose.model('Quiz',QustionSchema);
 
 
 module.exports.addQuestion=function(newQuestion,callback){
-Question.create(newQuestion,callback);
+Quiz.create(newQuestion,callback);
 };
