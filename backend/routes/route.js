@@ -5,36 +5,6 @@ const passport=require('passport');
 const jwt=require('jsonwebtoken');
 const User= require('../models/user');
 const bcrypt=require('bcryptjs');
-const Quiz =require('../models/quiz');
-// fr quiz
-router.post('/quiz',(req,res,next)=>{
-    console.log(req.body);
-    let newQuiz = new Quiz({
-        id:req.body.id,
-        name:req.body.name,
-        questions:[{
-        id:req.body.id,
-        name:req.body.name
-    }
-
-        ],
-        options:[{
-            id:req.body.id,
-            name:req.body.name,
-            isAnswer:req.body.isAnswer
-        }]
-    });
-    Quiz.addQuiz(newQuiz,(err,quiz)=>{
-        if(err){
-            res.json({success:false,msg:"fail to enter"+err});
-        }else{
-            res.json({success:true,msg:"quiz registered"+quiz});
-        }
-    });
-});
-
-
-
 router.post('/signup',(req,res,next)=>{
     console.log(req.body);
        let newUser =new User({
