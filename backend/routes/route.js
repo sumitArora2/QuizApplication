@@ -6,13 +6,14 @@ const jwt=require('jsonwebtoken');
 const User= require('../models/user');
 const Quiz=require('../models/quiz');
 const bcrypt=require('bcryptjs');
+var quiz=require('../controllers/quiz');
+
 router.post('/signup',(req,res,next)=>{
        let newUser =new User({
          username:req.body.username,
         email:req.body.email,
        password:req.body.password
     });
-    console.log("comming");
     User.addUser(newUser,(err,data)=>{
         if(err){
             res.json({success:false,msg:'fail to register'+err});
@@ -23,27 +24,8 @@ router.post('/signup',(req,res,next)=>{
     });
 });
 
-//for question posting into database
-router.post('/question',(req,res,next)=>{
-let newQuestion=new Quiz({
-   dept_name:req.body.dept_name,
-   question:{
-       ques_name:req.body.ques_name,
-       Options:{
-               opts_name:req.body.opts_name,
-               isAnswer:req.body.isAnswer
-           }
-   }
-});
-Quiz.addQuestion(newQuestion,(err,data)=>{
-if(err){
-    res.json({success:false,msg:'Failed to add the Question'+err});
-}else{
-    res.json({success:true,msg:'Question added successfully'+data});
-}
-});
-});
 
+router.route('/question').post(quiz.addQuestion);
 
 
 
@@ -86,10 +68,6 @@ router.post('/authenticate', (req,res,next)=>{
 //Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,next)=>{
     res.json({user: req.user});
-})
+});
 
-// router.get('/profile',(req, res,next)=>{
-//     console.log("aaaprofile partaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-//     res.send('Profle');
-// })
 module.exports=router;

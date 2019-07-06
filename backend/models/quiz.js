@@ -26,7 +26,3 @@ const QustionSchema=mongoose.Schema({
 });
 const Quiz =module.exports = mongoose.model('Quiz',QustionSchema);
 
-
-module.exports.addQuestion=function(newQuestion,callback){
-Quiz.create(newQuestion,callback);
-};

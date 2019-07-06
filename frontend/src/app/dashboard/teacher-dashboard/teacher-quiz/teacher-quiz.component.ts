@@ -1,5 +1,5 @@
 import { Ques } from './../../../classes/Ques';
-import { QuestionsService } from './../../../shared/services/questions.service';
+import { QuestionsService } from '../../../shared/services/QuestionsService/questions.service';
 import { FormGroup, FormBuilder, FormArray,  } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
