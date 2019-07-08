@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
   signinForm:FormGroup; 
   // email=document.getElementById("email");
   // password:String;
+  success1=false;
   constructor(private authservice:AuthServiceService) { }
 
   ngOnInit() {
@@ -27,7 +28,14 @@ export class LoginComponent implements OnInit {
       // password: this.
     // }
     this.authservice.postLogin(this.signinForm.value).subscribe(data=>{
-      console.log(data);
+      // console.log(data);
+      if(data.success){
+        console.log('ifnbjb', data);
+      
+      }
+      else{
+        console.log('else run');
+      }
     });
   }
 

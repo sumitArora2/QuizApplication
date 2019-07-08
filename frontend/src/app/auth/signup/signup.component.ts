@@ -37,6 +37,6 @@ export class SignupComponent implements OnInit {
         console.log('unsuccessful');
         this.router.navigate(['/signup']);
       }
-    })
+    }) 
   }
 }
