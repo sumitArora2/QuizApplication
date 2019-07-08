@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthRouthingModule } from './auth-routing';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
   imports: [

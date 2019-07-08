@@ -9,10 +9,12 @@ const bcrypt=require('bcryptjs');
 const path=require('path');
 const cors=require('cors');
 
+
 const port=3000;
 
 mongoose.connect(config.database,{ useNewUrlParser:true });
-
+app.use(cors());
+app.use(express.json());
 
 
 // on error

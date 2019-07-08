@@ -10,15 +10,14 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './shared/profile/profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule } from '@angular/common/http';
 import { AuthServiceService } from './shared/services/Authetication/auth-service.service';
-
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent,
+    FooterComponent,  
     ProfileComponent,
     PageNotFoundComponent
  
