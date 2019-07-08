@@ -18,10 +18,11 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <form [formGroup]="nestedForm">
-
+           <div>
+             <input type="text" class="form-control" formControlName="subject_name" placeholder="Enter the subject name">
+           </div>
           <div class="panel panel-default" formArrayName="Questions">
-
-            <div class="panel-body" *ngFor="let question of nestedForm.get('Questions').controls; let QuesIdx=index;"
+            <div class="panel-body" *ngFor="let question of QuestionControl.controls; let QuesIdx=index;"
               [formGroupName]="QuesIdx">
               <div class="form-group base">
                 <a (click)="removeQuestions(QuesIdx)">
@@ -32,18 +33,20 @@
                 <input type="text" class="form-control" formControlName="question_name" placeholder="Enter question">
                 <br>
                 <div formArrayName="Options">
-                  <div *ngFor="let option of question.get('Options').controls;  let OptIdx=index"
+                  <div *ngFor="let option of getOptionControl(question).controls;  let OptIdx=index"
                     [formGroupName]="OptIdx">
                     <input type="text" class="form-control options" formControlName="option_name"
                       placeholder="Enter the options">
-                    <div class="radio">
+                    <!-- <div class="radio">
                       <label>
-                          <input type="radio" formControlName="QuesIdx" name="QuesIdx" (click)="sendOptsId(QuesIdx,OptIdx)"/>
-                        <!-- <input type="checkbox" name="check" formControlName="IsAnswer"> -->
-                        {{option.IsAnswer}}</label>
-                    </div>
+                          <input type="radio" formControlName='optsId'  (click)="sendOptsId(QuesIdx,OptIdx)"/>
+                        {{IsAnswer}}</label>
+                    </div> -->
+                    <input type="text" formControlName="IsAnswer" placeholder="true/false">
                     <a (click)="removeOptions(question,OptIdx)"><span class="glyphicon glyphicon-trash"></span>
                     </a>
+                    <br>
+                    <br>
                   </div>
                   <br>
                 </div>
