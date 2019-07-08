@@ -1,7 +1,7 @@
 import { Ques } from '../../../classes/Ques';
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
-import {}
+
 @Injectable({
   providedIn: 'root'
 })
