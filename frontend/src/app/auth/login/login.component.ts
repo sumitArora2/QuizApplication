@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   // fr login
   CheckUserAuth(){ 
     this.authservice.postLogin(this.signinForm.value).subscribe(data=>{
-      if(data){
+      if(data.success){
         this.router.navigate(['studentHome']);
         this.flashMessage.show('You are now logged in',{cssClass:'alert-success',timeout:3000});
       }else{
