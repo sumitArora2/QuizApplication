@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
   //on signup
   onRegister(){
     this.authService.registerUser(this.signupForm.value).subscribe(data=>{
-      if(data){
+      if(data.success){
         console.log('assa',data);
         this.flashMessage.show('you are now registered and login', { cssClass: 'alert-success', timeout: 3000 });
          this.router.navigate(['login']);
