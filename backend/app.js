@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const route = require('./routes/route');
 const config = require('./config/database');
-const bodyparser = require('body-parser');
+// const bodyparser = require('body-parser');
 const passport=require('passport');
 const bcrypt=require('bcryptjs');
 const path=require('path');
@@ -31,7 +31,7 @@ mongoose.connection.on('disconnected',()=>{
     console.log('database disconnected');
 });
 
-app.use(bodyparser.json());
+// app.use(bodyparser.json());
 
 // for implementing routes
 app.use('/api',route);
