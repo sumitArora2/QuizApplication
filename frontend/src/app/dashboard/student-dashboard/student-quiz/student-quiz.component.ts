@@ -11,8 +11,8 @@ export class StudentQuizComponent implements OnInit {
   name = 'Angular 6';
   timeLeft: number = 60;
   interval;
+  quizes:{};
   quiz:any;
- 
 
   constructor(private quizgenerate:QuizserviceService,private questionService:QuestionsService) { }
   nextId:number=1;
@@ -24,15 +24,15 @@ export class StudentQuizComponent implements OnInit {
         this.timeLeft = 60;
       }
     },1000)
-
-
+    this.questionService.getQuestions().subscribe(data=>{
+      this.quizes=data;
+     console.log(this.quizes);
+    });
     // this.quizs = this.quizgenerate.getQuiz();
-    this.quiz=this.quizgenerate.getquestionque(1);
+    // this.quiz=this.quizgenerate.getquestionque(1);
   }
   getquestion(id)
   {
-    this.quiz=this.questionService.getQuestions();
-    console.log("going further",this.quiz);
     // this.quiz=this.quizgenerate.getquestionque(id);
     // this.nextId=id;
     // if(id>1){
