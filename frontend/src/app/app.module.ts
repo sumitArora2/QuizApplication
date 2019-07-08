@@ -12,6 +12,7 @@ import { ProfileComponent } from './shared/profile/profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {HttpClientModule } from '@angular/common/http';
 import { AuthServiceService } from './shared/services/Authetication/auth-service.service';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,9 @@ import { AuthServiceService } from './shared/services/Authetication/auth-service
     ReactiveFormsModule,
     AuthModule,
     DashboardModule,
-    HttpClientModule
+    HttpClientModule,
+    FlashMessagesModule.forRoot(),
+
   ],
   providers: [AuthServiceService],
   bootstrap: [AppComponent]

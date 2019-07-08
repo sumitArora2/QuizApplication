@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
 import { Router } from '@angular/router';
+import { FlashMessagesService } from 'angular2-flash-messages';
+
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
-  constructor(private authService:AuthServiceService,private router:Router) { }
+  constructor(private authService:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService) { }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
@@ -22,20 +24,16 @@ export class SignupComponent implements OnInit {
       'repassword' : new FormControl(null,[Validators.required])
   });
   }
+  //on signup
   onRegister(){
-    // const user={
-    //   username:this.username,
-    //   email:this.email,
-    //   password:this.password
-    // }
-    console.log("ghvhvj");
     this.authService.registerUser(this.signupForm.value).subscribe(data=>{
       if(data){
+        this.flashMessage.show('you are now registered and login', { cssClass: 'alert-success', timeout: 3000 });
         console.log('uugy',data);
-        this.router.navigate(['/login']);
+        this.router.navigate(['login']);
       }else{
-        console.log('unsuccessful');
-        this.router.navigate(['/signup']);
+        this.flashMessage.show('something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
+        this.router.navigate(['signup']);
       }
     })
   }
