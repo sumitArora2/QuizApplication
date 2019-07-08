@@ -15,16 +15,14 @@ export class TeacherQuizComponent implements OnInit {
   nestedForm: FormGroup;
   Queslength: number
   Optslength: number
-  subject_name: String;
   constructor(public QuesService: QuestionsService, private fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.Queslength = 1;
     this.Optslength = 1;
-    this.subject_name = "";
     this.nestedForm = this.fb.group({
-      subject_name: "",
+      dept_name: "",
       Questions: this.fb.array([this.Questions]),
     });
     // console.log("forms==>>", this.nestedForm);
@@ -38,7 +36,7 @@ export class TeacherQuizComponent implements OnInit {
   }
   get Questions(): FormGroup {
     return this.fb.group({
-      quesId: this.Queslength,
+      // quesId: this.Queslength,
       question_name: "",
       Options: this.fb.array([this.Options])
     })
@@ -46,7 +44,7 @@ export class TeacherQuizComponent implements OnInit {
 
   get Options(): FormGroup {
     return this.fb.group({
-      optsId: this.Optslength,
+      // optsId: this.Optslength,
       option_name: "",
       IsAnswer: ""
     })
@@ -73,9 +71,24 @@ export class TeacherQuizComponent implements OnInit {
     question[QuesIdx].Options[OptIdx].IsAnswer = true;
     // console.log((this.nestedForm.get("Questions") as FormArray).value)
   }
-  submitForm(Quesdata) {
-    console.log(Quesdata);
-    this.QuesService.AddQuestion(Quesdata).subscribe(data=>{
+  submitForm(data) {
+    console.log(data);
+    // const QuesData={
+    //  dept_name:data.dept_name,
+    //  Questions:[
+    //    {
+    //      ques_name:data.question_name,
+    //      Options:[
+    //        {
+    //          opts_name:data.option_name,
+    //          IsAnswer:data.IsAnswer
+    //        }
+    //      ]
+    //    }
+    //  ]
+    // }
+   
+    this.QuesService.AddQuestion(data).subscribe(data=>{
       if(data){
       console.log("posted successfull now you can go");
       }else{

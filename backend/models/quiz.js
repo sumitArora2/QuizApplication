@@ -4,18 +4,18 @@ const QustionSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    question:[
+    Questions:[
         {
-            ques_name:{
+            question_name:{
                 type:String,
                 required:true
             },Options:[
                 {
-                    opts_name:{
+                    option_name:{
                         type:String,
                         required:true
                     },
-                    isAnswer:{
+                    IsAnswer:{
                         type:String,
                         required:true
                     }

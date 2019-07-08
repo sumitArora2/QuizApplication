@@ -19,7 +19,7 @@
       <div class="panel-body">
         <form [formGroup]="nestedForm">
            <div>
-             <input type="text" class="form-control" formControlName="subject_name" placeholder="Enter the subject name">
+             <input type="text" class="form-control" formControlName="dept_name" placeholder="Enter the subject name">
            </div>
           <div class="panel panel-default" formArrayName="Questions">
             <div class="panel-body" *ngFor="let question of QuestionControl.controls; let QuesIdx=index;"
@@ -42,7 +42,7 @@
                           <input type="radio" formControlName='optsId'  (click)="sendOptsId(QuesIdx,OptIdx)"/>
                         {{IsAnswer}}</label>
                     </div> -->
-                    <input type="text" formControlName="IsAnswer" placeholder="true/false">
+                    <input type="text"  formControlName="IsAnswer" placeholder="true/false">
                     <a (click)="removeOptions(question,OptIdx)"><span class="glyphicon glyphicon-trash"></span>
                     </a>
                     <br>
