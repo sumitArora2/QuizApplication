@@ -12,7 +12,8 @@ router.post('/signup',(req,res,next)=>{
        let newUser =new User({
          username:req.body.username,
         email:req.body.email,
-       password:req.body.password
+       password:req.body.password,
+       role:req.body.role
     });
     User.addUser(newUser,(err,data)=>{
         if(err){
@@ -33,13 +34,14 @@ router.route('/question').post(quiz.addQuestion);
 router.post('/authenticate', (req,res,next)=>{
     const email=req.body.email;
     const password=req.body.password;
+    const role=req.body.role;
 
     User.getUserByEmail(email, (err, user)=>{
         if(err) throw err;
         if(!user){
             return res.json({success: false, msg:'User not found, try again'});
         }
-        
+        console.log("this is user ",user.role);
         User.comparePassword(password, user.password,(err,isMatch)=>{
             if(err){
                throw err; 
@@ -55,13 +57,16 @@ router.post('/authenticate', (req,res,next)=>{
                     user:{
                         id:user._id,
                         username:user.username,
-                        email:user.email
+                        email:user.email,
+                        role:user.role
                     }
                 });
-            }else{
+            }
+            else{
                 return res.json({success:false, msg:'Wrong Password'});
             }
         });
+
     });
 });
 

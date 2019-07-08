@@ -32,15 +32,16 @@
                                 <span *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched" class="spanVaild">Please Enter Your Password</span>
                     
                         </div>
-                        <div class="col-md-9">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <select class="form-control" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Role
-                                      </button>
                                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Student</a>
-                                        <a class="dropdown-item" href="#">Teacher</a>
-                                        <a class="dropdown-item" href="#">Principal</a>
+                                        <option class="dropdown-item">Student</option>
+                                        <option class="dropdown-item">Teacher</option>
+                                        <option class="dropdown-item">Principal</option>
                                       </div>
+                                      </select>
                                     </div>
                         
                                 

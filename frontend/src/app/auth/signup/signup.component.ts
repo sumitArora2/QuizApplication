@@ -9,7 +9,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
-})
+}) 
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   constructor(private authService:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService) { }
@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
       }else{
         this.flashMessage.show('something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
         this.router.navigate(['signup']);
-      }
+      } 
     }) 
   }
 }
