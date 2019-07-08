@@ -5,9 +5,7 @@ const UserSchema =mongoose.Schema({
     username:{
         type:String,
         required:true,
-        minlength:6,
-        maxlength:25,
-        unique:true
+        maxlength:10,
     },
     email:{
         type:String,

@@ -10,13 +10,14 @@ export class AuthServiceService {
   user:any;
 
   constructor(private http:HttpClient) { }
+  // for registeration
   registerUser(user){
     let headers =new HttpHeaders();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:3000/api/signup',user,{headers:headers})
     .pipe(map(res=>res));
   }
-
+// fr login 
   postLogin(userauth){
     let headers=new HttpHeaders();
     headers.append('Content-Type','application/json');
