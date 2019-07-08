@@ -12,10 +12,11 @@ export class StudentQuizComponent implements OnInit {
   timeLeft: number = 60;
   interval;
   quizes:{};
+  showidx=0;
   quiz:any;
-
+  
   constructor(private quizgenerate:QuizserviceService,private questionService:QuestionsService) { }
-  nextId:number=1;
+  nextId:number;
   ngOnInit() {
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
@@ -23,16 +24,23 @@ export class StudentQuizComponent implements OnInit {
       } else { 
         this.timeLeft = 60;
       }
-    },1000)
+    },1000);
     this.questionService.getQuestions().subscribe(data=>{
       this.quizes=data;
      console.log(this.quizes);
     });
+    this.nextId=this.showidx+1;
     // this.quizs = this.quizgenerate.getQuiz();
     // this.quiz=this.quizgenerate.getquestionque(1);
   }
+
   getquestion(id)
   {
+    this.showidx=id-1;
+    this.questionService.getQuestions().subscribe(data=>{
+      this.quizes=data;
+     console.log(this.quizes);
+    });
     // this.quiz=this.quizgenerate.getquestionque(id);
     // this.nextId=id;
     // if(id>1){
@@ -43,9 +51,16 @@ export class StudentQuizComponent implements OnInit {
     //     document.getElementById("prv").style.visibility = "hidden";
     // }
   }
+ 
   nextque(){
-    this.quiz=this.quizgenerate.getquestionque(this.nextId+1);
-    this.nextId=this.nextId+1;
+    // this.quiz=this.quizgenerate.getquestionque(this.nextId+1);
+    // this.nextId=this.nextId+1;
+    this.showidx=this.showidx+1;
+    this.questionService.getQuestions().subscribe(data=>{
+      this.quizes=data;
+    });
+    this.nextId=this.showidx+1;
+    console.log("this.nextId",this.nextId);
     if(this.nextId>1){
       document.getElementById("prv").style.visibility = "visible";
     }
@@ -54,15 +69,13 @@ export class StudentQuizComponent implements OnInit {
     }
   }
   prvque(){
-    this.quiz=this.quizgenerate.getquestionque(this.nextId-1);
-    this.nextId=this.nextId-1;
-    if(this.nextId == 1)
-    {
-      document.getElementById("prv").style.visibility="hidden";
-      document.getElementById("next").style.visibility = "visible";
-    }
-    else{
-      document.getElementById("next").style.visibility = "visible";
+    this.showidx=this.showidx-1;
+    this.questionService.getQuestions().subscribe(data=>{
+      this.quizes=data;
+    });
+    this.nextId=this.showidx-1;
+    if(this.nextId==1){
+      document.getElementById("prv").style.visibility = "hidden";
     }
   }
 }

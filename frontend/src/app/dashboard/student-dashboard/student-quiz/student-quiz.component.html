@@ -16,9 +16,9 @@
 </div>
 <div class="modal-dialog">
     <!-- <div  *ngFor= "let quiz of quizs"> -->
-<div class="modal-content">
- <div class="modal-header" *ngFor="let quiz of quizes; let i=index">
-    <h3><span class="label label-warning" id="qid">{{quiz.id}}</span> {{quiz.Questions[i].question_name}}</h3>
+<div class="modal-content" *ngFor="let quiz of quizes; let i=index">
+ <div class="modal-header" >
+    <h3><span class="label label-warning" id="qid">{{quiz.id}}</span> {{quiz.Questions[showidx].question_name}}</h3>
 </div>
 <div class="modal-body"> 
     <div class="col-xs-3 col-xs-offset-5">
@@ -34,13 +34,10 @@
       </div>
   </div> 
  
-  <div class="quiz" id="quiz" data-toggle="buttons">
-
-   <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="1">{{quiz.option1}}</label>
-   <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="2">{{quiz.option2}}</label>
-   <label class="element-animation3 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="3">{{quiz.option3}}</label>
-   <label class="element-animation4 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="4">{{quiz.option4}}</label>
-</div>
+  <div class="quiz" id="quiz" data-toggle="buttons" *ngFor="let options of quiz.Questions[showidx].Options; let in=index">   
+   <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right">     
+   </i></span> <input type="radio" name="q_answer" value="1">{{options.option_name}}</label>
+   </div>
 </div>
 <div class="modal-footer text-muted">
 <div class="nav-buttons">
@@ -59,6 +56,15 @@
 
 <!-- all quetions options-->
 <div class="allque">
+        <div class="modal-content">
+        <div class="modal-content">
+           <button type="button" class="btn btn-default btn-circle btn-lg" *ngFor="let item of [1,2,3,4,5]; let i=index" (click)="getquestion(item)">{{item}}</button>
+        </div>
+           
+    </div>
+</div>
+
+<!-- <div class="allque">
     <div class="modal-content">
             <button type="button" class="btn btn-default btn-circle btn-lg" (click)="getquestion(1)">1</button>
             <button type="button" class="btn btn-default btn-circle btn-lg" (click)="getquestion(2)">2</button>
@@ -67,7 +73,7 @@
             <button type="button" class="btn btn-default btn-circle btn-lg" (click)="getquestion(5)">5</button>
     </div>
        
-</div>
+</div> -->
 
 
 
