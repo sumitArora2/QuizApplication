@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +10,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
-  constructor() { }
+  constructor(private authService:AuthServiceService,private router:Router) { }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
@@ -19,8 +20,23 @@ export class SignupComponent implements OnInit {
      
       'password' : new FormControl(null,[Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
       'repassword' : new FormControl(null,[Validators.required])
-  },
-  // {validators: this.passwordConfirming('password','repassword')}
-  );
+  });
+  }
+  onRegister(){
+    // const user={
+    //   username:this.username,
+    //   email:this.email,
+    //   password:this.password
+    // }
+    console.log("ghvhvj");
+    this.authService.registerUser(this.signupForm.value).subscribe(data=>{
+      if(data){
+        console.log('uugy',data);
+        this.router.navigate(['/login']);
+      }else{
+        console.log('unsuccessful');
+        this.router.navigate(['/signup']);
+      }
+    })
   }
 }

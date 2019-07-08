@@ -3,8 +3,11 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Ques } from '../../../classes/Ques';
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
+<<<<<<< HEAD
 import { Observable } from 'rxjs';
 
+=======
+>>>>>>> 453e88d78c28be0ff8b03eb18fc14f5af9a215c3
 @Injectable({
   providedIn: 'root'
 })
