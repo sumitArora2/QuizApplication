@@ -9,7 +9,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
-})
+}) 
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   constructor(private authService:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService) { }
@@ -21,20 +21,23 @@ export class SignupComponent implements OnInit {
       'email' : new FormControl(null,[Validators.required,Validators.email]),
      
       'password' : new FormControl(null,[Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
-      'repassword' : new FormControl(null,[Validators.required])
+      'repassword' : new FormControl(null,[Validators.required]),
+      'role': new FormControl(null,[Validators.required])
+
   });
   }
   //on signup
   onRegister(){
+    console.log(this.signupForm.value)
     this.authService.registerUser(this.signupForm.value).subscribe(data=>{
       if(data.success){
-        console.log('assa',data);
+        console.log(data);
         this.flashMessage.show('you are now registered and login', { cssClass: 'alert-success', timeout: 3000 });
          this.router.navigate(['login']);
       }else{
         this.flashMessage.show('something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
         this.router.navigate(['signup']);
-      }
-    })
+      } 
+    }) 
   }
 }

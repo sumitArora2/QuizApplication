@@ -11,5 +11,4 @@ async function addQuestion(req,res){
     }
 }
 
-
 module.exports.addQuestion=addQuestion;
