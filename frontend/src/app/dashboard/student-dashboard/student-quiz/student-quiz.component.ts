@@ -1,3 +1,4 @@
+import { QuestionsService } from './../../../shared/services/QuestionsService/questions.service';
 import { Component, OnInit } from '@angular/core';
 import { QuizserviceService } from 'src/app/shared/services/QuizService/quizservice.service';
 
@@ -13,7 +14,7 @@ export class StudentQuizComponent implements OnInit {
   quiz:any;
  
 
-  constructor(private quizgenerate:QuizserviceService) { }
+  constructor(private quizgenerate:QuizserviceService,private questionService:QuestionsService) { }
   nextId:number=1;
   ngOnInit() {
     this.interval = setInterval(() => {
@@ -30,16 +31,17 @@ export class StudentQuizComponent implements OnInit {
   }
   getquestion(id)
   {
-    this.quiz=this.quizgenerate.getquestionque(id);
-    this.nextId=id;
-    if(id>1){
-      document.getElementById("prv").style.visibility = "visible";
-      document.getElementById("next").style.visibility = "visible";
-    }
-    else{
-        document.getElementById("prv").style.visibility = "hidden";
-    }
-
+    this.quiz=this.questionService.getQuestions();
+    console.log("going further",this.quiz);
+    // this.quiz=this.quizgenerate.getquestionque(id);
+    // this.nextId=id;
+    // if(id>1){
+    //   document.getElementById("prv").style.visibility = "visible";
+    //   document.getElementById("next").style.visibility = "visible";
+    // }
+    // else{
+    //     document.getElementById("prv").style.visibility = "hidden";
+    // }
   }
   nextque(){
     this.quiz=this.quizgenerate.getquestionque(this.nextId+1);

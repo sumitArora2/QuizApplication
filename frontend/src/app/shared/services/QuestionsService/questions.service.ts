@@ -31,6 +31,13 @@ AddQuestion(question){
   .pipe(map((res:Response)=>res));
 }
    
+getQuestions(){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application-json');
+  return this.http.get('http://localhost:3000/api/questions',{headers:headers})
+  .pipe(map((res:Response)=>res));
+}
+}
 
 
   //get the questions from the local storage
@@ -71,5 +78,8 @@ AddQuestion(question){
   //   let questions=this.getQuestions();
 
   //  }
+<<<<<<< HEAD
 }
  
+=======
+>>>>>>> b7ca990d6e8d0560a310f51eb477e303c45fb219
