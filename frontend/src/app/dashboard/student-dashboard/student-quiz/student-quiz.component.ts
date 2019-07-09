@@ -33,13 +33,15 @@ export class StudentQuizComponent implements OnInit {
     // this.quizs = this.quizgenerate.getQuiz();
     // this.quiz=this.quizgenerate.getquestionque(1);
   }
-
+  sendId(data){
+  console.log("data",data);
+  }
   getquestion(id)
   {
     this.showidx=id-1;
     this.questionService.getQuestions().subscribe(data=>{
       this.quizes=data;
-     console.log(this.quizes);
+    //  console.log(this.quizes);
     });
     // this.quiz=this.quizgenerate.getquestionque(id);
     // this.nextId=id;
@@ -62,6 +64,7 @@ export class StudentQuizComponent implements OnInit {
     this.nextId=this.showidx+1;
     console.log("this.nextId",this.nextId);
     if(this.nextId>1){
+      
       document.getElementById("prv").style.visibility = "visible";
     }
     if(this.nextId == 5){
@@ -77,5 +80,8 @@ export class StudentQuizComponent implements OnInit {
     if(this.nextId==1){
       document.getElementById("prv").style.visibility = "hidden";
     }
+  }
+  SubmitData(){
+
   }
 }
