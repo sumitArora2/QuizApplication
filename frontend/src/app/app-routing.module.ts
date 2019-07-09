@@ -4,6 +4,8 @@ import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { AuthModule } from './auth/auth.module';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   // {
@@ -16,7 +18,7 @@ const routes: Routes = [
   path:'home',component:HomeComponent
   },
   {
-    path:'profile',component:ProfileComponent
+    path:'profile',component:ProfileComponent,canActivate:[AuthGuard]
   },
   {
     path:'header', component:HeaderComponent

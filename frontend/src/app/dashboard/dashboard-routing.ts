@@ -8,6 +8,7 @@ import { StudentQuizComponent } from './student-dashboard/student-quiz/student-q
 import { DetailsComponent } from './details/details.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { ComplaintsComponent } from './principal-dashboard/complaints/complaints.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 
 const routes: Routes = [
@@ -16,12 +17,13 @@ const routes: Routes = [
  },
  {
      path:'teacherHome', component:TeacherHomeComponent
+     
  },
  {
   path:'teacherQuiz', component:TeacherQuizComponent
 },
  {
-     path:'studentHome', component:StudentHomeComponent
+     path:'studentHome', component:StudentHomeComponent,canActivate:[AuthGuard]
  },
  {
      path:'studentQuiz', component:StudentQuizComponent

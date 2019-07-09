@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   signinForm:FormGroup; 
-  // email=document.getElementById("email");
-  // password:String;
+   email=String;
+   password:String;
   constructor(private authservice:AuthServiceService,private flashMessage:FlashMessagesService,private router:Router) { }
 
   ngOnInit() {
@@ -25,13 +25,18 @@ export class LoginComponent implements OnInit {
   } 
   // fr login
   CheckUserAuth(){ 
-    this.authservice.postLogin(this.signinForm.value).subscribe(data=>{
+    const user={
+      email:this.email,
+      password:this.password
+    }
+    this.authservice.postLogin(user).subscribe(data=>{
       if(data.success){
+        this.authservice.storeUserData(data.token,data.user);
         this.router.navigate(['studentHome']);
         this.flashMessage.show('You are now logged in',{cssClass:'alert-success',timeout:3000});
       }else{
         this.router.navigate(['login'])
-        this.flashMessage.show('You are not a valid user',{cssClass:'alert-danger',timeout:3000});
+        this.flashMessage.show(data.msg,{cssClass:'alert-danger',timeout:3000});
       }
     });
   }

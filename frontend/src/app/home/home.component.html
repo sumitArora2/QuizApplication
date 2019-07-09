@@ -24,8 +24,8 @@
     </div>
 
       <nav class="main-nav float-right d-none d-lg-block">
-        <ul>
-          <li class="active"><a href="#intro">Home</a></li>
+        <ul *ngIf="!authService.loggedIn()">
+          <li [routerLinkActive]="['acitve']" [routerLinkActiveOptions]="{exact:true}"class="active"><a routerLink="/">Home</a></li>
           <!-- <li><a href="#about"  >About Us</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
@@ -48,11 +48,12 @@
             </ul>
           </li> -->
           <!-- <li><a href="#contact">Contact Us</a></li> -->
-          <li><a routerLink="/princiHome">PrincipalDashboard</a></li>
-          <li><a routerLink="/studentHome">StudentDashboard</a></li>
-          <li><a routerLink="/teacherHome">TeacherDashboard</a></li>
-          <li><a routerLink="/login">Login</a></li>
-          <li><a routerLink="/signup">Signup</a></li>
+          <li *ngIf="authService.loggedIn()"><a routerLink="/princiHome">PrincipalDashboard</a></li>
+          <li *ngIf="authService.loggedIn()"><a routerLink="/studentHome">StudentDashboard</a></li>
+          <li *ngIf="authService.loggedIn()"><a routerLink="/teacherHome">TeacherDashboard</a></li>
+          <li *ngIf="!authService.loggedIn()"><a routerLink="/login">Login</a></li>
+          <li *ngIf="!authService.loggedIn()"><a routerLink="/signup">Signup</a></li>
+          <li *ngIf="authService.loggedIn()"><a (click)="this.Logoutclick()">Logout</a></li>
         </ul>
       </nav><!-- .main-nav -->
       
