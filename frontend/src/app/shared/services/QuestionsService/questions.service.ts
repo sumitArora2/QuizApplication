@@ -78,8 +78,3 @@ getQuestions(){
   //   let questions=this.getQuestions();
 
   //  }
-<<<<<<< HEAD
-}
- 
-=======
->>>>>>> b7ca990d6e8d0560a310f51eb477e303c45fb219
