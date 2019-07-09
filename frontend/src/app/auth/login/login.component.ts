@@ -3,7 +3,6 @@ import { FormControl, Validators, FormGroup} from '@angular/forms';
 import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
-import { StudentDashboardModule } from 'src/app/dashboard/student-dashboard/student-dashboard.module';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +27,7 @@ export class LoginComponent implements OnInit {
   // fr login 
   CheckUserAuth(){  
     this.authservice.postLogin(this.signinForm.value).subscribe(data=>{
+
       if(data.success){ 
         console.log("succ data ",data);
         console.log('database ',data['user'].role);
