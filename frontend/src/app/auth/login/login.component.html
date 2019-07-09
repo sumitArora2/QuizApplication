@@ -32,16 +32,18 @@
                                 <span *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched" class="spanVaild">Please Enter Your Password</span>
                     
                         </div>
-                        <div class="col-md-9">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Role
-                                      </button>
-                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Student</a>
-                                        <a class="dropdown-item" href="#">Teacher</a>
-                                        <a class="dropdown-item" href="#">Principal</a>
-                                      </div>
-                                    </div>
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <!-- <div class="dropdown-menu1">  -->
+                            <select class="dropdown-menu1" formControlName="role" class="form-control">
+                                      <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
+                                        <option selected="defaultrole">Select Role</option>
+                                        <option value="student" id="student" name="student">Student</option>
+                                        <option value="teacher" id="teacher">Teacher</option>
+                                        <option value="principal" id="principal">Principal</option>
+                                      </select> 
+                            <!-- </div> --> 
+                        </div>
                         
                                 
                           <div class="input-group">

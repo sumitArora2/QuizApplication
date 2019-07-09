@@ -16,6 +16,10 @@ const UserSchema =mongoose.Schema({
         type:String,
         required:true,
         minlength:6,
+    },
+    role:{
+        type:String,
+        require:true 
     }
 });
 const User =module.exports = mongoose.model('User',UserSchema);
@@ -43,4 +47,4 @@ module.exports.comparePassword=function(candidatePasword, hash,callback){
         if(err)throw err;
         callback(null, isMatch);
     });
-}
+} 
