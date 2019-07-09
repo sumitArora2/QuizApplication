@@ -6,7 +6,7 @@ import { QuizserviceService } from 'src/app/shared/services/QuizService/quizserv
   selector: 'app-student-quiz',
   templateUrl: './student-quiz.component.html',
   styleUrls: ['./student-quiz.component.css']
-})
+}) 
 export class StudentQuizComponent implements OnInit {
   name = 'Angular 6';
   timeLeft: number = 60;
@@ -14,7 +14,7 @@ export class StudentQuizComponent implements OnInit {
   quizes:{};
   showidx=0;
   quiz:any;
-  
+   
   constructor(private quizgenerate:QuizserviceService,private questionService:QuestionsService) { }
   nextId:number;
   ngOnInit() {
