@@ -16,9 +16,9 @@ export class LoginComponent implements OnInit {
   constructor(private authservice:AuthServiceService,private flashMessage:FlashMessagesService,private router:Router) { }
 
   ngOnInit() {
-    if(){
-      this.router.navigate(['studentHome']);
-    }
+    // if(){
+    //   this.router.navigate(['studentHome']);
+    // }
     this.signinForm = new FormGroup({
 
       'email' : new FormControl(null, Validators.required),     
