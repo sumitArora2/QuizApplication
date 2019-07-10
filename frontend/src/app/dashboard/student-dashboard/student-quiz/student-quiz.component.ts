@@ -34,6 +34,7 @@ export class StudentQuizComponent implements OnInit {
     // this.quiz=this.quizgenerate.getquestionque(1);
   }
 
+  
   getquestion(id)
   {
     this.showidx=id-1;
