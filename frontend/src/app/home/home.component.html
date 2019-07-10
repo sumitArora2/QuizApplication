@@ -48,9 +48,9 @@
             </ul>
           </li> -->
           <!-- <li><a href="#contact">Contact Us</a></li> -->
-          <li *ngIf="authService.loggedIn()"><a routerLink="/princiHome">PrincipalDashboard</a></li>
-          <li *ngIf="authService.loggedIn()"><a routerLink="/studentHome">StudentDashboard</a></li>
-          <li *ngIf="authService.loggedIn()"><a routerLink="/teacherHome">TeacherDashboard</a></li>
+          <li *ngIf="authService.getUserDetails() == 'principal' "><a routerLink="/princiHome">PrincipalDashboard</a></li>
+          <li *ngIf="authService.getUserDetails() == 'student' "><a routerLink="/studentHome">StudentDashboard</a></li>
+          <li *ngIf="authService.getUserDetails() == 'teacher' "><a routerLink="/teacherHome">TeacherDashboard</a></li>
           <li *ngIf="!authService.loggedIn()"><a routerLink="/login">Login</a></li>
           <li *ngIf="!authService.loggedIn()"><a routerLink="/signup">Signup</a></li>
           <li *ngIf="authService.loggedIn()"><a (click)="this.Logoutclick()">Logout</a></li>

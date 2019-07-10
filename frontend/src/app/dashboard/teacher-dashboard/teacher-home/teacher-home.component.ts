@@ -20,7 +20,7 @@ export class TeacherHomeComponent implements OnInit {
       else if(this.role==="teacher"){
         this.router.navigate(['teacherHome']);
       }else if(this.role==="principal"){
-        this.router.navigate(['teacherHome']);
+        this.router.navigate(['princiHome']);
       }else{
         this.router.navigate(['login']);
       }

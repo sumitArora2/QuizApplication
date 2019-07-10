@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(private router:Router,private authService:AuthServiceService,private flashMessage:FlashMessagesService) { }
 
   ngOnInit() {
+    console.log("this.authService.getUserDetails()",this.authService.getUserDetails());
     this.authService.loadToken();
   }
   Logoutclick()
