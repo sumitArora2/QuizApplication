@@ -18,6 +18,7 @@ export class StudentQuizComponent implements OnInit {
   constructor(private quizgenerate:QuizserviceService,private questionService:QuestionsService) { }
   nextId:number;
   ngOnInit() {
+    
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
@@ -34,7 +35,7 @@ export class StudentQuizComponent implements OnInit {
     // this.quiz=this.quizgenerate.getquestionque(1);
   }
 
-  
+
   getquestion(id)
   {
     this.showidx=id-1;

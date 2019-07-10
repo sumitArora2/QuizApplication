@@ -45,7 +45,6 @@ export class AuthServiceService {
   }
   getUserDetails(){
     let user=JSON.parse(localStorage.getItem('user'));
-    // console.log("role",user.role);
     return user.role;
   }
  

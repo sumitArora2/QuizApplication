@@ -12,9 +12,23 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 }) 
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+  role:any;
   constructor(private authService:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService) { }
 
   ngOnInit() {
+    if(this.authService.loggedIn()){
+      this.role=this.authService.getUserDetails()
+      if(this.role==="student"){
+        this.router.navigate(['studentHome']);
+      }
+      else if(this.role==="teacher"){
+        this.router.navigate(['teacherHome']);
+      }else if(this.role==="principal"){
+        this.router.navigate(['teacherHome']);
+      }else{
+        this.router.navigate(['login']);
+      }
+    }
     this.signupForm = new FormGroup({
 
       'username' : new FormControl(null, [Validators.required,Validators.maxLength(10)]),
