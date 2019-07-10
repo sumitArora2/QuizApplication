@@ -13,7 +13,7 @@ export class StudentQuizComponent implements OnInit {
   interval;
   quizes:{};
   showidx=0;
-  quiz:any;
+  quiz:any; 
    
   constructor(private quizgenerate:QuizserviceService,private questionService:QuestionsService) { }
   nextId:number;

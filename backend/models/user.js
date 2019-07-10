@@ -5,7 +5,7 @@ const UserSchema =mongoose.Schema({
     username:{
         type:String,
         required:true,
-        maxlength:10,
+        maxlength:25,
     },
     email:{
         type:String,
@@ -20,6 +20,25 @@ const UserSchema =mongoose.Schema({
     role:{
         type:String,
         require:true 
+    },
+    isstatus:{
+        type:Boolean,
+        default:true
+    },
+    phone:{
+        type:Number
+    },
+    location:{
+        type:String
+    },
+    address:{
+        type:String
+    },
+    faterMotherName:{
+        type:String
+    },
+    fmphone:{
+        type:Number
     }
 });
 const User =module.exports = mongoose.model('User',UserSchema);
