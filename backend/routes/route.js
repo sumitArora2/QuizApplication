@@ -28,16 +28,17 @@ router.post('/signup',(req,res,next)=>{
 
 router.route('/question').post(quiz.addQuestion);
 
+router.route('/question').get(quiz.getQuestions);
 
-router.get('/questions',(req,res,next)=>{
-    Quiz.find(function(err,data){
-    if(err){
-       res.json(err);
-    }else{
-        res.json(data);
-    }
-    });
-});
+// router.get('/questions',(req,res,next)=>{
+//     Quiz.find(function(err,data){
+//     if(err){
+//        res.json(err);
+//     }else{
+//         res.json(data);
+//     }
+//     });
+// });
 
 
 //Autheticate login user
