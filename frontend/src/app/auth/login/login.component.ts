@@ -24,11 +24,11 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['studentHome']);
       }
       else if(this.role==="teacher"){
-        this.router.navigateByUrl('/teacherHome');
+        this.router.navigate(['teacherHome']);
       }else if(this.role==="principal"){
-        this.router.navigateByUrl('/princiHome');
+        this.router.navigate(['teacherHome']);
       }else{
-        this.router.navigateByUrl('/login');
+        this.router.navigate(['login']);
       }
     }
     this.signinForm = new FormGroup({
