@@ -12,7 +12,6 @@ import { ProfileComponent } from './shared/profile/profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {HttpClientModule } from '@angular/common/http';
 import { AuthServiceService } from './shared/services/Authetication/auth-service.service';
-// import { FlashMessagesModule } from 'angular2-flash-messages/module/module';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 @NgModule({

@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
         console.log("succ data ",data);
         console.log('database ',data['user'].role);
         console.log('fff', this.signinForm.value.role);
+        this.authservice.storeUserData(data.token,data.user);
       if(this.signinForm.value.role ==='student' && data['user'].role ==='student'){
           console.log("student data ", data);
         this.router.navigate(['studentHome']);

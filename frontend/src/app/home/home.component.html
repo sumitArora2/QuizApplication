@@ -24,8 +24,8 @@
     </div>
 
       <nav class="main-nav float-right d-none d-lg-block">
-        <ul *ngIf="!authService.loggedIn()">
-          <li [routerLinkActive]="['acitve']" [routerLinkActiveOptions]="{exact:true}"class="active"><a routerLink="/">Home</a></li>
+        <ul>
+          <li [routerLinkActive]="['acitve']" [routerLinkActiveOptions]="{exact:true}"><a  routerLink="/">home</a></li>
           <!-- <li><a href="#about"  >About Us</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#portfolio">Portfolio</a></li>

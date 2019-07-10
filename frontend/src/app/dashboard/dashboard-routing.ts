@@ -24,6 +24,7 @@ const routes: Routes = [
 },
  {
      path:'studentHome', component:StudentHomeComponent,canActivate:[AuthGuard]
+
  },
  {
      path:'studentQuiz', component:StudentQuizComponent
