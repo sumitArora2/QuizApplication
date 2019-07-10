@@ -17,7 +17,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.signupForm = new FormGroup({
 
-      'username' : new FormControl(null, [Validators.required,Validators.maxLength(10)]),
+      'username' : new FormControl(null, [Validators.required,Validators.maxLength(25)]),
       'email' : new FormControl(null,[Validators.required,Validators.email]),
      
       'password' : new FormControl(null,[Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
@@ -32,7 +32,7 @@ export class SignupComponent implements OnInit {
     this.authService.registerUser(this.signupForm.value).subscribe(data=>{
       if(data.success){
         console.log(data);
-        this.flashMessage.show('you are now registered and login', { cssClass: 'alert-success', timeout: 3000 });
+        this.flashMessage.show('you are now registered and Kindly login', { cssClass: 'alert-success', timeout: 3000 });
          this.router.navigate(['login']);
       }else{
         this.flashMessage.show('something went wrong', { cssClass: 'alert-danger', timeout: 3000 });

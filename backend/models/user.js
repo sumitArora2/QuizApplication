@@ -4,17 +4,20 @@ const bcrypt=require('bcryptjs');
 const UserSchema =mongoose.Schema({
     username:{
         type:String,
-        required:true,
+        required:[true,'username is required'],
         maxlength:25,
     },
+    lastname:{
+        type:String
+    }, 
     email:{
         type:String,
-        required:true,
+        required:[true,'email is required'],
         unique: true
     },
     password:{
         type:String,
-        required:true,
+        required:[true,'password is required'],
         minlength:6,
     },
     role:{
