@@ -13,11 +13,23 @@ export class LoginComponent implements OnInit {
   signinForm:FormGroup; 
    email=String;
    password:String;
+   user:any
+   role:String;
   constructor(private authservice:AuthServiceService,private flashMessage:FlashMessagesService,private router:Router) { }
 
   ngOnInit() {
-    if(){
-      this.router.navigate(['studentHome']);
+    if(this.authservice.loggedIn()){
+      this.role=this.authservice.getUserDetails()
+      if(this.role==="student"){
+        this.router.navigate(['studentHome']);
+      }
+      else if(this.role==="teacher"){
+        this.router.navigateByUrl('/teacherHome');
+      }else if(this.role==="principal"){
+        this.router.navigateByUrl('/princiHome');
+      }else{
+        this.router.navigateByUrl('/login');
+      }
     }
     this.signinForm = new FormGroup({
 
@@ -32,33 +44,33 @@ export class LoginComponent implements OnInit {
     this.authservice.postLogin(this.signinForm.value).subscribe(data=>{
 
       if(data.success){ 
-        console.log("succ data ",data);
-        console.log('database ',data['user'].role);
-        console.log('fff', this.signinForm.value.role);
+        // console.log("succ data ",data);
+        // console.log('database ',data['user'].role);
+        // console.log('fff', this.signinForm.value.role);
         this.authservice.storeUserData(data.token,data.user);
       if(this.signinForm.value.role ==='student' && data['user'].role ==='student'){
-          console.log("student data ", data);
+          // console.log("student data ", data);
         this.router.navigate(['studentHome']);
         this.flashMessage.show('Student are now logged in',{cssClass:'alert-success',timeout:3000});
       }
       else if(this.signinForm.value.role ==='principal' && data['user'].role ==='principal'){
-        console.log("principal data ", data);
+        // console.log("principal data ", data);
       this.router.navigate(['principalHome']);
       this.flashMessage.show('Principal are now logged in',{cssClass:'alert-success',timeout:3000});
     }
     else if(data['user'].role === 'teacher' && data['user'].role ==='teacher'){
-        console.log("teacher data ", data);
+        // console.log("teacher data ", data);
       this.router.navigate(['teacherHome']);
       this.flashMessage.show('Teacher are now logged in',{cssClass:'alert-success',timeout:3000});
     }
     else{ 
-      console.log(data);
+      // console.log(data);
       this.router.navigate(['login'])
       this.flashMessage.show('You are not a valid user',{cssClass:'alert-danger',timeout:3000});
     } 
   }
       else{ 
-        console.log(data);
+        // console.log(data);
         this.router.navigate(['login'])
         this.flashMessage.show('You are not a valid user',{cssClass:'alert-danger',timeout:3000});
       }  

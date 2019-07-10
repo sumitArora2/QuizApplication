@@ -13,10 +13,10 @@ import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
  {
-     path:'princiHome', component:PrincipalHomeComponent
+     path:'princiHome', component:PrincipalHomeComponent,canActivate:[AuthGuard]
  },
  {
-     path:'teacherHome', component:TeacherHomeComponent
+     path:'teacherHome', component:TeacherHomeComponent,canActivate:[AuthGuard]
      
  },
  {
