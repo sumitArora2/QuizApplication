@@ -1,15 +1,5 @@
 const Quiz=require('../models/quiz');
 
-
-
-async function getQuestions(req,res){
-try{
-
-}catch(error){
-throw error
-}
-}
-
 module.exports={
       addQuestion : async(req,res) => {
         try{
