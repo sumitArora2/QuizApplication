@@ -30,6 +30,8 @@ router.route('/question').post(quiz.addQuestion);
 
 router.route('/question').get(quiz.getQuestions);
 
+router.route('/question/:id').patch(quiz.addMoreQuestion);
+
 // router.get('/questions',(req,res,next)=>{
 //     Quiz.find(function(err,data){
 //     if(err){

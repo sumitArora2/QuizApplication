@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if(this.authservice.loggedIn()){
+      this.role=this.authservice.getUserDetails();
+    }
+    if(this.authservice.loggedIn()){
       this.role=this.authservice.getUserDetails()
       if(this.role==="student"){
         this.router.navigate(['studentHome']);
@@ -26,11 +29,12 @@ export class LoginComponent implements OnInit {
       else if(this.role==="teacher"){
         this.router.navigate(['teacherHome']);
       }else if(this.role==="principal"){
-        this.router.navigate(['teacherHome']);
+        this.router.navigate(['princiHome']);
       }else{
         this.router.navigate(['login']);
       }
     }
+
     this.signinForm = new FormGroup({
 
       'email' : new FormControl(null, Validators.required),     
@@ -54,12 +58,12 @@ export class LoginComponent implements OnInit {
         this.flashMessage.show('Student are now logged in',{cssClass:'alert-success',timeout:3000});
       }
       else if(this.signinForm.value.role ==='principal' && data['user'].role ==='principal'){
-        // console.log("principal data ", data);
-      this.router.navigate(['principalHome']);
+        console.log("principal data ", data);
+      this.router.navigate(['princiHome']);
       this.flashMessage.show('Principal are now logged in',{cssClass:'alert-success',timeout:3000});
     }
     else if(data['user'].role === 'teacher' && data['user'].role ==='teacher'){
-        // console.log("teacher data ", data);
+        console.log("teacher data ", data);
       this.router.navigate(['teacherHome']);
       this.flashMessage.show('Teacher are now logged in',{cssClass:'alert-success',timeout:3000});
     }

@@ -13,6 +13,7 @@ export class PrincipalHomeComponent implements OnInit {
   constructor(private authService:AuthServiceService,private router:Router,private flashMesssage:FlashMessagesService) { }
 
   ngOnInit() {
+    
   }
   Logoutclick()
   {
