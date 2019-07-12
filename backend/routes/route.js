@@ -4,7 +4,7 @@ const config=require('../config/database');
 const passport=require('passport');
 const jwt=require('jsonwebtoken');
 const User= require('../models/user');
-const Quiz=require('../models/quiz');
+const Quiz=require('../models/class');
 const bcrypt=require('bcryptjs');
 var quiz=require('../controllers/quiz');
 // const user=require('../controllers/user')
@@ -29,6 +29,11 @@ router.post('/signup',(req,res,next)=>{
 router.route('/question').post(quiz.addQuestion);
 
 router.route('/question').get(quiz.getQuestions);
+
+router.route('/question/:id').patch(quiz.addMoreQuestion);
+
+
+router.route('/question/:subjectId/:questionId').patch(quiz.DeleteQuestion);
 
 // router.get('/questions',(req,res,next)=>{
 //     Quiz.find(function(err,data){

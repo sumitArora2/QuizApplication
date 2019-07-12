@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class AuthServiceService {
   authToken:any;
   user:any;
-
+  authRole:any;
   constructor(private http:HttpClient) { }
   // for registeration
   registerUser(user):Observable<any>{
@@ -25,20 +25,29 @@ export class AuthServiceService {
     return this.http.post('http://localhost:3000/api/authenticate',userauth,{headers:headers})
   .pipe(map(res=>res));
   }
-  loggedIn(){
-    // console.log("loggedin", this.authToken);
-    if(this.authToken)
-      return true;
-    return false;
-  }
   storeUserData(token, user) {
 
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
     this.user = user;
-    //console.log(this.authToken, token)
+    // console.log(this.authToken, this)
   }
+  loggedIn(){
+    // console.log("loggedin", this.authToken);
+    var token=this.getToken();
+    if(token)
+      return true;
+    return false;
+  }
+  getToken() {
+    return localStorage.getItem('id_token');
+  }
+  getUserDetails(){
+    let user=JSON.parse(localStorage.getItem('user'));
+    return user.role;
+  }
+ 
   logout() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('user');
@@ -57,6 +66,7 @@ export class AuthServiceService {
     
   loadToken(){ 
     const token = localStorage.getItem('id_token');
+    const user = localStorage.getItem('user.role');
     this.authToken = token;
   }
  
