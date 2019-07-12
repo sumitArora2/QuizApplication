@@ -7,9 +7,9 @@ const User= require('../models/user');
 const Quiz=require('../models/quiz');
 const bcrypt=require('bcryptjs');
 var quiz=require('../controllers/quiz');
-
+// const user=require('../controllers/user')
 router.post('/signup',(req,res,next)=>{
-       let newUser =new User({
+       let newUser =new User({ 
          username:req.body.username,
         email:req.body.email,
        password:req.body.password,
@@ -25,7 +25,7 @@ router.post('/signup',(req,res,next)=>{
     });
 });
 
-
+// router.route('/signup').post(user.addUser);
 router.route('/question').post(quiz.addQuestion);
 
 router.route('/question').get(quiz.getQuestions);
@@ -85,5 +85,30 @@ router.post('/authenticate', (req,res,next)=>{
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,next)=>{
     res.json({user: req.user});
 });
+
+//complete Profile
+// router.put('/profile',(req,res,next)=>{
+//     let newUser =new User({ 
+//     User.findByID()
+//       username:req.body.username,
+//       lastname:req.body.lastname,
+//       email:req.body.email,
+//       phone:req.body.phone, 
+//       location:req.body.location,
+//       address:req.body.address,
+//       password:req.body.password,
+//       role:req.body.role,
+//       faterMotherName:req.body.faterMotherName,
+//       fmphone:req.body.fmphone
+//  });
+//  User.addUser(newUser,(err,data)=>{
+//      if(err){
+//          res.json({success:false,msg:'fail to update'+err});
+//      }
+//      else{
+//          res.json({success:true,msg:'Update your details successfully'+data});
+//      }
+//  });
+// });
 
 module.exports=router;

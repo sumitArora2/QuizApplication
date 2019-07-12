@@ -1,0 +1,125 @@
+{
+    "Class":[{
+        "className":"1",
+            "Subject":[{
+                "subjectName":"Math",
+                    "Chapter":[{
+                        "chapterName":"1 chapter",
+                            "Qustions":[{
+                                "qustion1":"What is 2+2",
+                                    "Options":[{
+                                        "option1":"4","option2":"5","option3":"6","option4":"9"
+                                    }]
+                            },{
+                                "qustion2":"What is 3*9",
+                                    "Options":[{
+                                        "option1":"4","option2":"27","option3":"6","option4":"9"
+                                     }] 
+                            }]
+                    },{
+                        "chapterName":"2 chapter",
+                            "Qustions":[{
+                                "qustion1":"What is 9-5",
+                                    "Options":[{
+                                        "option1":"4","option2":"5","option3":"6","option4":"9"
+                                    }]
+                            },{
+                                "qustion2":"What is 9/3",
+                                    "Options":[{
+                                        "option1":"4","option2":"3","option3":"29","option4":"9"
+                                     }] 
+                            }]
+                    }]
+        },{
+            "subjectName":"Computer",
+                    "Chapter":[{
+                        "chapterName":"1 chapter",
+                            "Qustions":[{
+                                "qustion1":"What is Mouse",
+                                    "Options":[{
+                                        "option1":"Input Device","option2":"Output Device","option3":"Input/Output","option4":"Nothing"
+                                    }]
+                            },{
+                                "qustion2":"What is Output Device",
+                                    "Options":[{
+                                        "option1":"Printer","option2":"Mouse","option3":"Keyboard","option4":"All"
+                                     }] 
+                            }]
+                    },{
+                        "chapterName":"2 chapter",
+                            "Qustions":[{
+                                "qustion1":"What is 9-5",
+                                    "Options":[{
+                                        "option1":"4","option2":5,"option3":6,"option4":9
+                                    }]
+                            },{
+                                "qustion2":"What is 9/3",
+                                    "Options":[{
+                                        "option1":"4","option2":3,"option3":29,"option4":9
+                                     }] 
+                            }]
+                    }]
+        }]
+    },{
+        "className":"2",
+        "Subject":[{
+            "subjectName":"Math",
+                "Chapter":[{
+                    "chapterName":"2 chapter",
+                        "Qustions":[{
+                            "qustion1":"22 What is 2+2",
+                                "Options":[{
+                                    "option1":"4","option2":"5","option3":"6","option4":"9"
+                                }]
+                        },{
+                            "qustion2":"22 What is 3*9",
+                                "Options":[{
+                                    "option1":"4","option2":"27","option3":"6","option4":"9"
+                                 }] 
+                        }]
+                },{
+                    "chapterName":"3 chapter",
+                        "Qustions":[{
+                            "qustion1":"22 What is 9-5",
+                                "Options":[{
+                                    "option1":"4","option2":"5","option3":"6","option4":"9"
+                                }]
+                        },{
+                            "qustion2":"22 What is 9/3",
+                                "Options":[{
+                                    "option1":"4","option2":"3","option3":"29","option4":"9"
+                                 }] 
+                        }]
+                }]
+    },{
+        "subjectName":"Computer",
+                "Chapter":[{
+                    "chapterName":"1 chapter",
+                        "Qustions":[{
+                            "qustion1":"What is Mouse",
+                                "Options":[{
+                                    "option1":"Input Device","option2":"Output Device","option3":"Input/Output","option4":"Nothing"
+                                }]
+                        },{
+                            "qustion2":"What is Output Device",
+                                "Options":[{
+                                    "option1":"Printer","option2":"Mouse","option3":"Keyboard","option4":"All"
+                                 }] 
+                        }]
+                },{
+                    "chapterName":"2 chapter",
+                        "Qustions":[{
+                            "qustion1":"What is 9-5",
+                                "Options":[{
+                                    "option1":"4","option2":5,"option3":6,"option4":9
+                                }]
+                        },{
+                            "qustion2":"What is 9/3",
+                                "Options":[{
+                                    "option1":"4","option2":3,"option3":29,"option4":9
+                                 }] 
+                        }]
+                }]
+    }]  
+    }]
+}

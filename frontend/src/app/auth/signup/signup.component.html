@@ -62,14 +62,13 @@
               <div class="form-group">
                 <label for="password" class="col-md-3 control-label">Select Role</label>
                 <div class="col-md-9">
-                <select class="dropdown-menu1" formControlName="role">
-                          <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
-                            <option selected="defaultrole">Select Role</option>
+                <select class="dropdown-menu1" formControlName="role" [(ngModel)]="select_role">
+                            <option selected="role">Select Role</option>
                             <option value="student">Student</option>
                             <option value="teacher">Teacher</option>
                             <option value="principal">Principal</option>
                           </select>
-                </div> 
+                </div>  
             </div>
 
               

@@ -7,3 +7,54 @@
     width:60%;
  
 }
+body{
+background-image: url("http://all4desktop.com/data_images/original/4238046-background.jpg");
+/* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy7-f65t-ZYO5_sxxikDaNI0L7hmwIKwsz3Y_GEBZs7ghp73oY"); */
+background-size: 100% 100%;
+height: 100vh+auto;
+float: left;
+width: 100%;
+/* calc(3.25rem + 2px) */
+}
+.panel{
+    background-color: bisque;
+    border-color: burlywood;
+    border-width: thick;
+}
+
+.form-control{
+    display: block;
+    width: 50%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+.droup-down{
+    height: calc(3.25rem + 2px);
+    display: block;
+    width: 50%;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+.spanVaild{
+    color: red; 
+    padding-left: 50%;
+}
+sup{
+    color: red; 
+    font-size: large;
+}

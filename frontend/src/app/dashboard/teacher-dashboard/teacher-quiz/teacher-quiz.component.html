@@ -11,21 +11,64 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body>
-
+<body>   
   <div class="container">
-    <h2>Quiz</h2>
+    <img src="https://cdn.pixabay.com/photo/2017/02/17/15/25/quiz-2074324__340.png" alt="quiz img" height="90px"> 
     <div class="panel panel-default">
       <div class="panel-body">
         <form [formGroup]="nestedForm">
-           <div>
-             <input type="text" class="form-control" formControlName="dept_name" placeholder="Enter the subject name">
-           </div>
+
+          <!-- before submit button -->
+          <div id="BeforeMakeQuizbtn">   
+            <div>
+               <label for="User Name" class="col-md-3 control-label">Enter Class<sup>*</sup></label>
+                <!-- <input type="text" class="form-control" formControlName="dept_name" placeholder="Enter Class" [attr.disabled]="abc"> -->
+                <select class="droup-down" formControlName="class" [(ngModel)]="class" [attr.disabled]="abc">
+                  <option [ngValue]="undefined" disabled  selected hidden>Select Class</option>
+                  <option value="5">5<sup>th</sup></option>
+                  <option value="6">6<sup>th</sup></option>
+                  <option value="9">9<sup>th</sup></option>
+                  <option value="10">10<sup>th</sup></option>
+                </select>
+              </div> 
+              <span *ngIf="!nestedForm.get('class').valid && nestedForm.get('class').touched" class="spanVaild">Please Select Class</span>
+              <br>
+            <div> 
+             <label for="User Name" class="col-md-3 control-label">Enter Subject<sup>*</sup></label>
+             <!-- <input type="text" class="form-control" formControlName="dept_name" placeholder="Enter Subject"> -->
+             <select class="droup-down" formControlName="subject" [(ngModel)]="subject" [attr.disabled]="abc">
+              <option [ngValue]="undefined" disabled  selected>Select Subjects</option>
+              <option value="math">Math</option>
+              <option value="science">Science</option>
+              <option value="hindi">Hindi</option> 
+              <option value="english">English</option>
+            </select>
+            </div>
+            <span *ngIf="!nestedForm.get('subject').valid && nestedForm.get('subject').touched" class="spanVaild">Please Select Subject</span>
+            <br>
+           <div> 
+              <label for="User Name" class="col-md-3 control-label">Enter Chapter<sup>*</sup></label>
+              <!-- <input type="text" class="form-control" formControlName="dept_name" placeholder="Enter Chapter"> -->
+              <select class="droup-down" formControlName="chapter" [(ngModel)]="chapter" [attr.disabled]="abc">
+                <option [ngValue]="undefined" disabled  selected>Select Chapter</option>
+                <option value="chapter1">Chapter 1</option>
+                <option value="chapter2">Chapter 2</option>
+                <option value="chapter3">Chapter 3</option> 
+                <option value="chapter4">Chapter 4</option>
+              </select>
+            </div>
+            <span *ngIf="!nestedForm.get('chapter').valid && nestedForm.get('chapter').touched" class="spanVaild">Please Select Chapter</span>
+            <br> 
+          <button type="submit" class="btn btn-primary" id="startMakeQuiz" (click)="startQuizMakebtn()" [disabled]="!nestedForm.valid">Start Make Quiz</button>
+          </div>
+
+          <!-- After submit button -->
+          <div id="onbuttonVisible"  style="visibility: hidden;">
           <div class="panel panel-default" formArrayName="Questions">
             <div class="panel-body" *ngFor="let question of QuestionControl.controls; let QuesIdx=index;"
               [formGroupName]="QuesIdx">
               <div class="form-group base">
-                <a (click)="removeQuestions(QuesIdx)">
+                <a (click)="removeQuestions(QuesIdx)"> 
                   <span class="glyphicon glyphicon-trash"></span>
                 </a>
                 <label>Enter the Question</label>
@@ -62,9 +105,11 @@
           <br>
           <br>
           <button type="submit" class="btn btn-primary" (click)="submitForm(nestedForm.value)">Submit</button>
+        </div>
         </form>
-      </div>
+      
     </div>
+  </div>
   </div>
 
 </body>
@@ -90,3 +135,39 @@
                   </div>
                 </div>
               </div> -->
+
+              <!-- Classes: [{
+                class_name: {
+                type: String,
+                required: true
+                },
+                subjects: [{
+                subject_name: {
+                type: String,
+                required: true
+                },
+                Chapters: [{
+                chapter_name: {
+                type: String,
+                required: true
+                },
+                Questions: [{
+                question_name: {
+                type: String,
+                required: true
+                },
+                Options: [{
+                option_name: {
+                type: String,
+                required: true
+                },
+                IsAnswer: {
+                type: String,
+                required: true
+                }
+                }]
+                }]
+                }],
+                }],
+                }]
+                 -->

@@ -13,14 +13,11 @@ export class LoginComponent implements OnInit {
   signinForm:FormGroup; 
    email=String;
    password:String;
+   select_role="Select Role";
   constructor(private authservice:AuthServiceService,private flashMessage:FlashMessagesService,private router:Router) { }
 
   ngOnInit() {
-    if(){
-      this.router.navigate(['studentHome']);
-    }
     this.signinForm = new FormGroup({
-
       'email' : new FormControl(null, Validators.required),     
       'password' : new FormControl(null,[Validators.required]),
       'role': new FormControl(null,[Validators.required])

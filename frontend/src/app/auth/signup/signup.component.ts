@@ -12,6 +12,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 }) 
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+  select_role="Select Role";
   constructor(private authService:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService) { }
 
   ngOnInit() {
@@ -24,8 +25,23 @@ export class SignupComponent implements OnInit {
       'repassword' : new FormControl(null,[Validators.required]),
       'role': new FormControl(null,[Validators.required])
 
-  });
+  },
+  {validators: this.passwordConfirming('password','repassword')}
+  );
   }
+  //Confirm Password
+  passwordConfirming(password: string, repassword: string){
+    return(group: FormGroup):{[key: string]: any}=>{
+      let pass= group.controls[password];
+      let cnfpass= group.controls[repassword];
+      if(pass.value !== cnfpass.value){
+        return{
+         passwordConfirming: true
+        };
+      }
+      return null;
+    }
+ }
   //on signup
   onRegister(){
     console.log(this.signupForm.value)
