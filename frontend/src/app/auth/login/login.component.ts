@@ -13,12 +13,6 @@ export class LoginComponent implements OnInit {
   signinForm:FormGroup; 
    email=String;
    password:String;
-<<<<<<< HEAD
-   select_role="Select Role";
-  constructor(private authservice:AuthServiceService,private flashMessage:FlashMessagesService,private router:Router) { }
-
-  ngOnInit() {
-=======
    user:any
    role:String;
   constructor(private authservice:AuthServiceService,private flashMessage:FlashMessagesService,private router:Router) { }
@@ -41,7 +35,6 @@ export class LoginComponent implements OnInit {
       }
     }
 
->>>>>>> e2abb4a8681a1c936d1589ab998543df0cada8a9
     this.signinForm = new FormGroup({
       'email' : new FormControl(null, Validators.required),     
       'password' : new FormControl(null,[Validators.required]),
