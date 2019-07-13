@@ -1,8 +1,7 @@
 import { Ques } from './../../../classes/Ques';
 import { QuestionsService } from '../../../shared/services/QuestionsService/questions.service';
-import { FormGroup, FormBuilder, FormArray, } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-
 
 @Component({
   selector: 'app-teacher-quiz',
@@ -15,17 +14,37 @@ export class TeacherQuizComponent implements OnInit {
   nestedForm: FormGroup;
   Queslength: number
   Optslength: number
+  abc:boolean;
+  // makeQuizForm: FormGroup;
   constructor(public QuesService: QuestionsService, private fb: FormBuilder) {
   }
-
+ 
   ngOnInit() {
     this.Queslength = 1;
     this.Optslength = 1;
     this.nestedForm = this.fb.group({
       dept_name: "",
       Questions: this.fb.array([this.Questions]),
+
+      'class' : new FormControl(null, [Validators.required]),
+      'subject' : new FormControl(null,[Validators.required]), 
+      'chapter' : new FormControl(null,[Validators.required])
     });
+    // this.abc=false;
     // console.log("forms==>>", this.nestedForm);
+    // this.makeQuizForm = new FormGroup({ 
+
+    //   'class' : new FormControl(null, [Validators.required]),
+    //   'subject' : new FormControl(null,[Validators.required]), 
+    //   'chapter' : new FormControl(null,[Validators.required])
+    // })
+  }
+
+  startQuizMakebtn(){
+    document.getElementById("onbuttonVisible").style.visibility="visible";
+    document.getElementById("startMakeQuiz").style.visibility="hidden";
+    // document.getElementsByClassName("droup-down").disabled;
+    this.abc=true;
   }
 
   get QuestionControl() {

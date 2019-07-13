@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
     }
 
     this.signinForm = new FormGroup({
-
       'email' : new FormControl(null, Validators.required),     
       'password' : new FormControl(null,[Validators.required]),
       'role': new FormControl(null,[Validators.required])
@@ -45,7 +44,7 @@ export class LoginComponent implements OnInit {
   }  
   // fr login 
   CheckUserAuth(){  
-    this.authservice.postLogin(this.signinForm.value).subscribe(data=>{
+    this.authservice. AuthLogin(this.signinForm.value).subscribe(data=>{
 
       if(data.success){ 
         // console.log("succ data ",data);

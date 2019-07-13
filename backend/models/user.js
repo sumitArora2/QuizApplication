@@ -4,22 +4,44 @@ const bcrypt=require('bcryptjs');
 const UserSchema =mongoose.Schema({
     username:{
         type:String,
-        required:true,
-        maxlength:10,
+        required:[true,'username is required'],
+        maxlength:25,
     },
+    lastname:{
+        type:String
+    }, 
     email:{
         type:String,
-        required:true,
+        required:[true,'email is required'],
         unique: true
     },
     password:{
         type:String,
-        required:true,
+        required:[true,'password is required'],
         minlength:6,
     },
     role:{
         type:String,
         require:true 
+    },
+    isstatus:{
+        type:Boolean,
+        default:true
+    },
+    phone:{
+        type:Number
+    },
+    location:{
+        type:String
+    },
+    address:{
+        type:String
+    },
+    faterMotherName:{
+        type:String
+    },
+    fmphone:{
+        type:Number
     }
 });
 const User =module.exports = mongoose.model('User',UserSchema);

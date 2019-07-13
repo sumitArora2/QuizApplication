@@ -17,9 +17,9 @@ export class AuthServiceService {
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:3000/api/signup',user,{headers:headers})
     .pipe(map(res=>res));
-  }
+  } 
 // fr login 
-  postLogin(userauth):Observable<any>{
+  AuthLogin(userauth):Observable<any>{
     let headers=new HttpHeaders();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:3000/api/authenticate',userauth,{headers:headers})
@@ -64,7 +64,7 @@ export class AuthServiceService {
       .pipe(map(res=>Response ));
   }  
     
-  loadToken(){
+  loadToken(){ 
     const token = localStorage.getItem('id_token');
     const user = localStorage.getItem('user.role');
     this.authToken = token;

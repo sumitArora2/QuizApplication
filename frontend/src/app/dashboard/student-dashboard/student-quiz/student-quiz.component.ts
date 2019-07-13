@@ -1,6 +1,7 @@
 import { QuestionsService } from './../../../shared/services/QuestionsService/questions.service';
 import { Component, OnInit } from '@angular/core';
 import { QuizserviceService } from 'src/app/shared/services/QuizService/quizservice.service';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-student-quiz',
@@ -14,11 +15,18 @@ export class StudentQuizComponent implements OnInit {
   quizes:{};
   showidx=0;
   quiz:any; 
-   
+  takeQuizForm: FormGroup;
   constructor(private quizgenerate:QuizserviceService,private questionService:QuestionsService) { }
   nextId:number;
   ngOnInit() {
+<<<<<<< HEAD
+    this.takeQuizForm = new FormGroup({
+
+      'course':new FormControl(null, [Validators.required])
+  })
+=======
     
+>>>>>>> e2abb4a8681a1c936d1589ab998543df0cada8a9
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
@@ -34,8 +42,20 @@ export class StudentQuizComponent implements OnInit {
     // this.quizs = this.quizgenerate.getQuiz();
     // this.quiz=this.quizgenerate.getquestionque(1);
   }
+<<<<<<< HEAD
+  startQuizbtn(){
+    if(!this.takeQuizForm.valid){
+      alert("First select Subject and Chapter");
+    }
+    else{
+    document.getElementById("onbuttonVisible").style.visibility="visible";
+    document.getElementById("desBeforeQuiz").style.visibility="hidden";
+    }
+  }
+=======
 
 
+>>>>>>> e2abb4a8681a1c936d1589ab998543df0cada8a9
   getquestion(id)
   {
     this.showidx=id-1;
