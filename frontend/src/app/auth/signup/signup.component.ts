@@ -12,11 +12,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 }) 
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
-<<<<<<< HEAD
-  select_role="Select Role";
-=======
   role:any;
->>>>>>> e2abb4a8681a1c936d1589ab998543df0cada8a9
   constructor(private authService:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService) { }
 
   ngOnInit() {
