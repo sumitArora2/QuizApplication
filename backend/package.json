@@ -18,5 +18,8 @@
     "bcryptjs": "*"
   },
   "author": "quiz team",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jshint": "^2.10.2"
+  }
 }

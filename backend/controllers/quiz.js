@@ -1,46 +1,213 @@
 const Quiz = require("../models/class");
-
+const Subject = require('../models/subject');
+const Chapter = require('../models/chapter');
+const Question = require('../models/question');
+const Option = require('../models/option');
+const Class = require('../models/class');
 module.exports = {
-  addQuestion: async (req, res) => {
+
+  addClass: async (req, res) => {
     try {
-      let quiz = new Quiz(req.body);
-      const result = await quiz.save();
-       result ? res.status(200).send({message : 'data posted', res:result}) : 
-       res.status(422).send({message:'data not posted due to symentic errors'})
+      let classes = new Class(req.body);
+      const result = await classes.save();
+      result ? res.status(200).send({
+          message: 'classes are saved',
+          res: result
+        }) :
+        res.status(422).send({
+          message: 'classes are not saved',
+          res: result
+        });
     } catch (error) {
       console.log(error);
-    res.send(error);
+      res.send(error);
     }
   },
+  addSubject: async (req, res) => {
+    try {
+      let subject = new Subject({
+        Subjects: [{
+          subject_name: req.body.subject_name,
+          Classes: [req.params.classId]
+        }]
+      });
+      let result = await subject.save();
+      console.log(result);
+      result ? res.status(200).send({
+        message: 'subjects are saved',
+        res: result
+      }) : res.status(422).send({
+        message: 'subjects re not saved',
+        res: result
+      });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
+  addChapter: async (req, res) => {
+    try {
+      console.log("hare rama here rama");
+      const chapter = new Chapter({
+        Chapters: [{
+          chapter_name: req.body.chapter_name,
+          Classes: [req.params.classId],
+          Subjects: [req.params.subjectId]
+        }]
+      });
+      const result = await chapter.save();
+      result ? res.status(200).send({
+        message: 'chapters are saved',
+        res: result
+      }) : req.status(422).send({
+        message: 'chapters are not saved',
+        res: result
+      });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
+  addQuestion: async (req, res) => {
+    try {
+      console.log("req.params.classId", req.params.classId);
+
+      const question = new Question({
+        Questions: [{
+          question_name: req.body.question_name,
+          Classes: [req.params.classId],
+          Subjects: [req.params.subjectId],
+          Chapters: [req.params.chapterId]
+        }]
+      });
+      const result = await question.save();
+      result ? res.status(200).send({
+          message: 'Questions are saved',
+          res: result
+        }) :
+        res.status(422).send({
+          message: 'Questions are not saved'
+        });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
+  addOption: async (req, res) => {
+    try {
+      // console.log(req.body)
+      // return res.send("Done")
+      // let option = new Option({
+      //   Options: [{
+      //     option_name: req.body.option_name,
+      //     IsAnswer: req.body.IsAnswer,
+      //     Questions: [req.params.questionId]
+      //   }]
+      // });
+      // req.body.Options = req.body.Options.map(
+      //   (option)=>{
+      //     option['Subjects']=[req.params.questionId];
+      //     return option;
+      //   }
+      // );
+      let option = new Option({
+        Options:req.body.Options,
+        Question:[req.params.questionId]
+      });
+      console.log("req.bodysssssssssssss",req.body);
+      let result = await option.save();
+      result ? res.status(200).send({
+          message: 'Options are saved',
+          res: result
+        }) :
+        res.status(422).send({
+          message: 'Options are not saved',
+          res: result
+        })
+  
+    } catch (error) {
+     console.log(error);
+     res.send(error);      
+    }
+      },
   getQuestions: async (req, res) => {
     try {
-      let result = await Quiz.find();
-      res.status(200).send({ message: "all questions", result: result });
+      const result = await Quiz.find();
+      result ?
+        res.status(200).send({
+          message: "Here are the questions",
+          result: result
+        }) :
+        res.status(422).send({
+          message: "questions are not getting",
+          result: result
+        })
     } catch (error) {
       throw error;
     }
   },
   addMoreQuestion: async (req, res) => {
-    var newQuestion = req.body;
-    var SubId = req.params.id;
+    const newQuestion = req.body;
     try {
-      let result = await Quiz.findByIdAndUpdate({ _id: SubId }, { $push:{Questions: newQuestion} });
-      res.status(200).send({ message: "adding more question", result: result });
+      let result = await Quiz.findByIdAndUpdate({
+        _id: SubId
+      }, {
+        $push: {
+          Questions: newQuestion
+        }
+      });
+      res.status(200).send({
+        message: "adding more question",
+        result: result
+      });
     } catch (error) {
       console.log(error);
     }
   },
-  DeleteQuestion: async(req, res) => {
-    var SubId =req.params.subjectId; 
+  DeleteQuestion: async (req, res) => {
+    var SubId = req.params.subjectId;
     var QuesId = req.params.questionId;
-    console.log(QuesId," ",SubId);
+    console.log(QuesId, " ", SubId);
     try {
-      const result = await Quiz.findByIdAndUpdate({ _id: SubId },{ $pull:{ Questions:{_id: QuesId} }});
-      result ? res.status(200).send({ message: 'data Deleted', res: result })
-      : res.status(422).send({ message: 'Data Not Deleted', res: result });
+      const result = await Quiz.findByIdAndUpdate({
+        _id: SubId
+      }, {
+        $pull: {
+          Questions: {
+            _id: QuesId
+          }
+        }
+      });
+      result ? res.status(200).send({
+          message: 'data Deleted',
+          res: result
+        }) :
+        res.status(422).send({
+          message: 'Data Not Deleted',
+          res: result
+        });
     } catch (error) {
       console.log(error);
       res.send(error);
     }
   }
 };
+
+
+// "Options":[{
+//   "option_name":"JavaScript is a lightweight, interpreted programming language.",
+//   "IsAnswer":"false"
+// },
+// {
+//   "option_name":"JavaScript is designed for creating network-centric applications",
+//   "IsAnswer":"false"
+// },
+// {
+//   "option_name":"JavaScript is complementary to and integrated with Java.",
+//   "IsAnswer":"false"
+// },
+// {
+//   "option_name":"All of the above.",
+//   "IsAnswer":"true"
+// }
+// ]
