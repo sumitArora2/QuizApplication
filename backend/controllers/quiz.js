@@ -7,8 +7,10 @@ const Class = require('../models/class');
 module.exports = {
 
   addClass: async (req, res) => {
+    console.log("in routing and received");
     try {
       let classes = new Class(req.body);
+      console.log("in quiz",classes);
       const result = await classes.save();
       result ? res.status(200).send({
           message: 'classes are saved',
@@ -23,16 +25,34 @@ module.exports = {
       res.send(error);
     }
   },
+  getClass: async (req, res) => {
+    try {
+      const result = await Class.find();
+      result ? res.status(200).send({
+          message: 'Success',
+          res: result
+        }) :
+        res.status(422).send({
+          message: 'Failure',
+          res: result
+        });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
   addSubject: async (req, res) => {
     try {
+      // console.log("req.bodyeeeeee",req.body);
+      // console.log("req.bodyeeeeee",req.params);
       let subject = new Subject({
         Subjects: [{
-          subject_name: req.body.subject_name,
+          subject_name: req.body.subjectname,
           Classes: [req.params.classId]
         }]
       });
       let result = await subject.save();
-      console.log(result);
+      // console.log(result);
       result ? res.status(200).send({
         message: 'subjects are saved',
         res: result
