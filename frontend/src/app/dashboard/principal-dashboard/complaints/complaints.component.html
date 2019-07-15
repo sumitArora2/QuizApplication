@@ -1,45 +1,46 @@
- <link rel="stylesheet" type="text/css" href="assets/css/util.css">
-<link rel="stylesheet" type="text/css" href="assets/css/main.css">
-<div class="container-contact100">
+ <link rel="stylesheet" type="text/css" href="../../../../assets/css/util.css">
+<link rel="stylesheet" type="text/css" href="../../../../assets/css/main.css">
+<!-- <div class="container-contact100">
     <div class="wrap-contact100">
-        <form class="contact100-form validate-form">
+        <form (submit)="onComplaint()" id="complaintForm" class="contact100-form-validate-form" [formGroup]="complaintForm">
             <span class="contact100-form-title">
                 Complaint Form
             </span>
 
-            <label class="label-input100" for="first-name">Tell us your name *</label>
+            <label class="label-input100" for="firstname">Tell us your name *</label>
             <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
-                <input id="first-name" class="input100" type="text" name="first-name" placeholder="First name">
+                <input formControlName="firstname" id="first-name" class="input100" type="text" name="firstname" placeholder="First name">
+                <span *ngIf="!complaintForm.get('firstname').valid && complaintForm.get('firstname').touched" class="spanVaild">Please Enter Your First Name</span>
                 <span class="focus-input100"></span>
             </div>
             <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
-                <input class="input100" type="text" name="last-name" placeholder="Last name">
+                <input formControlName="lastname" class="input100" type="text" name="lastname" placeholder="Last name">
+                <span *ngIf="!complaintForm.get('lastname').valid && complaintForm.get('lastname').touched" class="spanVaild">Please Enter Your Last Name</span>
                 <span class="focus-input100"></span>
             </div>
 
             <label class="label-input100" for="email">Enter your email *</label>
             <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                <input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com">
-                <span class="focus-input100"></span>
-            </div>
+                <input formControlName="email" id="email"class="input100" type="email" name="email" placeholder="Eg. example@email.com">
+                <span *ngIf="!complaintForm.get('email').valid && complaintForm.get('email').touched" class="spanVaild">Please Enter Your Email</span>
 
-            <label class="label-input100" for="phone">Enter phone number</label>
-            <div class="wrap-input100">
-                <input id="phone" class="input100" type="text" name="phone" placeholder="Eg. +91 00 0000000">
                 <span class="focus-input100"></span>
             </div>
 
             <label class="label-input100" for="message">Message *</label>
             <div class="wrap-input100 validate-input" data-validate = "Message is required">
-                <textarea id="message" class="input100" name="message" placeholder="Write us a message"></textarea>
+                <textarea formControlName="message" id="message" class="input100" name="message" placeholder="Write us a message"></textarea>
+                <span *ngIf="!complaintForm.get('message').valid && complaintForm.get('message').touched" class="spanVaild">Please Enter the Message </span>
                 <span class="focus-input100"></span>
             </div>
 
             <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn">
+                <button id="btn-signup" value="submit" type="submit" class="contact100-form-btn" [disabled]="!complaintForm.valid"><i class="icon-hand-right"></i> 
                     Submit
                 </button>
             </div>
+          
+                               
         </form>
 
         <div class="contact100-more flex-col-c-m" style="background-image: url('images/bg-01.jpg');">
@@ -94,7 +95,105 @@
     </div>
 </div>
 
+<div id ="dropDownSelect"></div> -->
 
 
-<div id="dropDownSelect1"></div>
+
+
+
+<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form (submit)="onComplaint()" class="contact100-form validate-form"[formGroup]="complaintForm">
+				<span class="contact100-form-title">
+					Send Us A Message
+				</span>
+
+				<label class="label-input100" for="first-name">Tell us your name *</label>
+				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
+                    <input formControlName="firstname" id="first-name" class="input100" type="text" name="first-name" placeholder="First name">
+                    <span *ngIf="!complaintForm.get('firstname').valid && complaintForm.get('firstname').touched" class="spanVaild">Please Enter Your First Name</span>
+					<span class="focus-input100"></span>
+				</div>
+				<div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
+                    <input formControlName="lastname" class="input100" type="text" name="lastname" placeholder="Last name">
+                     <span *ngIf="!complaintForm.get('lastname').valid && complaintForm.get('lastname').touched" class="spanVaild">Please Enter Your Last Name</span>
+					<span class="focus-input100"></span>
+				</div>
+
+				<label class="label-input100" for="email">Enter your email *</label>
+				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <input formControlName="email" id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com">
+                    <span *ngIf="!complaintForm.get('email').valid && complaintForm.get('email').touched" class="spanVaild">Please Enter Your Email</span>
+					<span class="focus-input100"></span>
+                </div>
+                
+				<label class="label-input100" for="message">Message *</label>
+				<div class="wrap-input100 validate-input" data-validate = "Message is required">
+                    <textarea formControlName="message" id="message" class="input100" name="message" placeholder="Write us a message"></textarea>
+                    <span *ngIf="!complaintForm.get('message').valid && complaintForm.get('message').touched" class="spanVaild">Please Enter the Message </span>
+
+					<span class="focus-input100"></span>
+                </div>
+                <div class="container-contact100-form-btn">
+                    <button id="btn-signup" value="submit" type="submit" class="contact100-form-btn" [disabled]="!complaintForm.valid"><i class="icon-hand-right"></i> 
+                        Send Message
+                    </button>
+                </div>
+              
+			</form>
+
+			<div class="contact100-more flex-col-c-m" style="background-image: url('images/bg-01.jpg');">
+				<div class="flex-w size1 p-b-47">
+					<div class="txt1 p-r-25">
+						<span class="lnr lnr-map-marker"></span>
+					</div>
+
+					<div class="flex-col size2">
+						<span class="txt1 p-b-20">
+                            Address
+						</span>
+
+						<span class="txt2">
+							Lovely Professional University, Jalandhar, Punjab
+						</span>
+					</div>
+				</div>
+
+				<div class="dis-flex size1 p-b-47">
+					<div class="txt1 p-r-25">
+						<span class="lnr lnr-phone-handset"></span>
+					</div>
+
+					<div class="flex-col size2">
+						<span class="txt1 p-b-20">
+							Contact Us
+						</span>
+
+						<span class="txt3">
+                            +91 9988895020
+						</span>
+					</div>
+				</div>
+
+				<div class="dis-flex size1 p-b-47">
+					<div class="txt1 p-r-25">
+						<span class="lnr lnr-envelope"></span>
+					</div>
+
+					<div class="flex-col size2">
+						<span class="txt1 p-b-20">
+							 Support
+						</span>
+
+						<span class="txt3">
+                            Lpu@University.com
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
 
