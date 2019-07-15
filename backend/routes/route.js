@@ -27,9 +27,12 @@ router.post('/signup',(req,res,next)=>{
 
 router.route('/addclass').post(quiz.addClass);
 router.route('/getclass').get(quiz.getClass);
+router.route('/getSpecificClass/:classId').get(quiz.getSpecificClass);
+router.route('/deleteClass/:classId').delete(quiz.deleteClass);
+router.route('/updateClass/:classId').put(quiz.updateClass);
 router.route('/addsubject/:classId').patch(quiz.addSubject);
-router.route('/getsubject').get(quiz.getSubject);
 
+router.route('/getsubject').get(quiz.getSubject);
 router.route('/addchapter/:classId/:subjectId').post(quiz.addChapter);
 router.route('/addquestion/:classId/:subjectId/:chapterId').post(quiz.addQuestion);
 router.route('/addoption/:questionId').post(quiz.addOption);

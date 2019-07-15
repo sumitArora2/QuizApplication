@@ -10,7 +10,7 @@ module.exports = {
     // console.log("in routing and received");
     try {
       let classes = new Class(req.body);
-      console.log("in quiz", classes);
+      // console.log("in quiz", classes);
       const result = await classes.save();
       result ? res.status(200).send({
           message: 'classes are saved',
@@ -28,6 +28,7 @@ module.exports = {
   getClass: async (req, res) => {
     try {
       const result = await Class.find();
+      console.log("result", result);
       result ? res.status(200).send({
           message: 'Success',
           res: result
@@ -39,6 +40,61 @@ module.exports = {
     } catch (error) {
       console.log(error);
       res.send(error);
+    }
+  },
+  getSpecificClass: async (req, res) => {
+    try {
+      const result = await Class.findById({
+        _id: req.params.classId
+      });
+      result ? res.status(200).send({
+          message: 'particular class received',
+          res: result
+        }) :
+        res.status(422).send({
+          message: 'particular class not received',
+          res: result
+        })
+    } catch (error) {
+      throw error;
+    }
+
+  },
+  deleteClass: async (req, res) => {
+    try {
+      const result = await Class.findByIdAndDelete({
+        _id: req.params.classId
+      });
+      result ? res.status(200).send({
+          message: 'class deleted successfully',
+          res: result
+        }) :
+        res.status(422).send({
+          message: 'class not deleted'
+        });
+    } catch (error) {
+      throw eror;
+    }
+  },
+  updateClass: async (req, res) => {
+    // console.log(req.body.class_name);
+    try {
+      const result = await Class.findOneAndUpdate({
+        _id: req.params.classId
+      }, {
+        class_name: req.body.class_name
+      });
+      console.log("result", result);
+      result ? res.status(200).send({
+          message: 'class name update successfully',
+          res: result
+        }) :
+        res.status(422).send({
+          message: 'class name not updated',
+          res: result
+        });
+    } catch (error) {
+      throw error;
     }
   },
   addSubject: async (req, res) => {
@@ -70,7 +126,6 @@ module.exports = {
   getSubject: async (req, res) => {
     try {
       const result = await Subject.find({}).populate('Class_Id');
-      // console.log("result", result);
       result ? res.status(200).send({
           message: 'Success',
           res: result
