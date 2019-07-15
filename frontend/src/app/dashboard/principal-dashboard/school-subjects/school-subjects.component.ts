@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class SchoolSubjectsComponent implements OnInit {
   showsubject:any;
   myForm:FormGroup
-  classes:any;
+  classes=[];
   constructor(private fb:FormBuilder,private QuesService:QuestionsService) {
     
   
@@ -24,13 +24,17 @@ export class SchoolSubjectsComponent implements OnInit {
   this.showsubject=false;
   let response=await this.QuesService.getClass();
   this.classes=response['res']
-  // console.log(this.classes);  
+  console.log("in ng on init",this.classes);
+   
 }
   showsubjectForm(){
     this.showsubject=true;
   }
-  submitsubject(){
-  // console.log(this.myForm.value);
-  this.QuesService.AddSubject(this.myForm.value);
+  async submitsubject(){
+  await this.QuesService.AddSubject(this.myForm.value);
+  this.myForm.reset();
+  let response=await this.QuesService.getClass();
+   this.classes=response['res'];
+   console.log("sssswqqwe",this.classes);
   }
 }

@@ -1,6 +1,5 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-
-import { Ques } from '../../../classes/Ques';
+import { Ques } from '../../../models/Ques';
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -42,6 +41,11 @@ AddSubject(data){
   headers.append('Content-Type','application/json');
   // console.log("data",data);
   return this.http.patch(`http://localhost:3000/api/addsubject/${data.class}`,data,{headers:headers}).toPromise();
+}
+getSubjects(){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application/json');
+  return this.http.get('http://localhost:3000/api/getsubject',{headers:headers}).toPromise();
 }
 }
 

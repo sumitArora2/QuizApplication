@@ -50,6 +50,8 @@ router.post('/complaint',(req,res,next)=>{
 router.route('/addclass').post(quiz.addClass);
 router.route('/getclass').get(quiz.getClass);
 router.route('/addsubject/:classId').patch(quiz.addSubject);
+router.route('/getsubject').get(quiz.getSubject);
+
 router.route('/addchapter/:classId/:subjectId').post(quiz.addChapter);
 router.route('/addquestion/:classId/:subjectId/:chapterId').post(quiz.addQuestion);
 router.route('/addoption/:questionId').post(quiz.addOption);
