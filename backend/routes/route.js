@@ -25,27 +25,20 @@ router.post('/signup',(req,res,next)=>{
     });
 });
 
+router.route('/addclass').post(quiz.addClass);
+router.route('/getclass').get(quiz.getClass);
+router.route('/addsubject/:classId').patch(quiz.addSubject);
+router.route('/addchapter/:classId/:subjectId').post(quiz.addChapter);
+router.route('/addquestion/:classId/:subjectId/:chapterId').post(quiz.addQuestion);
+router.route('/addoption/:questionId').post(quiz.addOption);
 // router.route('/signup').post(user.addUser);
 
 
 router.route('/question').post(quiz.addQuestion);
 
-router.route('/question').get(quiz.getQuestions); 
-
-router.route('/question/:id').patch(quiz.addMoreQuestion);
-
-
+router.route('/question').get(quiz.getQuestions);
+router.route('/question/:classid').patch(quiz.addMoreQuestion);
 router.route('/question/:subjectId/:questionId').patch(quiz.DeleteQuestion);
-
-// router.get('/questions',(req,res,next)=>{
-//     Quiz.find(function(err,data){
-//     if(err){
-//        res.json(err);
-//     }else{
-//         res.json(data);
-//     }
-//     });
-// });
 
 
 //Autheticate login user

@@ -15,11 +15,16 @@ export class TeacherQuizComponent implements OnInit {
   Queslength: number
   Optslength: number
   abc:boolean;
+  class:any
   // makeQuizForm: FormGroup;
   constructor(public QuesService: QuestionsService, private fb: FormBuilder) {
   }
  
   ngOnInit() {
+    // this.QuesService.getClass().subscribe(data=>{
+    // this.class=data;
+    // console.log("this.class",this.class['res']);
+    // });
     this.Queslength = 1;
     this.Optslength = 1;
     this.nestedForm = this.fb.group({

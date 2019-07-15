@@ -1,8 +1,9 @@
+const mongoose = require('mongoose');
 const Class=require('./class');
 const Chapter=require('./chapter');
 const Question=require('./question');
 const Option=require('./option');
-
+var Schema = mongoose.Schema;
 const SubjectSchema=mongoose.Schema({
     Subjects: [{
         subject_name: {

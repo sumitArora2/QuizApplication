@@ -30,10 +30,10 @@ export class StudentQuizComponent implements OnInit {
         this.timeLeft = 60;
       }
     },1000);
-    this.questionService.getQuestions().subscribe(data=>{
-      this.quizes=data;
-     console.log(this.quizes);
-    });
+    // this.questionService.getQuestions().subscribe(data=>{
+    //   this.quizes=data;
+    //  console.log(this.quizes);
+    // });
     this.nextId=this.showidx+1;
     // this.quizs = this.quizgenerate.getQuiz();
     // this.quiz=this.quizgenerate.getquestionque(1);
