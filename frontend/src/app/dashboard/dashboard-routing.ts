@@ -1,3 +1,5 @@
+import { SchoolSubjectsComponent } from './principal-dashboard/school-subjects/school-subjects.component';
+import { SchoolClassesComponent } from './principal-dashboard/school-classes/school-classes.component';
 import { TeacherQuizComponent } from './teacher-dashboard/teacher-quiz/teacher-quiz.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -15,6 +17,12 @@ const routes: Routes = [
  {
      path:'princiHome', component:PrincipalHomeComponent,canActivate:[AuthGuard]
  },
+ {
+  path:'SchoolClass', component:SchoolClassesComponent,canActivate:[AuthGuard]
+},
+{
+  path:'SchoolSubject', component:SchoolSubjectsComponent,canActivate:[AuthGuard]
+},
  {
      path:'teacherHome', component:TeacherHomeComponent,canActivate:[AuthGuard]
      

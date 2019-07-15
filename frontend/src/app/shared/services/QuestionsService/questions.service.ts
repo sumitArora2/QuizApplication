@@ -3,25 +3,14 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Ques } from '../../../classes/Ques';
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionsService {
-  // private nextId:number;
-  // private questions:Ques[];
-  // private optId:number;
-  // // private quesId:[];
-  // private newQuestion=[{}];
   constructor(private http:HttpClient) {
-    // this.optId=0;
-    // let questions=this.getQuestions();
-    // if(questions.length==0){
-    //   this.nextId=0;
-    // }else{
-    //   let maxId=questions.length-1;
-    //   this.nextId=maxId+1;
-    // }
+
    }
 
 AddQuestion(question){
@@ -36,6 +25,23 @@ getQuestions(){
   headers.append('Content-Type','application-json');
   return this.http.get('http://localhost:3000/api/questions',{headers:headers})
   .pipe(map((res:Response)=>res));
+}
+addClass(classname){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application/json');
+  return this.http.post('http://localhost:3000/api/addclass',{'class_name':classname},{headers:headers}).toPromise();
+}
+
+getClass(){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application/json');
+  return this.http.get('http://localhost:3000/api/getclass',{headers:headers}).toPromise();
+}
+AddSubject(data){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application/json');
+  // console.log("data",data);
+  return this.http.patch(`http://localhost:3000/api/addsubject/${data.class}`,data,{headers:headers}).toPromise();
 }
 }
 
