@@ -448,6 +448,7 @@
  #desBeforeQuiz{
      overflow: hidden;
      position: absolute;
+     width: -webkit-fill-available;
  }
 /* .subjectsdivs{
     border-color: burlywood;

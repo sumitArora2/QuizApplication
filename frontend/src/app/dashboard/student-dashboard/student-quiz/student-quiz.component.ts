@@ -19,14 +19,10 @@ export class StudentQuizComponent implements OnInit {
   constructor(private quizgenerate:QuizserviceService,private questionService:QuestionsService) { }
   nextId:number;
   ngOnInit() {
-<<<<<<< HEAD
     this.takeQuizForm = new FormGroup({
 
       'course':new FormControl(null, [Validators.required])
   })
-=======
-    
->>>>>>> e2abb4a8681a1c936d1589ab998543df0cada8a9
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
@@ -42,7 +38,6 @@ export class StudentQuizComponent implements OnInit {
     // this.quizs = this.quizgenerate.getQuiz();
     // this.quiz=this.quizgenerate.getquestionque(1);
   }
-<<<<<<< HEAD
   startQuizbtn(){
     if(!this.takeQuizForm.valid){
       alert("First select Subject and Chapter");
@@ -52,10 +47,6 @@ export class StudentQuizComponent implements OnInit {
     document.getElementById("desBeforeQuiz").style.visibility="hidden";
     }
   }
-=======
-
-
->>>>>>> e2abb4a8681a1c936d1589ab998543df0cada8a9
   getquestion(id)
   {
     this.showidx=id-1;

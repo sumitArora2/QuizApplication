@@ -28,7 +28,7 @@
                   <option value="5">5<sup>th</sup></option>
                   <option value="6">6<sup>th</sup></option>
                   <option value="9">9<sup>th</sup></option>
-                  <option value="10">10<sup>th</sup></option>
+                  <option value="10">10<sup>th</sup></option> 
                 </select>
               </div> 
               <span *ngIf="!nestedForm.get('class').valid && nestedForm.get('class').touched" class="spanVaild">Please Select Class</span>
@@ -48,14 +48,14 @@
             <br>
            <div> 
               <label for="User Name" class="col-md-3 control-label">Enter Chapter<sup>*</sup></label>
-              <!-- <input type="text" class="form-control" formControlName="dept_name" placeholder="Enter Chapter"> -->
-              <select class="droup-down" formControlName="chapter" [(ngModel)]="chapter" [attr.disabled]="abc">
+              <input type="text" class="form-control" formControlName="chapter" placeholder="Enter Chapter">
+              <!-- <select class="droup-down" formControlName="chapter" [(ngModel)]="chapter" [attr.disabled]="abc">
                 <option [ngValue]="undefined" disabled  selected>Select Chapter</option>
                 <option value="chapter1">Chapter 1</option>
                 <option value="chapter2">Chapter 2</option>
                 <option value="chapter3">Chapter 3</option> 
                 <option value="chapter4">Chapter 4</option>
-              </select>
+              </select> -->
             </div>
             <span *ngIf="!nestedForm.get('chapter').valid && nestedForm.get('chapter').touched" class="spanVaild">Please Select Chapter</span>
             <br> 

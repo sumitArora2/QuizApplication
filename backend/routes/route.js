@@ -7,10 +7,10 @@ const User= require('../models/user');
 const Quiz=require('../models/class');
 const bcrypt=require('bcryptjs');
 var quiz=require('../controllers/quiz');
-// const user=require('../controllers/user')
+const user=require('../controllers/user')
 router.post('/signup',(req,res,next)=>{
        let newUser =new User({ 
-         username:req.body.username,
+         username:req.body.username, 
         email:req.body.email,
        password:req.body.password,
        role:req.body.role
@@ -26,9 +26,11 @@ router.post('/signup',(req,res,next)=>{
 });
 
 // router.route('/signup').post(user.addUser);
+
+
 router.route('/question').post(quiz.addQuestion);
 
-router.route('/question').get(quiz.getQuestions);
+router.route('/question').get(quiz.getQuestions); 
 
 router.route('/question/:id').patch(quiz.addMoreQuestion);
 

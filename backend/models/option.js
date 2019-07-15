@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Subject=require('./subject');
 const Class=require('./class');
 const Chapter=require('./chapter');
@@ -5,7 +6,7 @@ const Question=require('./question');
 
 const OptionSchema=mongoose.Schema({
     Options: [{
-        option_name: {
+        option_name: { 
             type: String,
             required: true
         },

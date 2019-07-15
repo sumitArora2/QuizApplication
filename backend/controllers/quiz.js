@@ -11,7 +11,7 @@ module.exports = {
       console.log(error);
     res.send(error);
     }
-  },
+  }, 
   getQuestions: async (req, res) => {
     try {
       let result = await Quiz.find();

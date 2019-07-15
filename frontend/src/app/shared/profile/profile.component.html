@@ -14,11 +14,14 @@
 
 
 <!-- <hr> -->
-<div class="container bootstrap snippet">
+<!-- <div class="container bootstrap snippet">
     <div class="row">
   		<div class="col-sm-10"><h1>User name</h1></div>
-    	<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>
-    </div>
+      <div class="col-sm-2"><a href="/users" class="pull-right">
+        <img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a>
+      </div>
+        </div>
+    </div> -->
     <div class="row">
   		<div class="col-sm-3"><!--left col-->
               
@@ -56,50 +59,74 @@
         </div><!--/col-3-->
     	<div class="col-sm-9">
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                <li class="active"><a data-toggle="tab" href="#home">User Profile</a></li>
                 <li><a data-toggle="tab" href="#changePassword">Change Password</a></li>
-                <li><a data-toggle="tab" href="#settings">Menu 2</a></li>
               </ul>
-
+ 
                
           <div class="tab-content">
             <div class="tab-pane active" id="home">
                 <hr>
-                  <form class="form" action="##" method="post" id="registrationForm" form [formGroup]="userProfileForm" (submit)="SubmitProfile()">
+                  <form class="form" action="##" method="post" id="registrationForm" [formGroup]="userProfileForm" (submit)="SubmitProfile()">
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="first_name"><h4>First name</h4></label>
-                              <input type="text" formControlName="firstname" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
-                          </div>
+                              <label for="first_name"><h4>First name<sup>*</sup></h4></label>
+                              <input type="text" formControlName="firstname" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any." 
+                              [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }">
+                              <!-- <span *ngIf="!userProfileForm.get('firstname').valid && userProfileForm.get('firstname').touched" class="spanVaild">Enter Your First Name less then 25 characters</span> -->
+                              <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                                <div *ngIf="f.firstname.errors.required">Enter Your First Name less then 25 characters</div>
+                              </div>
+                            </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                            <label for="last_name"><h4>Last name</h4></label>
-                              <input type="text" formControlName="lastname" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                            <label for="last_name"><h4>Last name<sup>*</sup></h4></label>
+                              <input type="text" formControlName="lastname" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any."
+                              [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }">
+                              <!-- <span *ngIf="!userProfileForm.get('lastname').valid && userProfileForm.get('lastname').touched" class="spanVaild">Enter Your Last Name</span> -->
+                              <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                <div *ngIf="f.lastname.errors.required">Enter Your Last Name</div>
+                              </div>
                           </div>
                       </div>
           
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="phone"><h4>Phone</h4></label>
-                              <input type="text" formControlName="phone" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                              <label for="phone"><h4>Phone<sup>*</sup></h4></label>
+                              <input type="number" formControlName="phone" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any."
+                              [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                              <!-- <span *ngIf="!userProfileForm.get('phone').valid && userProfileForm.get('phone').touched" class="spanVaild">Enter Your Mobile Number</span> -->
+                              <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                <div *ngIf="f.phone.errors.required">Enter Your Mobile Number</div>
+                              </div>
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="email"><h4>Email</h4></label>
-                              <input type="email" formControlName="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                              <label for="email"><h4>Email<sup>*</sup></h4></label>
+                              <input type="email" formControlName="email" class="form-control" name="email" 
+                              [ngClass]="{ 'is-invalid': submitted && f.email.errors }" id="email" placeholder="you@email.com" title="enter your email.">
+                              <!-- <span *ngIf="!userProfileForm.get('email').valid && userProfileForm.get('email').touched" class="spanVaild">Enter Your Email Address</span> -->
+                              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                <div *ngIf="f.email.errors.required">Enter Your Email Address</div>
+                              </div>
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="location"><h4>Location</h4></label>
-                              <input type="text" class="form-control" id="location" placeholder="Enter a location" title="enter a location">
+                              <label for="location"><h4>Location<sup>*</sup></h4></label>
+                              <input type="text" formControlName="location" class="form-control" id="location" 
+                              [ngClass]="{ 'is-invalid': submitted && f.location.errors }" placeholder="Enter a location" title="enter a location">
+                              <!-- <span *ngIf="!userProfileForm.get('location').valid && userProfileForm.get('location').touched" class="spanVaild">Enter Your location</span> -->
+                              <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+                                <div *ngIf="f.location.errors.required">Enter Your location</div>
+                              </div>  
                           </div>
 					  </div>
 					  
@@ -113,16 +140,26 @@
 
 					<div class="form-group">      
 						<div class="col-xs-6">
-							<label for="fmname"><h4>Father's/Mother's Name</h4></label>
-							<input type="text" class="form-control" id="fmname" placeholder="Enter Your Father's/Mother's Name" title="Enter Your Father's/Mother's Name">
-						</div>
+							<label for="fmname"><h4>Father's/Mother's Name<sup>*</sup></h4></label>
+              <input type="text" formControlName="fmname" class="form-control" id="fmname" 
+              [ngClass]="{ 'is-invalid': submitted && f.fmname.errors }" placeholder="Enter Your Father's/Mother's Name" title="Enter Your Father's/Mother's Name">
+              <!-- <span *ngIf="!userProfileForm.get('fmname').valid && userProfileForm.get('fmname').touched" class="spanVaild">Enter Your Father's/Mother's Name</span> -->
+              <div *ngIf="submitted && f.fmname.errors" class="invalid-feedback">
+                <div *ngIf="f.fmname.errors.required">Enter Your Father's/Mother's Name</div>
+              </div>
+            </div>
 					</div>
 
 					<div class="form-group">   
 						<div class="col-xs-6">
-							<label for="fmphone"><h4>Father's/Mother's Mobile No.</h4></label>
-							<input type="number" class="form-control" id="fmphone" placeholder="Enter Your Father's/Mother's Phone" title="Enter Your Father's/Mother's Phone">
-						</div>
+							<label for="fmphone"><h4>Father's/Mother's Mobile No.<sup>*</sup></h4></label>
+              <input type="number" formControlName="fphone" class="form-control" id="fmphone" 
+              [ngClass]="{ 'is-invalid': submitted && f.fphone.errors }" placeholder="Enter Your Father's/Mother's Phone" title="Enter Your Father's/Mother's Phone">
+              <!-- <span *ngIf="!userProfileForm.get('fphone').valid && userProfileForm.get('fphone').touched" class="spanVaild">Enter Your Father's Phone Number</span> -->
+              <div *ngIf="submitted && f.fphone.errors" class="invalid-feedback">
+                <div *ngIf="f.fphone.errors.required">Enter Your Father's Phone Number</div>
+              </div>
+            </div>
 					</div>
                       <div class="form-group">
                            <div class="col-xs-12">
@@ -131,28 +168,46 @@
                                	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
                             </div>
                       </div>
+                <!-- validation error div -->
+                <div>
+                  <p>error div</p>
+                  <!-- <div>
+                  <input [ngClass]="{ 'is-invalid': submitted && f.fphone.errors }">
+                  <div *ngIf="submitted && f.fphone.errors" class="invalid-feedback">
+                    <div *ngIf="f.fphone.errors.required">Enter Your Father's Phone Number</div>
+                  </div>
+                  </div>
+                  <div *ngIf="submitted && f.fmname.errors" class="invalid-feedback">
+                    <div *ngIf="f.fmname.errors.required">Enter Your Father's/Mother's Name</div>
+                  </div>
+                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Enter Your Email Address</div>
+                  </div> -->
+                 
+                </div>
+                <!-- validation error div end -->
+
               	</form>
               
               <hr>
               
              </div><!--/tab-pane-->
+
         <!-- Password Panal -->
              <div class="tab-pane" id="changePassword">
-               
-               <h2></h2>
-        
+
                <hr>
-                  <form class="form" action="##" method="post" id="registrationForm">
+                  <form class="form" action="##" method="post" id="changePasswordForm" [formGroup]="passwordForm">
 					<div class="form-group">    
 						<div class="col-xs-6">
 							<label for="password"><h4>Old Password</h4></label>
-							<input type="password" class="form-control" name="password" id="password" placeholder="Enter your old Password" title="Enter your old Password">
+							<input type="password" class="form-control" name="password" id="oldpassword" placeholder="Enter your old Password" title="Enter your old Password">
 						</div>
 					</div>  
 					<div class="form-group">     
                           <div class="col-xs-6">
                               <label for="password"><h4>New Password</h4></label>
-                              <input type="password" class="form-control" name="password" id="password" placeholder="Enter your New Password" title="Enter your New Password">
+                              <input type="password" class="form-control" name="password" id="newpassword" placeholder="Enter your New Password" title="Enter your New Password">
                           </div>
                       </div>
                       <div class="form-group">
@@ -171,7 +226,7 @@
                       </div>
               	</form>
                
-             </div>
+             
                
               </div><!--/tab-pane-->
           </div><!--/tab-content-->

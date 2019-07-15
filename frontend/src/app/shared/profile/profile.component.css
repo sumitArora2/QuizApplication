@@ -4,7 +4,7 @@ A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themefores
 Licensed under MIT
 ***/
 
-body {
+body { 
     background: #F1F3FA;
   }
   
@@ -111,4 +111,11 @@ body {
     background: #fff;
     min-height: 460px;
   }
-  
+  .spanVaild{
+    color: red; 
+    /* padding-left: 50%; */
+}
+sup{
+    color: red; 
+    font-size: large;
+}
