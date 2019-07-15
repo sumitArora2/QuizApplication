@@ -36,25 +36,10 @@
 
                
           <div class="panel panel-default">
-            <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
-            <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
+            <div class="panel-heading">Home <i class="fa fa-link fa-1x"></i></div>
+            <div class="panel-body"><a href="#">Go back Dashboard</a></div>
           </div>
           
-          
-          <ul class="list-group">
-            <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
-          </ul> 
-               
-          <div class="panel panel-default">
-            <div class="panel-heading">Social Media</div>
-            <div class="panel-body">
-            	<i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
-            </div>
-          </div>
           
         </div><!--/col-3-->
     	<div class="col-sm-9">
@@ -83,13 +68,8 @@
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                            <label for="last_name"><h4>Last name<sup>*</sup></h4></label>
-                              <input type="text" formControlName="lastname" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any."
-                              [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }">
-                              <!-- <span *ngIf="!userProfileForm.get('lastname').valid && userProfileForm.get('lastname').touched" class="spanVaild">Enter Your Last Name</span> -->
-                              <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
-                                <div *ngIf="f.lastname.errors.required">Enter Your Last Name</div>
-                              </div>
+                            <label for="last_name"><h4>Last name</h4></label>
+                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">                            
                           </div>
                       </div>
           
@@ -169,9 +149,9 @@
                             </div>
                       </div>
                 <!-- validation error div -->
-                <div>
+                <!-- <div>
                   <p>error div</p>
-                  <!-- <div>
+                 <div>
                   <input [ngClass]="{ 'is-invalid': submitted && f.fphone.errors }">
                   <div *ngIf="submitted && f.fphone.errors" class="invalid-feedback">
                     <div *ngIf="f.fphone.errors.required">Enter Your Father's Phone Number</div>
@@ -182,9 +162,9 @@
                   </div>
                   <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                     <div *ngIf="f.email.errors.required">Enter Your Email Address</div>
-                  </div> -->
+                  </div> 
                  
-                </div>
+                </div> -->
                 <!-- validation error div end -->
 
               	</form>
@@ -197,24 +177,38 @@
              <div class="tab-pane" id="changePassword">
 
                <hr>
-                  <form class="form" action="##" method="post" id="changePasswordForm" [formGroup]="passwordForm">
-					<div class="form-group">    
-						<div class="col-xs-6">
-							<label for="password"><h4>Old Password</h4></label>
-							<input type="password" class="form-control" name="password" id="oldpassword" placeholder="Enter your old Password" title="Enter your old Password">
-						</div>
-					</div>  
+                  <form class="form" action="##" method="post" id="changePasswordForm" [formGroup]="passwordForm" (submit)="passwordSubmitbtn()">
+                      <div class="form-group">     
+                          <div class="col-xs-6">
+                              <label for="password"><h4>Old Password<sup>*</sup></h4></label>
+                              <input type="password" class="form-control" formControlName="oldpassword" name="password" id="oldpassword" 
+                              [ngClass]="{ 'is-invalid': submitted && p.oldpassword.errors }" placeholder="Enter your New Password" title="Enter your New Password">
+                              <div *ngIf="submitted && p.oldpassword.errors" class="invalid-feedback">
+                                  <div *ngIf="p.oldpassword.errors.required">Enter Your Old Password</div>
+                                </div>
+                          </div>
+                      </div> 
 					<div class="form-group">     
                           <div class="col-xs-6">
-                              <label for="password"><h4>New Password</h4></label>
-                              <input type="password" class="form-control" name="password" id="newpassword" placeholder="Enter your New Password" title="Enter your New Password">
+                              <label for="password"><h4>New Password<sup>*</sup></h4></label>
+                              <input type="password" class="form-control" formControlName="newpassword" name="password" id="newpassword" 
+                              [ngClass]="{ 'is-invalid': submitted && p.newpassword.errors }" placeholder="Enter your New Password" title="Enter your New Password">
+                              <div *ngIf="submitted && p.newpassword.errors" class="invalid-feedback">
+                                  <div *ngIf="p.newpassword.errors.required">Enter Your New Password length between 6 to 15</div>
+                                </div>
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                            <label for="password2"><h4>Re-Type Password</h4></label>
-                              <input type="password" class="form-control" name="password2" id="password2" placeholder="Re-Type your password" title="Re-Type your password">
+                            <label for="password2"><h4>Re-Type Password<sup>*</sup></h4></label>
+                              <input type="password" class="form-control" formControlName="repassword" name="password2" id="password2" 
+                              [ngClass]="{ 'is-invalid': submitted && p.repassword.errors }" placeholder="Re-Type your password" title="Re-Type your password">
+                              <div *ngIf="submitted && p.repassword.errors" class="invalid-feedback">
+                                  <div *ngIf="p.repassword.errors.required">Password must match</div>
+                                </div>
+                              <span *ngIf="!passwordForm.get('repassword').valid && passwordForm.get('repassword').touched" class="spanVaild">Password must match</span>
+                     
                           </div>
                       </div>
                       <div class="form-group">

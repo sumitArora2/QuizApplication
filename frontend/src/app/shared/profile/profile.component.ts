@@ -35,24 +35,32 @@ export class ProfileComponent implements OnInit {
       'location' : new FormControl(null,[Validators.required]),
   });
   this.passwordForm = new FormGroup({
-     'password' : new FormControl(null,[Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
+     'oldpassword' : new FormControl(null,[Validators.required]),
+     'newpassword' : new FormControl(null,[Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
      'repassword' : new FormControl(null,[Validators.required])
-  }); 
-  // this.userProfileForm= this.formBuilder.group({
-  //   'firstname': ['', Validators.required],
-  //   'lastname' : ['', Validators.required,Validators.maxLength(20)],
-  //   'phone' : ['', Validators.required,Validators.maxLength(10)],
-  //   'email' : ['',Validators.required,Validators.email],
-  //   'fmname' : ['',Validators.required],
-  //   'fphone' : ['',Validators.required],
-  //   'location' : ['',Validators.required],
-  // })
+  },  {validators: this.passwordConfirming('newpassword','repassword')});
   }
-
+ //Confirm Password
+ passwordConfirming(newpassword: string, repassword: string){
+  return(group: FormGroup):{[key: string]: any}=>{
+    let pass= group.controls[newpassword];
+    let cnfpass= group.controls[repassword];
+    if(pass.value !== cnfpass.value){
+      return{
+       passwordConfirming: true
+      };
+    }
+    return null;
+  }
+}
   get f() { return this.userProfileForm.controls; }
+  get p() { return this.passwordForm.controls; }
   SubmitProfile(){ 
     this.submitted=true;
     // stop here if form is invalid
+    if(this.passwordConfirming){
+      alert("Password and Re-Type password must match");
+    }
     if (this.userProfileForm.invalid) {
       return;
   }
@@ -69,12 +77,14 @@ export class ProfileComponent implements OnInit {
     //   } 
     // }) 
   } 
-
-  // OnProfilebtn(){
-  //   if(this.userProfileForm.valid){
-  //     this.flashMessage.show('Data added successfully', { cssClass: 'alert-success', timeout: 3000 }); 
-  //   }else{
-  //     this.flashMessage.show('Fill All required Fields', { cssClass: 'alert-danger', timeout: 3000 });
-  //   } 
-  // }
+passwordSubmitbtn(){
+  this.submitted=true;
+  // stop here if form is invalid
+  if (this.userProfileForm.invalid) {
+    return;
+}
+else{
+  alert("bjbj");
+}
+}
 }

@@ -7,10 +7,10 @@ const Class = require('../models/class');
 module.exports = { 
 
   addClass: async (req, res) => {
-    console.log("in routing and received");
+    // console.log("in routing and received");
     try {
       let classes = new Class(req.body);
-      console.log("in quiz",classes);
+      console.log("in quiz", classes);
       const result = await classes.save();
       result ? res.status(200).send({
           message: 'classes are saved',
@@ -43,16 +43,18 @@ module.exports = {
   },
   addSubject: async (req, res) => {
     try {
-      // console.log("req.bodyeeeeee",req.body);
-      // console.log("req.bodyeeeeee",req.params);
       let subject = new Subject({
-        Subjects: [{
-          subject_name: req.body.subjectname,
-          Classes: [req.params.classId]
-        }]
+        subject_name: req.body.subjectname,
+        Class_Id: req.params.classId
       });
       let result = await subject.save();
-      // console.log(result);
+      let result2 = await Class.findByIdAndUpdate({
+        _id: req.params.classId
+      }, {
+        $push: {
+          'Subjects': result._id
+        }
+      });
       result ? res.status(200).send({
         message: 'subjects are saved',
         res: result
@@ -65,9 +67,27 @@ module.exports = {
       res.send(error);
     }
   },
+  getSubject: async (req, res) => {
+    try {
+      const result = await Subject.find({}).populate('Class_Id');
+      // console.log("result", result);
+      result ? res.status(200).send({
+          message: 'Success',
+          res: result
+        }) :
+        res.status(422).send({
+          message: 'Failure',
+          res: result
+        });
+      // console.log(result);
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
   addChapter: async (req, res) => {
     try {
-      console.log("hare rama here rama");
+      // console.log("hare rama here rama");
       const chapter = new Chapter({
         Chapters: [{
           chapter_name: req.body.chapter_name,
@@ -90,7 +110,7 @@ module.exports = {
   },
   addQuestion: async (req, res) => {
     try {
-      console.log("req.params.classId", req.params.classId);
+      // console.log("req.params.classId", req.params.classId);
 
       const question = new Question({
         Questions: [{
@@ -131,10 +151,10 @@ module.exports = {
       //   }
       // );
       let option = new Option({
-        Options:req.body.Options,
-        Question:[req.params.questionId]
+        Options: req.body.Options,
+        Question: [req.params.questionId]
       });
-      console.log("req.bodysssssssssssss",req.body);
+      console.log("req.bodysssssssssssss", req.body);
       let result = await option.save();
       result ? res.status(200).send({
           message: 'Options are saved',
@@ -144,12 +164,12 @@ module.exports = {
           message: 'Options are not saved',
           res: result
         })
-  
+
     } catch (error) {
-     console.log(error);
-     res.send(error);      
+      console.log(error);
+      res.send(error);
     }
-      },
+  },
   getQuestions: async (req, res) => {
     try {
       const result = await Quiz.find();

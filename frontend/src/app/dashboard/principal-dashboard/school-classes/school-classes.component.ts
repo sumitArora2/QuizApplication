@@ -15,6 +15,7 @@ export class SchoolClassesComponent implements OnInit {
     this.showclass=false;
   }
 
+
   async ngOnInit() {
    this.myForm=this.fb.group({
     classname:""
@@ -32,7 +33,7 @@ export class SchoolClassesComponent implements OnInit {
     this.myForm.reset();
     let response=await this.QuesService.getClass();
    this.classes=response['res'];
-  //  console.log("comming",this.classes)
+   console.log("comming",this.classes)
   }
 
 }
