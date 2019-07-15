@@ -23,4 +23,18 @@ export class ComplaintsComponent implements OnInit {
   });
 
 }
+onComplaint(){
+  console.log(this.complaintForm.value);
+  this.authService.complaintStudent(this.complaintForm.value).subscribe(data=>{
+    if(data.success){
+      this.flashService.show('your complaint is registered now', { cssClass: 'alert-success', timeout: 3000 });
+      this.router.navigate(['studentHome']);
+    }
+    else{
+       this.flashService.show('something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
+        this.router.navigate(['complaints']);
+ 
+    }
+  });
+}
 }
