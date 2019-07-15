@@ -11,18 +11,17 @@ import { DetailsComponent } from './details/details.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { ComplaintsComponent } from './principal-dashboard/complaints/complaints.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { DashboardComponent } from './principal-dashboard/dashboard/dashboard.component';
 
 
 const routes: Routes = [
  {
-     path:'princiHome', component:PrincipalHomeComponent,canActivate:[AuthGuard]
+     path:'princiHome', component:PrincipalHomeComponent,canActivate:[AuthGuard],children:[
+       { path:'dashboard',component:DashboardComponent },
+       { path:'SchoolClass', component:SchoolClassesComponent},
+     { path:'SchoolSubject',component:SchoolSubjectsComponent}
+     ]
  },
- {
-  path:'SchoolClass', component:SchoolClassesComponent,canActivate:[AuthGuard]
-},
-{
-  path:'SchoolSubject', component:SchoolSubjectsComponent,canActivate:[AuthGuard]
-},
  {
      path:'teacherHome', component:TeacherHomeComponent,canActivate:[AuthGuard]
      

@@ -45,7 +45,8 @@ export class AuthServiceService {
   }
   getUserDetails(){
     let user=JSON.parse(localStorage.getItem('user'));
-    return user.role;
+    if(user)
+      return user.role;
   }
  
   logout() {
