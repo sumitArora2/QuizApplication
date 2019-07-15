@@ -7,7 +7,10 @@ const User= require('../models/user');
 const Quiz=require('../models/class');
 const bcrypt=require('bcryptjs');
 var quiz=require('../controllers/quiz');
-// const user=require('../controllers/user')
+const Complaint =require('../models/complaint');
+
+//signup
+
 router.post('/signup',(req,res,next)=>{
        let newUser =new User({ 
          username:req.body.username,
@@ -21,6 +24,25 @@ router.post('/signup',(req,res,next)=>{
         }
         else{
             res.json({success:true,msg:'user registered'+data});
+        }
+    });
+});
+
+// fr complaints
+
+router.post('/complaint',(req,res,next)=>{
+    let newComplaint = new Complaint({
+        firstname:req.body.firstname,
+        lastname:req.body.lastname,
+        email:req.body.email,
+        message:req.body.message
+    });
+    Complaint.addComplaint(newComplaint,(err,data)=>{
+   
+        if(err){
+            res.json({success:false,msg:'fail to register complaint'+err});
+        }else{
+            res.json({success:true,msg:'complaint register'+data});
         }
     });
 });

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PrincipalHomeComponent } from './principal-home/principal-home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ComplaintsComponent } from './complaints/complaints.component';
+
 import { SchoolClassesComponent } from './school-classes/school-classes.component';
 import { SchoolSubjectsComponent } from './school-subjects/school-subjects.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -14,8 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,FormsModule
   ]
 })
 export class PrincipalDashboardModule { }
