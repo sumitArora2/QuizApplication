@@ -182,7 +182,7 @@ module.exports = {
           message: "questions are not getting",
           result: result
         })
-    } catch (error) {
+    } catch (error) { 
       throw error;
     }
   },

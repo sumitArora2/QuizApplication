@@ -88,6 +88,33 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     res.json({user: req.user});
 });
 
+router.put('/profileupdate/:id', (req,res,next)=>{
+    // const email=req.body.email;
+    // console.log("email is ",email);
+    console.log("id is ",req.params.id);
+    User.findOneAndUpdate({_id:req.params.id},
+            {
+                $set:{
+                    username:req.body.username,
+                    lastname:req.body.lastname, 
+                    phone:req.body.phone, 
+                    location:req.body.location,
+                    address:req.body.address,
+                    password:req.body.password,
+                    faterMotherName:req.body.faterMotherName,
+                    fmphone:req.body.fmphone
+                }
+            },
+            function(err,data){
+            if(err){
+                res.json({success:false,msg:'fail to register'+err});
+            }
+            else{
+                res.json({success:true,msg:'user registered: '+data});
+            }
+        });
+    });
+
 //complete Profile
 // router.put('/profile',(req,res,next)=>{
 //     let newUser =new User({ 

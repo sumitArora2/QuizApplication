@@ -16,14 +16,6 @@ export class ProfileComponent implements OnInit {
   constructor(private profileService:ProfileServiceService,private flashMessage:FlashMessagesService) { }
 
   ngOnInit() {
-    // this.profileService.getProfile().subscribe(profile=>{
-    //   this.user=profile
-    // }, 
-    // err=>{
-    //   console.log(err);
-    //   return false;
-    // });
-
     this.userProfileForm = new FormGroup({
 
       'firstname' : new FormControl(null, [Validators.required,Validators.maxLength(25)]),
@@ -39,6 +31,10 @@ export class ProfileComponent implements OnInit {
      'newpassword' : new FormControl(null,[Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
      'repassword' : new FormControl(null,[Validators.required])
   },  {validators: this.passwordConfirming('newpassword','repassword')});
+
+  let response=this.profileService.getUserProfile();
+   this.classes=response['res']
+
   }
  //Confirm Password
  passwordConfirming(newpassword: string, repassword: string){

@@ -70,3 +70,8 @@ module.exports.comparePassword=function(candidatePasword, hash,callback){
         callback(null, isMatch);
     });
 } 
+
+module.exports.updateUserProfile=function(adddata, callback){
+    console.log("export profile");
+    adddata.save(callback);
+}

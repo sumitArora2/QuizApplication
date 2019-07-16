@@ -17,5 +17,20 @@
 //         });
 //     }
 // }
-
+// getProfile: async (req, res) => {
+//     try {
+//       const result = await Quiz.find();
+//       result ?
+//         res.status(200).send({
+//           message: "Profile getting success",
+//           result: result
+//         }) :
+//         res.status(422).send({
+//           message: "profile are not getting",
+//           result: result
+//         })
+//     } catch (error) {
+//       throw error;
+//     }
+//   }
  

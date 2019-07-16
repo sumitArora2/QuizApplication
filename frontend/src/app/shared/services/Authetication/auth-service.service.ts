@@ -19,7 +19,7 @@ export class AuthServiceService {
     .pipe(map(res=>res));
   } 
 // fr login 
-  AuthLogin(userauth):Observable<any>{
+  AuthLogin(userauth):Observable<any>{ 
     let headers=new HttpHeaders();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:3000/api/authenticate',userauth,{headers:headers})
