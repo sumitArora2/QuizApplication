@@ -8,11 +8,9 @@ import { QuestionsService } from 'src/app/shared/services/QuestionsService/quest
   styleUrls: ['./school-classes.component.css']
 })
 export class SchoolClassesComponent implements OnInit {
-  showclass:any
   classes=[];
   myForm:FormGroup
   constructor(private fb:FormBuilder,private QuesService:QuestionsService) { 
-    this.showclass=false;
   }
 
 
@@ -24,9 +22,7 @@ export class SchoolClassesComponent implements OnInit {
    this.classes=response['res']
   // console.log(this.classes);
   }
-  showclassForm(){
-   this.showclass=true;
-  }
+
  async submitClass(){
     let classname=this.myForm.value.classname;
     await this.QuesService.addClass(classname);

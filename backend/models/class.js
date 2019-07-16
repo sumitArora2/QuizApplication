@@ -1,14 +1,10 @@
 const mongoose = require('mongoose');
-const Subject = require('./subject');
-const Chapter = require('./chapter');
-const Question = require('./question');
-const Option = require('./option');
 var Schema = mongoose.Schema;
 const ClassSchema = mongoose.Schema({
-    class_name: {
+      class_name: {
         type: String,
         required: true,
-        unique: true
+        unique: false
     },
     Subjects: [{
         type: Schema.Types.ObjectId,

@@ -12,6 +12,7 @@ export class SchoolSubjectsComponent implements OnInit {
   showsubject:any;
   myForm:FormGroup
   classes=[];
+  subjects=[];
   constructor(private fb:FormBuilder,private QuesService:QuestionsService) {
     
   
@@ -24,8 +25,11 @@ export class SchoolSubjectsComponent implements OnInit {
   this.showsubject=false;
   let response=await this.QuesService.getClass();
   this.classes=response['res']
-  console.log("in ng on init",this.classes);
-   
+  console.log("in ng on init",this.classes);  
+  let response2=await this.QuesService.getSubjects();
+  this.subjects= response2['res'];
+  console.log("this.subjectes",this.subjects);
+
 }
   showsubjectForm(){
     this.showsubject=true;
@@ -35,6 +39,6 @@ export class SchoolSubjectsComponent implements OnInit {
   this.myForm.reset();
   let response=await this.QuesService.getClass();
    this.classes=response['res'];
-   console.log("sssswqqwe",this.classes);
+   
   }
 }
