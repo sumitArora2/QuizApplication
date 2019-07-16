@@ -8,6 +8,10 @@ const Quiz=require('../models/class');
 const bcrypt=require('bcryptjs');
 var quiz=require('../controllers/quiz');
 const user=require('../controllers/user')
+const Complaint =require('../models/complaint');
+
+//signup
+
 router.post('/signup',(req,res,next)=>{
        let newUser =new User({ 
          username:req.body.username, 
@@ -16,7 +20,7 @@ router.post('/signup',(req,res,next)=>{
        role:req.body.role
     });
     User.addUser(newUser,(err,data)=>{
-        if(err){
+        if(err){ newUser.save(callback);
             res.json({success:false,msg:'fail to register'+err});
         }
         else{
@@ -25,11 +29,33 @@ router.post('/signup',(req,res,next)=>{
     });
 });
 
+// fr complaints
+
+router.post('/complaint',(req,res,next)=>{
+    let newComplaint = new Complaint({
+        firstname:req.body.firstname,
+        lastname:req.body.lastname,
+        email:req.body.email,
+        message:req.body.message
+    });
+    Complaint.addComplaint(newComplaint,(err,data)=>{
+   
+        if(err){
+            res.json({success:false,msg:'fail to register complaint'+err});
+        }else{
+            res.json({success:true,msg:'complaint register'+data});
+        }
+    });
+});
+
 router.route('/addclass').post(quiz.addClass);
 router.route('/getclass').get(quiz.getClass);
+router.route('/getSpecificClass/:classId').get(quiz.getSpecificClass);
+router.route('/deleteClass/:classId').delete(quiz.deleteClass);
+router.route('/updateClass/:classId').put(quiz.updateClass);
 router.route('/addsubject/:classId').patch(quiz.addSubject);
-router.route('/getsubject').get(quiz.getSubject);
 
+router.route('/getsubject').get(quiz.getSubject);
 router.route('/addchapter/:classId/:subjectId').post(quiz.addChapter);
 router.route('/addquestion/:classId/:subjectId/:chapterId').post(quiz.addQuestion);
 router.route('/addoption/:questionId').post(quiz.addOption);
