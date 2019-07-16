@@ -7,7 +7,9 @@
                 </div>
             </div>
             <div class="col-md-4 ">
-                <button type="button " class="btn btn-primary " (click)="submitClass()">Submit</button>
+                <button *ngIf="editing" type="button " class="btn btn-primary " (click)="submitClass()">Submit</button>
+                <button *ngIf="!editing" type="button" class="btn btn-success" (click)="update()">Update </button>
+                <button  *ngIf="!editing" type="button" class="btn btn-light" (click)="cancel()">Cancel</button> 
             </div>
         </div>
     </form>
@@ -25,8 +27,8 @@
                     <td>{{class.class_name}}</td>
                     <td>{{class.Subjects.length}}</td>
                     <td class="controls">
-                        <i class="fas fa-edit"></i>
-                        <i class="fas fa-trash-alt"></i>
+                        <i class="fas fa-edit" (click)="edit(class)"></i>
+                        <i class="fas fa-trash-alt" (click)="delete(class)"></i>
                     </td>
                 </tr>
 

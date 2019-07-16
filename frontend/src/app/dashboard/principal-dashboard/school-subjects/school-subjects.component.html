@@ -16,21 +16,34 @@
              <label for="pwd">Subjects Name:</label>
              <input type="text" class="form-control" placeholder="Enter the Subject name" formControlName="subjectname">
            </div>
-           <button type="submit" class="btn btn-primary" (click)="submitsubject()">Submit</button>
-       </form>
+           <button *ngIf="editing" type="submit" class="btn btn-primary" (click)="submitsubject()">Submit</button>
+           <button *ngIf="!editing" type="submit" class="btn btn-success" (click)="update()">Update</button>
+           <button *ngIf="!editing" type="submit" class="btn btn-light" (click)="cancel()">Cancel</button>
+          </form>
    </div>
+   <div *ngIf="showSubjectList">
+  <li *ngFor="let subject of this.subjectList">{{subject.subject_name}}
+  <button type="submit" class="btn btn-primary">Update</button>
+  <button type="submit" class="btn btn-danger">Delete</button>
+</li>
+  </div>
    <div class="container table" >          
      <table class="table table-hover">
        <thead>
          <tr>
            <th>Class Name</th>
            <th>Subjects</th>
+           <th>Action</th>
          </tr>
        </thead>
        <tbody *ngFor="let class of classes">
          <tr>
             <td>{{class.class_name}}</td>
            <td>{{class.Subjects.length}}</td> 
+           <td class="controls">
+            <i class="fas fa-edit" (click)="edit(class)"></i>
+            <i class="fas fa-trash-alt" (click)="delete(class)"></i>
+        </td>
          </tr>
        </tbody>
      </table>
