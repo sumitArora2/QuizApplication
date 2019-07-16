@@ -19,7 +19,7 @@ router.post('/signup',(req,res,next)=>{
        role:req.body.role
     });
     User.addUser(newUser,(err,data)=>{
-        if(err){
+        if(err){ newUser.save(callback);
             res.json({success:false,msg:'fail to register'+err});
         }
         else{
