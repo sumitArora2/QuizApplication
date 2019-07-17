@@ -23,9 +23,3 @@ const complaintSchema = mongoose.Schema({
     }
 });
 const Complaint = module.exports = mongoose.model('Complaint',complaintSchema);
-
-module.exports.addComplaint= function(newComplaint,callback){
-    
-    newComplaint.save(callback);
-    console.log("succesfully complaint registered");
-}

@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +13,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   role:any;
-  constructor(private authService:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService) { }
+  constructor(private authService:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService,private toastr:ToastrService) { }
 
   ngOnInit() {
     if(this.authService.loggedIn()){
@@ -61,10 +61,10 @@ export class SignupComponent implements OnInit {
     this.authService.registerUser(this.signupForm.value).subscribe(data=>{
       if(data.success){
         console.log(data);
-        this.flashMessage.show('you are now registered and Kindly login', { cssClass: 'alert-success', timeout: 3000 });
+       this.toastr.success("you are successfully registered")
          this.router.navigate(['login']);
       }else{
-        this.flashMessage.show('something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
+        this.toastr.warning('something went wrong');
         this.router.navigate(['signup']);
       } 
     }) 

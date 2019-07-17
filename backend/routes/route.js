@@ -7,7 +7,7 @@ const User= require('../models/user');
 const Quiz=require('../models/class');
 const bcrypt=require('bcryptjs');
 var quiz=require('../controllers/quiz');
-const Complaint =require('../models/complaint');
+const Complaint =require('../controllers/complaint');
 
 //signup
 
@@ -30,22 +30,27 @@ router.post('/signup',(req,res,next)=>{
 
 // fr complaints
 
-router.post('/complaint',(req,res,next)=>{
-    let newComplaint = new Complaint({
-        firstname:req.body.firstname,
-        lastname:req.body.lastname,
-        email:req.body.email,
-        message:req.body.message
-    });
-    Complaint.addComplaint(newComplaint,(err,data)=>{
+// router.post('/complaint',(req,res,next)=>{
+//     let newComplaint = new Complaint({
+//         firstname:req.body.firstname,
+//         lastname:req.body.lastname,
+//         email:req.body.email,
+//         message:req.body.message
+//     });
+//     Complaint.addComplaint(newComplaint,(err,data)=>{
    
-        if(err){
-            res.json({success:false,msg:'fail to register complaint'+err});
-        }else{
-            res.json({success:true,msg:'complaint register'+data});
-        }
-    });
-});
+//         if(err){
+//             res.json({success:false,msg:'fail to register complaint'+err});
+//         }else{
+//             res.json({success:true,msg:'complaint register'+data});
+//         }
+//     });
+// });
+// fr add complaint
+router.route('/complaint').post(Complaint.addComplaint);
+// fr get complaint
+router.route('/getComplaint').get(Complaint.getComplaint);
+
 
 router.route('/addclass').post(quiz.addClass);
 router.route('/getclass').get(quiz.getClass);

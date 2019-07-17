@@ -1,5 +1,5 @@
+import { ComplaintServiceService } from './../../../shared/services/Complaints/complaint-service.service';
 import { Component, OnInit } from '@angular/core';
-import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
 import { FormGroup,Validators,FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -11,7 +11,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class ComplaintsComponent implements OnInit {
   complaintForm:FormGroup;
 
-  constructor(private authService:AuthServiceService,private router:Router,private flashService:FlashMessagesService) { }
+  constructor(private complaintService:ComplaintServiceService,private router:Router,private flashService:FlashMessagesService) { }
 
   ngOnInit() {
     this.complaintForm = new FormGroup({
@@ -25,16 +25,18 @@ export class ComplaintsComponent implements OnInit {
 }
 onComplaint(){
   console.log(this.complaintForm.value);
-  this.authService.complaintStudent(this.complaintForm.value).subscribe(data=>{
+  this.complaintService.complaintStudent(this.complaintForm.value).subscribe(data=>{
     if(data.success){
       this.flashService.show('your complaint is registered now', { cssClass: 'alert-success', timeout: 3000 });
-      this.router.navigate(['studentHome']);
+     this.router.navigate(['studentHome']);
+      
     }
     else{
-       this.flashService.show('something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
-        this.router.navigate(['complaints']);
- 
+      this.flashService.show('something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
+           this.router.navigate(['complaints']);
+
     }
   });
 }
 }
+

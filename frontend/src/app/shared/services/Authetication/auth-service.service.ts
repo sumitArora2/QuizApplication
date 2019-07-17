@@ -10,7 +10,6 @@ export class AuthServiceService {
   authToken:any;
   user:any;
   authRole:any;
-  student:any;
   constructor(private http:HttpClient) { }
   // for registeration
   registerUser(user):Observable<any>{
@@ -19,18 +18,6 @@ export class AuthServiceService {
     return this.http.post('http://localhost:3000/api/signup',user,{headers:headers})
     .pipe(map(res=>res));
   } 
-
-  //fr complaint
-  complaintStudent(student):Observable<any>{
-    let headers =new HttpHeaders();
-    headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/api/complaint',student,{headers:headers})
-    .pipe(map(res=>res));
-  }
-
-
-
-
 
 // fr login 
   AuthLogin(userauth):Observable<any>{
