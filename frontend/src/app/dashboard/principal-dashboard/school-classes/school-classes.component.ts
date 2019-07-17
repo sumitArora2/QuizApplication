@@ -10,6 +10,8 @@ import { QuestionsService } from 'src/app/shared/services/QuestionsService/quest
 export class SchoolClassesComponent implements OnInit {
   classes=[];
   myForm:FormGroup
+  editing:Boolean
+  classId:any;
   constructor(private fb:FormBuilder,private QuesService:QuestionsService) { 
   }
 
@@ -18,9 +20,9 @@ export class SchoolClassesComponent implements OnInit {
    this.myForm=this.fb.group({
     classname:""
    })
+   this.editing=true
   let response=await this.QuesService.getClass();
    this.classes=response['res']
-  // console.log(this.classes);
   }
 
  async submitClass(){
@@ -29,7 +31,31 @@ export class SchoolClassesComponent implements OnInit {
     this.myForm.reset();
     let response=await this.QuesService.getClass();
    this.classes=response['res'];
-   console.log("comming",this.classes)
+  }
+  edit(data:any){
+    this.myForm.patchValue({
+      classname:data.class_name
+    });
+    this.editing=false;
+  }
+  async delete(data:any){
+    this.editing=true;
+    this.myForm.reset();
+    await this.QuesService.deleteClass(data._id);
+    let response=await this.QuesService.getClass();
+    this.classes=response['res'];
+  }
+  async update(){
+    this.editing=true;
+    let classname=this.myForm.value.classname;
+    await this.QuesService.updateClass(this.classId,classname);
+    this.myForm.reset();
+    let response=await this.QuesService.getClass();
+    this.classes=response['res'];
+  }
+  cancel(){
+    this.editing=true;
+    this.myForm.reset();
   }
 
 }

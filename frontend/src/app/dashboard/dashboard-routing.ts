@@ -19,7 +19,8 @@ const routes: Routes = [
      path:'princiHome', component:PrincipalHomeComponent,canActivate:[AuthGuard],children:[
        { path:'dashboard',component:DashboardComponent },
        { path:'SchoolClass', component:SchoolClassesComponent},
-     { path:'SchoolSubject',component:SchoolSubjectsComponent}
+       { path:'SchoolSubject',component:SchoolSubjectsComponent},
+       {path:'**',redirectTo:'dashboard',pathMatch:'full'}
      ]
  },
  {

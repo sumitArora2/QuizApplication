@@ -24,7 +24,6 @@ export class PrincipalHomeComponent implements OnInit {
     });
     this.router.navigate(['/login']);
     return false;
-
   }
 
 }

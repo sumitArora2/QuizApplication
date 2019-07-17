@@ -3,3 +3,27 @@
     margin-top: 10px;
     border: 10
   }
+
+  .table tr td {
+    line-height: 16px;
+}
+
+.table .controls i {
+    display: none;
+}
+
+.table tr:hover .controls i {
+    display: inline-block;
+}
+
+.table .controls i {
+    margin: 12px;
+    margin-top: 0;
+    margin-left: -5px;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.table .controls i:hover {
+    color: teal;
+}

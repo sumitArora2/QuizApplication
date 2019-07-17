@@ -13,23 +13,25 @@ export class SchoolSubjectsComponent implements OnInit {
   myForm:FormGroup
   classes=[];
   subjects=[];
+  editing:Boolean;
+  showSubjectList:Boolean
+  subjectList=[];
   constructor(private fb:FormBuilder,private QuesService:QuestionsService) {
     
   
-  this.myForm=this.fb.group({
+this.myForm=this.fb.group({
     subjectname:"",
     class:""
   });
 }
   async ngOnInit() {
+    this.showSubjectList=false;
   this.showsubject=false;
+  this.editing=true;
   let response=await this.QuesService.getClass();
-  this.classes=response['res']
-  console.log("in ng on init",this.classes);  
+  this.classes=response['res'] 
   let response2=await this.QuesService.getSubjects();
   this.subjects= response2['res'];
-  console.log("this.subjectes",this.subjects);
-
 }
   showsubjectForm(){
     this.showsubject=true;
@@ -39,6 +41,47 @@ export class SchoolSubjectsComponent implements OnInit {
   this.myForm.reset();
   let response=await this.QuesService.getClass();
    this.classes=response['res'];
-   
+  }
+  edit(data){
+  // console.log("data",data);
+  this.showSubjectList=true;
+  
+//   data.Subjects.map((subjectList)=>{
+//    subjectList=subjectList.subject_name;
+//   this.subjectList.push(subjectList);
+// })
+//   console.log("this.subjectList",this.subjectList);
+  // this.editing=false;
+  // console.log("data.Subjects[0].subject_name",data.Subjects[0].subject_name);
+  this.subjectList=data.Subjects;
+}
+update(){
+    console.log("in update");
+}
+EditSubject(data){
+console.log("data",data);
+}
+deleteSubject(data){
+console.log("data",data);
+}
+CancelSubjectList(){
+  this.showSubjectList=false;
+  console.log("in subject cancel");
+  
+}
+cancelUpdate(){
+    this.myForm.reset();
+    this.editing=true;
+  }
+  cancelSubjects(){
+    this.showsubject=false;
+  }
+  async delete(data){
+  console.log("in delete");
+  this.editing=true;
+  await this.QuesService.deleteClass(data._id);
+  this.myForm.reset();
+  let response=await this.QuesService.getClass();
+  this.classes=response['res'];
   }
 }
