@@ -17,16 +17,41 @@
              <input type="text" class="form-control" placeholder="Enter the Subject name" formControlName="subjectname">
            </div>
            <button *ngIf="editing" type="submit" class="btn btn-primary" (click)="submitsubject()">Submit</button>
+           <button *ngIf="editing" type="button" class="btn btn-danger" (click)="cancelSubjects()">Cancel</button>
            <button *ngIf="!editing" type="submit" class="btn btn-success" (click)="update()">Update</button>
-           <button *ngIf="!editing" type="submit" class="btn btn-light" (click)="cancel()">Cancel</button>
+           <button *ngIf="!editing" type="submit" class="btn btn-light" (click)="cancelUpdate()">Cancel</button>
           </form>
    </div>
-   <div *ngIf="showSubjectList">
+
+ 
+   <div class="container table" *ngIf="showSubjectList">
+     <button class="btn btn-danger" type="button" (click)="CancelSubjectList()">Cancel</button>          
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Subjects</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let subject of this.subjectList">
+          <tr>
+            <td>{{subject.subject_name}}</td> 
+            <td class="controls">
+             <i class="fas fa-edit" (click)="EditSubject(subject)"></i>
+             <i class="fas fa-trash-alt" (click)="deleteSubject(subject)"></i>
+         </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+   <!-- <div >
   <li *ngFor="let subject of this.subjectList">{{subject.subject_name}}
-  <button type="submit" class="btn btn-primary">Update</button>
-  <button type="submit" class="btn btn-danger">Delete</button>
+  <button type="submit" class="btn btn-primary" (click)="EditSubject(subject)">Edit</button>
+  <button type="submit" class="btn btn-danger" (click)="delete()">Delete</button>
 </li>
-  </div>
+  </div> -->
+  
    <div class="container table" >          
      <table class="table table-hover">
        <thead>

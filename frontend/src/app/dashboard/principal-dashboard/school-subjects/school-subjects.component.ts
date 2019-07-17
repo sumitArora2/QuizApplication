@@ -51,16 +51,30 @@ this.myForm=this.fb.group({
 //   this.subjectList.push(subjectList);
 // })
 //   console.log("this.subjectList",this.subjectList);
-  this.editing=false;
+  // this.editing=false;
   // console.log("data.Subjects[0].subject_name",data.Subjects[0].subject_name);
   this.subjectList=data.Subjects;
 }
 update(){
     console.log("in update");
 }
-  cancel(){
+EditSubject(data){
+console.log("data",data);
+}
+deleteSubject(data){
+console.log("data",data);
+}
+CancelSubjectList(){
+  this.showSubjectList=false;
+  console.log("in subject cancel");
+  
+}
+cancelUpdate(){
     this.myForm.reset();
     this.editing=true;
+  }
+  cancelSubjects(){
+    this.showsubject=false;
   }
   async delete(data){
   console.log("in delete");
