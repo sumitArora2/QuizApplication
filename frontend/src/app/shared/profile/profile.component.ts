@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileServiceService } from '../services/ProfileService/profile-service.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -9,37 +10,59 @@ import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms'
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user:Object;
   userProfileForm: FormGroup;
   passwordForm: FormGroup;
   submitted=false;
-  constructor(private profileService:ProfileServiceService,private flashMessage:FlashMessagesService) { }
+  constructor(private profileService:ProfileServiceService,private flashMessage:FlashMessagesService, public http: HttpClient) { }
 
   ngOnInit() {
     this.userProfileForm = new FormGroup({
 
-      'firstname' : new FormControl(null, [Validators.required,Validators.maxLength(25)]),
-      'lastname' : new FormControl(null, [Validators.required,Validators.maxLength(20)]),
+      'username' : new FormControl(null, [Validators.required,Validators.maxLength(25)]),
       'phone' : new FormControl(null, [Validators.required,Validators.minLength(10),Validators.maxLength(10)]),
       'email' : new FormControl(null,[Validators.required,Validators.email]),
-      'fmname' : new FormControl(null,[Validators.required]),
-      'fphone' : new FormControl(null,[Validators.required, Validators.minLength(10),Validators.maxLength(10)]),
+      'faterMotherName' : new FormControl(null,[Validators.required]),
+      'fmphone' : new FormControl(null,[Validators.required, Validators.minLength(10),Validators.maxLength(10)]),
       'location' : new FormControl(null,[Validators.required]),
+      'address': new FormControl(null),
+      'lastname': new FormControl(null)
   });
   this.passwordForm = new FormGroup({
      'oldpassword' : new FormControl(null,[Validators.required]),
-     'newpassword' : new FormControl(null,[Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
+     'password' : new FormControl(null,[Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
      'repassword' : new FormControl(null,[Validators.required])
-  },  {validators: this.passwordConfirming('newpassword','repassword')});
+  },  {validators: this.passwordConfirming('password','repassword')});
+  
+  // get profile data
+  let user=JSON.parse(localStorage.getItem('user'));
+  console.log("user id is: ",user.id);
 
-  let response=this.profileService.getUserProfile();
-   this.classes=response['res']
+ this.profileService.getUserProfile(user.id).subscribe(data=>{
+   if(data.success){ 
+    console.log("data:  ",data);
+    console.log("data",data.data[0].email);
 
+    // set signup data into textbox
+        this.userProfileForm.patchValue({   
+          'username':data.data[0].username,
+          'phone':data.data[0].phone,
+          'email': data.data[0].email,
+          'faterMotherName':data.data[0].faterMotherName,
+          'fmphone':data.data[0].fmphone,
+          'location':data.data[0].location,
+          'lastname':data.data[0].lastname,
+          'address':data.data[0].address 
+        });
+   }
+   else{
+     console.log("nnnnnnn");
+   }
+  });  
   }
  //Confirm Password
- passwordConfirming(newpassword: string, repassword: string){
+ passwordConfirming(password: string, repassword: string){
   return(group: FormGroup):{[key: string]: any}=>{
-    let pass= group.controls[newpassword];
+    let pass= group.controls[password];
     let cnfpass= group.controls[repassword];
     if(pass.value !== cnfpass.value){
       return{
@@ -51,36 +74,63 @@ export class ProfileComponent implements OnInit {
 }
   get f() { return this.userProfileForm.controls; }
   get p() { return this.passwordForm.controls; }
-  SubmitProfile(){ 
+  
+  SubmitProfileForm(){ 
     this.submitted=true;
-    // stop here if form is invalid
-    if(this.passwordConfirming){
-      alert("Password and Re-Type password must match");
-    }
+  
     if (this.userProfileForm.invalid) {
       return;
   }
-
-  // display form values on success
-  alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.userProfileForm.value, null, 4));
-    // console.log(this.userProfileForm.value)
-    // this.profileService.completeProfile(this.userProfileForm.value).subscribe(data=>{
-    //   if(data.success){
-    //     console.log(data);
-    //     this.flashMessage.show('Data added successfully', { cssClass: 'alert-success', timeout: 3000 });
-    //   }else{
-    //     this.flashMessage.show('something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
-    //   } 
-    // }) 
+  else{
+    let user=JSON.parse(localStorage.getItem('user'));
+    this.profileService.updateUserProfile(this.userProfileForm.value,user.id).subscribe(data=>{
+      console.log("vjhbjbj");
+      if(data.success){ 
+        console.log("updated data is: ",data);
+          this.flashMessage.show('Data is submitted successfully', { cssClass: 'alert-success', timeout: 3000 });
+        }else{
+          console.log("not send");
+          this.flashMessage.show('Data not submited', { cssClass: 'alert-danger', timeout: 3000 });
+        } 
+    });
+  }
   } 
-passwordSubmitbtn(){
+ passwordSubmitForm(){
   this.submitted=true;
-  // stop here if form is invalid
-  if (this.userProfileForm.invalid) {
+      // stop here if form is invalid
+      if(this.passwordConfirming){
+        alert("Password and Re-Type password must match");
+      }
+  if (this.passwordForm.invalid) {
     return;
 }
 else{
-  alert("bjbj");
+  // let user=JSON.parse(localStorage.getItem('user'));
+  // this.profileService.updateUserProfile(this.passwordForm.value,user.id).subscribe(data=>{
+  //   console.log("vjhbjbj");
+  //   if(data.success){ 
+  //     console.log("updated data is: ",data);
+  //       this.flashMessage.show('Password is changed successfully', { cssClass: 'alert-success', timeout: 3000 });
+  //     }else{
+  //       console.log("not send");
+  //       this.flashMessage.show('Password not changed', { cssClass: 'alert-danger', timeout: 3000 });
+  //     } 
+  // });
 }
 }
+
+// ProfileSubmitbtnOnClick(){
+//   let user=JSON.parse(localStorage.getItem('user'));
+//   this.profileService.updateUserProfile(this.userProfileForm.value,user.id).subscribe(data=>{
+//     console.log("vjhbjbj");
+//     if(data.success){ 
+//       console.log(data);
+//         this.flashMessage.show('Data is submitted successfully', { cssClass: 'alert-success', timeout: 3000 });
+//       }else{
+//         console.log("not send");
+//         this.flashMessage.show('Data not submited', { cssClass: 'alert-danger', timeout: 3000 });
+//       } 
+//   });
+
+// }
 }

@@ -49,7 +49,7 @@ getSubjects(){
 }
 }
 
-
+ 
 
   //get the questions from the local storage
   // public getQuestions(){

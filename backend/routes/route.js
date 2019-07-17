@@ -16,7 +16,7 @@ router.post('/signup',(req,res,next)=>{
        let newUser =new User({ 
          username:req.body.username, 
         email:req.body.email,
-       password:req.body.password,
+       password:req.body.password, 
        role:req.body.role
     });
     User.addUser(newUser,(err,data)=>{
@@ -28,7 +28,7 @@ router.post('/signup',(req,res,next)=>{
         }
     });
 });
-
+ 
 // fr complaints
 
 router.post('/complaint',(req,res,next)=>{
@@ -74,7 +74,8 @@ router.post('/authenticate', (req,res,next)=>{
     const email=req.body.email;
     const password=req.body.password;
     const role=req.body.role;
-
+    console.log("login password is: ",password);
+    console.log("passssssss: ",User.password);
     User.getUserByEmail(email, (err, user)=>{
         if(err) throw err;
         if(!user){
@@ -85,6 +86,9 @@ router.post('/authenticate', (req,res,next)=>{
             if(err){
                throw err; 
             }  
+            console.log("user pass  ",user.password);
+            console.log(password);
+            console.log("dhgfghjfjgkj  ",isMatch);
             if(isMatch){
                 
                 const token=jwt.sign(user.toJSON(),config.secret,{
@@ -100,6 +104,7 @@ router.post('/authenticate', (req,res,next)=>{
                         role:user.role
                     }
                 });
+                
             }
             else{
                 return res.json({success:false, msg:'Wrong Password'});
@@ -111,22 +116,47 @@ router.post('/authenticate', (req,res,next)=>{
 
 //Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,next)=>{
-    res.json({user: req.user});
+    res.json({User: req.User});
 });
+
+router.get('/userprofile/:id',(req,res,next)=>{
+    User.find({_id:req.params.id},
+    function(err, data){
+        if(err){
+            res.json({success:false,msg:'fail to show'+err});
+        }
+        else{
+            res.json({success:true,msg:'user prifile data: ',data});
+        }
+    });
+})
 
 router.put('/profileupdate/:id', (req,res,next)=>{
     // const email=req.body.email;
     // console.log("email is ",email);
     console.log("id is ",req.params.id);
-    User.findOneAndUpdate({_id:req.params.id},
+    console.log("password is ccccccccccccccccccc:  ",req.body.password);
+    var passcheck=req.body.password;
+    bcrypt.genSalt(10, (err,salt)=>{
+        bcrypt.hash(passcheck,salt,(err, hash)=>{
+            if(err) throw err;
+            passcheck=hash; 
+    
+    console.log("aaaaaaaaaaaaaaaaa  ",passcheck);
+    if(req.body.password != undefined){
+        console.log("When body.password not null");
+        User.findOneAndUpdate({_id:req.params.id},
             {
+                // if(req.body.password==null){        
+                // },
                 $set:{
                     username:req.body.username,
                     lastname:req.body.lastname, 
+                    email: req.body.email,
                     phone:req.body.phone, 
                     location:req.body.location,
                     address:req.body.address,
-                    password:req.body.password,
+                    password:passcheck,
                     faterMotherName:req.body.faterMotherName,
                     fmphone:req.body.fmphone
                 }
@@ -136,34 +166,49 @@ router.put('/profileupdate/:id', (req,res,next)=>{
                 res.json({success:false,msg:'fail to register'+err});
             }
             else{
-                res.json({success:true,msg:'user registered: '+data});
+                // User.addUser(data,(err,updatedata)=>{
+                //     data.save();
+                    // if(err){
+                    //     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                    //     res.json("password eroor occur..............");
+                    // }
+                    // else{
+                    //     console.log("################################");
+                    //     res.json({success:true,msg:'passowrd hash data: '+updatedata});
+                    // }
+                // });
+                res.json({success:true,msg:'user data updated: '+data});
             }
         });
-    });
+    }
+    else{
+        console.log("When body.password is null");
+        User.findOneAndUpdate({_id:req.params.id},
+            {
+                $set:{
+                    username:req.body.username,
+                    lastname:req.body.lastname, 
+                    email: req.body.email,
+                    phone:req.body.phone, 
+                    location:req.body.location,
+                    address:req.body.address,
+                    faterMotherName:req.body.faterMotherName,
+                    fmphone:req.body.fmphone
+                }
+            },
+            function(err,data){
+            if(err){
+                res.json({success:false,msg:'fail to register'+err});
+            }
+            else{
+                res.json({success:true,msg:'user data updated: '+data});
+            }
+        });
+    }
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+});
+});
+});
 
-//complete Profile
-// router.put('/profile',(req,res,next)=>{
-//     let newUser =new User({ 
-//     User.findByID()
-//       username:req.body.username,
-//       lastname:req.body.lastname,
-//       email:req.body.email,
-//       phone:req.body.phone, 
-//       location:req.body.location,
-//       address:req.body.address,
-//       password:req.body.password,
-//       role:req.body.role,
-//       faterMotherName:req.body.faterMotherName,
-//       fmphone:req.body.fmphone
-//  });
-//  User.addUser(newUser,(err,data)=>{
-//      if(err){
-//          res.json({success:false,msg:'fail to update'+err});
-//      }
-//      else{
-//          res.json({success:true,msg:'Update your details successfully'+data});
-//      }
-//  });
-// });
 
 module.exports=router;

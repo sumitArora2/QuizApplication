@@ -21,7 +21,7 @@ export class SchoolSubjectsComponent implements OnInit {
     class:""
   });
 }
-  async ngOnInit() {
+  async ngOnInit() { 
   this.showsubject=false;
   let response=await this.QuesService.getClass();
   this.classes=response['res']
