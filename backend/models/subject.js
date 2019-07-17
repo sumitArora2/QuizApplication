@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const SubjectSchema = mongoose.Schema({
         subject_name: {
             type: String,
-            required: true
+            required: true,
+            unique:true
         },
         Class_Id: [{
             type: mongoose.Schema.Types.ObjectId,
