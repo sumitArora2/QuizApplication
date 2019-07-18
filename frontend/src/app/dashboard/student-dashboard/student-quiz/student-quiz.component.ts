@@ -16,29 +16,26 @@ export class StudentQuizComponent implements OnInit {
   quizes:{};
   showidx=0;
   quiz:any; 
-  takeQuizForm: FormGroup; 
+  takeQuizForm: FormGroup;
+  subjects=[]; 
   constructor(private quizgenerate:QuizserviceService,private questionService:QuestionsService) { }
   nextId:number;
-  classes=[];
   ngOnInit() {
     this.takeQuizForm = new FormGroup({
 
       'course':new FormControl(null, [Validators.required])
   })
 
-// get classes and Subject
-this.quizgenerate.getClass().subscribe(data=>{
-  console.log("!!!!!!!!!!!");
+//get Subjects
+this.quizgenerate.getSubjects().subscribe(data=>{
   if(data){
-    console.log("class data ",data);
-    console.log("class name  ",data.res[0].class_name);
-    this.classes=data.res;
+    console.log("subject data ",data);
+    console.log("subject name  ",data.res[0].subject_name);
+    this.subjects=data.res;
   }
-  else{
-    console.log("lese run");
-  }
-});
+}); 
 
+// Time Interval
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;

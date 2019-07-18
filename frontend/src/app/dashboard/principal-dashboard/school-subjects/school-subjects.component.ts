@@ -33,7 +33,7 @@ this.myForm=this.fb.group({
   console.log("this.classes",this.classes);
   let response2=await this.QuesService.getSubjects();
   this.subjects= response2['res'];
-  console.log("this.subjects",this.subjects);
+  console.log("this.subjects",this.subjects); 
 }
   showsubjectForm(){
     this.showsubject=true;

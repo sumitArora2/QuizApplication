@@ -9,14 +9,14 @@
 <div id="desBeforeQuiz">  
     <form [formGroup]="takeQuizForm" class="subjectsdiv">
             <div class="topnav"> 
-        <select class="droup-down" formControlName="course" [(ngModel)]="comp">
-                <option [ngValue]="undefined" disabled selected>Computer</option>
-                <option value="chapter1">C Programming</option>
-                <option value="chapter2">Functions and Recursion</option>
+        <select class="droup-down" formControlName="course" [(ngModel)]="comp" *ngFor="let subject of subjects">
+                <option [ngValue]="undefined" disabled selected>{{subject.subject_name}}</option>
+                <option value="">Chapter1</option>
+                <!-- <option value="chapter2">Functions and Recursion</option>
                 <option value="chapter3">Lists,Stacks and Queues</option>
-                <option value="chapter4">File Handling</option>
+                <option value="chapter4">File Handling</option> -->
         </select>
-        <select class="droup-down" formControlName="course" [(ngModel)]="math">
+        <!-- <select class="droup-down" formControlName="course" [(ngModel)]="math">
                 <option [ngValue]="undefined" disabled selected>Mathematics</option>
                 <option value="chapter1">Sets and Functions</option>
                 <option value="chapter2">Algebra</option>
@@ -36,7 +36,7 @@
                 <option value="chapter2">Verbal Classification</option>
                 <option value="chapter3">Artificial Language</option>
                 <option value="chapter4">Letter and Symbol Series</option>
-                </select>
+                </select> -->
 </div>
 
 <!-- description div -->
@@ -65,7 +65,7 @@
      </div>
 </form> 
 </div> 
- 
+  
 <div id="onbuttonVisible"  style="visibility: hidden;">
 <div class="container1">
 <div class="container-fluid bg-info">
