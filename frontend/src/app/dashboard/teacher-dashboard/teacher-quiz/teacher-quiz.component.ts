@@ -37,7 +37,6 @@ export class TeacherQuizComponent implements OnInit {
   }
 
   async classChange(data){
-  
   let response=await this.QuesService.getSpecificClass(data);
   this.subjects= response['res'].Subjects;
   }
@@ -45,8 +44,10 @@ export class TeacherQuizComponent implements OnInit {
   // console.log("formdata",formdata)
   // }
   async startQuizMakebtn(data){
+    console.log(data);
     let chapterData=await this.QuesService.AddChapter(data);
-    this.chapterId=chapterData['res']._id
+    // console.log("chapterData",chapterData);
+    this.chapterId=chapterData['res']._id;
     document.getElementById("onbuttonVisible").style.visibility="visible";
     document.getElementById("startMakeQuiz").style.visibility="hidden";
     // document.getElementsByClassName("droup-down").disabled;

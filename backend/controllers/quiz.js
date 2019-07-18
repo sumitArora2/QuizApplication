@@ -4,7 +4,8 @@ const Chapter = require('../models/chapter');
 const Question = require('../models/question');
 const Option = require('../models/option');
 const Class = require('../models/class');
-module.exports = {
+module.exports = { 
+
   addClass: async (req, res) => {
     // console.log("in routing and received");
     try {
@@ -268,7 +269,7 @@ module.exports = {
           message: "questions are not getting",
           result: result
         })
-    } catch (error) {
+    } catch (error) { 
       throw error;
     }
   }
