@@ -2,7 +2,6 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Ques } from '../../../models/Ques';
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +11,7 @@ export class QuestionsService {
 
    }
 
-AddQuestion(question){
-  let headers=new HttpHeaders();
-  headers.append('Content-Type','application-json');
-  return this.http.post('http://localhost:3000/api/question',question,{headers:headers})
-  .pipe(map((res:Response)=>res));
-}
+
    
 getQuestions(){
   let headers=new HttpHeaders();
@@ -36,18 +30,19 @@ getClass(){
   headers.append('Content-Type','application/json');
   return this.http.get('http://localhost:3000/api/getclass',{headers:headers}).toPromise();
 }
-
+getSpecificClass(classId){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application/json');
+  return this.http.get('http://localhost:3000/api/getSpecificClass/'+classId,{headers:headers}).toPromise();
+}
 updateClass(id,classname){
 let headers=new HttpHeaders();
-// console.log("in service",id);
-// console.log("in service",classname);
 headers.append('Content-Type','applications/json');
 return this.http.put('http://localhost:3000/api/updateClass/'+id,{'class_name':classname},{headers:headers}).toPromise();
 }
 deleteClass(id){
 let headers=new HttpHeaders();
 headers.append('Content-type','application/json');
-
 return this.http.delete(`http://localhost:3000/api/deleteClass/${id}`,{headers:headers}).toPromise();
 }
 
@@ -61,6 +56,17 @@ getSubjects(){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
   return this.http.get('http://localhost:3000/api/getsubject',{headers:headers}).toPromise();
+}
+AddChapter(data){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application/json');
+  return this.http.post(`http://localhost:3000/api/addchapter/${data.class}/${data.subject}`,{'chapter_name':data.chapter},{headers:headers}).toPromise();
+}
+
+AddQuestion(chapterId,question){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application-json');
+  return this.http.post('http://localhost:3000/api/addquestion/'+chapterId,question,{headers:headers}).toPromise();
 }
 }
 

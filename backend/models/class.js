@@ -9,18 +9,6 @@ const ClassSchema = mongoose.Schema({
     Subjects: [{
         type: Schema.Types.ObjectId,
         ref: 'Subject'
-    }],
-    Chapters: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Chapter'
-    }],
-    Questions: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Questions'
-    }],
-    Options: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Option'
     }]
 });
 

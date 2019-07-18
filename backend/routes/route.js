@@ -56,13 +56,12 @@ router.route('/addsubject/:classId').patch(quiz.addSubject);
 router.route('/getsubject').get(quiz.getSubject);
 router.route('/addchapter/:classId/:subjectId').post(quiz.addChapter);
 router.route('/addquestion/:classId/:subjectId/:chapterId').post(quiz.addQuestion);
-router.route('/addoption/:questionId').post(quiz.addOption);
+// router.route('/addoption/:questionId').post(quiz.addOption);
 // router.route('/signup').post(user.addUser);
 router.route('/question').post(quiz.addQuestion);
-
 router.route('/question').get(quiz.getQuestions);
-router.route('/question/:classid').patch(quiz.addMoreQuestion);
-router.route('/question/:subjectId/:questionId').patch(quiz.DeleteQuestion);
+// router.route('/question/:classid').patch(quiz.addMoreQuestion);
+// router.route('/question/:subjectId/:questionId').patch(quiz.DeleteQuestion);
 
 
 //Autheticate login user
@@ -110,6 +109,8 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     res.json({user: req.user});
 });
 
+module.exports=router;
+
 //complete Profile
 // router.put('/profile',(req,res,next)=>{
 //     let newUser =new User({ 
@@ -135,4 +136,3 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 //  });
 // });
 
-module.exports=router;

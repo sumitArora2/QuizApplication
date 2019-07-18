@@ -17,15 +17,12 @@ const ChapterSchema = mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'Question'
     }],
-    Options: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Option'
-    }],
     Classes: [{
         type: Schema.Types.ObjectId,
         ref: 'Class'
     }]
 });
+
 
 
 const Chapter = module.exports = mongoose.model('Chapter', ChapterSchema);

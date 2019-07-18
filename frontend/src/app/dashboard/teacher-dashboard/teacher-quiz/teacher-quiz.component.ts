@@ -16,36 +16,37 @@ export class TeacherQuizComponent implements OnInit {
   Optslength: number
   abc:boolean;
   class:any
+  classes=[];
+  subjects=[];
+  chapterId:any;
   // makeQuizForm: FormGroup;
   constructor(public QuesService: QuestionsService, private fb: FormBuilder) {
   }
  
-  ngOnInit() {
-    // this.QuesService.getClass().subscribe(data=>{
-    // this.class=data;
-    // console.log("this.class",this.class['res']);
-    // });
+  async ngOnInit() {
     this.Queslength = 1;
     this.Optslength = 1;
     this.nestedForm = this.fb.group({
-      dept_name: "",
       Questions: this.fb.array([this.Questions]),
-
       'class' : new FormControl(null, [Validators.required]),
       'subject' : new FormControl(null,[Validators.required]), 
       'chapter' : new FormControl(null,[Validators.required])
     });
-    // this.abc=false;
-    // console.log("forms==>>", this.nestedForm);
-    // this.makeQuizForm = new FormGroup({ 
-
-    //   'class' : new FormControl(null, [Validators.required]),
-    //   'subject' : new FormControl(null,[Validators.required]), 
-    //   'chapter' : new FormControl(null,[Validators.required])
-    // })
+    let response=await this.QuesService.getClass();
+    this.classes=response['res'] 
   }
 
-  startQuizMakebtn(){
+  async classChange(data){
+  
+  let response=await this.QuesService.getSpecificClass(data);
+  this.subjects= response['res'].Subjects;
+  }
+  // send(formdata){
+  // console.log("formdata",formdata)
+  // }
+  async startQuizMakebtn(data){
+    let chapterData=await this.QuesService.AddChapter(data);
+    this.chapterId=chapterData['res']._id
     document.getElementById("onbuttonVisible").style.visibility="visible";
     document.getElementById("startMakeQuiz").style.visibility="hidden";
     // document.getElementsByClassName("droup-down").disabled;
@@ -97,28 +98,16 @@ export class TeacherQuizComponent implements OnInit {
   }
   submitForm(data) {
     console.log(data);
-    // const QuesData={
-    //  dept_name:data.dept_name,
-    //  Questions:[
-    //    {
-    //      ques_name:data.question_name,
-    //      Options:[
-    //        {
-    //          opts_name:data.option_name,
-    //          IsAnswer:data.IsAnswer
-    //        }
-    //      ]
-    //    }
-    //  ]
-    // }
-   
-    this.QuesService.AddQuestion(data).subscribe(data=>{
-      if(data){
-      console.log("posted successfull now you can go");
-      }else{
-        console.log("data not posted");
-      }
-    })
+    console.log("data.Questions",data.Questions);
+    console.log("data.Questions.length",data.Questions.length);
+    console.log("data.Questions[0]",data.Questions[0]);
+    let QuestionsLength=data.Questions.length;
+    let question=data.Questions;
+    // this.chapterId="abcsss"
+    for(let i=0;i<QuestionsLength;i++){
+      console.log("questions",question);
+      this.QuesService.AddQuestion(this.chapterId,question[i]);
+    }
   }
 }
 
