@@ -19,7 +19,7 @@ AddQuestion(question){
   .pipe(map((res:Response)=>res));
 }
    
-getQuestions(){
+getQuestions(){ 
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
   return this.http.get('http://localhost:3000/api/questions',{headers:headers})
@@ -47,6 +47,7 @@ return this.http.put('http://localhost:3000/api/updateClass/'+id,{'class_name':c
 deleteClass(id){
 let headers=new HttpHeaders();
 headers.append('Content-type','application/json');
+
 return this.http.delete(`http://localhost:3000/api/deleteClass/${id}`,{headers:headers}).toPromise();
 }
 
@@ -63,6 +64,7 @@ getSubjects(){
 }
 }
 
+ 
 
   //get the questions from the local storage
   // public getQuestions(){

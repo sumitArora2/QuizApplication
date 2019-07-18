@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 }) 
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+  select_role="Select Role";
   role:any;
   constructor(private authService:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService,private toastr:ToastrService) { }
 

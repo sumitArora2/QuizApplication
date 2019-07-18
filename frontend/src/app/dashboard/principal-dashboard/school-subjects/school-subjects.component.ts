@@ -30,8 +30,10 @@ this.myForm=this.fb.group({
   this.editing=true;
   let response=await this.QuesService.getClass();
   this.classes=response['res'] 
+  console.log("this.classes",this.classes);
   let response2=await this.QuesService.getSubjects();
   this.subjects= response2['res'];
+  console.log("this.subjects",this.subjects);
 }
   showsubjectForm(){
     this.showsubject=true;
@@ -79,6 +81,7 @@ cancelUpdate(){
   async delete(data){
   console.log("in delete");
   this.editing=true;
+  console.log("class id is ",data._id);
   await this.QuesService.deleteClass(data._id);
   this.myForm.reset();
   let response=await this.QuesService.getClass();
