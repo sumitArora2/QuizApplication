@@ -19,7 +19,7 @@ export class ComplaintServiceService {
   getComplaint():Observable<any>{
     let headers=new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/api/complaint',{headers:headers})
+    return this.http.get('http://localhost:3000/api/getComplaint',{headers:headers})
     .pipe(map(res=>res));
     
   }
