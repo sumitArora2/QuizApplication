@@ -12,8 +12,8 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 }) 
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
-  select_role="Select Role";
   role:any;
+  classes=[];
   constructor(private authService:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService) { }
 
   ngOnInit() {
@@ -42,6 +42,24 @@ export class SignupComponent implements OnInit {
   },
   {validators: this.passwordConfirming('password','repassword')}
   );
+
+  // get student class 
+  this.authService.getClass().subscribe(data=>{
+    console.log("!!!!!!!!!!!");
+    if(data){
+      console.log("class data ",data);
+      console.log("class name  ",data.res[0].class_name);
+      this.classes=data.res;
+    }
+    else{
+      console.log("lese run");
+    }
+  });
+
+  // if(document.getElementById("studentOption"))
+  // {
+  //   document.getElementById("classDropDown").style.visibility="visible"
+  // }
   }
   //Confirm Password
   passwordConfirming(password: string, repassword: string){
@@ -56,7 +74,7 @@ export class SignupComponent implements OnInit {
       return null;
     }
  }
-  //on signup
+  //on signup 
   onRegister(){
     console.log(this.signupForm.value)
     this.authService.registerUser(this.signupForm.value).subscribe(data=>{
@@ -69,5 +87,12 @@ export class SignupComponent implements OnInit {
         this.router.navigate(['signup']);
       } 
     }) 
+  }
+
+  roleOnChange(changedata){ 
+    console.log(changedata);
+    // if(document.getElementById("roleDroupDown").value ==="student")
+        // document.getElementById("classDropDown").style.visibility="visible"
+    
   }
 }

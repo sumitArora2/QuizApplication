@@ -20,6 +20,13 @@ export class AuthServiceService {
     .pipe(map(res=>res));
   } 
 
+  getClass():Observable<any>{
+    let headers=new HttpHeaders();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/api/getclass',{headers:headers})
+    .pipe(map(res=>res));
+  }
+
   //fr complaint
   complaintStudent(student):Observable<any>{
     let headers =new HttpHeaders();
