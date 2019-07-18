@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
       'lastname': new FormControl(null)
   });
   this.passwordForm = new FormGroup({
-     'oldpassword' : new FormControl(null,[Validators.required]),
+    //  'oldpassword' : new FormControl(null,[Validators.required]),
      'password' : new FormControl(null,[Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
      'repassword' : new FormControl(null,[Validators.required])
   },  {validators: this.passwordConfirming('password','repassword')});
@@ -58,6 +58,7 @@ export class ProfileComponent implements OnInit {
      console.log("nnnnnnn");
    }
   });  
+
   }
  //Confirm Password
  passwordConfirming(password: string, repassword: string){
@@ -105,17 +106,17 @@ export class ProfileComponent implements OnInit {
     return;
 }
 else{
-  // let user=JSON.parse(localStorage.getItem('user'));
-  // this.profileService.updateUserProfile(this.passwordForm.value,user.id).subscribe(data=>{
-  //   console.log("vjhbjbj");
-  //   if(data.success){ 
-  //     console.log("updated data is: ",data);
-  //       this.flashMessage.show('Password is changed successfully', { cssClass: 'alert-success', timeout: 3000 });
-  //     }else{
-  //       console.log("not send");
-  //       this.flashMessage.show('Password not changed', { cssClass: 'alert-danger', timeout: 3000 });
-  //     } 
-  // });
+  let user=JSON.parse(localStorage.getItem('user'));
+  this.profileService.updateUserProfile(this.passwordForm.value,user.id).subscribe(data=>{
+    console.log("vjhbjbj");
+    if(data.success){ 
+      console.log("updated data is: ",data);
+        this.flashMessage.show('Password is changed successfully', { cssClass: 'alert-success', timeout: 3000 });
+      }else{
+        console.log("not send");
+        this.flashMessage.show('Password not changed', { cssClass: 'alert-danger', timeout: 3000 });
+      } 
+  });
 }
 }
 
@@ -133,4 +134,5 @@ else{
 //   });
 
 // }
+
 }

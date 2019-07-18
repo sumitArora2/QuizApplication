@@ -134,30 +134,34 @@ router.put('/profileupdate/:id', (req,res,next)=>{
     // const email=req.body.email;
     // console.log("email is ",email);
     console.log("id is ",req.params.id);
-    console.log("password is ccccccccccccccccccc:  ",req.body.password);
-    var passcheck=req.body.password;
-    bcrypt.genSalt(10, (err,salt)=>{
-        bcrypt.hash(passcheck,salt,(err, hash)=>{
-            if(err) throw err;
-            passcheck=hash; 
-    
-    console.log("aaaaaaaaaaaaaaaaa  ",passcheck);
+
     if(req.body.password != undefined){
         console.log("When body.password not null");
+        
+        // hash password
+        console.log("password is ccccccccccccccccccc:  ",req.body.password);
+        var passcheck=req.body.password;
+        bcrypt.genSalt(10, (err,salt)=>{
+            bcrypt.hash(passcheck,salt,(err, hash)=>{
+                if(err) throw err;
+                passcheck=hash; 
+        console.log("aaaaaaaaaaaaaaaaa  ",passcheck);
+        // hasd passworde end
+
         User.findOneAndUpdate({_id:req.params.id},
             {
                 // if(req.body.password==null){        
                 // },
                 $set:{
-                    username:req.body.username,
-                    lastname:req.body.lastname, 
-                    email: req.body.email,
-                    phone:req.body.phone, 
-                    location:req.body.location,
-                    address:req.body.address,
+                    // username:req.body.username,
+                    // lastname:req.body.lastname, 
+                    // email: req.body.email,
+                    // phone:req.body.phone, 
+                    // location:req.body.location,
+                    // address:req.body.address,
                     password:passcheck,
-                    faterMotherName:req.body.faterMotherName,
-                    fmphone:req.body.fmphone
+                    // faterMotherName:req.body.faterMotherName,
+                    // fmphone:req.body.fmphone
                 }
             },
             function(err,data){
@@ -179,6 +183,8 @@ router.put('/profileupdate/:id', (req,res,next)=>{
                 res.json({success:true,msg:'user data updated: '+data});
             }
         });
+    });
+    });
     }
     else{
         console.log("When body.password is null");
@@ -205,8 +211,6 @@ router.put('/profileupdate/:id', (req,res,next)=>{
         });
     }
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
-});
-});
 });
 
 

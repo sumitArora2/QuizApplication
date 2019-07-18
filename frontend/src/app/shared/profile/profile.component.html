@@ -148,25 +148,6 @@
                                	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
                             </div>
                       </div>
-                <!-- validation error div -->
-                <!-- <div>
-                  <p>error div</p>
-                 <div>
-                  <input [ngClass]="{ 'is-invalid': submitted && f.fphone.errors }">
-                  <div *ngIf="submitted && f.fphone.errors" class="invalid-feedback">
-                    <div *ngIf="f.fphone.errors.required">Enter Your Father's Phone Number</div>
-                  </div>
-                  </div>
-                  <div *ngIf="submitted && f.fmname.errors" class="invalid-feedback">
-                    <div *ngIf="f.fmname.errors.required">Enter Your Father's/Mother's Name</div>
-                  </div>
-                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                    <div *ngIf="f.email.errors.required">Enter Your Email Address</div>
-                  </div> 
-                 
-                </div> -->
-                <!-- validation error div end -->
-
               	</form>
               
               <hr>
@@ -178,7 +159,7 @@
 
                <hr>
                   <form class="form" action="##" method="post" id="changePasswordForm" [formGroup]="passwordForm" (submit)="passwordSubmitForm()">
-                      <div class="form-group">     
+                      <!-- <div class="form-group">     
                           <div class="col-xs-6">
                               <label for="password"><h4>Old Password<sup>*</sup></h4></label>
                               <input type="password" class="form-control" formControlName="oldpassword" name="password" id="oldpassword" 
@@ -187,7 +168,7 @@
                                   <div *ngIf="p.oldpassword.errors.required">Enter Your Old Password</div>
                                 </div>
                           </div>
-                      </div> 
+                      </div>  -->
 					<div class="form-group">     
                           <div class="col-xs-6">
                               <label for="password"><h4>New Password<sup>*</sup></h4></label>
