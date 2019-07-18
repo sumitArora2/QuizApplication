@@ -10,7 +10,6 @@ export class AuthServiceService {
   authToken:any;
   user:any;
   authRole:any;
-  student:any;
   constructor(private http:HttpClient) { }
   // for registeration
   registerUser(user):Observable<any>{

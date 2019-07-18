@@ -26,4 +26,5 @@ export class PrincipalHomeComponent implements OnInit {
     return false;
   }
 
+
 }

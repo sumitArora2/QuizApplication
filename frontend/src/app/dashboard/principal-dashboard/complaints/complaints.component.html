@@ -100,7 +100,7 @@
 
 
 
-
+<div id="studentComplaintDiv"> 
 <div class="container-contact100">
 		<div class="wrap-contact100">
 			<form (submit)="onComplaint()" class="contact100-form validate-form"[formGroup]="complaintForm">
@@ -193,7 +193,28 @@
 			</div>
 		</div>
 	</div>
+</div>
 
-
-
-
+<!-- view Complaints table -->
+<div class="container">
+<div id="viewComplaintDiv" style="visibility: hidden;">
+    <form> 
+        <table class="table table-hover">
+         <thead class="thead-dark">
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Message</th>
+            </thead>
+            <tbody *ngFor="let complaint of complaints">
+                <tr>
+                    <td>{{complaint.firstname}}</td>
+                            <td>{{complaint.lastname}}</td>
+                                    <td>{{complaint.email}}</td>
+                                            <td>{{complaint.message}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</div>
