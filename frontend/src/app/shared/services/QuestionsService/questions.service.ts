@@ -14,10 +14,8 @@ export class QuestionsService {
 AddQuestion(id,question){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application-json');
-  return this.http.post('http://localhost:3000/api/question',question,{headers:headers})
-  .pipe(map((res:Response)=>res));
+  return this.http.post(`http://localhost:3000/api/addquestion/${id}`,question,{headers:headers}).toPromise();
 }
-   
 getQuestions(){ 
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');

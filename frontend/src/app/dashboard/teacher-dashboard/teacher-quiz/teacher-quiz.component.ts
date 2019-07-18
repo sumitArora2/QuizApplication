@@ -98,10 +98,10 @@ export class TeacherQuizComponent implements OnInit {
     // console.log((this.nestedForm.get("Questions") as FormArray).value)
   }
   submitForm(data) {
-    console.log(data);
-    console.log("data.Questions",data.Questions);
-    console.log("data.Questions.length",data.Questions.length);
-    console.log("data.Questions[0]",data.Questions[0]);
+    // console.log(data);
+    // console.log("data.Questions",data.Questions);
+    // console.log("data.Questions.length",data.Questions.length);
+    // console.log("data.Questions[0]",data.Questions[0]);
     let QuestionsLength=data.Questions.length;
     let question=data.Questions;
     // this.chapterId="abcsss"
