@@ -62,9 +62,13 @@ module.exports = {
   },
   deleteClass: async (req, res) => {
     try {
-      const result = await Class.findByIdAndDelete({
+      let result = await Class.findByIdAndDelete({
         _id: req.params.classId
       });
+       result=await Subject.find({
+        Class_Id:req.params.classId
+      }).remove();
+
       result ? res.status(200).send({
           message: 'class deleted successfully',
           res: result
@@ -73,13 +77,13 @@ module.exports = {
           message: 'class not deleted'
         });
     } catch (error) {
-      throw eror;
+      throw error;
     }
   },
   updateClass: async (req, res) => {
     try {
-      console.log("req.body",req.body);
-      console.log("id",req.params.classId);
+      console.log("req.body", req.body);
+      console.log("id", req.params.classId);
       const result = await Class.findOneAndUpdate({
         _id: req.params.classId
       }, {
@@ -98,6 +102,7 @@ module.exports = {
       throw error;
     }
   },
+  //subjects are added on the basis of there respective classes
   addSubject: async (req, res) => {
     try {
       let subject = new Subject({
@@ -105,7 +110,34 @@ module.exports = {
         Class_Id: req.params.classId
       });
       let result = await subject.save();
+      //add the same subject into the class
       let result2 = await Class.findByIdAndUpdate({
+        _id: req.params.classId
+      }, {
+        $push: {
+          'Subjects': result._id
+        }
+      });
+      result ? res.status(200).send({
+        message: 'subjects are saved',
+        res: result
+      }) : res.status(422).send({
+        message: 'subjects re not saved',
+        res: result
+      });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
+  //update the subjects on the basis of class and update the subject in class table also
+  updateSubject: async (req, res) => {
+    try {
+      let subject = new Subject({
+        subject_name: req.body.subject_name,
+        Class_Id: req.params.classId
+      });
+      let result = await Class.findByIdAndUpdate({
         _id: req.params.classId
       }, {
         $push: {

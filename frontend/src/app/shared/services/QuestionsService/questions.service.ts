@@ -47,6 +47,7 @@ return this.http.put('http://localhost:3000/api/updateClass/'+id,{'class_name':c
 deleteClass(id){
 let headers=new HttpHeaders();
 headers.append('Content-type','application/json');
+
 return this.http.delete(`http://localhost:3000/api/deleteClass/${id}`,{headers:headers}).toPromise();
 }
 
