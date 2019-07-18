@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +13,8 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   role:any;
-  constructor(private authService:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService) { }
+  classes=[];
+ constructor(private authService:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService,private toastr:ToastrService) { }
 
   ngOnInit() {
     if(this.authService.loggedIn()){
@@ -36,11 +37,25 @@ export class SignupComponent implements OnInit {
      
       'password' : new FormControl(null,[Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
       'repassword' : new FormControl(null,[Validators.required]),
-      'role': new FormControl(null,[Validators.required])
+      'role': new FormControl(null,[Validators.required]),
+      'class': new FormControl(null)
 
   },
   {validators: this.passwordConfirming('password','repassword')}
   );
+
+  // get student class 
+  this.authService.getClass().subscribe(data=>{
+    console.log("!!!!!!!!!!!");
+    if(data){
+      console.log("class data ",data);
+      console.log("class name  ",data.res[0].class_name);
+      this.classes=data.res;
+    }
+    else{
+      console.log("lese run");
+    }
+  });
   }
   //Confirm Password
   passwordConfirming(password: string, repassword: string){
@@ -55,18 +70,27 @@ export class SignupComponent implements OnInit {
       return null;
     }
  }
-  //on signup
+  //on signup 
   onRegister(){
     console.log(this.signupForm.value)
     this.authService.registerUser(this.signupForm.value).subscribe(data=>{
       if(data.success){
         console.log(data);
-        this.flashMessage.show('you are now registered and Kindly login', { cssClass: 'alert-success', timeout: 3000 });
+       this.toastr.success("you are successfully registered")
          this.router.navigate(['login']);
       }else{
-        this.flashMessage.show('something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
+        this.toastr.warning('something went wrong');
         this.router.navigate(['signup']);
       } 
     }) 
+  }
+
+  roleOnChange(changedata){ 
+    console.log(changedata);
+    if(changedata === "student")
+        document.getElementById("classDropDown").style.visibility="visible";
+    else
+        document.getElementById("classDropDown").style.visibility="hidden";
+    
   }
 }

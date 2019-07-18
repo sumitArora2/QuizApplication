@@ -1,3 +1,4 @@
+import { ComplaintServiceService } from './shared/services/Complaints/complaint-service.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +15,7 @@ import {HttpClientModule } from '@angular/common/http';
 import { AuthServiceService } from './shared/services/Authetication/auth-service.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
+import {ToastrModule} from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent, 
@@ -34,9 +36,14 @@ import { AuthGuard } from './guards/auth.guard';
     DashboardModule,
     HttpClientModule,
     FlashMessagesModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+  
+    }),
 
   ],
-  providers: [AuthServiceService,AuthGuard],
+  providers: [AuthServiceService,AuthGuard,ComplaintServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

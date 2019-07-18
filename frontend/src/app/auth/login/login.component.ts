@@ -3,6 +3,7 @@ import { FormControl, Validators, FormGroup} from '@angular/forms';
 import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
    password:String;
    user:any
    role:String;
-  constructor(private authservice:AuthServiceService,private flashMessage:FlashMessagesService,private router:Router) { }
+  constructor(private authservice:AuthServiceService,private flashMessage:FlashMessagesService,private router:Router,private toastr:ToastrService) { }
 
   ngOnInit() {
     if(this.authservice.loggedIn()){
@@ -54,30 +55,30 @@ export class LoginComponent implements OnInit {
       if(this.signinForm.value.role ==='student' && data['user'].role ==='student'){
           // console.log("student data ", data);
         this.router.navigate(['studentHome']);
-        this.flashMessage.show('Student are now logged in',{cssClass:'alert-success',timeout:3000});
+        this.toastr.success(' student');
       }
       else if(this.signinForm.value.role ==='principal' && data['user'].role ==='principal'){
         console.log("principal data ", data);
       this.router.navigate(['princiHome']);
-      this.flashMessage.show('Principal are now logged in',{cssClass:'alert-success',timeout:3000});
+      this.toastr.success(' principal are succesfully logged  in');
     }
     else if(data['user'].role === 'teacher' && data['user'].role ==='teacher'){
         console.log("teacher data ", data);
       this.router.navigate(['teacherHome']);
-      this.flashMessage.show('Teacher are now logged in',{cssClass:'alert-success',timeout:3000});
+      this.toastr.success(' teacher are succesfully logged  in');
     }
     else{ 
       // console.log(data);
       this.router.navigate(['login'])
-      this.flashMessage.show('You are not a valid user',{cssClass:'alert-danger',timeout:3000});
+      this.toastr.error(' you are not logged in');
     } 
   }
       else{ 
         // console.log(data);
         this.router.navigate(['login'])
-        this.flashMessage.show('You are not a valid user',{cssClass:'alert-danger',timeout:3000});
+        this.toastr.error(' you are not logged in');
       }  
-    }); 
+    });
   } 
 
 }

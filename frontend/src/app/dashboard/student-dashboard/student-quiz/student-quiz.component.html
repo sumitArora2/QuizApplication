@@ -5,10 +5,10 @@
 <!-- circle button link -->
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
- 
+   
 <div id="desBeforeQuiz">  
     <form [formGroup]="takeQuizForm" class="subjectsdiv">
-            <div class="topnav">
+            <div class="topnav"> 
         <select class="droup-down" formControlName="course" [(ngModel)]="comp">
                 <option [ngValue]="undefined" disabled selected>Computer</option>
                 <option value="chapter1">C Programming</option>
@@ -63,7 +63,7 @@
     <div class="startQuizdiv">
     <button type="button" class="startQuizbtn" (click)="startQuizbtn()">Start Quiz</button>
      </div>
-</form>
+</form> 
 </div> 
  
 <div id="onbuttonVisible"  style="visibility: hidden;">

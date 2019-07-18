@@ -42,6 +42,9 @@ const UserSchema =mongoose.Schema({
     },
     fmphone:{
         type:Number
+    },
+    class:{
+        type:String
     }
 });
 const User =module.exports = mongoose.model('User',UserSchema);
@@ -59,7 +62,7 @@ module.exports.addUser=function(newUser,callback){
     bcrypt.genSalt(10, (err,salt)=>{
         bcrypt.hash(newUser.password,salt,(err, hash)=>{
             if(err) throw err;
-            newUser.password=hash;
+            newUser.password=hash; 
             newUser.save(callback);
         });
     });
@@ -70,3 +73,8 @@ module.exports.comparePassword=function(candidatePasword, hash,callback){
         callback(null, isMatch);
     });
 } 
+
+module.exports.updateUserProfile=function(adddata, callback){
+    console.log("export profile");
+    adddata.save(callback);
+}
