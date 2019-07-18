@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
-import {map} from 'rxjs/Operators';
+import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -17,9 +17,29 @@ export class AuthServiceService {
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:3000/api/signup',user,{headers:headers})
     .pipe(map(res=>res));
+  } 
+
+  getClass():Observable<any>{
+    let headers=new HttpHeaders();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/api/getclass',{headers:headers})
+    .pipe(map(res=>res));
   }
+
+  //fr complaint
+  complaintStudent(student):Observable<any>{
+    let headers =new HttpHeaders();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/api/complaint',student,{headers:headers})
+    .pipe(map(res=>res));
+  }
+
+
+
+
+
 // fr login 
-  postLogin(userauth):Observable<any>{
+  AuthLogin(userauth):Observable<any>{ 
     let headers=new HttpHeaders();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:3000/api/authenticate',userauth,{headers:headers})
@@ -45,7 +65,8 @@ export class AuthServiceService {
   }
   getUserDetails(){
     let user=JSON.parse(localStorage.getItem('user'));
-    return user.role;
+    if(user)
+      return user.role;
   }
  
   logout() {
@@ -64,7 +85,7 @@ export class AuthServiceService {
       .pipe(map(res=>Response ));
   }  
     
-  loadToken(){
+  loadToken(){ 
     const token = localStorage.getItem('id_token');
     const user = localStorage.getItem('user.role');
     this.authToken = token;

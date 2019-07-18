@@ -1,6 +1,8 @@
 import { QuestionsService } from './../../../shared/services/QuestionsService/questions.service';
 import { Component, OnInit } from '@angular/core';
 import { QuizserviceService } from 'src/app/shared/services/QuizService/quizservice.service';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-student-quiz',
@@ -14,11 +16,29 @@ export class StudentQuizComponent implements OnInit {
   quizes:{};
   showidx=0;
   quiz:any; 
-   
+  takeQuizForm: FormGroup; 
   constructor(private quizgenerate:QuizserviceService,private questionService:QuestionsService) { }
   nextId:number;
+  classes=[];
   ngOnInit() {
-    
+    this.takeQuizForm = new FormGroup({
+
+      'course':new FormControl(null, [Validators.required])
+  })
+
+// get classes and Subject
+this.quizgenerate.getClass().subscribe(data=>{
+  console.log("!!!!!!!!!!!");
+  if(data){
+    console.log("class data ",data);
+    console.log("class name  ",data.res[0].class_name);
+    this.classes=data.res;
+  }
+  else{
+    console.log("lese run");
+  }
+});
+
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
@@ -26,16 +46,23 @@ export class StudentQuizComponent implements OnInit {
         this.timeLeft = 60;
       }
     },1000);
-    this.questionService.getQuestions().subscribe(data=>{
-      this.quizes=data;
-     console.log(this.quizes);
-    });
+    // this.questionService.getQuestions().subscribe(data=>{
+    //   this.quizes=data;
+    //  console.log(this.quizes);
+    // });
     this.nextId=this.showidx+1;
     // this.quizs = this.quizgenerate.getQuiz();
     // this.quiz=this.quizgenerate.getquestionque(1);
   }
-
-
+  startQuizbtn(){
+    if(!this.takeQuizForm.valid){
+      alert("First select Subject and Chapter");
+    }
+    else{
+    document.getElementById("onbuttonVisible").style.visibility="visible";
+    document.getElementById("desBeforeQuiz").style.visibility="hidden";
+    }
+  }
   getquestion(id)
   {
     this.showidx=id-1;

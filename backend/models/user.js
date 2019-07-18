@@ -4,22 +4,47 @@ const bcrypt=require('bcryptjs');
 const UserSchema =mongoose.Schema({
     username:{
         type:String,
-        required:true,
-        maxlength:10,
+        required:[true,'username is required'],
+        maxlength:25,
     },
+    lastname:{
+        type:String
+    }, 
     email:{
         type:String,
-        required:true,
+        required:[true,'email is required'],
         unique: true
     },
     password:{
         type:String,
-        required:true,
+        required:[true,'password is required'],
         minlength:6,
     },
     role:{
         type:String,
         require:true 
+    },
+    isstatus:{
+        type:Boolean,
+        default:true
+    },
+    phone:{
+        type:Number
+    },
+    location:{
+        type:String
+    },
+    address:{
+        type:String
+    },
+    faterMotherName:{
+        type:String
+    },
+    fmphone:{
+        type:Number
+    },
+    class:{
+        type:String
     }
 });
 const User =module.exports = mongoose.model('User',UserSchema);
@@ -37,7 +62,7 @@ module.exports.addUser=function(newUser,callback){
     bcrypt.genSalt(10, (err,salt)=>{
         bcrypt.hash(newUser.password,salt,(err, hash)=>{
             if(err) throw err;
-            newUser.password=hash;
+            newUser.password=hash; 
             newUser.save(callback);
         });
     });
@@ -48,3 +73,8 @@ module.exports.comparePassword=function(candidatePasword, hash,callback){
         callback(null, isMatch);
     });
 } 
+
+module.exports.updateUserProfile=function(adddata, callback){
+    console.log("export profile");
+    adddata.save(callback);
+}

@@ -5,7 +5,7 @@
   "projects": {
     "frontend": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {}, 
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -24,7 +24,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "./node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },

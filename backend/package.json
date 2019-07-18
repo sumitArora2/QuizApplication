@@ -7,16 +7,19 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "bcryptjs": "*",
     "body-parser": "^1.19.0",
     "cors": "*",
     "express": "*",
-    "mongoose": "*",
-    "nodemon": "*",
     "jsonwebtoken": "*",
+    "mongoose": "*",
+    "nodemon": "^1.19.1",
     "passport": "*",
-    "passport-jwt": "*",
-    "bcryptjs": "*"
+    "passport-jwt": "*"
   },
   "author": "quiz team",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jshint": "^2.10.2"
+  }
 }

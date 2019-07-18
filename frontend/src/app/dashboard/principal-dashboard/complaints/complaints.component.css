@@ -1,0 +1,19 @@
+
+
+table, th, td{
+    border: 1px solid red;
+}
+
+#viewComplaintDiv{
+    float: right;
+    /* overflow:hidden; */
+    text-align: center;
+    margin-top: 20%;
+}
+
+#studentComplaintDiv{
+    overflow: hidden;
+    position: absolute;
+
+
+}
