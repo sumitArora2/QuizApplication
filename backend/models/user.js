@@ -42,6 +42,9 @@ const UserSchema =mongoose.Schema({
     },
     fmphone:{
         type:Number
+    },
+    class:{
+        type:String
     }
 });
 const User =module.exports = mongoose.model('User',UserSchema);

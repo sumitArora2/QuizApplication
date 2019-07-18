@@ -16,7 +16,8 @@ router.post('/signup',(req,res,next)=>{
          username:req.body.username, 
         email:req.body.email,
        password:req.body.password, 
-       role:req.body.role
+       role:req.body.role,
+       class:req.body.class
     });
     User.addUser(newUser,(err,data)=>{
         if(err){ newUser.save(callback);

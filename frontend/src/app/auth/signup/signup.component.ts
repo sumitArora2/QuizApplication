@@ -37,7 +37,8 @@ export class SignupComponent implements OnInit {
      
       'password' : new FormControl(null,[Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
       'repassword' : new FormControl(null,[Validators.required]),
-      'role': new FormControl(null,[Validators.required])
+      'role': new FormControl(null,[Validators.required]),
+      'class': new FormControl(null)
 
   },
   {validators: this.passwordConfirming('password','repassword')}
@@ -55,11 +56,6 @@ export class SignupComponent implements OnInit {
       console.log("lese run");
     }
   });
-
-  // if(document.getElementById("studentOption"))
-  // {
-  //   document.getElementById("classDropDown").style.visibility="visible"
-  // }
   }
   //Confirm Password
   passwordConfirming(password: string, repassword: string){
@@ -91,8 +87,10 @@ export class SignupComponent implements OnInit {
 
   roleOnChange(changedata){ 
     console.log(changedata);
-    // if(document.getElementById("roleDroupDown").value ==="student")
-        // document.getElementById("classDropDown").style.visibility="visible"
+    if(changedata === "student")
+        document.getElementById("classDropDown").style.visibility="visible";
+    else
+        document.getElementById("classDropDown").style.visibility="hidden";
     
   }
 }

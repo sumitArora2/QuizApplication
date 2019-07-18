@@ -148,12 +148,15 @@
                                                 <option value="principal">Principal</option>
                                               </select>
                                 </div>
+                                
                                 <div class="form-group"id="classDropDown" style="visibility: hidden">
-                                    <select class="dropdown-menu1">
+                                    <select class="dropdown-menu1" formControlName="class">
+                                        <option value="" disabled>Select Class</option>
                                                  <!-- <option [ngValue]="undefined" disabled>Select Class</option> -->
                                                  <option  *ngFor="let class of classes" value={{class.class_name}}>{{class.class_name}}</option>
-                                               </select>
+                                    </select>
                                  </div>
+                                 
 
                                 <div class="form-group">
                                          

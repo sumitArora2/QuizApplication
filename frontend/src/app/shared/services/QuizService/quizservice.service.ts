@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-
+import {HttpClient,HttpHeaders} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -51,12 +53,12 @@ export class QuizserviceService {
                 ,"answer":"Two" 
           } 
 ]
-  constructor() { }
+constructor(private http:HttpClient) { }
 
   // getQuiz(){
   //     return this.Quizs;
   // }
-  getquestionque(id){
+  getquestionque(id){ 
     for(let q of this.Quizs)
     {
       if(q.id==id)
@@ -65,4 +67,12 @@ export class QuizserviceService {
       }
     }
   }
+  getClass():Observable<any>{
+    let headers=new HttpHeaders();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/api/getclass',{headers:headers})
+    .pipe(map(res=>res));
+  }
+
 }
+  
