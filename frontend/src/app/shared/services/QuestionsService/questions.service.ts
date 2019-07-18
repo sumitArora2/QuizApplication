@@ -21,7 +21,7 @@ AddQuestion(question){
    
 getQuestions(){ 
   let headers=new HttpHeaders();
-  headers.append('Content-Type','application-json');
+  headers.append('Content-Type','application/json');
   return this.http.get('http://localhost:3000/api/questions',{headers:headers})
   .pipe(map((res:Response)=>res));
 }
@@ -36,10 +36,24 @@ getClass(){
   headers.append('Content-Type','application/json');
   return this.http.get('http://localhost:3000/api/getclass',{headers:headers}).toPromise();
 }
+
+updateClass(id,classname){
+let headers=new HttpHeaders();
+// console.log("in service",id);
+// console.log("in service",classname);
+headers.append('Content-Type','applications/json');
+return this.http.put('http://localhost:3000/api/updateClass/'+id,{'class_name':classname},{headers:headers}).toPromise();
+}
+deleteClass(id){
+let headers=new HttpHeaders();
+headers.append('Content-type','application/json');
+return this.http.delete(`http://localhost:3000/api/deleteClass/${id}`,{headers:headers}).toPromise();
+}
+
 AddSubject(data){
   let headers=new HttpHeaders();
-  headers.append('Content-Type','application/json');
   // console.log("data",data);
+  headers.append('Content-Type','application/json');
   return this.http.patch(`http://localhost:3000/api/addsubject/${data.class}`,data,{headers:headers}).toPromise();
 }
 getSubjects(){

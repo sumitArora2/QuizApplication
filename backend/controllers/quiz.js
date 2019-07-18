@@ -27,8 +27,8 @@ module.exports = {
   },
   getClass: async (req, res) => {
     try {
-      const result = await Class.find();
-      console.log("result", result);
+      const result = await Class.find({}).populate('Subjects');
+      // console.log("result", result);
       result ? res.status(200).send({
           message: 'Success',
           res: result
@@ -77,14 +77,15 @@ module.exports = {
     }
   },
   updateClass: async (req, res) => {
-    // console.log(req.body.class_name);
     try {
+      console.log("req.body",req.body);
+      console.log("id",req.params.classId);
       const result = await Class.findOneAndUpdate({
         _id: req.params.classId
       }, {
         class_name: req.body.class_name
       });
-      console.log("result", result);
+      // console.log("result", result);
       result ? res.status(200).send({
           message: 'class name update successfully',
           res: result
