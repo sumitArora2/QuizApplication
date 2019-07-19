@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
   // fr login 
   CheckUserAuth(){  
     this.authservice. AuthLogin(this.signinForm.value).subscribe(data=>{
-
       if(data.success){ 
         // console.log("succ data ",data);
         // console.log('database ',data['user'].role);
