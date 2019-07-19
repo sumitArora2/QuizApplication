@@ -17,7 +17,7 @@ AddQuestion(id,question){
   return this.http.post(`http://localhost:3000/api/addquestion/${id}`,question,{headers:headers}).toPromise();
 }
 getQuestions(){ 
-  let headers=new HttpHeaders();
+  let headers=new HttpHeaders();  
   headers.append('Content-Type','application/json');
   return this.http.get('http://localhost:3000/api/question',{headers:headers}).toPromise();
 }
