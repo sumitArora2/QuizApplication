@@ -16,6 +16,8 @@ import { AuthServiceService } from './shared/services/Authetication/auth-service
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 import {ToastrModule} from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent, 
@@ -35,11 +37,13 @@ import {ToastrModule} from 'ngx-toastr';
     AuthModule,
     DashboardModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+
     FlashMessagesModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,
-      positionClass: 'toast-top-right',
-  
+      positionClass:'toast-top-right',
+      tapToDismiss:false,
     }),
 
   ],
