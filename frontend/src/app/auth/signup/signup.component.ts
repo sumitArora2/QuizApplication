@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
 import { Router } from '@angular/router';
-import { FlashMessagesService } from 'angular2-flash-messages';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -14,7 +13,7 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   role:any;
   classes=[];
- constructor(private authService:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService,private toastr:ToastrService) { }
+ constructor(private authService:AuthServiceService,private router:Router,private toastr:ToastrService) { }
 
   ngOnInit() {
     if(this.authService.loggedIn()){

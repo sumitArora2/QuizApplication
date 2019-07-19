@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup} from '@angular/forms';
 import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
-import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,7 +15,7 @@ export class LoginComponent implements OnInit {
    password:String;
    user:any
    role:String;
-  constructor(private authservice:AuthServiceService,private flashMessage:FlashMessagesService,private router:Router,private toastr:ToastrService) { }
+  constructor(private authservice:AuthServiceService,private router:Router,private toastr:ToastrService) { }
 
   ngOnInit() {
     if(this.authservice.loggedIn()){
@@ -55,7 +54,7 @@ export class LoginComponent implements OnInit {
       if(this.signinForm.value.role ==='student' && data['user'].role ==='student'){
           // console.log("student data ", data);
         this.router.navigate(['studentHome']);
-        this.toastr.success(' student');
+        this.toastr.success(' student are succesfully logged in');
       }
       else if(this.signinForm.value.role ==='principal' && data['user'].role ==='principal'){
         console.log("principal data ", data);
