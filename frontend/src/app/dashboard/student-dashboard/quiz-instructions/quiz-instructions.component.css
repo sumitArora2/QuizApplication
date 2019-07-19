@@ -1,0 +1,41 @@
+div.header{
+   padding-top: 10px;
+margin-left: 30px;
+padding-bottom: 10px;
+}
+h5{
+    padding:0px;
+    font-size: 16px;
+    margin: 0px;
+}
+div.headerBar{
+    width: 100%;
+    background-color:#1a237e;
+    color: white;
+    display:flex;
+    justify-content: space-between;
+    padding:6px 10px;
+}
+.StrtQuizbtn{
+    position: fixed;
+    right: 0;
+   margin-bottom: 10px;
+   margin-right: 50px;
+}
+
+
+.description  h6{
+   padding-top: 5px;
+   padding-bottom: 10px;
+}
+
+.footer{
+    bottom: 0;
+    left: 0;
+background-color: #1a237e;
+color:white;
+text-align: center;
+padding: 6px 10px;
+position: fixed;
+width: 100%;
+}
