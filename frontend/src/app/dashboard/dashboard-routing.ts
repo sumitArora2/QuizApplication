@@ -1,3 +1,4 @@
+import { QuizInstructionsComponent } from './student-dashboard/quiz-instructions/quiz-instructions.component';
 import { SchoolSubjectsComponent } from './principal-dashboard/school-subjects/school-subjects.component';
 import { SchoolClassesComponent } from './principal-dashboard/school-classes/school-classes.component';
 import { TeacherQuizComponent } from './teacher-dashboard/teacher-quiz/teacher-quiz.component';
@@ -24,19 +25,20 @@ const routes: Routes = [
      ]
  },
  {
-     path:'teacherHome', component:TeacherHomeComponent,canActivate:[AuthGuard]
-     
+     path:'teacherHome', component:TeacherHomeComponent,canActivate:[AuthGuard] 
  },
- {
+{
   path:'teacherQuiz', component:TeacherQuizComponent
 },
  {
      path:'studentHome', component:StudentHomeComponent,canActivate:[AuthGuard]
-
  },
  {
      path:'studentQuiz', component:StudentQuizComponent
  },
+ {
+  path:'QuizInstruction', component:QuizInstructionsComponent
+},
  {
    path:'details',component:DetailsComponent
  },
