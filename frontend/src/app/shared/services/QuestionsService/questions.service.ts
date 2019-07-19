@@ -19,15 +19,13 @@ AddQuestion(id,question){
 getQuestions(){ 
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.get('http://localhost:3000/api/questions',{headers:headers})
-  .pipe(map((res:Response)=>res));
+  return this.http.get('http://localhost:3000/api/question',{headers:headers}).toPromise();
 }
 addClass(classname){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
   return this.http.post('http://localhost:3000/api/addclass',{'class_name':classname},{headers:headers}).toPromise();
 }
-
 getClass(){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
