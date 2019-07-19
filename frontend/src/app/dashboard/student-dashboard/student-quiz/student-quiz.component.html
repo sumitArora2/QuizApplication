@@ -5,10 +5,10 @@
 <!-- circle button link -->
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-   
+<!--    
 <div id="desBeforeQuiz">  
-    <form [formGroup]="takeQuizForm" class="subjectsdiv">
-            <div class="topnav"> 
+    <form [formGroup]="takeQuizForm" class="subjectsdiv"> -->
+            <!-- <div class="topnav"> 
         <select class="droup-down" formControlName="course" [(ngModel)]="comp">
                 <option [ngValue]="undefined" disabled selected>Computer</option>
                 <option value="chapter1">C Programming</option>
@@ -37,10 +37,10 @@
                 <option value="chapter3">Artificial Language</option>
                 <option value="chapter4">Letter and Symbol Series</option>
                 </select>
-</div>
+</div> -->
 
 <!-- description div -->
-<div class="description">
+<!-- <div class="description">
         <h3>Platform Instructions:</h3>
         <ul value="disc">
         <li>The countdown timer at the top, left-hand side of the screen will display the time avaliable for you to complete the examination.</li>
@@ -64,9 +64,10 @@
     <button type="button" class="startQuizbtn" (click)="startQuizbtn()">Start Quiz</button>
      </div>
 </form> 
-</div> 
+</div>  -->
  
-<div id="onbuttonVisible"  style="visibility: hidden;">
+<!-- style="visibility: hidden;" -->
+<div id="onbuttonVisible"  >
 <div class="container1">
 <div class="container-fluid bg-info">
 <div class="timer">
@@ -74,9 +75,10 @@
 </div>
 <div class="modal-dialog">
     <!-- <div  *ngFor= "let quiz of quizs"> -->
-<div class="modal-content" *ngFor="let quiz of quizes; let i=index">
+<div class="modal-content">
  <div class="modal-header" >
-    <h3><span class="label label-warning" id="qid">{{quiz.id}}</span> {{quiz.Questions[showidx].question_name}}</h3>
+                <!-- {{quiz.id}} before span -->
+    <h3><span class="label label-warning" id="qid">1</span> What is your name</h3>
 </div>
 <div class="modal-body"> 
     <div class="col-xs-3 col-xs-offset-5">
@@ -94,17 +96,17 @@
  
   <div class="quiz" id="quiz" data-toggle="buttons">
 
-        <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="1">{{quiz.option1}}</label>
-        <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="2">{{quiz.option2}}</label>
-        <label class="element-animation3 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="3">{{quiz.option3}}</label>
-        <label class="element-animation4 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="4">{{quiz.option4}}</label>
+        <label class="element-animation1 btn btn-lg btn-primary btn-block" (click)="sendvalue()"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="1" >abc</label>
+        <label class="element-animation2 btn btn-lg btn-primary btn-block" ><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="2" >bca</label>
+        <label class="element-animation3 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="3" >bca</label>
+        <label class="element-animation4 btn btn-lg btn-primary btn-block" ><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="4">bca</label>
      </div>
 
-  <div class="quiz" id="quiz" data-toggle="buttons" *ngFor="let options of quiz.Questions[showidx].Options;">   
+  <!-- <div class="quiz" id="quiz" data-toggle="buttons">   
    <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right">     
-   </i></span><input type="radio" name="quiz.Questions[showidx].question_name" value="{{options.option_name}}">{{options.option_name}}</label>
+   </i></span><input type="radio" name="abc" value="abcd">rahul</label>
    
-</div>
+</div> -->
 
 </div>
 <div class="modal-footer text-muted">
