@@ -2,7 +2,6 @@ import { QuestionsService } from './../../../shared/services/QuestionsService/qu
 import { Component, OnInit } from '@angular/core';
 import { QuizserviceService } from 'src/app/shared/services/QuizService/quizservice.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-student-quiz',
@@ -11,7 +10,7 @@ import { Subject } from 'rxjs';
 })
 export class StudentQuizComponent implements OnInit {
   name = 'Angular 6';
-  timeLeft: number = 60;
+  timeLeft: number = 59;
   interval;
   quize: {};
   showidx = 0;
@@ -20,6 +19,9 @@ export class StudentQuizComponent implements OnInit {
   constructor(private quizgenerate: QuizserviceService, private questionService: QuestionsService) { }
   nextId: number;
   classes = [];
+  questions_list=[];
+  active_question=1;
+  
   async ngOnInit() {
     this.takeQuizForm = new FormGroup({
       'course': new FormControl(null, [Validators.required])
@@ -34,8 +36,8 @@ export class StudentQuizComponent implements OnInit {
     }, 1000);
     this.nextId = this.showidx + 1;
     let getQuestions = await this.questionService.getQuestions();
-    let response = getQuestions['result'];
-    console.log("this.questionService.getQuestions()", response);
+    this.questions_list = getQuestions['result'];
+    console.log("this.questionService.getQuestions()", this.questions_list);
   }
   startQuizbtn() {
     if (!this.takeQuizForm.valid) {
@@ -49,37 +51,34 @@ export class StudentQuizComponent implements OnInit {
   sendvalue(value){
     console.log("value",value);
   }
-  // getquestion(id)
-  // {
-  //   this.showidx=id-1;
-  //   this.questionService.getQuestions().subscribe(data=>{
-  //     this.quizes=data;
-  //    console.log(this.quizes);
-  //   });
-  // }
 
-  // nextque(){
-  //   this.showidx=this.showidx+1;
-  //   this.questionService.getQuestions().subscribe(data=>{
-  //     this.quizes=data;
-  //   });
-  //   this.nextId=this.showidx+1;
-  //   console.log("this.nextId",this.nextId);
-  //   if(this.nextId>1){
-  //     document.getElementById("prv").style.visibility = "visible";
-  //   }
-  //   if(this.nextId == 5){
-  //     document.getElementById("next").style.visibility = "hidden";
-  //   }
-  // }
-  // prvque(){
-  //   this.showidx=this.showidx-1;
-  //   this.questionService.getQuestions().subscribe(data=>{
-  //     this.quizes=data;
-  //   });
-  //   this.nextId=this.showidx-1;
-  //   if(this.nextId==1){
-  //     document.getElementById("prv").style.visibility = "hidden";
-  //   }
-  // }
+  selectOption(questionIndex,optionIndex,isAnswer){
+    this.questions_list[questionIndex]['isSelected'] = optionIndex;
+    if(isAnswer=='true')
+      this.questions_list[questionIndex]['marks']=1;
+    else{
+      this.questions_list[questionIndex]['marks']=-0.25;
+    }
+  }
+  clearOption(question){
+    try{
+      this.questions_list[question]['isSelected']=null;
+      this.questions_list[question]['marks']=0
+    }
+    catch(err){
+      ;
+    }
+  }
+  changeQuestion(questionIndex){
+    this.active_question=questionIndex+1;
+  }
+
+  onSubmit(){
+    let marks =0;
+    for(let i=0;i<this.questions_list.length;i++){
+      if(this.questions_list[i]['marks']!=undefined)
+       marks += this.questions_list[i]['marks'];
+    }
+    console.log(marks);
+  }
 }

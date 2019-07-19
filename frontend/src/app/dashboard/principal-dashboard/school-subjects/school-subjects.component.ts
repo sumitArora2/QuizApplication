@@ -30,10 +30,10 @@ this.myForm=this.fb.group({
   this.editing=true;
   let response=await this.QuesService.getClass();
   this.classes=response['res'] 
-  console.log("this.classes",this.classes);
+  // console.log("this.classes",this.classes);
   let response2=await this.QuesService.getSubjects();
   this.subjects= response2['res'];
-  console.log("this.subjects",this.subjects);
+  // console.log("this.subjects",this.subjects);
 }
   showsubjectForm(){
     this.showsubject=true;
