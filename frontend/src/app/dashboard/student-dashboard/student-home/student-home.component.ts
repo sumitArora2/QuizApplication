@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
-import { FlashMessagesService } from 'angular2-flash-messages';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-student-home',
@@ -10,7 +10,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class StudentHomeComponent implements OnInit {
   role:any;
-  constructor(private authservice:AuthServiceService,private router:Router,private flashMessage:FlashMessagesService) { }
+  constructor(private authservice:AuthServiceService,private router:Router,private toastr:ToastrService) { }
 
   ngOnInit() {
     if(this.authservice.loggedIn()){
@@ -30,10 +30,7 @@ export class StudentHomeComponent implements OnInit {
   Logoutclick()
   {
     this.authservice.logout();
-    this.flashMessage.show('you are logged out', {
-      cssClass:'alert-success',
-      timeout:3000
-    });
+    this.toastr.success('you are logged out');
     this.router.navigate(['/login']);
     return false;
 
