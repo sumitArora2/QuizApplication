@@ -53,29 +53,34 @@ export class LoginComponent implements OnInit {
         this.authservice.storeUserData(data.token,data.user);
       if(this.signinForm.value.role ==='student' && data['user'].role ==='student'){
           // console.log("student data ", data);
+          this.toastr.success(' student are succesfully logged in'); 
         this.router.navigate(['studentHome']);
-        this.toastr.success(' student are succesfully logged in');
+        
       }
       else if(this.signinForm.value.role ==='principal' && data['user'].role ==='principal'){
         console.log("principal data ", data);
+        this.toastr.success(' principal are succesfully logged  in');
       this.router.navigate(['princiHome']);
-      this.toastr.success(' principal are succesfully logged  in');
+      
     }
     else if(data['user'].role === 'teacher' && data['user'].role ==='teacher'){
         console.log("teacher data ", data);
+        this.toastr.success(' teacher are succesfully logged  in');
       this.router.navigate(['teacherHome']);
-      this.toastr.success(' teacher are succesfully logged  in');
+      
     }
     else{ 
       // console.log(data);
-      this.router.navigate(['login'])
       this.toastr.error(' you are not logged in');
+      this.router.navigate(['login'])
+      
     } 
   }
       else{ 
         // console.log(data);
-        this.router.navigate(['login'])
         this.toastr.error(' you are not logged in');
+        this.router.navigate(['login'])
+      
       }  
     });
   } 

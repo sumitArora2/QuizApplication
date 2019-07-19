@@ -38,8 +38,8 @@ import {ToastrModule} from 'ngx-toastr';
     FlashMessagesModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,
-      positionClass: 'toast-top-right',
-  
+      positionClass:'toast-top-right',
+      tapToDismiss:false,
     }),
 
   ],

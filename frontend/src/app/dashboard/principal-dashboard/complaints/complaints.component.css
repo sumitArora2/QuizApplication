@@ -8,11 +8,12 @@ table, th, td{
     float: right;
      overflow:hidden; 
     text-align: center;
+    margin-top: 20%;
 }
-/* 
+
 #studentComplaintDiv{
     overflow: hidden;
-    position: relative;
+    position: absolute;
 
 
-} */
+}
