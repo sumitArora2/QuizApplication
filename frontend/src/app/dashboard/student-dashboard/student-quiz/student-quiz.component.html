@@ -1,14 +1,14 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
 
-<!-- circle button link -->
+circle button link 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> -->
 <!--    
 <div id="desBeforeQuiz">  
     <form [formGroup]="takeQuizForm" class="subjectsdiv"> -->
-            <!-- <div class="topnav"> 
+<!-- <div class="topnav"> 
         <select class="droup-down" formControlName="course" [(ngModel)]="comp">
                 <option [ngValue]="undefined" disabled selected>Computer</option>
                 <option value="chapter1">C Programming</option>
@@ -65,19 +65,17 @@
      </div>
 </form> 
 </div>  -->
- 
+
 <!-- style="visibility: hidden;" -->
-<div id="onbuttonVisible"  >
+<!-- <div id="onbuttonVisible"  >
 <div class="container1">
 <div class="container-fluid bg-info">
 <div class="timer">
         <p class="time">{{timeLeft}} Seconds Left....</p> 
 </div>
 <div class="modal-dialog">
-    <!-- <div  *ngFor= "let quiz of quizs"> -->
 <div class="modal-content">
  <div class="modal-header" >
-                <!-- {{quiz.id}} before span -->
     <h3><span class="label label-warning" id="qid">1</span> What is your name</h3>
 </div>
 <div class="modal-body"> 
@@ -102,11 +100,6 @@
         <label class="element-animation4 btn btn-lg btn-primary btn-block" ><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="4">bca</label>
      </div>
 
-  <!-- <div class="quiz" id="quiz" data-toggle="buttons">   
-   <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right">     
-   </i></span><input type="radio" name="abc" value="abcd">rahul</label>
-   
-</div> -->
 
 </div>
 <div class="modal-footer text-muted">
@@ -127,7 +120,6 @@
 </div>
 </div>
 
-<!-- all quetions options-->
 <div class="allque">
         <div class="modal-content">
         <div class="modal-content">
@@ -135,9 +127,80 @@
         </div>
     </div>
 </div>
+</div> -->
+
+
+<!-- quiz -->
+<div class="quiz">
+    <div class="row">
+        <div class="col col-md-3">
+            <div class="row">
+                <div class="col col-md-12">
+                    <!-- timer -->
+                    <div class="timer">
+                        <h1>Time Left(sec)</h1>
+                        <p>00:{{timeLeft}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-md-12">
+                    <!-- questions -->
+                    <div class="questions">
+                        <h1>Questions</h1>
+                        <div class="questions-list">
+                            <div class="row">
+                                <div class="col col-md-3" *ngFor="let question of questions_list;let i=index">
+                                    <div class="ques" [ngClass]="{'selected-option':i+1==active_question,'selected':question.isSelected!=null && question.isSelected>=0}" (click)="changeQuestion(i)">
+                                        <p>{{ i+1 }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col sm-9">
+            <div class="row">
+                <div class="col col-md-12">
+                    <div class="question">
+                        <div class="row">
+                            <div class="col col-md-1">
+                                <div class="number">
+                                    <p>{{ active_question }}</p>
+                                </div>
+                            </div>
+                            <div class="col col-md-11">
+                                <div class="active-question">
+                                    <p>{{ questions_list[active_question-1]?.question_name}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 offset-md-1">
+                                <div class="options">
+                                    <div class="marks">
+                                        <p>Marks: 1</p>
+                                        <p>Negative Marks: 0.25</p>
+                                    </div>
+                                    <div class="option hoverClass" *ngFor="let option of questions_list[active_question-1]?.Options;let optIndex=index" (click)="selectOption(active_question-1,optIndex,option['IsAnswer'])" [ngClass]="{'selected':questions_list[active_question-1]?.isSelected==optIndex,'hoverClass':questions_list[active_question-1]?.isSelected!=optIndex}">
+                                        <p>{{ option.option_name }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-md-1 offset-md-6">
+                                <a class="clear" (click)="clearOption(active_question-1)">
+                                    clear
+                                </a>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-success  btn-lg submit" (click)="onSubmit()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-
-
-
-
