@@ -1,68 +1,3 @@
-
-<!-- style="visibility: hidden;" -->
-<!-- <div id="onbuttonVisible"  >
-<div class="container1">
-<div class="container-fluid bg-info">
-<div class="timer">
-        <p class="time">{{timeLeft}} Seconds Left....</p> 
-</div>
-<div class="modal-dialog">
-<div class="modal-content">
- <div class="modal-header" >
-    <h3><span class="label label-warning" id="qid">1</span> What is your name</h3>
-</div>
-<div class="modal-body"> 
-    <div class="col-xs-3 col-xs-offset-5">
-       <div id="loadbar" style="display: none;">
-          <div class="blockG" id="rotateG_01"></div>
-          <div class="blockG" id="rotateG_02"></div>
-          <div class="blockG" id="rotateG_03"></div>
-          <div class="blockG" id="rotateG_04"></div>
-          <div class="blockG" id="rotateG_05"></div>
-          <div class="blockG" id="rotateG_06"></div>
-          <div class="blockG" id="rotateG_07"></div>
-          <div class="blockG" id="rotateG_08"></div>
-      </div>
-  </div> 
- 
-  <div class="quiz" id="quiz" data-toggle="buttons">
-
-        <label class="element-animation1 btn btn-lg btn-primary btn-block" (click)="sendvalue()"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="1" >abc</label>
-        <label class="element-animation2 btn btn-lg btn-primary btn-block" ><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="2" >bca</label>
-        <label class="element-animation3 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="3" >bca</label>
-        <label class="element-animation4 btn btn-lg btn-primary btn-block" ><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="4">bca</label>
-     </div>
-
-
-</div>
-<div class="modal-footer text-muted">
-<div class="nav-buttons">
-        <button class="nav-button prv" id="prv" (click)="prvque()" style="visibility: hidden;">Previous</button>
-</div>
-<div class="nav-buttons">
-        <button class="nav-button next" id="next" (click)="nextque()">Next</button>
-</div>
-<div>
-        <button tye="button" class="btn btn-primary" (click)="SubmitData()">Submit</button>
-    </div>
-<span id="answer"></span>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class="allque">
-        <div class="modal-content">
-        <div class="modal-content">
-           <button type="button" class="btn btn-default btn-circle btn-lg" *ngFor="let item of [1,2,3,4,5]; let i=index" (click)="getquestion(item)">{{item}}</button>
-        </div>
-    </div>
-</div>
-</div> -->
-
-
 <!-- quiz -->
 <div class="quiz">
     <div class="row">
@@ -130,10 +65,55 @@
                                 </a>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-outline-success  btn-lg submit" (click)="onSubmit()">Submit</button>
+                        <button type="button" class="btn btn-outline-success submit" (click)="onSubmit()">Submit</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<!-- sumit modal -->
+<div bsModal #submitModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center" style="color: #196f77;">
+        <h4>Total Questions: {{questions_list.length}} </h4>
+        <h4>
+          Total Answered: {{TotalAnswered}}
+        </h4>
+        <h4>
+          Right Answer :{{RightAnswer}}
+        </h4>
+        <span>
+          <button type="button" class="btn btn-primary" (click)="checkAnswers()" style="margin-right: 17px;"> Answers</button>
+        </span>
+        <button type="button" class="btn btn-light" (click)="closeModal()" style="margin-left: 17px;">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div bsModal #answerModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center" style="color: #196f77;">
+            <button type="button" class="btn btn-light" (click)="closeAnswerModal()" style="margin-left: 17px; ">Close</button>
+        <div *ngFor="let question of ShowAnswer;let i=index" [style.color]="question.marks==1? 'green':'red' ">
+          <div>{{question?.question_name}}</div>
+          <div>Your Answer : {{question.Options[question.isSelected]?.option_name}}</div>
+          <div *ngFor="let option of question.Options; let i=index;">
+           <div *ngIf="option.IsAnswer=='true'">Right Answer : {{option.option_name}}</div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>

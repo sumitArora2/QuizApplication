@@ -17,6 +17,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 import {ToastrModule} from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalModule } from "ngx-bootstrap/modal";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashboardModule,
     HttpClientModule,
     BrowserAnimationsModule,
-
+    ModalModule.forRoot(),
     FlashMessagesModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,
