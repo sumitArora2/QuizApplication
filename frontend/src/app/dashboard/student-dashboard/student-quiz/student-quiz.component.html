@@ -89,7 +89,7 @@
         <span>
           <button type="button" class="btn btn-primary" (click)="checkAnswers()" style="margin-right: 17px;"> Answers</button>
         </span>
-        <button type="button" class="btn btn-light" (click)="closeModal()" style="margin-left: 17px;">Close</button>
+        <!-- <button type="button" class="btn btn-light" (click)="closeModal()" style="margin-left: 17px;">Close</button> -->
       </div>
     </div>
     <!-- /.modal-content -->
@@ -102,7 +102,10 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body text-center" style="color: #196f77;">
-            <button type="button" class="btn btn-light" (click)="closeAnswerModal()" style="margin-left: 17px; ">Close</button>
+        <span>
+            <h2>Quiz is Completed now</h2>
+        </span>
+            <button type="button" class="btn btn-danger" (click)="closeAnswerModal()" style="margin-left: 17px; ">Done</button>
         <div *ngFor="let question of ShowAnswer;let i=index" [style.color]="question.marks==1? 'green':'red' ">
           <div>{{question?.question_name}}</div>
           <div>Your Answer : {{question.Options[question.isSelected]?.option_name}}</div>
@@ -116,4 +119,23 @@
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
+</div>
+
+
+ <!-- time out modal -->
+
+<div bsModal #timeoutModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center" style="color: #196f77;">
+        <div>
+            <h2>Your Quiz is Completed</h2>
+        </div>
+
+        <button type="button" class="btn btn-danger" (click)="timeUp()" style="margin-left: 17px;">Submit</button>
+      </div>
+    </div>
+
+  </div>
 </div>

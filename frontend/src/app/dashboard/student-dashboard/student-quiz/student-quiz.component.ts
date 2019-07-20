@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { QuizserviceService } from 'src/app/shared/services/QuizService/quizservice.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-quiz',
@@ -12,7 +13,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 export class StudentQuizComponent implements OnInit {
 
   name = 'Angular 6';
-  timeLeft: number = 59;
+  timeLeft: number = 300;
   interval;
   quize: {};
   showidx = 0;
@@ -23,8 +24,8 @@ export class StudentQuizComponent implements OnInit {
   NotAttempted: Boolean;
   @ViewChild('submitModal',{ static: true }) submitModal: ModalDirective;
   @ViewChild('answerModal',{ static: true }) answerModal: ModalDirective;
-
-  constructor(private quizgenerate: QuizserviceService, private questionService: QuestionsService) { }
+  @ViewChild('timeoutModal',{ static: true }) timeoutModal: ModalDirective;
+  constructor(private quizgenerate: QuizserviceService, private questionService: QuestionsService,private router:Router) { }
   nextId: number;
   classes = [];
   questions_list = [];
@@ -39,10 +40,15 @@ export class StudentQuizComponent implements OnInit {
     this.interval = setInterval(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
-      } else {
-        this.timeLeft = 60;
-      }
+      }else{
+       this.timeoutModal.show()
+      } 
     }, 1000);
+    // this.interval = setTimeout(() => {
+    //   if (this.timeLeft < 0) {
+        
+    //   }
+    // }, 1000);
     this.nextId = this.showidx + 1;
     let getQuestions = await this.questionService.getQuestions();
     this.questions_list = getQuestions['result'];
@@ -117,11 +123,21 @@ export class StudentQuizComponent implements OnInit {
     this.answerModal.show();
   }
   closeAnswerModal(){
+    clearInterval(this.interval); 
+    this.router.navigate(['/home']);
     this.answerModal.hide();
+    this.submitModal.hide();
     this.ShowAnswer=[];
     setTimeout(() => {
       this.TotalAnswered=0;
       this.RightAnswer=0;
     }, 1000);
+  }
+  timeUp(){
+    clearInterval(this.interval); 
+    this.timeoutModal.hide();
+    this.submitModal.hide();
+    this.answerModal.hide();
+    this.router.navigate(['/home']);
   }
 }
