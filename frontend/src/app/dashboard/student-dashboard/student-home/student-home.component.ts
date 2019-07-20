@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class StudentHomeComponent implements OnInit {
   role: any;
-  Wholeclass = {};
+  Particularclass = {};
   constructor(private authservice: AuthServiceService,
     private router: Router,
     private toastr: ToastrService, private QuesService: QuestionsService) { }
@@ -26,10 +26,10 @@ export class StudentHomeComponent implements OnInit {
         let classes = response['res'];
         for (let i = 0; i < classes.length; i++) {
           if (userclass == classes[i].class_name) {
-            this.Wholeclass=classes[i];
+            this.Particularclass=classes[i];
           }
         }
-        console.log("this.class", this.Wholeclass);
+        // console.log("this.class", this.Particularclass);
       }
       else if (this.role === "teacher") {
         this.router.navigate(['teacherHome']);
@@ -46,5 +46,11 @@ export class StudentHomeComponent implements OnInit {
     this.router.navigate(['/login']);
     return false;
 
+  }
+  sendSubjectData(subject){
+    console.log("subject",subject);
+    console.log("subject id ",subject._id);
+    this.QuesService.sendSubjectId(subject);
+    this.router.navigate(['/studentHome','studentSubject']);
   }
 }
