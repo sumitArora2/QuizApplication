@@ -2,18 +2,21 @@
 
 table, th, td{
     border: 1px solid red;
+    padding: 25px;
 }
 
-#viewComplaintDiv{
-    float: right;
-     overflow:hidden; 
-    text-align: center;
-    margin-top: 20%;
-}
+ /* #viewComplaintDiv{ 
+     float: 
+      overflow:hidden;  
+     text-align: center; 
+     margin-bottom: 10%; 
+} */
 
 #studentComplaintDiv{
     overflow: hidden;
     position: absolute;
+    float:right;
+    height:auto;
 
 
-}
+} 
