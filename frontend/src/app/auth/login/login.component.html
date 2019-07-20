@@ -22,9 +22,9 @@
                                 <span *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched" class="spanVaild">Please Enter Your Password</span>
                             </div>
                             <div  class="form-group">
-                                    <select id="dropdown-menu1" formControlName="role" class="form-control" >
+                                    <select id="dropdown-menu1" formControlName="role" class="form-control" [(ngModel)]="role"  >
                                     
-                                                <option selected="select">Select Role</option>
+                                                <option  [ngValue]="undefined" disabled>Select Role</option>
                                                 <option value="student" id="student">Student</option>
                                                 <option value="teacher" id="teacher">Teacher</option>
                                                 <option value="principal" id="principal">Principal</option>
