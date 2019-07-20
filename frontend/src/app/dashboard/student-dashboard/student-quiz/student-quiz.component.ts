@@ -1,7 +1,8 @@
 import { QuestionsService } from './../../../shared/services/QuestionsService/questions.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { QuizserviceService } from 'src/app/shared/services/QuizService/quizservice.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-student-quiz',
@@ -9,6 +10,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
   styleUrls: ['./student-quiz.component.css']
 })
 export class StudentQuizComponent implements OnInit {
+
   name = 'Angular 6';
   timeLeft: number = 59;
   interval;
@@ -16,13 +18,20 @@ export class StudentQuizComponent implements OnInit {
   showidx = 0;
   // quiz:any; 
   takeQuizForm: FormGroup;
+  TotalAnswered = 0;
+  RightAnswer = 0;
+  NotAttempted: Boolean;
+  @ViewChild('submitModal',{ static: true }) submitModal: ModalDirective;
+  @ViewChild('answerModal',{ static: true }) answerModal: ModalDirective;
+
   constructor(private quizgenerate: QuizserviceService, private questionService: QuestionsService) { }
   nextId: number;
   classes = [];
-  questions_list=[];
-  active_question=1;
-  
+  questions_list = [];
+  active_question = 1;
+  ShowAnswer=[];
   async ngOnInit() {
+    this.NotAttempted = true;
     this.takeQuizForm = new FormGroup({
       'course': new FormControl(null, [Validators.required])
     })
@@ -37,7 +46,6 @@ export class StudentQuizComponent implements OnInit {
     this.nextId = this.showidx + 1;
     let getQuestions = await this.questionService.getQuestions();
     this.questions_list = getQuestions['result'];
-    console.log("this.questionService.getQuestions()", this.questions_list);
   }
   startQuizbtn() {
     if (!this.takeQuizForm.valid) {
@@ -48,37 +56,72 @@ export class StudentQuizComponent implements OnInit {
       document.getElementById("desBeforeQuiz").style.visibility = "hidden";
     }
   }
-  sendvalue(value){
-    console.log("value",value);
-  }
 
-  selectOption(questionIndex,optionIndex,isAnswer){
+  selectOption(questionIndex, optionIndex, isAnswer) {
     this.questions_list[questionIndex]['isSelected'] = optionIndex;
-    if(isAnswer=='true')
-      this.questions_list[questionIndex]['marks']=1;
-    else{
-      this.questions_list[questionIndex]['marks']=-0.25;
+    if (isAnswer == 'true')
+      this.questions_list[questionIndex]['marks'] = 1;
+    else {
+      this.questions_list[questionIndex]['marks'] = -0.25;
     }
   }
-  clearOption(question){
-    try{
-      this.questions_list[question]['isSelected']=null;
-      this.questions_list[question]['marks']=0
+  clearOption(question) {
+    try {
+      this.questions_list[question]['isSelected'] = null;
+      this.questions_list[question]['marks'] = 0
     }
-    catch(err){
+    catch (err) {
       ;
     }
   }
-  changeQuestion(questionIndex){
-    this.active_question=questionIndex+1;
+  changeQuestion(questionIndex) {
+    this.active_question = questionIndex + 1;
   }
 
-  onSubmit(){
-    let marks =0;
-    for(let i=0;i<this.questions_list.length;i++){
-      if(this.questions_list[i]['marks']!=undefined)
-       marks += this.questions_list[i]['marks'];
+  onSubmit() {
+    let marks = 0;
+    for (let i = 0; i < this.questions_list.length; i++) {
+      if(this.questions_list[i]['isSelected']!=null){
+        this.TotalAnswered+=1;
+      }
+      if (this.questions_list[i]['marks'] != undefined) {
+        marks += this.questions_list[i]['marks']; 
+        this.NotAttempted = false;
+      }
+      if(this.questions_list[i]['marks']==1){
+      
+        this.RightAnswer+=1;
+      }
     }
-    console.log(marks);
+    // console.log(marks);
+    if (this.NotAttempted) {
+      this.TotalAnswered = 0;
+      this.RightAnswer = 0;
+    }
+    this.submitModal.show();
+  }
+  closeModal(){
+     this.submitModal.hide();
+     setTimeout(() => {
+      this.TotalAnswered=0;
+      this.RightAnswer=0;
+    }, 1000);
+  }
+  checkAnswers(){
+    this.submitModal.hide();
+    for (let i = 0; i < this.questions_list.length; i++) {
+      if(this.questions_list[i]['isSelected'] != undefined && this.questions_list[i]['isSelected'] != null){
+        this.ShowAnswer.push(this.questions_list[i]);
+      }
+    }
+    this.answerModal.show();
+  }
+  closeAnswerModal(){
+    this.answerModal.hide();
+    this.ShowAnswer=[];
+    setTimeout(() => {
+      this.TotalAnswered=0;
+      this.RightAnswer=0;
+    }, 1000);
   }
 }

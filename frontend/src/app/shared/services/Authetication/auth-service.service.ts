@@ -72,7 +72,10 @@ export class AuthServiceService {
     if(user)
       return user.role;
   }
-
+  getClassLocalStorage(){
+    let user=JSON.parse(localStorage.getItem('user'));
+    return user;
+  }
  
   logout() {
     localStorage.removeItem('id_token');

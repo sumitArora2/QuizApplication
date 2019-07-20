@@ -1,3 +1,4 @@
+import { ModalModule } from 'ngx-bootstrap/';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StudentHomeComponent } from './student-home/student-home.component';
@@ -7,11 +8,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuizInstructionsComponent } from './quiz-instructions/quiz-instructions.component';
 
 
-
 @NgModule({
   declarations: [StudentHomeComponent, StudentQuizComponent, QuizInstructionsComponent],
   imports: [
-    CommonModule,RouterModule,FormsModule,ReactiveFormsModule
+    CommonModule,RouterModule,FormsModule,ReactiveFormsModule,
+    ModalModule.forRoot()
   ]
 })
 export class StudentDashboardModule { }
