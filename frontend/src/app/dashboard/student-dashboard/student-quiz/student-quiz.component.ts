@@ -13,7 +13,8 @@ import { Router } from '@angular/router';
 export class StudentQuizComponent implements OnInit {
 
   name = 'Angular 6';
-  timeLeft: number = 300;
+  timeLeft: number =60;
+  counter:number=4;
   interval;
   quize: {};
   showidx = 0;
@@ -38,17 +39,16 @@ export class StudentQuizComponent implements OnInit {
     })
 
     this.interval = setInterval(() => {
-      if (this.timeLeft > 0) {
-        this.timeLeft--;
-      }else{
-       this.timeoutModal.show()
-      } 
+      if(this.timeLeft>0) {
+        this.timeLeft--
+      }else if(this.timeLeft==0 && this.counter>0){
+        this.timeLeft=59;
+        this.counter--;
+      }else if(this.timeLeft==0 && this.counter==0){
+        this.timeoutModal.show()
+      }
     }, 1000);
-    // this.interval = setTimeout(() => {
-    //   if (this.timeLeft < 0) {
-        
-    //   }
-    // }, 1000);
+
     this.nextId = this.showidx + 1;
     let getQuestions = await this.questionService.getQuestions();
     this.questions_list = getQuestions['result'];
