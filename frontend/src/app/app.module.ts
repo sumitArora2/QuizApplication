@@ -26,7 +26,7 @@ import { ModalModule } from "ngx-bootstrap/modal";
     HeaderComponent,
     FooterComponent,  
     ProfileComponent, 
-    PageNotFoundComponent
+    PageNotFoundComponent,
   
   ],
   imports: [

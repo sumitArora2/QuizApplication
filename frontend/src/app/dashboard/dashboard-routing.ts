@@ -1,3 +1,5 @@
+import { StuDashoardComponent } from './student-dashboard/stu-dashoard/stu-dashoard.component';
+import { StudentSubjectsComponent } from './student-dashboard/student-subjects/student-subjects.component';
 import { QuizInstructionsComponent } from './student-dashboard/quiz-instructions/quiz-instructions.component';
 import { SchoolSubjectsComponent } from './principal-dashboard/school-subjects/school-subjects.component';
 import { SchoolClassesComponent } from './principal-dashboard/school-classes/school-classes.component';
@@ -16,38 +18,39 @@ import { DashboardComponent } from './principal-dashboard/dashboard/dashboard.co
 
 
 const routes: Routes = [
- {
-     path:'princiHome', component:PrincipalHomeComponent,canActivate:[AuthGuard],children:[
-       { path:'dashboard',component:DashboardComponent },
-       { path:'SchoolClass', component:SchoolClassesComponent},
-       { path:'SchoolSubject',component:SchoolSubjectsComponent},
-       {path:'**',redirectTo:'dashboard',pathMatch:'full'}
-     ]
- },
- {
-     path:'teacherHome', component:TeacherHomeComponent,canActivate:[AuthGuard] 
- },
-{
-  path:'teacherQuiz', component:TeacherQuizComponent
-},
- {
-     path:'studentHome', component:StudentHomeComponent,canActivate:[AuthGuard]
- },
- {
-     path:'studentQuiz', component:StudentQuizComponent
- },
- {
-  path:'QuizInstruction', component:QuizInstructionsComponent
-},
- {
-   path:'details',component:DetailsComponent
- },
- {
-  path:'complaints', component:ComplaintsComponent
-},
-{
-  path:'**',component:PageNotFoundComponent
-}
+  {
+    path: 'princiHome', component: PrincipalHomeComponent, canActivate: [AuthGuard], children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'SchoolClass', component: SchoolClassesComponent },
+      { path: 'SchoolSubject', component: SchoolSubjectsComponent },
+      { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
+    ]
+  },
+  {
+    path: 'teacherHome', component: TeacherHomeComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'teacherQuiz', component: TeacherQuizComponent
+  },
+  {
+    path: 'studentHome', component: StudentHomeComponent, canActivate: [AuthGuard],
+    children: [
+      {path: 'studentDashboard', component: StuDashoardComponent},
+      {path: 'studentSubject', component: StudentSubjectsComponent},
+      { path: '**', redirectTo: 'studentDashboard', pathMatch: 'full' }
+    ]
+  },
+  { path: 'quizInstruction', component: QuizInstructionsComponent},
+  { path: 'studentQuiz', component: StudentQuizComponent},
+  {
+    path: 'details', component: DetailsComponent
+  },
+  {
+    path: 'complaints', component: ComplaintsComponent
+  },
+  {
+    path: '**', component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({

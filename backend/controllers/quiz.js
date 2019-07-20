@@ -200,6 +200,24 @@ module.exports = {
       res.send(error);
     }
   },
+  //get chapter through the subject id
+  getChapters: async (req, res) => {
+    try {
+      let result = await Chapter.find({
+        Subjects:req.params.subjectId
+      });
+      result ? res.status(200).send({
+        message: 'Chapters received successfully',
+        res: result
+      }) : req.status(422).send({
+        message: 'chapters not received',
+        res: result
+      });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
   addQuestion: async (req, res) => {
     try {
       const question = new Question({
@@ -259,7 +277,7 @@ module.exports = {
   // },
   getQuestions: async (req, res) => {
     try {
-      const result = await Question.find().populate('Options');
+      const result = await Question.find().populate('Options').populate('Chapters');
       result ?
         res.status(200).send({
           message: "Here are the questions",

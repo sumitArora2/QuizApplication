@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class QuestionsService {
+  subject:any;
   constructor(private http:HttpClient) {
-
    }
 AddQuestion(id,question){
   let headers=new HttpHeaders();
@@ -67,6 +67,16 @@ AddChapter(data){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
   return this.http.post(`http://localhost:3000/api/addchapter/${data.class}/${data.subject}`,{'chapter_name':data.chapter},{headers:headers}).toPromise();
+}
+//for click on particular subject in student dashboard
+sendSubjectId(data){
+this.subject=data._id;
+}
+getchptrSubjct(){
+  console.log("in service",this.subject);
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application/json');
+  return this.http.get('http://localhost:3000/api/getchapters/'+this.subject,{headers:headers}).toPromise();
 }
 }
 

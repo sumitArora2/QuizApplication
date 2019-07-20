@@ -6,10 +6,13 @@ import { StudentQuizComponent } from './student-quiz/student-quiz.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuizInstructionsComponent } from './quiz-instructions/quiz-instructions.component';
+import { StudentSubjectsComponent } from './student-subjects/student-subjects.component';
+
+import { StuDashoardComponent } from './stu-dashoard/stu-dashoard.component';
 
 
 @NgModule({
-  declarations: [StudentHomeComponent, StudentQuizComponent, QuizInstructionsComponent],
+  declarations: [StudentHomeComponent, StudentQuizComponent, QuizInstructionsComponent, StudentSubjectsComponent, StuDashoardComponent],
   imports: [
     CommonModule,RouterModule,FormsModule,ReactiveFormsModule,
     ModalModule.forRoot()
