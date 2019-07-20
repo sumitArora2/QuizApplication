@@ -97,9 +97,6 @@
 
 <div id ="dropDownSelect"></div> -->
 
-
-
-
 <div id="studentComplaintDiv"> 
 <div class="container-contact100">
 		<div class="wrap-contact100">
@@ -113,9 +110,11 @@
                     <input formControlName="firstname" id="first-name" class="input100" type="text" name="first-name" placeholder="First name">
                     <span *ngIf="!complaintForm.get('firstname').valid && complaintForm.get('firstname').touched" class="spanVaild">Please Enter Your First Name</span>
 					<span class="focus-input100"></span>
-				</div>
+                </div>
+                <label class="label-input100" for="last-name">Tell us your Last Name *</label>
+
 				<div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name">
-                    <input formControlName="lastname" class="input100" type="text" name="lastname" placeholder="Last name">
+                    <input formControlName="lastname" id ="last-name" class="input100" type="text" name="lastname" placeholder="Last name">
                      <span *ngIf="!complaintForm.get('lastname').valid && complaintForm.get('lastname').touched" class="spanVaild">Please Enter Your Last Name</span>
 					<span class="focus-input100"></span>
 				</div>
@@ -194,6 +193,9 @@
 		</div>
 	</div>
 </div>
+
+
+
 <!-- view Complaints table -->
 <div class="container-fluid">
 <div id="viewComplaintDiv" style="visibility: hidden;">
