@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AuthServiceService {
   authToken:any;
   user:any;
   authRole:any;
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private cookie:CookieService) { }
   // for registeration
   
   registerUser(user):Observable<any>{
@@ -102,7 +103,22 @@ export class AuthServiceService {
     const user = localStorage.getItem('user.role');
     this.authToken = token;
   }
- 
+ createCookie(){
+   this.cookie.set("quiz","success");
+ }
+ deleteCookie(){
+   this.cookie.delete('quiz');
+ }
+ checkCookie(){
+   this.cookie.check("quiz");
+ }
+ quizLoggedIn(){
+   if(this.cookie.get('quiz')){
+    console.log("here in the cookies") 
+    return true;
+   }
+   return false;
+ }
 }
 
  

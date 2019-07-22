@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './guards/auth.guard';
+import { QuizGuard } from './guards/quizGuard/quiz.guard';
 
 const routes: Routes = [
   // {

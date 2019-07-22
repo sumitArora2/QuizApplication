@@ -18,6 +18,8 @@ import { AuthGuard } from './guards/auth.guard';
 import {ToastrModule} from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from "ngx-bootstrap/modal";
+import { QuizGuard } from './guards/quizGuard/quiz.guard';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,7 @@ import { ModalModule } from "ngx-bootstrap/modal";
     }),
 
   ],
-  providers: [AuthServiceService,AuthGuard,ComplaintServiceService],
+  providers: [AuthServiceService,AuthGuard,ComplaintServiceService,QuizGuard,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

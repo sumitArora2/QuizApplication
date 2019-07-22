@@ -7,7 +7,9 @@
                     <!-- timer -->
                     <div class="timer">
                         <h1>Time Left(sec)</h1>
-                        <p>{{counter}}:{{timeLeft}}</p>
+                        <p *ngIf="timeLeft < 10">0{{counter}}:0{{timeLeft}}</p>
+                        <p *ngIf="timeLeft == 10">0{{counter}}:{{timeLeft}}</p>
+                        <p *ngIf="timeLeft  > 10">0{{counter}}:{{timeLeft}}</p>
                     </div>
                 </div>
             </div>
@@ -132,6 +134,7 @@
         <div>
             <h2>Your Quiz is Completed</h2>
         </div>
+        <button type="button"class="btn btn-primary" (click)="checkAnswers()" style="margin-left: 17px;">Answers</button>
 
         <button type="button" class="btn btn-danger" (click)="timeUp()" style="margin-left: 17px;">Submit</button>
       </div>

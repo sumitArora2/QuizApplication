@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-quiz-instructions',
   templateUrl: './quiz-instructions.component.html',
@@ -11,7 +11,7 @@ export class QuizInstructionsComponent implements OnInit {
   timeLeft= 60;
   interval;
   role:any;
-  constructor(private router:Router,private authService:AuthServiceService) { }
+  constructor(private router:Router,private authService:AuthServiceService,private cookie:CookieService) { }
 
   ngOnInit() {
     if(this.authService.loggedIn()){
@@ -39,6 +39,8 @@ export class QuizInstructionsComponent implements OnInit {
     }, 1000);
   }
   StartQuiz(){
+    this.authService.createCookie();
+
     this.router.navigate(['/studentQuiz']);
   }
 }

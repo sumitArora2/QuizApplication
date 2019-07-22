@@ -18,22 +18,22 @@ export class LoginComponent implements OnInit {
   constructor(private authservice:AuthServiceService,private router:Router,private toastr:ToastrService) { }
 
   ngOnInit() {
-    if(this.authservice.loggedIn()){
-      this.role=this.authservice.getUserDetails();
-    }
     // if(this.authservice.loggedIn()){
-    //   this.role=this.authservice.getUserDetails()
-    //   if(this.role==="student"){
-    //     this.router.navigate(['studentHome']);
-    //   }
-    //   else if(this.role==="teacher"){
-    //     this.router.navigate(['teacherHome']);
-    //   }else if(this.role==="principal"){
-    //     this.router.navigate(['princiHome']);
-    //   }else{
-    //     this.router.navigate(['login']);
-    //   }
+    //   this.role=this.authservice.getUserDetails();
     // }
+    if(this.authservice.loggedIn()){
+      this.role=this.authservice.getUserDetails()
+      if(this.role==="student"){
+        this.router.navigate(['studentHome']);
+      }
+      else if(this.role==="teacher"){
+        this.router.navigate(['teacherHome']);
+      }else if(this.role==="principal"){
+        this.router.navigate(['princiHome']);
+      }else{
+        this.router.navigate(['login']);
+      }
+    }
 
     this.signinForm = new FormGroup({
       'email' : new FormControl(null, Validators.required),     

@@ -5,7 +5,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-student-quiz',
   templateUrl: './student-quiz.component.html',
@@ -14,8 +14,8 @@ import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-s
 export class StudentQuizComponent implements OnInit {
 
   name = 'Angular 6';
-  timeLeft: number =60;
-  counter:number=4;
+  timeLeft: number =12;
+  counter:number=0;
   interval;
   quize: {};
   showidx = 0;
@@ -28,7 +28,7 @@ export class StudentQuizComponent implements OnInit {
   @ViewChild('submitModal',{ static: true }) submitModal: ModalDirective;
   @ViewChild('answerModal',{ static: true }) answerModal: ModalDirective;
   @ViewChild('timeoutModal',{ static: true }) timeoutModal: ModalDirective;
-  constructor(private quizgenerate: QuizserviceService, private questionService: QuestionsService,private router:Router,private authService:AuthServiceService) { }
+  constructor(private quizgenerate: QuizserviceService, private questionService: QuestionsService,private router:Router,private authService:AuthServiceService,private cookie:CookieService) { }
   nextId: number;
   classes = [];
   questions_list = [];
@@ -136,9 +136,13 @@ export class StudentQuizComponent implements OnInit {
       }
     }
     this.answerModal.show();
+    clearInterval(this.interval); 
+    this.timeoutModal.hide();
+    this.answerModal.show();
   }
   closeAnswerModal(){
     clearInterval(this.interval); 
+    this.authService.deleteCookie();
     this.router.navigate(['/home']);
     this.answerModal.hide();
     this.submitModal.hide();
@@ -153,6 +157,7 @@ export class StudentQuizComponent implements OnInit {
     this.timeoutModal.hide();
     this.submitModal.hide();
     this.answerModal.hide();
+    this.authService.deleteCookie();
     this.router.navigate(['/home']);
   }
 }

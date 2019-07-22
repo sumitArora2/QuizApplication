@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from '../page-not-found/page-not-found.componen
 import { ComplaintsComponent } from './principal-dashboard/complaints/complaints.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { DashboardComponent } from './principal-dashboard/dashboard/dashboard.component';
+import { QuizGuard } from '../guards/quizGuard/quiz.guard';
 
 
 const routes: Routes = [
@@ -41,7 +42,7 @@ const routes: Routes = [
     ]
   },
   { path: 'quizInstruction', component: QuizInstructionsComponent,canActivate:[AuthGuard]},
-  { path: 'studentQuiz', component: StudentQuizComponent,canActivate:[AuthGuard]},
+  { path: 'studentQuiz', component: StudentQuizComponent,canActivate:[AuthGuard,QuizGuard]},
   {
     path: 'details', component: DetailsComponent,canActivate:[AuthGuard]
   },
