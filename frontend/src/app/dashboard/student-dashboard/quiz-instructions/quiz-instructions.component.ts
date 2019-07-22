@@ -40,6 +40,7 @@ export class QuizInstructionsComponent implements OnInit {
   }
   StartQuiz(){
     this.authService.createCookie();
+    
 
     this.router.navigate(['/studentQuiz']);
   }
