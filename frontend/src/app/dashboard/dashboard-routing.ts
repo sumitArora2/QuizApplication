@@ -20,9 +20,9 @@ import { DashboardComponent } from './principal-dashboard/dashboard/dashboard.co
 const routes: Routes = [
   {
     path: 'princiHome', component: PrincipalHomeComponent, canActivate: [AuthGuard], children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'SchoolClass', component: SchoolClassesComponent },
-      { path: 'SchoolSubject', component: SchoolSubjectsComponent },
+      { path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard] },
+      { path: 'SchoolClass', component: SchoolClassesComponent,canActivate: [AuthGuard] },
+      { path: 'SchoolSubject', component: SchoolSubjectsComponent,canActivate: [AuthGuard] },
       { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
@@ -30,23 +30,23 @@ const routes: Routes = [
     path: 'teacherHome', component: TeacherHomeComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'teacherQuiz', component: TeacherQuizComponent
+    path: 'teacherQuiz', component: TeacherQuizComponent,canActivate:[AuthGuard]
   },
   {
     path: 'studentHome', component: StudentHomeComponent, canActivate: [AuthGuard],
     children: [
-      {path: 'studentDashboard', component: StuDashoardComponent},
-      {path: 'studentSubject', component: StudentSubjectsComponent},
+      {path: 'studentDashboard', component: StuDashoardComponent,canActivate:[AuthGuard]},
+      {path: 'studentSubject', component: StudentSubjectsComponent,canActivate:[AuthGuard]},
       { path: '**', redirectTo: 'studentDashboard', pathMatch: 'full' }
     ]
   },
-  { path: 'quizInstruction', component: QuizInstructionsComponent},
-  { path: 'studentQuiz', component: StudentQuizComponent},
+  { path: 'quizInstruction', component: QuizInstructionsComponent,canActivate:[AuthGuard]},
+  { path: 'studentQuiz', component: StudentQuizComponent,canActivate:[AuthGuard]},
   {
-    path: 'details', component: DetailsComponent
+    path: 'details', component: DetailsComponent,canActivate:[AuthGuard]
   },
   {
-    path: 'complaints', component: ComplaintsComponent
+    path: 'complaints', component: ComplaintsComponent,canActivate:[AuthGuard]
   },
   {
     path: '**', component: PageNotFoundComponent

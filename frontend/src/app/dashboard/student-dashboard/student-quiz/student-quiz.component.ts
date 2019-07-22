@@ -4,6 +4,7 @@ import { QuizserviceService } from 'src/app/shared/services/QuizService/quizserv
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap';
 import { Router } from '@angular/router';
+import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
 
 @Component({
   selector: 'app-student-quiz',
@@ -23,16 +24,30 @@ export class StudentQuizComponent implements OnInit {
   TotalAnswered = 0;
   RightAnswer = 0;
   NotAttempted: Boolean;
+  role:any;
   @ViewChild('submitModal',{ static: true }) submitModal: ModalDirective;
   @ViewChild('answerModal',{ static: true }) answerModal: ModalDirective;
   @ViewChild('timeoutModal',{ static: true }) timeoutModal: ModalDirective;
-  constructor(private quizgenerate: QuizserviceService, private questionService: QuestionsService,private router:Router) { }
+  constructor(private quizgenerate: QuizserviceService, private questionService: QuestionsService,private router:Router,private authService:AuthServiceService) { }
   nextId: number;
   classes = [];
   questions_list = [];
   active_question = 1;
   ShowAnswer=[];
   async ngOnInit() {
+    if(this.authService.loggedIn()){
+      this.role=this.authService.getUserDetails()
+      if(this.role==="student"){
+        this.router.navigate(['studentQuiz']);
+      }
+      else if(this.role==="teacher"){
+        this.router.navigate(['teacherHome']);
+      }else if(this.role==="principal"){
+        this.router.navigate(['princiHome']);
+      }else{
+        this.router.navigate(['login']);
+      }
+    }
     this.NotAttempted = true;
     this.takeQuizForm = new FormGroup({
       'course': new FormControl(null, [Validators.required])

@@ -12,6 +12,7 @@ export class AuthServiceService {
   authRole:any;
   constructor(private http:HttpClient) { }
   // for registeration
+  
   registerUser(user):Observable<any>{
     let headers =new HttpHeaders();
     headers.append('Content-Type','application/json');
@@ -45,6 +46,7 @@ export class AuthServiceService {
     return this.http.post('http://localhost:3000/api/authenticate',userauth,{headers:headers})
   .pipe(map(res=>res));
   }
+  
   // fr guards
   storeUserData(token, user) {
 

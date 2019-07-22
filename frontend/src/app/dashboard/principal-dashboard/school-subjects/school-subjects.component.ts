@@ -1,6 +1,8 @@
 import { QuestionsService } from 'src/app/shared/services/QuestionsService/questions.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +18,8 @@ export class SchoolSubjectsComponent implements OnInit {
   editing:Boolean;
   showSubjectList:Boolean
   subjectList=[];
-  constructor(private fb:FormBuilder,private QuesService:QuestionsService) {
+  role:any;
+  constructor(private fb:FormBuilder,private QuesService:QuestionsService,private router:Router,private authService:AuthServiceService) {
     
   
 this.myForm=this.fb.group({
@@ -25,6 +28,19 @@ this.myForm=this.fb.group({
   });
 }
   async ngOnInit() {
+    // if(this.authService.loggedIn()){
+    //   this.role=this.authService.getUserDetails()
+    //   if(this.role==="student"){
+    //     this.router.navigate(['studentHome']);
+    //   }
+    //   else if(this.role==="teacher"){
+    //     this.router.navigate(['teacherHome']);
+    //   }else if(this.role==="principal"){
+    //     this.router.navigate(['SchoolSubject']);
+    //   }else{
+    //     this.router.navigate(['login']);
+    //   }
+    // }
     this.showSubjectList=false;
   this.showsubject=false;
   this.editing=true;

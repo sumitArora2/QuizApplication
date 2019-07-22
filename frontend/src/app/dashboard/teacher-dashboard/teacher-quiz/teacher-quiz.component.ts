@@ -2,6 +2,8 @@ import { Ques } from '../../../models/Ques';
 import { QuestionsService } from '../../../shared/services/QuestionsService/questions.service';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teacher-quiz',
@@ -19,11 +21,27 @@ export class TeacherQuizComponent implements OnInit {
   classes=[];
   subjects=[];
   chapterId:any;
+  role:any;
   // makeQuizForm: FormGroup;
-  constructor(public QuesService: QuestionsService, private fb: FormBuilder) {
+  constructor(public QuesService: QuestionsService, 
+    private fb: FormBuilder,
+    private authService : AuthServiceService,private router:Router) {
   }
  
   async ngOnInit() {
+    if(this.authService.loggedIn()){
+      this.role=this.authService.getUserDetails()
+      if(this.role==="student"){
+        this.router.navigate(['studentHome']);
+      }
+      else if(this.role==="teacher"){
+        this.router.navigate(['teacherQuiz']);
+      }else if(this.role==="principal"){
+        this.router.navigate(['princiHome']);
+      }else{
+        this.router.navigate(['login']);
+      }
+    }
     this.Queslength = 1;
     this.Optslength = 1;
     this.nestedForm = this.fb.group({

@@ -9,10 +9,25 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./principal-home.component.css']
 })
 export class PrincipalHomeComponent implements OnInit {
+  role:any;
 
   constructor(private authService:AuthServiceService,private router:Router,private toastr:ToastrService) { }
 
   ngOnInit() {
+    if(this.authService.loggedIn()){
+      this.role=this.authService.getUserDetails()
+      if(this.role==="student"){
+        this.router.navigate(['studentHome']);
+      }
+      else if(this.role==="teacher"){
+        this.router.navigate(['teacherHome']);
+      }else if(this.role==="principal"){
+        this.router.navigate(['princiHome']);
+      }else{
+        this.router.navigate(['login']);
+      }
+    }
+
     
   }
   Logoutclick()

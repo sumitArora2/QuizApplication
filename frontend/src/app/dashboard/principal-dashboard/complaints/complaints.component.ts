@@ -22,9 +22,12 @@ export class ComplaintsComponent implements OnInit {
       document.getElementById("viewComplaintDiv").style.visibility="visible";
       document.getElementById("studentComplaintDiv").style.visibility="hidden";
     }
-    else{
+    else if(user.role==="student"){
       document.getElementById("viewComplaintDiv").style.visibility="hidden";
       document.getElementById("studentComplaintDiv").style.visibility="visible";
+    }
+    else{
+      this.router.navigate(['teacherHome']);
     }
 
     this.complaintForm = new FormGroup({
