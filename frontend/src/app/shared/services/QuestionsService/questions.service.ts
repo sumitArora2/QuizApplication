@@ -39,8 +39,6 @@ getSpecificClass(data){
 }
 updateClass(id,classname){
 let headers=new HttpHeaders();
-// console.log("in service",id);
-// console.log("in service",classname);
 headers.append('Content-Type','applications/json');
 return this.http.put('http://localhost:3000/api/updateClass/'+id,{'class_name':classname},{headers:headers}).toPromise();
 }
@@ -53,7 +51,6 @@ return this.http.delete(`http://localhost:3000/api/deleteClass/${id}`,{headers:h
 
 AddSubject(data){
   let headers=new HttpHeaders();
-  // console.log("data",data);
   headers.append('Content-Type','application/json');
   return this.http.patch(`http://localhost:3000/api/addsubject/${data.class}`,data,{headers:headers}).toPromise();
 }
@@ -63,21 +60,21 @@ getSubjects(){
   return this.http.get('http://localhost:3000/api/getsubject',{headers:headers}).toPromise();
 }
 AddChapter(data){
-  console.log("data is here",data);
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
   return this.http.post(`http://localhost:3000/api/addchapter/${data.class}/${data.subject}`,{'chapter_name':data.chapter},{headers:headers}).toPromise();
 }
 //for click on particular subject in student dashboard
 sendSubjectId(data){
-this.subject=data._id;
+this.subject=data;
 }
 getchptrSubjct(){
-  console.log("in service",this.subject);
+  
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
   return this.http.get('http://localhost:3000/api/getchapters/'+this.subject,{headers:headers}).toPromise();
 }
+
 }
 
  

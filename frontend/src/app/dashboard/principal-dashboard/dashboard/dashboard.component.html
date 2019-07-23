@@ -35,7 +35,7 @@
                     </div>
                     <div class="mr-5">Student Details</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" routerLink="/details">
+                <a routerLink="/details"class="card-footer text-white clearfix small z-1" (click)="sendDetails('student')">
                     <span class="float-left">View Details</span>
                     <span class="float-right">
           <i class="fas fa-angle-right"></i>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="mr-5">Teacher Details</div>
                 </div>
-                <a routerLink="/details" class="card-footer text-white clearfix small z-1">
+                <a routerLink="/details" (click)="sendDetails('teacher')" class="card-footer text-white clearfix small z-1">
                     <span class="float-left">View Details</span>
                     <span class="float-right">
           <i class="fas fa-angle-right"></i>
@@ -78,7 +78,7 @@
     </div>
 
     <!-- DataTables Example -->
-    <div class="card mb-3">
+    <!-- <div class="card mb-3">
         <div class="card-header">
             <i class="fas fa-table"></i> Student Record</div>
         <div class="card-body">
@@ -173,7 +173,7 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div>
 <!-- /.container-fluid -->

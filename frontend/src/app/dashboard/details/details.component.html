@@ -1,1 +1,24 @@
-<p>details works!</p>
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i> Student Record</div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th> Name</th>
+                        <th>Email Address</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let detail of this.details">
+                    <tr>
+                        <td>{{detail.username}}  </td>
+                        <td> {{detail.email}}  </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

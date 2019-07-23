@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileServiceService } from 'src/app/shared/services/ProfileService/profile-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
+  details:any;
 
-  constructor() { }
+  constructor(private profileService:ProfileServiceService,private router:Router) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    let response=await this.profileService.getDetails(); 
+    this.details=response['res'];
+   
   }
 
 }

@@ -2,6 +2,8 @@ import { AuthServiceService } from './../../../shared/services/Authetication/aut
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ProfileServiceService } from 'src/app/shared/services/ProfileService/profile-service.service';
+
 @Component({
   selector: 'app-teacher-home',
   templateUrl: './teacher-home.component.html',
@@ -9,7 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class TeacherHomeComponent implements OnInit {
   role:any
-  constructor(private authService:AuthServiceService,private router:Router,private toastr:ToastrService) { }
+  constructor(private authService:AuthServiceService,
+    private router:Router,private toastr:ToastrService,private profileService:ProfileServiceService) { }
 
   ngOnInit() {
     if(this.authService.loggedIn()){
@@ -32,5 +35,10 @@ export class TeacherHomeComponent implements OnInit {
     this.toastr.success('you are logged out');
     this.router.navigate(['login']);
     // return false;
+  }
+  async sendDetails(data){
+    // console.log("data is here",data);
+    // let response=await this.profileService.getDetails(data);
+    this.profileService.setrole(data);
   }
 }

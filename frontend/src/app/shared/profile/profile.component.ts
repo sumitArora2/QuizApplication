@@ -35,12 +35,12 @@ export class ProfileComponent implements OnInit {
   
   // get profile data
   let user=JSON.parse(localStorage.getItem('user'));
-  console.log("user id is: ",user.id);
+  // console.log("user id is: ",user.id);
 
  this.profileService.getUserProfile(user.id).subscribe(data=>{
    if(data.success){ 
-    console.log("data:  ",data);
-    console.log("data",data.data[0].email);
+    // console.log("data:  ",data);
+    // console.log("data",data.data[0].email);
 
     // set signup data into textbox
         this.userProfileForm.patchValue({   

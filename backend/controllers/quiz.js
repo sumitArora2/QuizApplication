@@ -4,7 +4,30 @@ const Chapter = require('../models/chapter');
 const Question = require('../models/question');
 const Option = require('../models/option');
 const Class = require('../models/class');
+const User=require('../models/user');
 module.exports = { 
+
+  getDetails:async(req,res)=>{
+ try {
+   console.log("intis")
+   let role=req.params.role;
+   let result=await User.find({
+     role:role
+   });
+   console.log("result",result);
+   result ? res.status(200).send({
+    message: 'getting the results',
+    res: result
+  }) :
+  res.status(422).send({
+    message: 'results are not saved',
+    res: result
+  });
+} catch (error) {
+console.log(error);
+res.send(error);
+}
+},
 
   addClass: async (req, res) => {
     // console.log("in routing and received");
@@ -58,7 +81,6 @@ module.exports = {
     } catch (error) {
       throw error;
     }
-
   },
   deleteClass: async (req, res) => {
     try {

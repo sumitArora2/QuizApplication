@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class ProfileServiceService {
   authToken:any;
+  role="";
   constructor(private http:HttpClient) { }
 
     //get user profile
@@ -26,4 +27,13 @@ export class ProfileServiceService {
       return this.http.put('http://localhost:3000/api/profileupdate/'+id,userData,{headers:headers})
       .pipe(map((res:Response)=>res));
     }
+     setrole(data){
+       this.role=data;
+     }
+    getDetails(){
+      let headers=new HttpHeaders();
+      headers.append('Content-Type','application/json');
+      return this.http.get('http://localhost:3000/api/getDetails/'+this.role,{headers:headers}).toPromise();
+    }
+
 } 

@@ -14,8 +14,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class StudentQuizComponent implements OnInit {
 
   name = 'Angular 6';
-  timeLeft: number =12;
-  counter:number=0;
+  timeLeft: number =60;
+  counter:number=5;
   interval;
   quize: {};
   showidx = 0;

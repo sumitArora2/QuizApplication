@@ -64,6 +64,8 @@ router.route('/addchapter/:classId/:subjectId').post(quiz.addChapter);
 router.route('/getchapters/:subjectId').get(quiz.getChapters);
 
 router.route('/addquestion/:chapterId').post(quiz.addQuestion);
+router.route('/getDetails/:role').get(quiz.getDetails);
+
 // router.route('/addoption/:questionId').post(quiz.addOption);
 // router.route('/signup').post(user.addUser);
 

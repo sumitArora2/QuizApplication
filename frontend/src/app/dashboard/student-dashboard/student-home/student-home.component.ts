@@ -49,8 +49,8 @@ export class StudentHomeComponent implements OnInit {
   }
   sendSubjectData(subject){
     console.log("subject",subject);
-    console.log("subject id ",subject._id);
-    this.QuesService.sendSubjectId(subject);
+    // console.log("subject id ",subject._id);
+    this.QuesService.sendSubjectId(subject._id);
     this.router.navigate(['/studentHome','studentSubject']);
   }
 }

@@ -20,7 +20,10 @@ export class TeacherQuizComponent implements OnInit {
   class:any
   classes=[];
   subjects=[];
+  chapters=[];
   chapterId:any;
+  chaptersExist:boolean;
+  newChapter:boolean;
   role:any;
   // makeQuizForm: FormGroup;
   constructor(public QuesService: QuestionsService, 
@@ -46,22 +49,35 @@ export class TeacherQuizComponent implements OnInit {
     this.Optslength = 1;
     this.nestedForm = this.fb.group({
       Questions: this.fb.array([this.Questions]),
-      'class' : new FormControl(null, [Validators.required]),
-      'subject' : new FormControl(null,[Validators.required]), 
-      'chapter' : new FormControl(null,[Validators.required])
+      'class' : new FormControl("", [Validators.required]),
+      'subject' : new FormControl("",[Validators.required]), 
+      'chapter' : new FormControl("",[Validators.required])
     });
     let response=await this.QuesService.getClass();
     this.classes=response['res'] 
+   this.chaptersExist=false;
+   this.newChapter=false;
   }
 
   async classChange(data){
+    this.subjects=[];
+    this.chaptersExist=false;
   let response=await this.QuesService.getSpecificClass(data);
   this.subjects= response['res'].Subjects;
+   
+}
+  async subjectChange(data){
+    console.log("in subject changes");
+    await this.QuesService.sendSubjectId(data);
+   let response=await this.QuesService.getchptrSubjct();
+   this.chapters=response['res'];
+   if(this.chapters.length>0){
+    this.chaptersExist=true;
+   }else{
+     this.chaptersExist=false;
+   }
   }
-  // send(formdata){
-  // console.log("formdata",formdata)
-  // }
-  async startQuizMakebtn(data){
+ async startQuizMakebtn(data){
     console.log(data);
     let chapterData=await this.QuesService.AddChapter(data);
     // console.log("chapterData",chapterData);
@@ -100,9 +116,7 @@ export class TeacherQuizComponent implements OnInit {
   AddQuestions() {
     this.Queslength++;
     (this.nestedForm.get("Questions") as FormArray).push(this.Questions);
-
   }
-
   removeQuestions(QuesIdx) {
     console.log((this.nestedForm.get("Questions") as FormArray).removeAt(QuesIdx));
   }
@@ -113,20 +127,29 @@ export class TeacherQuizComponent implements OnInit {
     const question = (this.nestedForm.get("Questions") as FormArray).value;
     question[QuesIdx].Options.map(option => option.IsAnswer = false);
     question[QuesIdx].Options[OptIdx].IsAnswer = true;
-    // console.log((this.nestedForm.get("Questions") as FormArray).value)
   }
   submitForm(data) {
-    // console.log(data);
-    // console.log("data.Questions",data.Questions);
-    // console.log("data.Questions.length",data.Questions.length);
-    // console.log("data.Questions[0]",data.Questions[0]);
     let QuestionsLength=data.Questions.length;
     let question=data.Questions;
-    // this.chapterId="abcsss"
     for(let i=0;i<QuestionsLength;i++){
       console.log("questions",question);
       this.QuesService.AddQuestion(this.chapterId,question[i]);
     }
+  }
+  AddNewChapter(){
+    console.log("in add new chapter");
+    this.chaptersExist=false;
+    this.newChapter=true;
+    this.nestedForm.patchValue({
+      'chapter':''
+    })
+    // this.nestedForm = this.fb.group({
+    //   'chapter' : new FormControl(null,[Validators.required])
+    // });
+  }
+  CancelAddChapter(){
+    this.chaptersExist=true;
+    this.newChapter=false;
   }
 }
 
