@@ -74,7 +74,11 @@ getchptrSubjct(){
   headers.append('Content-Type','application/json');
   return this.http.get('http://localhost:3000/api/getchapters/'+this.subject,{headers:headers}).toPromise();
 }
-
+getMarks(userId){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application.json');
+  return this.http.get('http://localhost:3000/api/getMarks/'+userId,{headers:headers}).toPromise();
+}
 }
 
  
