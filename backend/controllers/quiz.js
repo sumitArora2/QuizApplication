@@ -4,30 +4,31 @@ const Chapter = require('../models/chapter');
 const Question = require('../models/question');
 const Option = require('../models/option');
 const Class = require('../models/class');
-const User=require('../models/user');
-module.exports = { 
+const User = require('../models/user');
+const Marks=require('../models/marks');
+module.exports = {
 
-  getDetails:async(req,res)=>{
- try {
-   console.log("intis")
-   let role=req.params.role;
-   let result=await User.find({
-     role:role
-   });
-   console.log("result",result);
-   result ? res.status(200).send({
-    message: 'getting the results',
-    res: result
-  }) :
-  res.status(422).send({
-    message: 'results are not saved',
-    res: result
-  });
-} catch (error) {
-console.log(error);
-res.send(error);
-}
-},
+  getDetails: async (req, res) => {
+    try {
+      console.log("intis")
+      let role = req.params.role;
+      let result = await User.find({
+        role: role
+      });
+      console.log("result", result);
+      result ? res.status(200).send({
+          message: 'getting the results',
+          res: result
+        }) :
+        res.status(422).send({
+          message: 'results are not saved',
+          res: result
+        });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
 
   addClass: async (req, res) => {
     // console.log("in routing and received");
@@ -198,9 +199,9 @@ res.send(error);
   addChapter: async (req, res) => {
     try {
       const chapter = new Chapter({
-          chapter_name: req.body.chapter_name,
-          Classes: [req.params.classId],
-          Subjects: [req.params.subjectId]
+        chapter_name: req.body.chapter_name,
+        Classes: [req.params.classId],
+        Subjects: [req.params.subjectId]
       });
       let result = await chapter.save();
       let result2 = await Subject.findByIdAndUpdate({
@@ -226,7 +227,7 @@ res.send(error);
   getChapters: async (req, res) => {
     try {
       let result = await Chapter.find({
-        Subjects:req.params.subjectId
+        Subjects: req.params.subjectId
       });
       result ? res.status(200).send({
         message: 'Chapters received successfully',
@@ -243,26 +244,26 @@ res.send(error);
   addQuestion: async (req, res) => {
     try {
       const question = new Question({
-          question_name: req.body.question_name,
-          Chapters: req.params.chapterId
+        question_name: req.body.question_name,
+        Chapters: req.params.chapterId
       });
       const result = await question.save();
-      let optLength=req.body.Options.length;
-      for(let i=0;i<optLength;i++){
-        const option=new  Option({
-          option_name:req.body.Options[i].option_name,
-          IsAnswer:req.body.Options[i].IsAnswer,
+      let optLength = req.body.Options.length;
+      for (let i = 0; i < optLength; i++) {
+        const option = new Option({
+          option_name: req.body.Options[i].option_name,
+          IsAnswer: req.body.Options[i].IsAnswer,
           Question: result._id
         });
-          const result2 = await option.save();
-           result3 = await Question.findByIdAndUpdate({
-            _id: result._id
-          }, {
-            $push: {
-              Options: result2._id
-            }
-          });  
-        }
+        const result2 = await option.save();
+        result3 = await Question.findByIdAndUpdate({
+          _id: result._id
+        }, {
+          $push: {
+            Options: result2._id
+          }
+        });
+      }
       result3 ? res.status(200).send({
           message: 'Questions are saved',
           res: result
@@ -309,9 +310,60 @@ res.send(error);
           message: "questions are not getting",
           result: result
         })
-    } catch (error) { 
+    } catch (error) {
       throw error;
     }
+  },
+  addMarks: async (req, res) => {
+    try {
+      const marks = new Marks({
+        User: req.params.userId,
+        Subjects : req.params.subjectId,
+        marks: req.body.marks
+      });
+      let result1 = await marks.save();
+      let result2 = await User.findByIdAndUpdate({
+        _id: req.params.userId
+      }, {
+        $push: {
+          Marks: result1._id
+        }
+      });
+      result2 ? res.status(200).send({
+          message: 'Marks are saved',
+          res: result2
+        }) :
+        res.status(422).send({
+          message: 'Marks are not saved',
+          res:result2
+        });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
+  getMarks:async(req,res)=>{
+    try {
+      let result=await User.find({
+        _id:req.params.userId
+      }).populate({
+        path:'Marks',
+        populate:{
+          path:'Subjects'
+        }
+      });
+    result ? res.status(200).send({
+      message:'getting the user marks',
+      res:result
+    }) :
+    res.status(422).send({
+      message:'not getting the users marks',
+      res:result
+    })  
+    } catch (error) {
+      res.send(error)
+    }
+    
   }
   // addMoreQuestion: async (req, res) => {
   //   const newQuestion = req.body;
