@@ -106,7 +106,6 @@
           <button type="submit" class="btn btn-primary" (click)="submitForm(nestedForm.value)">Submit</button>
         </div>
         </form>
-      
     </div>
   </div>
   </div>
@@ -114,56 +113,3 @@
 </body>
 
 
-<!-- Add a new pannel -->
-<!-- <div class="panel panel-default" *ngFor="let newQues of QuesService.getQuestions() let i=index">
-                <div class="panel-body">
-                  <div class="form-group base">
-                        <a (click)="removeQuestion(newQues)">
-                                <span class="glyphicon glyphicon-trash"></span>
-                              </a>
-                              <br>
-                    <label>Enter the question {{newQues.id}}</label>
-                    <input type="text" class="form-control" formControlName="name" value="{{sampleString}}" placeholder="Enter question">
-                    <button class="btn btn-primary" type="button" (click)="AddAnotherOptions(newQues.id)">Add Options</button>
-                    <div *ngFor="let option of QuesService.getOptions()">
-                      <input type="text" class="form-control options" formControlName="name" placeholder="Enter the options">
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-
-              <!-- Classes: [{
-                class_name: {
-                type: String,
-                required: true
-                },
-                subjects: [{
-                subject_name: {
-                type: String,
-                required: true
-                },
-                Chapters: [{
-                chapter_name: {
-                type: String,
-                required: true
-                },
-                Questions: [{
-                question_name: {
-                type: String,
-                required: true
-                },
-                Options: [{
-                option_name: {
-                type: String,
-                required: true
-                },
-                IsAnswer: {
-                type: String,
-                required: true
-                }
-                }]
-                }]
-                }],
-                }],
-                }]
-                 -->

@@ -45,7 +45,11 @@ const UserSchema =mongoose.Schema({
     },
     class:{
         type:String
-    }
+    },
+    Marks: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Marks'
+    }]
 });
 const User =module.exports = mongoose.model('User',UserSchema);
 
