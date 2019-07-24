@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
 import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-quiz-instructions',
   templateUrl: './quiz-instructions.component.html',
@@ -17,7 +18,11 @@ export class QuizInstructionsComponent implements OnInit {
     if(this.authService.loggedIn()){
       this.role=this.authService.getUserDetails()
       if(this.role==="student"){
-        this.router.navigate(['quizInstruction']);
+        if(this.authService.quizLoggedIn()){
+          this.router.navigate(['studentQuiz']);  
+        }else{
+          this.router.navigate(['quizInstruction']);
+        }
       }
       else if(this.role==="teacher"){
         this.router.navigate(['teacherHome']);
@@ -40,8 +45,6 @@ export class QuizInstructionsComponent implements OnInit {
   }
   StartQuiz(){
     this.authService.createCookie();
-    
-
     this.router.navigate(['/studentQuiz']);
   }
 }

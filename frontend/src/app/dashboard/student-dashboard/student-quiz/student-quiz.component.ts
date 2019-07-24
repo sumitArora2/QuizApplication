@@ -35,19 +35,19 @@ export class StudentQuizComponent implements OnInit {
   active_question = 1;
   ShowAnswer=[];
   async ngOnInit() {
-    if(this.authService.loggedIn()){
-      this.role=this.authService.getUserDetails()
-      if(this.role==="student"){
-        this.router.navigate(['studentQuiz']);
-      }
-      else if(this.role==="teacher"){
-        this.router.navigate(['teacherHome']);
-      }else if(this.role==="principal"){
-        this.router.navigate(['princiHome']);
-      }else{
-        this.router.navigate(['login']);
-      }
-    }
+    // if(this.authService.loggedIn()){
+    //   this.role=this.authService.getUserDetails()
+    //   if(this.role==="student"){
+    //     this.router.navigate(['studentQuiz']);
+    //   }
+    //   else if(this.role==="teacher"){
+    //     this.router.navigate(['teacherHome']);
+    //   }else if(this.role==="principal"){
+    //     this.router.navigate(['princiHome']);
+    //   }else{
+    //     this.router.navigate(['login']);
+    //   }
+    // }
     this.NotAttempted = true;
     this.takeQuizForm = new FormGroup({
       'course': new FormControl(null, [Validators.required])

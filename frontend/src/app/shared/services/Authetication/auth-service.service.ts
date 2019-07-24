@@ -113,7 +113,7 @@ export class AuthServiceService {
    this.cookie.check("quiz");
  }
  quizLoggedIn(){
-   if(this.cookie.get('quiz')){
+   if(this.cookie.check('quiz')){
     console.log("here in the cookies") 
     return true;
    }
