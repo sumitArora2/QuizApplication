@@ -12,7 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./student-quiz.component.css']
 })
 export class StudentQuizComponent implements OnInit {
-
+  user:any;
   name = 'Angular 6';
   timeLeft: number =60;
   counter:number=5;
@@ -43,7 +43,7 @@ export class StudentQuizComponent implements OnInit {
     //   else if(this.role==="teacher"){
     //     this.router.navigate(['teacherHome']);
     //   }else if(this.role==="principal"){
-    //     this.router.navigate(['princiHome']);
+    //     this.router.navigate(['princiHome']);lo
     //   }else{
     //     this.router.navigate(['login']);
     //   }
@@ -99,7 +99,7 @@ export class StudentQuizComponent implements OnInit {
     this.active_question = questionIndex + 1;
   }
 
-  onSubmit() {
+  async onSubmit() {
     let marks = 0;
     for (let i = 0; i < this.questions_list.length; i++) {
       if(this.questions_list[i]['isSelected']!=null){
@@ -110,11 +110,11 @@ export class StudentQuizComponent implements OnInit {
         this.NotAttempted = false;
       }
       if(this.questions_list[i]['marks']==1){
-      
         this.RightAnswer+=1;
       }
     }
-    // console.log(marks);
+    console.log("marks",marks);
+    this.questionService.addMarks(marks);
     if (this.NotAttempted) {
       this.TotalAnswered = 0;
       this.RightAnswer = 0;

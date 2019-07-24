@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class QuestionsService {
   subject:any;
+  chapterId:any;
+  userId:any;
   constructor(private http:HttpClient) {
    }
 AddQuestion(id,question){
@@ -69,15 +71,29 @@ sendSubjectId(data){
 this.subject=data;
 }
 getchptrSubjct(){
-  
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
   return this.http.get('http://localhost:3000/api/getchapters/'+this.subject,{headers:headers}).toPromise();
 }
+
+sendChapterId(Uid,Cid){
+  this.chapterId=Cid;
+  this.userId=Uid;
+
+ }
+addMarks(marks){
+  console.log("this.userid",this.userId);
+  console.log("this.chapterId",this.chapterId);
+  console.log("marks",marks);
+  
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application/json');
+  return this.http.post('http://localhost:3000/api/marks/'+this.userId+'/'+this.chapterId,{'marks':marks},{headers:headers}).toPromise();
+}
 getMarks(userId){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application.json');
-  return this.http.get('http://localhost:3000/api/getMarks/'+userId,{headers:headers}).toPromise();
+  return this.http.get('http://localhost:3000/api/marks/'+userId,{headers:headers}).toPromise();
 }
 }
 

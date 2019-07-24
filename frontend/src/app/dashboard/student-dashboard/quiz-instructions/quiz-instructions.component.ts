@@ -1,3 +1,4 @@
+import { QuestionsService } from 'src/app/shared/services/QuestionsService/questions.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
@@ -12,7 +13,10 @@ export class QuizInstructionsComponent implements OnInit {
   timeLeft= 60;
   interval;
   role:any;
-  constructor(private router:Router,private authService:AuthServiceService,private cookie:CookieService) { }
+  user:any;
+  constructor(private router:Router,
+    private authService:AuthServiceService,
+    private cookie:CookieService,private quesService:QuestionsService) { }
 
   ngOnInit() {
     if(this.authService.loggedIn()){
@@ -43,7 +47,7 @@ export class QuizInstructionsComponent implements OnInit {
       }
     }, 1000);
   }
-  StartQuiz(){
+  async StartQuiz(){
     this.authService.createCookie();
     this.router.navigate(['/studentQuiz']);
   }

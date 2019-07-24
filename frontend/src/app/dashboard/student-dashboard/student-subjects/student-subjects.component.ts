@@ -12,6 +12,7 @@ import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-s
 export class StudentSubjectsComponent implements OnInit {
   chapters={};
   role:any;
+  user:any;
   constructor(private questionService:QuestionsService,private router:Router,private authService:AuthServiceService) { }
 
   async ngOnInit() {
@@ -21,6 +22,10 @@ export class StudentSubjectsComponent implements OnInit {
   // let response = await this.QuesService.getClass();
   // let classes = response['res'];
   console.log("this.chapters",this.chapters);  
+}
+async sendChapter(ChapId){
+  this.user=await JSON.parse(localStorage.getItem('user'));
+this.questionService.sendChapterId(this.user.id,ChapId);
 }
 
 }

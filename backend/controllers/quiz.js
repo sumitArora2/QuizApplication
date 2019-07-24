@@ -318,7 +318,7 @@ module.exports = {
     try {
       const marks = new Marks({
         User: req.params.userId,
-        Subjects : req.params.subjectId,
+        Chapters : req.params.chapterId,
         marks: req.body.marks
       });
       let result1 = await marks.save();
@@ -346,14 +346,15 @@ module.exports = {
     try {
       let result=await User.find({
         _id:req.params.userId
-      }).populate({
+       }).populate({
         path:'Marks',
         populate:{
-          path:'Subjects'
+          path:'Chapters'
         }
       });
+      
     result ? res.status(200).send({
-      message:'getting the user marks',
+      message:'getting the userssss marks',
       res:result
     }) :
     res.status(422).send({

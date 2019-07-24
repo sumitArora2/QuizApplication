@@ -72,7 +72,7 @@ router.route('/getDetails/:role').get(quiz.getDetails);
 
 router.route('/question').post(quiz.addQuestion);
 router.route('/question').get(quiz.getQuestions);
-router.route('/marks/:userId/:subjectId').post(quiz.addMarks);
+router.route('/marks/:userId/:chapterId').post(quiz.addMarks);
 router.route('/marks/:userId').get(quiz.getMarks);
 
 // router.route('/question/:classid').patch(quiz.addMoreQuestion);

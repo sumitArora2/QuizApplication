@@ -20,7 +20,8 @@
                 <p>{{chapter.chapter_name}}</p>
             </div>
           </div>
-          <a routerLink="/quizInstruction" class="card-footer text-white clearfix small z-1">
+    
+          <a routerLink="/quizInstruction" class="card-footer text-white clearfix small z-1" (click)="sendChapter(chapter._id)">
             <span class="float-left">Take a quiz</span>
             <span class="float-right">
               <i class="fas fa-angle-right"></i>
