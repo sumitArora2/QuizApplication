@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class QuestionsService {
   subject:any;
+  chapter:any; 
   chapterId:any;
   userId:any;
   constructor(private http:HttpClient) {
@@ -34,7 +35,7 @@ getClass(){
   return this.http.get('http://localhost:3000/api/getclass',{headers:headers}).toPromise();
 }
 getSpecificClass(data){
-  
+   
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
   return this.http.get(`http://localhost:3000/api/getSpecificClass/${data}`,{headers:headers}).toPromise();
@@ -70,16 +71,18 @@ AddChapter(data){
 sendSubjectId(data){
 this.subject=data;
 }
+sendChapterBYId(data){
+this.chapter=data;
+}
 getchptrSubjct(){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
   return this.http.get('http://localhost:3000/api/getchapters/'+this.subject,{headers:headers}).toPromise();
 }
-
+ 
 sendChapterId(Uid,Cid){
   this.chapterId=Cid;
   this.userId=Uid;
-
  }
 addMarks(marks){
   console.log("this.userid",this.userId);
@@ -95,6 +98,13 @@ getMarks(userId){
   headers.append('Content-Type','application.json');
   return this.http.get('http://localhost:3000/api/marks/'+userId,{headers:headers}).toPromise();
 }
+//add more questions in existing chapter
+   addMoreQuestion(id,morequs,chapid):Observable<any>{
+    let headers=new HttpHeaders();
+    headers.append('Content-Type','application/json');
+    return this.http.put(`http://localhost:3000/api/addmorequestion/${id}`+chapid,morequs,{headers:headers})
+    .pipe(map((res:Response)=>res));
+  }
 }
 
  

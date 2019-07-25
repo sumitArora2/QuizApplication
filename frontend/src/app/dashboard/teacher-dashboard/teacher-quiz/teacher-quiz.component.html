@@ -8,12 +8,15 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
+ 
 <body>   
   <div class="container">
     <img src="https://cdn.pixabay.com/photo/2017/02/17/15/25/quiz-2074324__340.png" alt="quiz img" height="90px"> 
+    <!-- <a routerLink="/teacherHome" -->
+    <img src="https://findicons.com/files/icons/77/icandy_junior_toolbar/128/back_2.png" alt="backImg" style="float: right; height: 90px;" routerLink="/teacherHome">
+    <!-- </a> -->
     <div class="panel panel-default">
-      <div class="panel-body">
+      <div class="panel-body"> 
         <form [formGroup]="nestedForm">
 
           <!-- before submit button -->
@@ -26,7 +29,7 @@
                   <!-- <sup>th</sup> -->
                   <option *ngFor="let cls of classes" value="{{cls._id}}">{{cls.class_name}}</option>
                 
-                </select>
+                </select> 
               </div> 
               <span *ngIf="!nestedForm.get('class').valid && nestedForm.get('class').touched" class="spanVaild">Please Select Class</span>
               <br>
@@ -39,13 +42,13 @@
             </select>
             </div>
             <span *ngIf="!nestedForm.get('subject').valid && nestedForm.get('subject').touched" class="spanVaild">Please Select Subject</span>
-            <div *ngIf="chaptersExist"> 
-              <br>
+            <div *ngIf="chaptersExist">  
+              <br>  
               <label for="chapter" class="col-md-3 control-label">Select Chapter<sup>*</sup></label>
               <!-- <input type="text" class="form-control" formControlName="dept_name" placeholder="Enter Subject"> -->
-              <select class="droup-down" formControlName="chapter" [(ngModel)]="chapter" [attr.disabled]="abc">
+              <select class="droup-down" formControlName="chapter" [(ngModel)]="chapter" [attr.disabled]="abc" (change)="getChapterId($event.target.value)">
                <option [ngValue]="undefined" disabled  selected>Select Chapter</option>
-               <option *ngFor="let chapter of this.chapters">{{chapter.chapter_name}}</option>
+               <option *ngFor="let chapter of this.chapters" value="{{chapter._id}}">{{chapter.chapter_name}}</option>
              </select>
             <button type="button" class="btn btn-primary" (click)="AddNewChapter()">Add New Chapter</button> 
             </div>

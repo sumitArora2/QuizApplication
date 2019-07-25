@@ -25,6 +25,7 @@ export class TeacherQuizComponent implements OnInit {
   chaptersExist:boolean;
   newChapter:boolean;
   role:any;
+  ExistingId:any;
   // makeQuizForm: FormGroup;
   constructor(public QuesService: QuestionsService, 
     private fb: FormBuilder,
@@ -58,7 +59,7 @@ export class TeacherQuizComponent implements OnInit {
    this.chaptersExist=false;
    this.newChapter=false;
   }
-
+ 
   async classChange(data){
     this.subjects=[];
     this.chaptersExist=false;
@@ -70,13 +71,21 @@ export class TeacherQuizComponent implements OnInit {
     console.log("in subject changes");
     await this.QuesService.sendSubjectId(data);
    let response=await this.QuesService.getchptrSubjct();
+   console.log("subject is ",data);
    this.chapters=response['res'];
-   if(this.chapters.length>0){
+   if(this.chapters.length>0){ 
     this.chaptersExist=true;
    }else{
      this.chaptersExist=false;
    }
   }
+  //get subject id
+  async getChapterId(data){
+    await this.QuesService.sendChapterBYId(data);
+    console.log(data);
+    this.ExistingId=data;
+  }
+
  async startQuizMakebtn(data){
     console.log(data);
     let chapterData=await this.QuesService.AddChapter(data);
@@ -128,14 +137,25 @@ export class TeacherQuizComponent implements OnInit {
     question[QuesIdx].Options.map(option => option.IsAnswer = false);
     question[QuesIdx].Options[OptIdx].IsAnswer = true;
   }
-  submitForm(data) {
+  submitForm(data) { 
+         
+    if(this.chaptersExist==true){
+      let QuestionsLength=data.Questions.length; 
+      let question=data.Questions;
+      for(let i=0;i<QuestionsLength;i++){
+        console.log("questions",question);
+          this.QuesService.addMoreQuestion(this.chapterId,this.ExistingId,question[i]);
+    }
+  } 
+  else{
     let QuestionsLength=data.Questions.length;
     let question=data.Questions;
     for(let i=0;i<QuestionsLength;i++){
       console.log("questions",question);
       this.QuesService.AddQuestion(this.chapterId,question[i]);
-    }
   }
+  }
+}
   AddNewChapter(){
     console.log("in add new chapter");
     this.chaptersExist=false;
