@@ -2,6 +2,19 @@
     <div class="card-header">
         <i class="fas fa-table"></i> Student Record</div>
     <div class="card-body">
+        <div class="search-box">    
+        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                    <div class="input-group">
+                        <input type="text" class="form-control" [(ngModel)]="filterText"
+                        placeholder="Search for..." name="search" aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" (click)="addstudent()">   
+                    <i class="fa fa-plus"></i>
+                  </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -10,7 +23,7 @@
                         <th>Email Address</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let detail of this.details">
+                <tbody *ngFor="let detail of this.details | mypipe:filterText">
                     <tr>
                         <td>{{detail.username}}  </td>
                         <td> {{detail.email}}  </td>

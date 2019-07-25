@@ -1,8 +1,5 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { Ques } from '../../../models/Ques';
 import { Injectable } from '@angular/core';
-import {map} from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

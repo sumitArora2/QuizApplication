@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from "ngx-bootstrap/modal";
 import { QuizGuard } from './guards/quizGuard/quiz.guard';
 import {CookieService} from 'ngx-cookie-service';
+import { MypipePipe } from './shared/pipe/mypipe.pipe';
 
 @NgModule({
   declarations: [

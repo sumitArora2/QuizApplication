@@ -9,13 +9,18 @@ import { Router } from '@angular/router';
 })
 export class DetailsComponent implements OnInit {
   details:any;
-
+  filterText:any;
   constructor(private profileService:ProfileServiceService,private router:Router) { }
 
   async ngOnInit() {
     let response=await this.profileService.getDetails(); 
     this.details=response['res'];
-   
+    console.log("this.details",this.details);
+  }
+  addstudent(){
+   console.log("data is here",this.filterText);
+   this.details.push({username:this.filterText,email:"sumit@gmail.com"});
+   this.filterText='';
   }
 
 }
