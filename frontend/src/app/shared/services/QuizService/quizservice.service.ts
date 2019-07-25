@@ -73,6 +73,12 @@ constructor(private http:HttpClient) { }
     return this.http.get('http://localhost:3000/api/getclass',{headers:headers})
     .pipe(map(res=>res));
   }
+  getSubjects(){
+    let headers=new HttpHeaders();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/api/getsubject',{headers:headers})
+    .pipe(map(res=>res));
+  }
 
 }
   
