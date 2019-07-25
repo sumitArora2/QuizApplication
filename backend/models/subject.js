@@ -14,14 +14,6 @@ const SubjectSchema = mongoose.Schema({
         Chapters: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Chapter'
-        }],
-        Questions: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Question'
-        }],
-        Options: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Option'
         }]
 });
 

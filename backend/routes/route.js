@@ -61,16 +61,22 @@ router.route('/updateClass/:classId').put(quiz.updateClass);
 router.route('/addsubject/:classId').patch(quiz.addSubject);
 router.route('/getsubject').get(quiz.getSubject);
 router.route('/addchapter/:classId/:subjectId').post(quiz.addChapter);
-router.route('/addquestion/:classId/:subjectId/:chapterId').post(quiz.addQuestion);
-router.route('/addoption/:questionId').post(quiz.addOption);
+router.route('/getchapters/:subjectId').get(quiz.getChapters);
+
+router.route('/addquestion/:chapterId').post(quiz.addQuestion);
+router.route('/getDetails/:role').get(quiz.getDetails);
+
+// router.route('/addoption/:questionId').post(quiz.addOption);
 // router.route('/signup').post(user.addUser);
 
 
 router.route('/question').post(quiz.addQuestion);
-
 router.route('/question').get(quiz.getQuestions);
-router.route('/question/:classid').patch(quiz.addMoreQuestion);
-router.route('/question/:subjectId/:questionId').patch(quiz.DeleteQuestion);
+router.route('/marks/:userId/:chapterId').post(quiz.addMarks);
+router.route('/marks/:userId').get(quiz.getMarks);
+
+// router.route('/question/:classid').patch(quiz.addMoreQuestion);
+// router.route('/question/:subjectId/:questionId').patch(quiz.DeleteQuestion);
 
 
 //Autheticate login user
@@ -105,7 +111,8 @@ router.post('/authenticate', (req,res,next)=>{
                         id:user._id,
                         username:user.username,
                         email:user.email,
-                        role:user.role
+                        role:user.role,
+                        class:user.class
                     }
                 });
                 
@@ -219,4 +226,4 @@ router.put('/profileupdate/:id', (req,res,next)=>{
 });
 
 
-module.exports=router;
+module.exports = router;

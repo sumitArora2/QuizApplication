@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const config = require('../config/database');
 const bcrypt=require('bcryptjs');
+var Schema =mongoose.Schema;
 const UserSchema =mongoose.Schema({
     username:{
         type:String,
@@ -45,7 +46,11 @@ const UserSchema =mongoose.Schema({
     },
     class:{
         type:String
-    }
+    },
+    Marks: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Marks'
+    }]
 });
 const User =module.exports = mongoose.model('User',UserSchema);
 

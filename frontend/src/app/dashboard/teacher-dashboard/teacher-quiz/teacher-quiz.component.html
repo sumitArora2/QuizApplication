@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 
 <head>
   <title>Bootstrap Example</title>
@@ -23,12 +21,11 @@
             <div>
                <label for="User Name" class="col-md-3 control-label">Enter Class<sup>*</sup></label>
                 <!-- <input type="text" class="form-control" formControlName="dept_name" placeholder="Enter Class" [attr.disabled]="abc"> -->
-                <select class="droup-down" formControlName="class" [(ngModel)]="class" [attr.disabled]="abc">
+                <select class="droup-down" formControlName="class" [(ngModel)]="class" [attr.disabled]="abc" (change)="classChange($event.target.value)">
                   <option [ngValue]="undefined" disabled  selected hidden>Select Class</option>
-                  <option value="5">5<sup>th</sup></option>
-                  <option value="6">6<sup>th</sup></option>
-                  <option value="9">9<sup>th</sup></option>
-                  <option value="10">10<sup>th</sup></option> 
+                  <!-- <sup>th</sup> -->
+                  <option *ngFor="let cls of classes" value="{{cls._id}}">{{cls.class_name}}</option>
+                
                 </select>
               </div> 
               <span *ngIf="!nestedForm.get('class').valid && nestedForm.get('class').touched" class="spanVaild">Please Select Class</span>
@@ -36,30 +33,32 @@
             <div> 
              <label for="User Name" class="col-md-3 control-label">Enter Subject<sup>*</sup></label>
              <!-- <input type="text" class="form-control" formControlName="dept_name" placeholder="Enter Subject"> -->
-             <select class="droup-down" formControlName="subject" [(ngModel)]="subject" [attr.disabled]="abc">
+             <select class="droup-down" formControlName="subject" [(ngModel)]="subject" [attr.disabled]="abc" (change)="subjectChange($event.target.value)">
               <option [ngValue]="undefined" disabled  selected>Select Subjects</option>
-              <option value="math">Math</option>
-              <option value="science">Science</option>
-              <option value="hindi">Hindi</option> 
-              <option value="english">English</option>
+              <option *ngFor="let sub of subjects" value="{{sub._id}}">{{sub.subject_name}}</option>
             </select>
             </div>
             <span *ngIf="!nestedForm.get('subject').valid && nestedForm.get('subject').touched" class="spanVaild">Please Select Subject</span>
-            <br>
-           <div> 
+            <div *ngIf="chaptersExist"> 
+              <br>
+              <label for="chapter" class="col-md-3 control-label">Select Chapter<sup>*</sup></label>
+              <!-- <input type="text" class="form-control" formControlName="dept_name" placeholder="Enter Subject"> -->
+              <select class="droup-down" formControlName="chapter" [(ngModel)]="chapter" [attr.disabled]="abc">
+               <option [ngValue]="undefined" disabled  selected>Select Chapter</option>
+               <option *ngFor="let chapter of this.chapters">{{chapter.chapter_name}}</option>
+             </select>
+            <button type="button" class="btn btn-primary" (click)="AddNewChapter()">Add New Chapter</button> 
+            </div>
+             <br>
+           <div *ngIf="newChapter">  
               <label for="User Name" class="col-md-3 control-label">Enter Chapter<sup>*</sup></label>
               <input type="text" class="form-control" formControlName="chapter" placeholder="Enter Chapter">
-              <!-- <select class="droup-down" formControlName="chapter" [(ngModel)]="chapter" [attr.disabled]="abc">
-                <option [ngValue]="undefined" disabled  selected>Select Chapter</option>
-                <option value="chapter1">Chapter 1</option>
-                <option value="chapter2">Chapter 2</option>
-                <option value="chapter3">Chapter 3</option> 
-                <option value="chapter4">Chapter 4</option>
-              </select> -->
+            <button class="btn btn-primary" type="button" (click)="CancelAddChapter()">Cancel</button>
             </div>
             <span *ngIf="!nestedForm.get('chapter').valid && nestedForm.get('chapter').touched" class="spanVaild">Please Select Chapter</span>
             <br> 
-          <button type="submit" class="btn btn-primary" id="startMakeQuiz" (click)="startQuizMakebtn()" [disabled]="!nestedForm.valid">Start Make Quiz</button>
+            <!-- <button type="submit" class="btn btn-primary" (click)="send(nestedForm.value)">Submit form Class</button> -->
+          <button type="submit" class="btn btn-primary" id="startMakeQuiz" (click)="startQuizMakebtn(nestedForm.value)" [disabled]="!nestedForm.valid">Start Make Quiz</button>
           </div>
 
           <!-- After submit button -->
@@ -107,67 +106,10 @@
           <button type="submit" class="btn btn-primary" (click)="submitForm(nestedForm.value)">Submit</button>
         </div>
         </form>
-      
     </div>
   </div>
   </div>
 
 </body>
 
-</html>
 
-
-
-<!-- Add a new pannel -->
-<!-- <div class="panel panel-default" *ngFor="let newQues of QuesService.getQuestions() let i=index">
-                <div class="panel-body">
-                  <div class="form-group base">
-                        <a (click)="removeQuestion(newQues)">
-                                <span class="glyphicon glyphicon-trash"></span>
-                              </a>
-                              <br>
-                    <label>Enter the question {{newQues.id}}</label>
-                    <input type="text" class="form-control" formControlName="name" value="{{sampleString}}" placeholder="Enter question">
-                    <button class="btn btn-primary" type="button" (click)="AddAnotherOptions(newQues.id)">Add Options</button>
-                    <div *ngFor="let option of QuesService.getOptions()">
-                      <input type="text" class="form-control options" formControlName="name" placeholder="Enter the options">
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-
-              <!-- Classes: [{
-                class_name: {
-                type: String,
-                required: true
-                },
-                subjects: [{
-                subject_name: {
-                type: String,
-                required: true
-                },
-                Chapters: [{
-                chapter_name: {
-                type: String,
-                required: true
-                },
-                Questions: [{
-                question_name: {
-                type: String,
-                required: true
-                },
-                Options: [{
-                option_name: {
-                type: String,
-                required: true
-                },
-                IsAnswer: {
-                type: String,
-                required: true
-                }
-                }]
-                }]
-                }],
-                }],
-                }]
-                 -->

@@ -1,6 +1,8 @@
 import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { QuestionsService } from 'src/app/shared/services/QuestionsService/questions.service';
+import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-school-classes',
@@ -12,11 +14,25 @@ export class SchoolClassesComponent implements OnInit {
   myForm:FormGroup
   editing:Boolean
   classId:any;
-  constructor(private fb:FormBuilder,private QuesService:QuestionsService) { 
+  role:any;
+  constructor(private fb:FormBuilder,private QuesService:QuestionsService,private router:Router,private authService:AuthServiceService) { 
   }
 
 
   async ngOnInit() {
+    // if(this.authService.loggedIn()){
+    //   this.role=this.authService.getUserDetails()
+    //   if(this.role==="student"){
+    //     this.router.navigate(['studentHome']);
+    //   }
+    //   else if(this.role==="teacher"){
+    //     this.router.navigate(['teacherHome']);
+    //   }else if(this.role==="principal"){
+    //     this.router.navigate(['SchoolClass']);
+    //   }else{
+    //     this.router.navigate(['login']);
+    //   }
+    // }
    this.myForm=this.fb.group({
     classname:""
    })

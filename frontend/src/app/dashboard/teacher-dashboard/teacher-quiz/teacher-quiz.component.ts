@@ -2,6 +2,8 @@ import { Ques } from '../../../models/Ques';
 import { QuestionsService } from '../../../shared/services/QuestionsService/questions.service';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teacher-quiz',
@@ -16,36 +18,70 @@ export class TeacherQuizComponent implements OnInit {
   Optslength: number
   abc:boolean;
   class:any
+  classes=[];
+  subjects=[];
+  chapters=[];
+  chapterId:any;
+  chaptersExist:boolean;
+  newChapter:boolean;
+  role:any;
   // makeQuizForm: FormGroup;
-  constructor(public QuesService: QuestionsService, private fb: FormBuilder) {
+  constructor(public QuesService: QuestionsService, 
+    private fb: FormBuilder,
+    private authService : AuthServiceService,private router:Router) {
   }
  
-  ngOnInit() {
-    // this.QuesService.getClass().subscribe(data=>{
-    // this.class=data;
-    // console.log("this.class",this.class['res']);
-    // });
+  async ngOnInit() {
+    if(this.authService.loggedIn()){
+      this.role=this.authService.getUserDetails()
+      if(this.role==="student"){
+        this.router.navigate(['studentHome']);
+      }
+      else if(this.role==="teacher"){
+        this.router.navigate(['teacherQuiz']);
+      }else if(this.role==="principal"){
+        this.router.navigate(['princiHome']);
+      }else{
+        this.router.navigate(['login']);
+      }
+    }
     this.Queslength = 1;
     this.Optslength = 1;
     this.nestedForm = this.fb.group({
-      dept_name: "",
       Questions: this.fb.array([this.Questions]),
-
-      'class' : new FormControl(null, [Validators.required]),
-      'subject' : new FormControl(null,[Validators.required]), 
-      'chapter' : new FormControl(null,[Validators.required])
+      'class' : new FormControl("", [Validators.required]),
+      'subject' : new FormControl("",[Validators.required]), 
+      'chapter' : new FormControl("",[Validators.required])
     });
-    // this.abc=false;
-    // console.log("forms==>>", this.nestedForm);
-    // this.makeQuizForm = new FormGroup({ 
-
-    //   'class' : new FormControl(null, [Validators.required]),
-    //   'subject' : new FormControl(null,[Validators.required]), 
-    //   'chapter' : new FormControl(null,[Validators.required])
-    // })
+    let response=await this.QuesService.getClass();
+    this.classes=response['res'] 
+   this.chaptersExist=false;
+   this.newChapter=false;
   }
 
-  startQuizMakebtn(){
+  async classChange(data){
+    this.subjects=[];
+    this.chaptersExist=false;
+  let response=await this.QuesService.getSpecificClass(data);
+  this.subjects= response['res'].Subjects;
+   
+}
+  async subjectChange(data){
+    console.log("in subject changes");
+    await this.QuesService.sendSubjectId(data);
+   let response=await this.QuesService.getchptrSubjct();
+   this.chapters=response['res'];
+   if(this.chapters.length>0){
+    this.chaptersExist=true;
+   }else{
+     this.chaptersExist=false;
+   }
+  }
+ async startQuizMakebtn(data){
+    console.log(data);
+    let chapterData=await this.QuesService.AddChapter(data);
+    // console.log("chapterData",chapterData);
+    this.chapterId=chapterData['res']._id;
     document.getElementById("onbuttonVisible").style.visibility="visible";
     document.getElementById("startMakeQuiz").style.visibility="hidden";
     // document.getElementsByClassName("droup-down").disabled;
@@ -80,9 +116,7 @@ export class TeacherQuizComponent implements OnInit {
   AddQuestions() {
     this.Queslength++;
     (this.nestedForm.get("Questions") as FormArray).push(this.Questions);
-
   }
-
   removeQuestions(QuesIdx) {
     console.log((this.nestedForm.get("Questions") as FormArray).removeAt(QuesIdx));
   }
@@ -93,32 +127,29 @@ export class TeacherQuizComponent implements OnInit {
     const question = (this.nestedForm.get("Questions") as FormArray).value;
     question[QuesIdx].Options.map(option => option.IsAnswer = false);
     question[QuesIdx].Options[OptIdx].IsAnswer = true;
-    // console.log((this.nestedForm.get("Questions") as FormArray).value)
   }
   submitForm(data) {
-    console.log(data);
-    // const QuesData={
-    //  dept_name:data.dept_name,
-    //  Questions:[
-    //    {
-    //      ques_name:data.question_name,
-    //      Options:[
-    //        {
-    //          opts_name:data.option_name,
-    //          IsAnswer:data.IsAnswer
-    //        }
-    //      ]
-    //    }
-    //  ]
-    // }
-   
-    this.QuesService.AddQuestion(data).subscribe(data=>{
-      if(data){
-      console.log("posted successfull now you can go");
-      }else{
-        console.log("data not posted");
-      }
+    let QuestionsLength=data.Questions.length;
+    let question=data.Questions;
+    for(let i=0;i<QuestionsLength;i++){
+      console.log("questions",question);
+      this.QuesService.AddQuestion(this.chapterId,question[i]);
+    }
+  }
+  AddNewChapter(){
+    console.log("in add new chapter");
+    this.chaptersExist=false;
+    this.newChapter=true;
+    this.nestedForm.patchValue({
+      'chapter':''
     })
+    // this.nestedForm = this.fb.group({
+    //   'chapter' : new FormControl(null,[Validators.required])
+    // });
+  }
+  CancelAddChapter(){
+    this.chaptersExist=true;
+    this.newChapter=false;
   }
 }
 

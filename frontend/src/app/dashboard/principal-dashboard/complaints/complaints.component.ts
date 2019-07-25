@@ -2,7 +2,7 @@ import { ComplaintServiceService } from './../../../shared/services/Complaints/c
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,Validators,FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FlashMessagesService } from 'angular2-flash-messages';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-complaints',
   templateUrl: './complaints.component.html',
@@ -12,7 +12,7 @@ export class ComplaintsComponent implements OnInit {
   complaintForm:FormGroup;
   complaints=[];
 
-  constructor(private complaintService:ComplaintServiceService,private router:Router,private flashService:FlashMessagesService) { }
+  constructor(private complaintService:ComplaintServiceService,private router:Router,private toastr:ToastrService) { }
 
   ngOnInit() {
 
@@ -22,9 +22,12 @@ export class ComplaintsComponent implements OnInit {
       document.getElementById("viewComplaintDiv").style.visibility="visible";
       document.getElementById("studentComplaintDiv").style.visibility="hidden";
     }
-    else{
+    else if(user.role==="student"){
       document.getElementById("viewComplaintDiv").style.visibility="hidden";
       document.getElementById("studentComplaintDiv").style.visibility="visible";
+    }
+    else{
+      this.router.navigate(['teacherHome']);
     }
 
     this.complaintForm = new FormGroup({
@@ -60,12 +63,12 @@ onComplaint(){
   console.log(this.complaintForm.value);
   this.complaintService.complaintStudent(this.complaintForm.value).subscribe(data=>{
     if(data.success){
-      this.flashService.show('your complaint is registered now', { cssClass: 'alert-success', timeout: 3000 });
+     this.toastr.success("your complaint is registered now");
      this.router.navigate(['studentHome']);
       
     }
     else{
-      this.flashService.show('something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
+      this.toastr.error("your complaint is not registred");
            this.router.navigate(['complaints']);
 
     }

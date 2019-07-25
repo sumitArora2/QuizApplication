@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-principal-home',
@@ -9,19 +9,31 @@ import { AuthServiceService } from 'src/app/shared/services/Authetication/auth-s
   styleUrls: ['./principal-home.component.css']
 })
 export class PrincipalHomeComponent implements OnInit {
+  role:any;
 
-  constructor(private authService:AuthServiceService,private router:Router,private flashMesssage:FlashMessagesService) { }
+  constructor(private authService:AuthServiceService,private router:Router,private toastr:ToastrService) { }
 
   ngOnInit() {
+    if(this.authService.loggedIn()){
+      this.role=this.authService.getUserDetails()
+      if(this.role==="student"){
+        this.router.navigate(['studentHome']);
+      }
+      else if(this.role==="teacher"){
+        this.router.navigate(['teacherHome']);
+      }else if(this.role==="principal"){
+        this.router.navigate(['princiHome']);
+      }else{
+        this.router.navigate(['login']);
+      }
+    }
+
     
   }
   Logoutclick()
   {
     this.authService.logout();
-    this.flashMesssage.show('you are logged out', {
-      cssClass:'alert-success',
-      timeout:3000
-    });
+    this.toastr.success('you are logged out');
     this.router.navigate(['/login']);
     return false;
   }

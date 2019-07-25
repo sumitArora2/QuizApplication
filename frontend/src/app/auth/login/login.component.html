@@ -1,137 +1,5 @@
-
-<!-- 
-<div class="setimg">
-<div class="container">    
-    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-        <div class="panel panel-info" >
-                <div class="panel-heading">
-                    <div class="panel-title">Sign In</div>
-                    <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
-                </div>     
-
-                <div style="padding-top:30px" class="panel-body" >
-
-                    <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                            
-                     <form id="loginform" class="form-horizontal" role="form" form [formGroup]="signinForm" (submit)="CheckUserAuth()">
-                                    
-                         <div style="margin-bottom: 25px" class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                 <input formControlName="email" type="text" name="email" id="email" class="form-control" placeholder="Email">                                        
-                                 <span *ngIf="!signinForm.get('email').valid && signinForm.get('email').touched" class="spanVaild">Please Enter Your valid Email Address</span>
-                    
-                         </div>
-                                
-                        <div style="margin-bottom: 25px" class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input formControlName="password" type="password" name="password" id="password" class="form-control" placeholder="Password">
-                                <span *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched" class="spanVaild">Please Enter Your Password</span>
-                    
-                        </div>
-                        <div style="margin-bottom: 25px" class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <select id="dropdown-menu1" formControlName="role" class="form-control" [(ngModel)]="select_role">
-                            
-                                        <option selected="select">Select Role</option>
-                                        <option value="student" id="student">Student</option>
-                                        <option value="teacher" id="teacher">Teacher</option>
-                                        <option value="principal" id="principal">Principal</option>
-                                      </select>   
-                            
-                        </div>
-                        
-                                
-                          <div class="input-group">
-                                  <div class="checkbox">
-                                    <label>
-                                      <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
-                                    </label>
-                                  </div>
-                                </div>
-
-
-                                <div style="margin-top:10px" class="form-group">
-
-
-                                 <div class="col-sm-12 controls">
-                                    
-                                      <button id="btn-signup" type="submit" class="btn btn-success"><i class="icon-hand-right"></i> Sign In</button>
-                                      <span style="margin-left:8px;">or</span>  
-                                      <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
-                                      
-                                    
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <div class="col-md-12 control">
-                                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
-                                            Don't have an account! 
-                                            <a [routerLink]="['/signup']">
-                                            Sign Up Here
-                                        </a>
-                                        </div> 
-                                    </div>
-                                </div>    
-                            </form>     
-
-
-
-                        </div>                     
-                    </div>  
-        </div>
-        
-    </div>
-
-</div>
- -->
- 
-
-    <link rel="stylesheet" href="../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">    
     <div class="main">
-
-        <!-- Sign up form
-        <section class="signup">
-            <div class="container">
-                <div class="signup-content">
-                    <div class="signup-form">
-                        <h2 class="form-title">Sign up</h2>
-                        <form method="POST" class="register-form" id="register-form">
-                            <div class="form-group">
-                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Your Name"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Your Email"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="pass" placeholder="Password"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                                <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
-                            </div>
-                            <div class="form-group form-button">
-                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="signup-image">
-                        <figure><img src="images/signup-image.jpg" alt="sing up image"></figure>
-                        <a href="#" class="signup-image-link">I am already member</a>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
-
         <section class="sign-in">
             <div class="container">
                 <div class="signin-content">
@@ -139,7 +7,6 @@
                         <figure><img src="../../../assets/images/portfolio/signin-image.jpg" alt="sing up image"></figure>
                         <a routerLink="/signup"class="signup-image-link">Create an account</a>
                     </div>
-
                     <div class="signin-form">
                         <h2 class="form-title">Sign in</h2>
                         <form id="loginform" class="form-horizontal" role="form" form [formGroup]="signinForm" (submit)="CheckUserAuth()">
@@ -155,9 +22,9 @@
                                 <span *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched" class="spanVaild">Please Enter Your Password</span>
                             </div>
                             <div  class="form-group">
-                                    <select id="dropdown-menu1" formControlName="role" class="form-control" >
+                                    <select id="dropdown-menu1" formControlName="role" class="form-control" [(ngModel)]="role"  >
                                     
-                                                <option selected="select">Select Role</option>
+                                                <option  [ngValue]="undefined" disabled>Select Role</option>
                                                 <option value="student" id="student">Student</option>
                                                 <option value="teacher" id="teacher">Teacher</option>
                                                 <option value="principal" id="principal">Principal</option>

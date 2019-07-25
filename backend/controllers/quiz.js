@@ -4,7 +4,31 @@ const Chapter = require('../models/chapter');
 const Question = require('../models/question');
 const Option = require('../models/option');
 const Class = require('../models/class');
-module.exports = { 
+const User = require('../models/user');
+const Marks=require('../models/marks');
+module.exports = {
+
+  getDetails: async (req, res) => {
+    try {
+      console.log("intis")
+      let role = req.params.role;
+      let result = await User.find({
+        role: role
+      });
+      console.log("result", result);
+      result ? res.status(200).send({
+          message: 'getting the results',
+          res: result
+        }) :
+        res.status(422).send({
+          message: 'results are not saved',
+          res: result
+        });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
 
   addClass: async (req, res) => {
     // console.log("in routing and received");
@@ -46,7 +70,7 @@ module.exports = {
     try {
       const result = await Class.findById({
         _id: req.params.classId
-      });
+      }).populate('Subjects');
       result ? res.status(200).send({
           message: 'particular class received',
           res: result
@@ -58,15 +82,14 @@ module.exports = {
     } catch (error) {
       throw error;
     }
-
   },
   deleteClass: async (req, res) => {
     try {
       let result = await Class.findByIdAndDelete({
         _id: req.params.classId
       });
-       result=await Subject.find({
-        Class_Id:req.params.classId
+      result = await Subject.find({
+        Class_Id: req.params.classId
       }).remove();
 
       result ? res.status(200).send({
@@ -175,15 +198,19 @@ module.exports = {
   },
   addChapter: async (req, res) => {
     try {
-      // console.log("hare rama here rama");
       const chapter = new Chapter({
-        Chapters: [{
-          chapter_name: req.body.chapter_name,
-          Classes: [req.params.classId],
-          Subjects: [req.params.subjectId]
-        }]
+        chapter_name: req.body.chapter_name,
+        Classes: [req.params.classId],
+        Subjects: [req.params.subjectId]
       });
-      const result = await chapter.save();
+      let result = await chapter.save();
+      let result2 = await Subject.findByIdAndUpdate({
+        _id: req.params.subjectId
+      }, {
+        $push: {
+          Chapters: result._id
+        }
+      });
       result ? res.status(200).send({
         message: 'chapters are saved',
         res: result
@@ -196,20 +223,48 @@ module.exports = {
       res.send(error);
     }
   },
+  //get chapter through the subject id
+  getChapters: async (req, res) => {
+    try {
+      let result = await Chapter.find({
+        Subjects: req.params.subjectId
+      });
+      result ? res.status(200).send({
+        message: 'Chapters received successfully',
+        res: result
+      }) : req.status(422).send({
+        message: 'chapters not received',
+        res: result
+      });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
   addQuestion: async (req, res) => {
     try {
-      // console.log("req.params.classId", req.params.classId);
-
       const question = new Question({
-        Questions: [{
-          question_name: req.body.question_name,
-          Classes: [req.params.classId],
-          Subjects: [req.params.subjectId],
-          Chapters: [req.params.chapterId]
-        }]
+        question_name: req.body.question_name,
+        Chapters: req.params.chapterId
       });
       const result = await question.save();
-      result ? res.status(200).send({
+      let optLength = req.body.Options.length;
+      for (let i = 0; i < optLength; i++) {
+        const option = new Option({
+          option_name: req.body.Options[i].option_name,
+          IsAnswer: req.body.Options[i].IsAnswer,
+          Question: result._id
+        });
+        const result2 = await option.save();
+        result3 = await Question.findByIdAndUpdate({
+          _id: result._id
+        }, {
+          $push: {
+            Options: result2._id
+          }
+        });
+      }
+      result3 ? res.status(200).send({
           message: 'Questions are saved',
           res: result
         }) :
@@ -221,46 +276,31 @@ module.exports = {
       res.send(error);
     }
   },
-  addOption: async (req, res) => {
-    try {
-      // console.log(req.body)
-      // return res.send("Done")
-      // let option = new Option({
-      //   Options: [{
-      //     option_name: req.body.option_name,
-      //     IsAnswer: req.body.IsAnswer,
-      //     Questions: [req.params.questionId]
-      //   }]
-      // });
-      // req.body.Options = req.body.Options.map(
-      //   (option)=>{
-      //     option['Subjects']=[req.params.questionId];
-      //     return option;
-      //   }
-      // );
-      let option = new Option({
-        Options: req.body.Options,
-        Question: [req.params.questionId]
-      });
-      console.log("req.bodysssssssssssss", req.body);
-      let result = await option.save();
-      result ? res.status(200).send({
-          message: 'Options are saved',
-          res: result
-        }) :
-        res.status(422).send({
-          message: 'Options are not saved',
-          res: result
-        })
+  // addOption: async (req, res) => {
+  //   try {
+  //     let option = new Option({
+  //       Options: req.body.Options,
+  //       Question: [req.params.questionId]
+  //     });
+  //     console.log("req.bodysssssssssssss", req.body);
+  //     let result = await option.save();
+  //     result ? res.status(200).send({
+  //         message: 'Options are saved',
+  //         res: result
+  //       }) :
+  //       res.status(422).send({
+  //         message: 'Options are not saved',
+  //         res: result
+  //       })
 
-    } catch (error) {
-      console.log(error);
-      res.send(error);
-    }
-  },
+  //   } catch (error) {
+  //     console.log(error);
+  //     res.send(error);
+  //   }
+  // },
   getQuestions: async (req, res) => {
     try {
-      const result = await Quiz.find();
+      const result = await Question.find().populate('Options').populate('Chapters');
       result ?
         res.status(200).send({
           message: "Here are the questions",
@@ -270,55 +310,107 @@ module.exports = {
           message: "questions are not getting",
           result: result
         })
-    } catch (error) { 
+    } catch (error) {
       throw error;
     }
   },
-  addMoreQuestion: async (req, res) => {
-    const newQuestion = req.body;
+  addMarks: async (req, res) => {
     try {
-      let result = await Quiz.findByIdAndUpdate({
-        _id: SubId
+      const marks = new Marks({
+        User: req.params.userId,
+        Chapters : req.params.chapterId,
+        marks: req.body.marks
+      });
+      let result1 = await marks.save();
+      let result2 = await User.findByIdAndUpdate({
+        _id: req.params.userId
       }, {
         $push: {
-          Questions: newQuestion
+          Marks: result1._id
         }
       });
-      res.status(200).send({
-        message: "adding more question",
-        result: result
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  },
-  DeleteQuestion: async (req, res) => {
-    var SubId = req.params.subjectId;
-    var QuesId = req.params.questionId;
-    console.log(QuesId, " ", SubId);
-    try {
-      const result = await Quiz.findByIdAndUpdate({
-        _id: SubId
-      }, {
-        $pull: {
-          Questions: {
-            _id: QuesId
-          }
-        }
-      });
-      result ? res.status(200).send({
-          message: 'data Deleted',
-          res: result
+      result2 ? res.status(200).send({
+          message: 'Marks are saved',
+          res: result2
         }) :
         res.status(422).send({
-          message: 'Data Not Deleted',
-          res: result
+          message: 'Marks are not saved',
+          res:result2
         });
     } catch (error) {
       console.log(error);
       res.send(error);
     }
+  },
+  getMarks:async(req,res)=>{
+    try {
+      let result=await User.find({
+        _id:req.params.userId
+       }).populate({
+        path:'Marks',
+        populate:{
+          path:'Chapters'
+        }
+      });
+      
+    result ? res.status(200).send({
+      message:'getting the userssss marks',
+      res:result
+    }) :
+    res.status(422).send({
+      message:'not getting the users marks',
+      res:result
+    })  
+    } catch (error) {
+      res.send(error)
+    }
+    
   }
+  // addMoreQuestion: async (req, res) => {
+  //   const newQuestion = req.body;
+  //   try {
+  //     let result = await Quiz.findByIdAndUpdate({
+  //       _id: SubId
+  //     }, {
+  //       $push: {
+  //         Questions: newQuestion
+  //       }
+  //     });
+  //     res.status(200).send({
+  //       message: "adding more question",
+  //       result: result
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // },
+  // DeleteQuestion: async (req, res) => {
+  //   var SubId = req.params.subjectId;
+  //   var QuesId = req.params.questionId;
+  //   console.log(QuesId, " ", SubId);
+  //   try {
+  //     const result = await Quiz.findByIdAndUpdate({
+  //       _id: SubId
+  //     }, {
+  //       $pull: {
+  //         Questions: {
+  //           _id: QuesId
+  //         }
+  //       }
+  //     });
+  //     result ? res.status(200).send({
+  //         message: 'data Deleted',
+  //         res: result
+  //       }) :
+  //       res.status(422).send({
+  //         message: 'Data Not Deleted',
+  //         res: result
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //     res.send(error);
+  //   }
+  // }
 };
 
 

@@ -1,3 +1,5 @@
+import { ModalModule } from 'ngx-bootstrap/';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardRouthingModule } from './dashboard-routing';
@@ -14,7 +16,8 @@ import { DetailsComponent } from './details/details.component';
     DashboardRouthingModule,
     PrincipalDashboardModule,
     StudentDashboardModule,
-    TeacherDashboardModule
+    TeacherDashboardModule,
+    ModalModule.forRoot()
   ]
 })
 export class DashboardModule { }

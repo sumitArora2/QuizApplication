@@ -1,0 +1,99 @@
+<div class="header">
+  <h4>Sample Test to understand the platform (MCQ)</h4>
+</div>
+<div class="headerBar">
+  <h5>Test and Platform Instructions</h5>
+  <h5>Test will start in : 00:{{timeLeft}}</h5>
+</div>
+<div id="desBeforeQuiz">
+  <!-- <div class="topnav"> 
+        <select class="droup-down" formControlName="course" [(ngModel)]="comp">
+                <option [ngValue]="undefined" disabled selected>Computer</option>
+                <option value="chapter1">C Programming</option>
+                <option value="chapter2">Functions and Recursion</option>
+                <option value="chapter3">Lists,Stacks and Queues</option>
+                <option value="chapter4">File Handling</option>
+        </select>
+        <select class="droup-down" formControlName="course" [(ngModel)]="math">
+                <option [ngValue]="undefined" disabled selected>Mathematics</option>
+                <option value="chapter1">Sets and Functions</option>
+                <option value="chapter2">Algebra</option>
+                <option value="chapter3">Calculus</option>
+                <option value="chapter4">Statistics</option>
+        </select>
+        <select class="droup-down" formControlName="course" [(ngModel)]="eng">
+                <option [ngValue]="undefined" disabled selected>English</option>
+                <option value="chapter1">Antonyms</option>
+                <option value="chapter2">Ordering of Words</option>
+                <option value="chapter3">Sentence Improvement</option>
+                <option value="chapter4">Ordering of Sentences</option>
+        </select> 
+        <select class="droup-down" formControlName="course" [(ngModel)]="log">
+                <option [ngValue]="undefined" disabled selected>Logical Reasoning</option>
+                <option value="chapter1">Number Series</option>
+                <option value="chapter2">Verbal Classification</option>
+                <option value="chapter3">Artificial Language</option>
+                <option value="chapter4">Letter and Symbol Series</option>
+                </select>
+</div>  -->
+
+
+  <div class="container description">
+    <h6>Platform Instructions:</h6>
+    <ul value="disc">
+      <li>The countdown timer at the top, left-hand side of the screen will display the time avaliable for you to
+        complete the examination.</li>
+      <li>Test will be submited automatically if the time expired.</li>
+      <li>If you have answerd a quetion you can click on the 'NEXT' button to move the next quetion. The answer will be
+        saved automatically.</li>
+      <li>If you want to see previous quetion you can click on the 'Previous' button to move back the previous quetion
+        and change the answer.</li>
+      <li>Don't refresh the page or click the browser back button when test is in progress.</li>
+      <li>Clicking browser back button will reload page and you loss your data.</li>
+      <li>If you have aswer the question you have you can click on the next button to move to next Question.</li>
+      <li>Clicking browser back button will reload page and you loss your data.</li>
+      <li>If sectional timer expires you wont be able to go back to that section</li>
+    </ul>
+    <h6>Color Codes</h6>
+    <img src="../../assets/images/quizimg.jpg" alt="colorcodeimg">
+    <h6>Test Instructions</h6>
+    <ul value="disc">
+      <li>You can retake this test at any number of times</li>
+      <li>You can pause and resume test at any point of time</li>
+      <li>Positive and nagetive marks will be mantion in each quetion</li>
+    </ul>
+  </div>
+  <div class="startQuizdiv">
+    <button type="button" class="btn btn-success StrtQuizbtn" data-toggle="modal" data-target="#exampleModal">Start Quiz</button>
+  </div>
+</div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Are you Ready to Start the Quiz?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-success" data-dismiss="modal" (click)="StartQuiz()">Start</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+<footer class="footer">
+  <h5>Test will start in : 00:{{timeLeft}}</h5>
+</footer>
+
+
+
+              
+            
