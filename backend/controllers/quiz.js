@@ -299,9 +299,10 @@ module.exports = {
        
     const question = new Question({
       question_name: req.body.question_name,
+      // Chapters: Chapter.findOneAndUpdate({_id:req.params.id})
       Chapters: req.params.chapterId
     });
-    $set:{
+
     console.log("qustions is  ",question);
     const result = await question.save();
     let optLength = req.body.Options.length;
@@ -320,7 +321,7 @@ module.exports = {
           Options: result2._id
         }
       });
-    }
+    
     }
     console.log("add questions works..................");
     result3 ? res.status(200).send({

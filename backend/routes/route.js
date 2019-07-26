@@ -75,8 +75,7 @@ router.route('/question').get(quiz.getQuestions);
 router.route('/marks/:userId/:chapterId').post(quiz.addMarks);
 router.route('/marks/:userId').get(quiz.getMarks);
 router.route('/allMarks/:role').get(quiz.getallStudentsMarks);
-
-router.route('/addmorequestion/chapterId').patch(quiz.addMoreQuestion);
+router.route('/addmorequestion/:chapterId').patch(quiz.addMoreQuestion);
 // router.route('/question/:classid').patch(quiz.addMoreQuestion);
 // router.route('/question/:subjectId/:questionId').patch(quiz.DeleteQuestion); 
 
