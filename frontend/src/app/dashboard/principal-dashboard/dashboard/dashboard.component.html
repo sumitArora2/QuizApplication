@@ -78,7 +78,7 @@
     </div>
 
     <!-- DataTables Example -->
-    <div class="card mb-3">
+    <div class="container-fluid">
         <div class="card-header">
             <i class="fas fa-table"></i> Student Record</div>
         <div class="card-body">
@@ -86,18 +86,22 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>marks</th>
-                            <th>Subject</th>
-                            <th>Attempt</th>
+                            <th>Username</th>
+                            <th>Subjects</th>
+                            <th>Marks</th>
+                           
+
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody *ngFor="let marks of this.classData;">
                         <tr>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
+                            <!-- <td>{{marks.username}}</td> -->
+                            <tr *ngFor="let chapter of marks.Marks;let i=index">
+                                    <td *ngIf="i==0">{{ marks.username}}</td>
+                                    <td *ngIf="i!=0"></td>
+                                    <td>{{chapter?.Chapters[0]?.chapter_name}}</td>
+                                    <td> {{chapter.marks}}</td>
                         </tr>
-
                     </tbody>
                 </table>
             </div>

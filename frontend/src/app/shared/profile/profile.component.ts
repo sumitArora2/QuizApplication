@@ -3,6 +3,8 @@ import { ProfileServiceService } from '../services/ProfileService/profile-servic
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +15,7 @@ export class ProfileComponent implements OnInit {
   userProfileForm: FormGroup;
   passwordForm: FormGroup;
   submitted=false;
-  constructor(private profileService:ProfileServiceService,private flashMessage:FlashMessagesService, public http: HttpClient) { }
+  constructor(private profileService:ProfileServiceService,private flashMessage:FlashMessagesService, public http: HttpClient, private router:Router,private _location: Location) { }
 
   ngOnInit() {
     this.userProfileForm = new FormGroup({
@@ -131,8 +133,21 @@ else{
 //         console.log("not send");
 //         this.flashMessage.show('Data not submited', { cssClass: 'alert-danger', timeout: 3000 });
 //       } 
-//   });
+//   }); 
 
 // }
-
+goBack(){ 
+  // let user=JSON.parse(localStorage.getItem('user'));
+  // console.log("user role show  ", user.role);
+  // if(user.role==="principal"){
+  //   this.router.navigate(['princiHome']); 
+  // }
+  // if(user.role==="teacher"){
+  //   this.router.navigate(['teacherHome']);
+  // } 
+  // if(user.role==="student"){
+  //   this.router.navigate(['studentHome']);
+  // } 
+  this._location.back();
+}
 }

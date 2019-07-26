@@ -6,8 +6,10 @@ import { Injectable } from '@angular/core';
 })
 export class QuestionsService {
   subject:any;
+  chapter:any; 
   chapterId:any;
   userId:any;
+  role:any;
   constructor(private http:HttpClient) {
    }
 AddQuestion(id,question){
@@ -31,7 +33,7 @@ getClass(){
   return this.http.get('http://localhost:3000/api/getclass',{headers:headers}).toPromise();
 }
 getSpecificClass(data){
-  
+   
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
   return this.http.get(`http://localhost:3000/api/getSpecificClass/${data}`,{headers:headers}).toPromise();
@@ -67,16 +69,18 @@ AddChapter(data){
 sendSubjectId(data){
 this.subject=data;
 }
+sendChapterBYId(data){
+this.chapter=data;
+}
 getchptrSubjct(){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
   return this.http.get('http://localhost:3000/api/getchapters/'+this.subject,{headers:headers}).toPromise();
 }
-
+ 
 sendChapterId(Uid,Cid){
   this.chapterId=Cid;
   this.userId=Uid;
-
  }
 addMarks(marks){
   console.log("this.userid",this.userId);
@@ -92,8 +96,21 @@ getMarks(userId){
   headers.append('Content-Type','application.json');
   return this.http.get('http://localhost:3000/api/marks/'+userId,{headers:headers}).toPromise();
 }
+getallStudentMarks(role){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application/json');
+  return this.http.get('http://localhost:3000/api/allMarks/'+role,{headers:headers}).toPromise();
 }
 
+//add more questions in existing chapter
+   addMoreQuestion(id,question){
+    let headers=new HttpHeaders();
+    headers.append('Content-Type','application-json');
+    return this.http.patch(`http://localhost:3000/api/addmorequestion/${id}`,question,{headers:headers}).toPromise();
+    // .pipe(map((res:Response)=>res));
+  } 
+} 
+ 
  
 
   //get the questions from the local storage

@@ -223,11 +223,12 @@ module.exports = {
       res.send(error);
     }
   },
+
   //get chapter through the subject id
   getChapters: async (req, res) => {
     try {
       let result = await Chapter.find({
-        Subjects: req.params.subjectId
+        Subjects: req.params.subjectId,
       });
       result ? res.status(200).send({
         message: 'Chapters received successfully',
@@ -241,15 +242,19 @@ module.exports = {
       res.send(error);
     }
   },
+  
   addQuestion: async (req, res) => {
     try {
+      console.log("add question try works..........");
       const question = new Question({
         question_name: req.body.question_name,
         Chapters: req.params.chapterId
       });
+      console.log("qustions is  ",question);
       const result = await question.save();
       let optLength = req.body.Options.length;
       for (let i = 0; i < optLength; i++) {
+        console.log("add questions for works!!!!!!!!!!!!!!!!!!!!!!");
         const option = new Option({
           option_name: req.body.Options[i].option_name,
           IsAnswer: req.body.Options[i].IsAnswer,
@@ -264,6 +269,7 @@ module.exports = {
           }
         });
       }
+      console.log("add questions works..................");
       result3 ? res.status(200).send({
           message: 'Questions are saved',
           res: result
@@ -276,6 +282,62 @@ module.exports = {
       res.send(error);
     }
   },
+
+  addMoreQuestion: async(req, res)=>{
+    try
+    {
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111",req.params.id);
+      console.log("............",req.params.chapterId);
+    //  let result1= await Chapter.findOneAndUpdate({_id:req.params.id},
+    //     {
+    //       $set: 
+    //       { 
+    //             question_name: req.body.question_name,
+    //             Chapters: req.params.chapterId
+    //       }
+    //     });
+       
+    const question = new Question({
+      question_name: req.body.question_name,
+      // Chapters: Chapter.findOneAndUpdate({_id:req.params.id})
+      Chapters: req.params.chapterId
+    });
+
+    console.log("qustions is  ",question);
+    const result = await question.save();
+    let optLength = req.body.Options.length;
+    for (let i = 0; i < optLength; i++) {
+      console.log("add more questions for works!!!!!!!!!!!!!!!!!!!!!!");
+      const option = new Option({
+        option_name: req.body.Options[i].option_name,
+        IsAnswer: req.body.Options[i].IsAnswer,
+        Question: result._id
+      });
+      const result2 = await option.save();
+      result3 = await Question.findByIdAndUpdate({
+        _id: result._id
+      }, {
+        $push: {
+          Options: result2._id
+        }
+      });
+    
+    }
+    console.log("add questions works..................");
+    result3 ? res.status(200).send({
+        message: 'Questions are saved',
+        res: result
+      }) :
+      res.status(422).send({
+        message: 'Questions are not saved'
+      });
+  } 
+  catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+  },
+
   // addOption: async (req, res) => {
   //   try {
   //     let option = new Option({
@@ -365,69 +427,30 @@ module.exports = {
       res.send(error)
     }
     
+  },
+  getallStudentsMarks:async(req,res)=>{
+    try{
+      let role= req.params.role
+      console.log("role",role);
+      let result =await User.find({
+        role:role
+      })
+    .populate({
+      path:'Marks',
+      populate:{
+        path:'Chapters'
+      }
+    });
+    console.log("result",result);
+    result ? res.status(200).send({
+      message:'getting user marks',
+      res:result
+    }):
+    res.status(422).send({
+      message:'not getting user marks'
+    });
+    }catch(error){
+      res.send(error)
+    }
   }
-  // addMoreQuestion: async (req, res) => {
-  //   const newQuestion = req.body;
-  //   try {
-  //     let result = await Quiz.findByIdAndUpdate({
-  //       _id: SubId
-  //     }, {
-  //       $push: {
-  //         Questions: newQuestion
-  //       }
-  //     });
-  //     res.status(200).send({
-  //       message: "adding more question",
-  //       result: result
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // },
-  // DeleteQuestion: async (req, res) => {
-  //   var SubId = req.params.subjectId;
-  //   var QuesId = req.params.questionId;
-  //   console.log(QuesId, " ", SubId);
-  //   try {
-  //     const result = await Quiz.findByIdAndUpdate({
-  //       _id: SubId
-  //     }, {
-  //       $pull: {
-  //         Questions: {
-  //           _id: QuesId
-  //         }
-  //       }
-  //     });
-  //     result ? res.status(200).send({
-  //         message: 'data Deleted',
-  //         res: result
-  //       }) :
-  //       res.status(422).send({
-  //         message: 'Data Not Deleted',
-  //         res: result
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //     res.send(error);
-  //   }
-  // }
-};
-
-
-// "Options":[{
-//   "option_name":"JavaScript is a lightweight, interpreted programming language.",
-//   "IsAnswer":"false"
-// },
-// {
-//   "option_name":"JavaScript is designed for creating network-centric applications",
-//   "IsAnswer":"false"
-// },
-// {
-//   "option_name":"JavaScript is complementary to and integrated with Java.",
-//   "IsAnswer":"false"
-// },
-// {
-//   "option_name":"All of the above.",
-//   "IsAnswer":"true"
-// }
-// ]
+}
