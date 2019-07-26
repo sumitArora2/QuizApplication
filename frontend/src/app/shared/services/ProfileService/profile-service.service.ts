@@ -30,7 +30,7 @@ export class ProfileServiceService {
      setrole(data){
        this.role=data;
      }
-    getDetails(){
+    getDetails(){ 
       let headers=new HttpHeaders();
       headers.append('Content-Type','application/json');
       return this.http.get('http://localhost:3000/api/getDetails/'+this.role,{headers:headers}).toPromise();

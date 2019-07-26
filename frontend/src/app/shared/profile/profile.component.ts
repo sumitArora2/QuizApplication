@@ -3,7 +3,7 @@ import { ProfileServiceService } from '../services/ProfileService/profile-servic
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import {Location} from '@angular/common';
 
 @Component({
@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
   userProfileForm: FormGroup;
   passwordForm: FormGroup;
   submitted=false;
-  constructor(private profileService:ProfileServiceService,private flashMessage:FlashMessagesService, public http: HttpClient, private router:Router,private _location: Location) { }
+  constructor(private profileService:ProfileServiceService,private flashMessage:FlashMessagesService, public http: HttpClient,private _location: Location) { }
 
   ngOnInit() {
     this.userProfileForm = new FormGroup({
@@ -90,7 +90,7 @@ export class ProfileComponent implements OnInit {
       console.log("vjhbjbj");
       if(data.success){ 
         console.log("updated data is: ",data);
-          this.flashMessage.show('Data is submitted successfully', { cssClass: 'alert-success', timeout: 3000 });
+        this.flashMessage.show('Data is submitted successfully', { cssClass: 'alert-success', timeout: 3000 });
         }else{
           console.log("not send");
           this.flashMessage.show('Data not submited', { cssClass: 'alert-danger', timeout: 3000 });

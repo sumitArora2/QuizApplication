@@ -62,7 +62,7 @@ router.route('/addsubject/:classId').patch(quiz.addSubject);
 router.route('/getsubject').get(quiz.getSubject);
 router.route('/addchapter/:classId/:subjectId').post(quiz.addChapter);
 router.route('/getchapters/:subjectId').get(quiz.getChapters);
-
+  
 router.route('/addquestion/:chapterId').post(quiz.addQuestion);
 router.route('/getDetails/:role').get(quiz.getDetails);
  

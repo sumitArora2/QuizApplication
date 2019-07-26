@@ -10,13 +10,19 @@ import {Location} from '@angular/common';
 })
 export class DetailsComponent implements OnInit {  
   details:any;
+  checkRole: String;
 
   constructor(private profileService:ProfileServiceService,private router:Router,private _location: Location) { }
-
+ 
   async ngOnInit() {
     let response=await this.profileService.getDetails(); 
     this.details=response['res'];
-   
+    console.log(this.details[0].role);
+    if(this.details[0].role === "teacher")
+      this.checkRole="Teacher";
+    else{
+      this.checkRole="Student";
+    }
   }
   goBack(){ 
     // let user=JSON.parse(localStorage.getItem('user'));
