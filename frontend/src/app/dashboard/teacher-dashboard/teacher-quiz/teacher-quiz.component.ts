@@ -84,13 +84,16 @@ export class TeacherQuizComponent implements OnInit {
     await this.QuesService.sendChapterBYId(data);
     console.log(data);
     this.ExistingId=data;
+    console.log("ExistingId is  ",this.ExistingId);
   }
 
  async startQuizMakebtn(data){
     console.log(data);
+    if(this.chaptersExist==false){
     let chapterData=await this.QuesService.AddChapter(data);
     // console.log("chapterData",chapterData);
     this.chapterId=chapterData['res']._id;
+    }
     document.getElementById("onbuttonVisible").style.visibility="visible";
     document.getElementById("startMakeQuiz").style.visibility="hidden";
     // document.getElementsByClassName("droup-down").disabled;
@@ -123,7 +126,11 @@ export class TeacherQuizComponent implements OnInit {
     question.get("Options").push(this.Options)
   }
   AddQuestions() {
-    this.Queslength++;
+    this.Queslength++; 
+    (this.nestedForm.get("Questions") as FormArray).push(this.Questions);
+  }
+  addMoreQuestion(){
+    this.Queslength++; 
     (this.nestedForm.get("Questions") as FormArray).push(this.Questions);
   }
   removeQuestions(QuesIdx) {
@@ -139,15 +146,18 @@ export class TeacherQuizComponent implements OnInit {
   }
   submitForm(data) { 
          
-    if(this.chaptersExist==true){
+    if(this.chaptersExist==true){  
+      console.log("if works");
       let QuestionsLength=data.Questions.length; 
       let question=data.Questions;
       for(let i=0;i<QuestionsLength;i++){
         console.log("questions",question);
-          this.QuesService.addMoreQuestion(this.chapterId,this.ExistingId,question[i]);
-    }
-  } 
+          this.QuesService.addMoreQuestion(this.ExistingId,question[i]);
+          console.log("end if..........");
+    }  
+  }  
   else{
+    console.log("else works");
     let QuestionsLength=data.Questions.length;
     let question=data.Questions;
     for(let i=0;i<QuestionsLength;i++){

@@ -99,14 +99,14 @@ getMarks(userId){
   return this.http.get('http://localhost:3000/api/marks/'+userId,{headers:headers}).toPromise();
 }
 //add more questions in existing chapter
-   addMoreQuestion(id,morequs,chapid):Observable<any>{
+   addMoreQuestion(id,question){
     let headers=new HttpHeaders();
-    headers.append('Content-Type','application/json');
-    return this.http.put(`http://localhost:3000/api/addmorequestion/${id}`+chapid,morequs,{headers:headers})
-    .pipe(map((res:Response)=>res));
-  }
-}
-
+    headers.append('Content-Type','application-json');
+    return this.http.patch(`http://localhost:3000/api/addmorequestion/${id}`,question,{headers:headers}).toPromise();
+    // .pipe(map((res:Response)=>res));
+  } 
+} 
+ 
  
 
   //get the questions from the local storage

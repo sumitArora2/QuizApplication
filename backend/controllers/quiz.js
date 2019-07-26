@@ -245,13 +245,16 @@ module.exports = {
   
   addQuestion: async (req, res) => {
     try {
+      console.log("add question try works..........");
       const question = new Question({
         question_name: req.body.question_name,
         Chapters: req.params.chapterId
       });
+      console.log("qustions is  ",question);
       const result = await question.save();
       let optLength = req.body.Options.length;
       for (let i = 0; i < optLength; i++) {
+        console.log("add questions for works!!!!!!!!!!!!!!!!!!!!!!");
         const option = new Option({
           option_name: req.body.Options[i].option_name,
           IsAnswer: req.body.Options[i].IsAnswer,
@@ -266,6 +269,7 @@ module.exports = {
           }
         });
       }
+      console.log("add questions works..................");
       result3 ? res.status(200).send({
           message: 'Questions are saved',
           res: result
@@ -282,57 +286,55 @@ module.exports = {
   addMoreQuestion: async(req, res)=>{
     try
     {
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111");
-      Chapter.findOneAndUpdate({_id:req.params.id},
-        {
-          $set: 
-          {
-                question_name: req.body.question_name,
-                Chapters: req.params.chapterId
-          }
-        },
-            async function(err,data){ 
-              if(err){
-                console.log("inside funcccccccccccccccccccccccccccccccccc");
-                res.json({success:false,msg:'fail to add questions'+err});
-              } 
-              else{
-                console.log("inside else@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                    const result = await data.save();
-                    let optLength = req.body.Options.length;
-                    for (let i = 0; i < optLength; i++) 
-                    {
-                      const option = new Option({
-                        option_name: req.body.Options[i].option_name,
-                        IsAnswer: req.body.Options[i].IsAnswer,
-                        Question: result._id
-                      });
-                      const result2 = await option.save();
-                      result3 = await Question.findByIdAndUpdate({
-                        _id: result._id
-                      }, {
-                        $push: {
-                          Options: result2._id
-                        }
-                      });
-                    }
-                    result3 ? res.status(200).send({
-                        message: 'Questions are saved',
-                        res: result
-                      }) :
-                      res.status(422).send({
-                        message: 'Questions are not saved'
-                      });
-              }     
-              
-            }
-        );     
-  }
-    catch{
-        console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",error);
-        res.send(error);
-      
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111",req.params.id);
+      console.log("............",req.params.chapterId);
+    //  let result1= await Chapter.findOneAndUpdate({_id:req.params.id},
+    //     {
+    //       $set: 
+    //       { 
+    //             question_name: req.body.question_name,
+    //             Chapters: req.params.chapterId
+    //       }
+    //     });
+       
+    const question = new Question({
+      question_name: req.body.question_name,
+      Chapters: req.params.chapterId
+    });
+    $set:{
+    console.log("qustions is  ",question);
+    const result = await question.save();
+    let optLength = req.body.Options.length;
+    for (let i = 0; i < optLength; i++) {
+      console.log("add more questions for works!!!!!!!!!!!!!!!!!!!!!!");
+      const option = new Option({
+        option_name: req.body.Options[i].option_name,
+        IsAnswer: req.body.Options[i].IsAnswer,
+        Question: result._id
+      });
+      const result2 = await option.save();
+      result3 = await Question.findByIdAndUpdate({
+        _id: result._id
+      }, {
+        $push: {
+          Options: result2._id
+        }
+      });
     }
+    }
+    console.log("add questions works..................");
+    result3 ? res.status(200).send({
+        message: 'Questions are saved',
+        res: result
+      }) :
+      res.status(422).send({
+        message: 'Questions are not saved'
+      });
+  } 
+  catch (error) {
+    console.log(error);
+    res.send(error);
+  }
   },
 
   // addOption: async (req, res) => {

@@ -17,5 +17,14 @@ export class DetailsComponent implements OnInit {
     this.details=response['res'];
    
   }
-
+  goBack(){ 
+    let user=JSON.parse(localStorage.getItem('user'));
+    console.log("user role show  ", user.role);
+    if(user.role==="principal"){
+      this.router.navigate(['princiHome']); 
+    }
+    if(user.role==="teacher"){
+      this.router.navigate(['teacherHome']);
+    } 
+  }
 }
