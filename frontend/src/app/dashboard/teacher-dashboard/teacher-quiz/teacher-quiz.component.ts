@@ -25,6 +25,7 @@ export class TeacherQuizComponent implements OnInit {
   chaptersExist:boolean;
   newChapter:boolean;
   role:any;
+  ExistingId:any;
   // makeQuizForm: FormGroup;
   constructor(public QuesService: QuestionsService, 
     private fb: FormBuilder,
@@ -58,7 +59,7 @@ export class TeacherQuizComponent implements OnInit {
    this.chaptersExist=false;
    this.newChapter=false;
   }
-
+ 
   async classChange(data){
     this.subjects=[];
     this.chaptersExist=false;
@@ -70,18 +71,29 @@ export class TeacherQuizComponent implements OnInit {
     console.log("in subject changes");
     await this.QuesService.sendSubjectId(data);
    let response=await this.QuesService.getchptrSubjct();
+   console.log("subject is ",data);
    this.chapters=response['res'];
-   if(this.chapters.length>0){
+   if(this.chapters.length>0){ 
     this.chaptersExist=true;
    }else{
      this.chaptersExist=false;
    }
   }
+  //get subject id
+  async getChapterId(data){
+    await this.QuesService.sendChapterBYId(data);
+    console.log(data);
+    this.ExistingId=data;
+    console.log("ExistingId is  ",this.ExistingId);
+  }
+
  async startQuizMakebtn(data){
     console.log(data);
+    if(this.chaptersExist==false){
     let chapterData=await this.QuesService.AddChapter(data);
     // console.log("chapterData",chapterData);
     this.chapterId=chapterData['res']._id;
+    }
     document.getElementById("onbuttonVisible").style.visibility="visible";
     document.getElementById("startMakeQuiz").style.visibility="hidden";
     // document.getElementsByClassName("droup-down").disabled;
@@ -114,7 +126,11 @@ export class TeacherQuizComponent implements OnInit {
     question.get("Options").push(this.Options)
   }
   AddQuestions() {
-    this.Queslength++;
+    this.Queslength++; 
+    (this.nestedForm.get("Questions") as FormArray).push(this.Questions);
+  }
+  addMoreQuestion(){
+    this.Queslength++; 
     (this.nestedForm.get("Questions") as FormArray).push(this.Questions);
   }
   removeQuestions(QuesIdx) {
@@ -128,14 +144,28 @@ export class TeacherQuizComponent implements OnInit {
     question[QuesIdx].Options.map(option => option.IsAnswer = false);
     question[QuesIdx].Options[OptIdx].IsAnswer = true;
   }
-  submitForm(data) {
+  submitForm(data) { 
+         
+    if(this.chaptersExist==true){  
+      console.log("if works");
+      let QuestionsLength=data.Questions.length; 
+      let question=data.Questions;
+      for(let i=0;i<QuestionsLength;i++){
+        console.log("questions",question);
+          this.QuesService.addMoreQuestion(this.ExistingId,question[i]);
+          console.log("end if..........");
+    }  
+  }  
+  else{
+    console.log("else works");
     let QuestionsLength=data.Questions.length;
     let question=data.Questions;
     for(let i=0;i<QuestionsLength;i++){
       console.log("questions",question);
       this.QuesService.AddQuestion(this.chapterId,question[i]);
-    }
   }
+  }
+}
   AddNewChapter(){
     console.log("in add new chapter");
     this.chaptersExist=false;
