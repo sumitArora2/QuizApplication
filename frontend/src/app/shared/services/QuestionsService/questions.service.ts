@@ -12,6 +12,7 @@ export class QuestionsService {
   chapter:any; 
   chapterId:any;
   userId:any;
+  role:any;
   constructor(private http:HttpClient) {
    }
 AddQuestion(id,question){
@@ -98,6 +99,12 @@ getMarks(userId){
   headers.append('Content-Type','application.json');
   return this.http.get('http://localhost:3000/api/marks/'+userId,{headers:headers}).toPromise();
 }
+getallStudentMarks(role){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application/json');
+  return this.http.get('http://localhost:3000/api/allMarks/'+role,{headers:headers}).toPromise();
+}
+
 //add more questions in existing chapter
    addMoreQuestion(id,question){
     let headers=new HttpHeaders();

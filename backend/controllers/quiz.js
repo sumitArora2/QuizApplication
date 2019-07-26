@@ -427,69 +427,30 @@ module.exports = {
       res.send(error)
     }
     
+  },
+  getallStudentsMarks:async(req,res)=>{
+    try{
+      let role= req.params.role
+      console.log("role",role);
+      let result =await User.find({
+        role:role
+      })
+    .populate({
+      path:'Marks',
+      populate:{
+        path:'Chapters'
+      }
+    });
+    console.log("result",result);
+    result ? res.status(200).send({
+      message:'getting user marks',
+      res:result
+    }):
+    res.status(422).send({
+      message:'not getting user marks'
+    });
+    }catch(error){
+      res.send(error)
+    }
   }
-  // addMoreQuestion: async (req, res) => {
-  //   const newQuestion = req.body;
-  //   try {
-  //     let result = await Quiz.findByIdAndUpdate({
-  //       _id: SubId
-  //     }, {
-  //       $push: {
-  //         Questions: newQuestion
-  //       }
-  //     });
-  //     res.status(200).send({
-  //       message: "adding more question",
-  //       result: result
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // },
-  // DeleteQuestion: async (req, res) => {
-  //   var SubId = req.params.subjectId;
-  //   var QuesId = req.params.questionId;
-  //   console.log(QuesId, " ", SubId);
-  //   try {
-  //     const result = await Quiz.findByIdAndUpdate({
-  //       _id: SubId
-  //     }, {
-  //       $pull: {
-  //         Questions: {
-  //           _id: QuesId
-  //         }
-  //       }
-  //     });
-  //     result ? res.status(200).send({
-  //         message: 'data Deleted',
-  //         res: result
-  //       }) :
-  //       res.status(422).send({
-  //         message: 'Data Not Deleted',
-  //         res: result
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //     res.send(error);
-  //   }
-  // }
-};
-
-
-// "Options":[{
-//   "option_name":"JavaScript is a lightweight, interpreted programming language.",
-//   "IsAnswer":"false"
-// },
-// {
-//   "option_name":"JavaScript is designed for creating network-centric applications",
-//   "IsAnswer":"false"
-// },
-// {
-//   "option_name":"JavaScript is complementary to and integrated with Java.",
-//   "IsAnswer":"false"
-// },
-// {
-//   "option_name":"All of the above.",
-//   "IsAnswer":"true"
-// }
-// ]
+}
