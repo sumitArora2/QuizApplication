@@ -14,7 +14,7 @@ export class MypipePipe implements PipeTransform {
     }
    return  value.filter(items=>{
     return  items.username.includes(arg)==true
-    })
+    });
   }
 
 }
