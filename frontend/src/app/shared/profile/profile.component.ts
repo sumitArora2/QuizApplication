@@ -142,7 +142,7 @@ goBack(){
   // if(user.role==="principal"){
   //   this.router.navigate(['princiHome']); 
   // }
-  // if(user.role==="teacher"){
+  // if(user.role==="teacher"){ 
   //   this.router.navigate(['teacherHome']);
   // } 
   // if(user.role==="student"){
