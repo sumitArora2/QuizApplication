@@ -233,7 +233,7 @@
                     <th>Message</th> 
                 </tr>
                 </thead>
-            <tbody *ngFor="let complaint of complaints | mypipe:filterText">
+            <tbody *ngFor="let complaint of complaints">
                 <tr>
                     <td>{{complaint.username}}</td>
                             <td>{{complaint.lastname}}</td>
