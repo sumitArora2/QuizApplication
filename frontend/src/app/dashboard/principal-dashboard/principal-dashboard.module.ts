@@ -1,3 +1,5 @@
+import { MypipeModule } from './../../shared/pipe/mypipe/mypipe.module';
+import { MypipePipe } from '../../shared/pipe/mypipe/mypipe.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,7 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   imports: [
     CommonModule,
     RouterModule,
-    ReactiveFormsModule,FormsModule
+    ReactiveFormsModule,FormsModule,MypipeModule
   ]
 })
 export class PrincipalDashboardModule { }
