@@ -1,3 +1,4 @@
+import { MypipeModule } from './shared/pipe/mypipe/mypipe.module';
 import { ComplaintServiceService } from './shared/services/Complaints/complaint-service.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -20,7 +21,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from "ngx-bootstrap/modal";
 import { QuizGuard } from './guards/quizGuard/quiz.guard';
 import {CookieService} from 'ngx-cookie-service';
-import { MypipePipe } from './shared/pipe/mypipe.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +40,7 @@ import { MypipePipe } from './shared/pipe/mypipe.pipe';
     ReactiveFormsModule,
     AuthModule,
     DashboardModule,
+    MypipeModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),

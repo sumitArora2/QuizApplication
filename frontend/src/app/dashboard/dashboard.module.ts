@@ -1,4 +1,5 @@
-import { MypipePipe } from './../shared/pipe/mypipe.pipe';
+import { MypipeModule } from 'src/app/shared/pipe/mypipe/mypipe.module';
+
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/';
 
@@ -12,7 +13,6 @@ import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
-    MypipePipe,
   DetailsComponent],
   imports: [
     CommonModule,
@@ -21,6 +21,7 @@ import { DetailsComponent } from './details/details.component';
     StudentDashboardModule,
     TeacherDashboardModule,
     FormsModule,
+    MypipeModule,
     ModalModule.forRoot()
   ]
 })
