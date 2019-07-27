@@ -2,9 +2,9 @@ const mongoose= require('mongoose');
 
 //schema
 const complaintSchema = mongoose.Schema({
-    firstname:{
+    username:{
         type:String,
-        required:[true,'first name is required'],
+        required:[true,'user name is required'],
         maxLength:25
     },
     lastname:{

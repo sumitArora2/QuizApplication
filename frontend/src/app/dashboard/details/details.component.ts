@@ -33,7 +33,7 @@ export class DetailsComponent implements OnInit {
   }
   goBack(){ 
     // let user=JSON.parse(localStorage.getItem('user'));
-    // console.log("user role show  ", user.role);
+    // console.log("user role show  ", user.role); 
     // if(user.role==="principal"){
     //   this.router.navigate(['princiHome']); 
     // }

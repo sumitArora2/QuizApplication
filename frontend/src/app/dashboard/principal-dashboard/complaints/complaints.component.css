@@ -9,5 +9,51 @@
     position: absolute;
     width: 100%;
 } 
+th{
+  background-color: rgb(77, 77, 153);
+  color: white;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td{
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.recordText{
+  text-align: center;
+  color:rgb(77, 77, 153);
+}
+img{
+  /* position: all; */
+  float: left; 
+  height: 70px;
+  width: 90px;
+}
+h2{
+  font-size: 3rem;
+  text-align: center;
+  color: rgb(77, 77, 153);
+  /* position: absolute; */
+  width: 93%;
+  margin-left: 7%;
+}
+.search-box{
+  /* margin-top: 10px; */
+  /* margin-bottom: 10px; */
+  float: right;
+  /* position: relative; */
+
+}
+
 
 
