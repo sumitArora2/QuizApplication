@@ -22,6 +22,24 @@ table {
     text-align: center;
     color:rgb(77, 77, 153);
   }
+  img{
+    /* position: all; */
+    float: left; 
+    height: 70px;
+    width: 90px;
+  }
   h2{
     font-size: 3rem;
+    text-align: center;
+    color: rgb(77, 77, 153);
+    position: absolute;
+    width: 93%;
+    margin-left: 7%;
   }
+.search-box{
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
+    float: right;
+    position: relative;
+
+}

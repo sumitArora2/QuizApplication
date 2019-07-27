@@ -18,10 +18,5 @@ export class StuDashoardComponent implements OnInit {
   let respone=await this.QuesService.getMarks(this.user.id);
   this.classData=respone['res']; 
   this.marksData=this.classData[0].Marks;
-  // console.log(this.marksData);
-  console.log("marks",this.marksData);
-  console.log("this.classData[0].Marks[0].Chapters[0].chapter_name",this.classData[0].Marks[0].Chapters[0].chapter_name);
-  console.log("this.classData[0].Marks[0].Chapters[0].chapter_name",this.classData[0].Marks[1].Chapters[0].chapter_name);
 }
-
 }

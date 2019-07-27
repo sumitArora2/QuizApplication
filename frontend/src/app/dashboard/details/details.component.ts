@@ -12,6 +12,7 @@ export class DetailsComponent implements OnInit {
   details:any;
   checkRole: String;
 
+  filterText:any;
   constructor(private profileService:ProfileServiceService,private router:Router,private _location: Location) { }
  
   async ngOnInit() {
@@ -23,6 +24,12 @@ export class DetailsComponent implements OnInit {
     else{
       this.checkRole="Student";
     }
+    console.log("this.details",this.details);
+  }
+  addstudent(){
+   console.log("data is here",this.filterText);
+  //  this.details.push({username:this.filterText,email:"sumit@gmail.com"});
+   this.filterText='';
   }
   goBack(){ 
     // let user=JSON.parse(localStorage.getItem('user'));
@@ -33,6 +40,7 @@ export class DetailsComponent implements OnInit {
     // if(user.role==="teacher"){
     //   this.router.navigate(['teacherHome']);
     // } 
+    console.log("go back works");
     this._location.back();
   }
 }

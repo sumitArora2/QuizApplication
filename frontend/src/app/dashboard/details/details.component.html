@@ -2,10 +2,26 @@
        
     <div class="card-header">
             <!-- <img src="https://imageog.flaticon.com/icons/png/512/0/340.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=FFFFFFFF" alt="backImg" style="float: left; height: 70px;width: 90px;" (click)="goBack()"> -->
-        <img src="https://library.kissclipart.com/20180920/be/kissclipart-red-back-icon-png-clipart-computer-icons-clip-art-718ad0fa645d5a5a.png" alt="backImg" style="float: left; height: 70px;width: 90px;" (click)="goBack()">
+        <img src="https://library.kissclipart.com/20180920/be/kissclipart-red-back-icon-png-clipart-computer-icons-clip-art-718ad0fa645d5a5a.png" alt="backImg" (click)="goBack()">
             <!-- <i class="fas fa-table"></i> -->
-       <div class="recordText"> 
-        <h2>{{this.checkRole}} Record</h2></div>
+       <!-- <div class="recordText">  -->
+        <h2>{{this.checkRole}} Record</h2>
+    <!-- </div> -->
+
+    <!-- Serach Bar -->
+    <div class="search-box">    
+        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                    <div class="input-group">
+                        <input type="text" class="form-control" [(ngModel)]="filterText"
+                        placeholder="Search {{this.checkRole}} Name..." name="search" aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" (click)="addstudent()">   
+                    <i class="fa fa-plus"></i>
+                  </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -21,8 +37,8 @@
                         <th>Father/Mother Name</th>
                         <th>Father Mobile No.</th>
                     </tr>
-                </thead> 
-                <tbody *ngFor="let detail of this.details">
+                </thead>
+                <tbody *ngFor="let detail of this.details | mypipe:filterText">
                     <tr>
                         <td>{{detail.username}}  </td>
                         <td> {{detail.lastname}} </td>
