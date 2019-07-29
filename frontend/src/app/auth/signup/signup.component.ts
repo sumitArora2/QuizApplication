@@ -24,7 +24,7 @@ export class SignupComponent implements OnInit {
       else if(this.role==="teacher"){
         this.router.navigate(['teacherHome']);
       }else if(this.role==="principal"){
-        this.router.navigate(['teacherHome']);
+        this.router.navigate(['princiHome']);
       }else{
         this.router.navigate(['login']);
       }
@@ -74,15 +74,48 @@ export class SignupComponent implements OnInit {
     console.log(this.signupForm.value)
     this.authService.registerUser(this.signupForm.value).subscribe(data=>{
       if(data.success){
-        console.log(data);
-       this.toastr.success("you are successfully registered");
-         this.router.navigate(['login']);
-      }else{
-        this.toastr.warning('something went wrong');
-        this.router.navigate(['signup']); 
-      } 
-    }) 
+   
+    // this.authService. AuthLogin(this.signupForm.value).subscribe(data1=>{
+    //   console.log("s@@@@@@@@@@@@@@@@@@", data1);
+    //   if(data1.success){ 
+    //     // console.log("succ data ",data);
+    //     // console.log('database ',data['user'].role);
+    //     // console.log('fff', this.signinForm.value.role);
+        
+        this.authService.storeUserData(data.token,data.user);
+      if(this.signupForm.value.role ==='student' && data['user'].role ==='student'){
+          // console.log("student data ", data);
+          this.toastr.success(' student are succesfully logged in'); 
+        this.router.navigate(['studentHome']);
+        
+      }
+      else if(this.signupForm.value.role ==='principal' && data['user'].role ==='principal'){
+        console.log("principal data ", data);
+        this.toastr.success(' principal are succesfully logged  in');
+      this.router.navigate(['princiHome']);
+      
+    }
+    else if(this.signupForm.value.role ==='teacher' && data['user'].role ==='teacher'){
+        console.log("teacher data ", data);
+        this.toastr.success(' teacher are succesfully logged  in');
+      this.router.navigate(['teacherHome']);
+      
+    }
+    else{ 
+      // console.log(data);
+      this.toastr.error(' you are not logged in');
+      this.router.navigate(['signup'])
+      
+    } 
   }
+  else{ 
+    // console.log(data);
+    this.toastr.error(' you are not logged in');
+    this.router.navigate(['signup'])
+    
+  } 
+});
+  } 
 
   roleOnChange(changedata){ 
     console.log(changedata);
