@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
 
-    <!-- Breadcrumbs-->
+    <!-- Breadcrumbs--> 
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="#">Dashboard</a>
@@ -80,7 +80,24 @@
     <!-- DataTables Example -->
     <div class="container-fluid">
         <div class="card-header">
-            <i class="fas fa-table"></i> Student Record</div>
+            <i class="fas fa-table"></i> 
+            Student Record
+             <!-- Serach Bar -->
+    <div class="search-box">    
+            <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="filterText"
+                            placeholder="Search Students Name..." name="search" aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" (click)="studentMarks()"  style="background-color: black;">   
+                            <i class="fas fa-search"></i>
+                      </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        </div>
+           
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -93,7 +110,7 @@
 
                         </tr>
                     </thead>
-                    <tbody *ngFor="let marks of this.classData;">
+                    <tbody *ngFor="let marks of this.classData | mypipe:filterText">
                         <tr>
                             <!-- <td>{{marks.username}}</td> -->
                             <tr *ngFor="let chapter of marks.Marks;let i=index">

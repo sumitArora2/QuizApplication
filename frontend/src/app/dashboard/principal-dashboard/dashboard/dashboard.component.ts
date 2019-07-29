@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   classData;
   marksData;
 userName;
+  filterText: any;
   constructor(private profileService:ProfileServiceService,private questionService:QuestionsService) { }
 
 
@@ -29,5 +30,9 @@ async sendDetails(data){
   // console.log("data is here",data);
   // let response=await this.profileService.getDetails(data);
   this.profileService.setrole(data);
+}
+studentMarks(){
+  console.log("data is here",this.filterText);
+   this.filterText='';
 }
 }
