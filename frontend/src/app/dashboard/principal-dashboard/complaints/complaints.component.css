@@ -49,11 +49,21 @@ h2{
 }
 .search-box{
   /* margin-top: 10px; */
-  /* margin-bottom: 10px; */
+  /* margin-bottom: 10px; */ 
   float: right;
   /* position: relative; */
 
 }
-
+.card-header{
+border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+height: 100px;
+}
+.buttonClass{
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
 
 
