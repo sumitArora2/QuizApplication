@@ -65,7 +65,6 @@ export class TeacherQuizComponent implements OnInit {
     this.chaptersExist=false;
   let response=await this.QuesService.getSpecificClass(data);
   this.subjects= response['res'].Subjects;
-   
 }
   async subjectChange(data){
     console.log("in subject changes");

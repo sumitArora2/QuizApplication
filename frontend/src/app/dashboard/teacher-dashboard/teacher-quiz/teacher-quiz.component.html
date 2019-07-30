@@ -60,7 +60,6 @@
             </div>
             <span *ngIf="!nestedForm.get('chapter').valid && nestedForm.get('chapter').touched" class="spanVaild">Please Select Chapter</span>
             <br> 
-            <!-- <button type="submit" class="btn btn-primary" (click)="send(nestedForm.value)">Submit form Class</button> -->
           <button type="submit" class="btn btn-primary" id="startMakeQuiz" (click)="startQuizMakebtn(nestedForm.value)" [disabled]="!nestedForm.valid">Start Make Quiz</button>
           </div>
 
