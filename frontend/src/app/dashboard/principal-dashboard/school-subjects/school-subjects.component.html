@@ -2,18 +2,18 @@
     <button class="btn btn-success" type="button" (click)="showsubjectForm()"> Add New Subjects</button>
    </div>
    <div *ngIf="showsubject">
-       <form [formGroup]="myForm">
-        <div class="form-group"> 
-            <label for="password" class="col-md-3 control-label">Select class</label>
+       <form [formGroup]="myForm" class="addsub"> 
+        <div class="form-group">  
+            <label for="password" class="col-md-3 control-label" style="font-weight: 700;">Select class</label>
                 <div class="col-md-9">
-                <select class="dropdown-menu1" formControlName="class">
-                    <option selected="Select the class">Select the class</option>        
-                    <option *ngFor="let cls of classes" value="{{cls._id}}">{{cls.class_name}}</option>
+                <select class="dropdown-menu1" formControlName="class" class="form-control">
+                  <option value="" disabled>Select the class</option>        
+                  <option *ngFor="let cls of classes" value="{{cls._id}}">{{cls.class_name}}</option>
                           </select>
                 </div>  
           </div>   
-        <div class="form-group">
-             <label for="pwd">Subjects Name:</label>
+        <div class="form-group" style="padding-left: 10px">
+             <label for="password" class="col-md-3 control-label" style="font-weight: 700;">Subjects Name:</label>
              <input type="text" class="form-control" placeholder="Enter the Subject name" formControlName="subjectname">
            </div>
            <button *ngIf="editing" type="submit" class="btn btn-primary" (click)="submitsubject()">Submit</button>

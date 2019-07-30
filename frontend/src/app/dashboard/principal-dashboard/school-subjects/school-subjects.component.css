@@ -27,3 +27,17 @@
 .table .controls i:hover {
     color: teal;
 }
+
+thead{
+background-color: rgb(77, 77, 153);
+color: white;
+}
+.addsub{
+border: #6559c5; 
+border-width: thick;
+border-style: inset;
+border-radius: 15px;
+padding: 20px;
+background: #dbd2e4;
+}
+

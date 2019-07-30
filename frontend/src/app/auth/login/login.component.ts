@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
         // console.log("succ data ",data);
         // console.log('database ',data['user'].role);
         // console.log('fff', this.signinForm.value.role);
-        console.log("data.user",data.user);
+        
         this.authservice.storeUserData(data.token,data.user);
       if(this.signinForm.value.role ==='student' && data['user'].role ==='student'){
           // console.log("student data ", data);
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['princiHome']);
       
     }
-    else if(data['user'].role === 'teacher' && data['user'].role ==='teacher'){
+    else if(this.signinForm.value.role ==='teacher' && data['user'].role ==='teacher'){
         console.log("teacher data ", data);
         this.toastr.success(' teacher are succesfully logged  in');
       this.router.navigate(['teacherHome']);
