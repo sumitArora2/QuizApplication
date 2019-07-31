@@ -1,3 +1,4 @@
+import { environment } from './../../../../environments/environment';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -15,55 +16,60 @@ export class QuestionsService {
 AddQuestion(id,question){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application-json');
-  return this.http.post(`http://localhost:3000/api/addquestion/${id}`,question,{headers:headers}).toPromise();
+  return this.http.post(`${environment.API}/addquestion/${id}`,question,{headers:headers}).toPromise();
 }
 getQuestions(){ 
   let headers=new HttpHeaders();  
   headers.append('Content-Type','application/json');
-  return this.http.get('http://localhost:3000/api/question',{headers:headers}).toPromise();
+  // 'http://localhost:3000/api/question'
+  return this.http.get(`${environment.API}/question`,{headers:headers}).toPromise();
 }
 addClass(classname){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.post('http://localhost:3000/api/addclass',{'class_name':classname},{headers:headers}).toPromise();
+  // 'http://localhost:3000/api/addclass'
+  return this.http.post( `${environment.API}/addclass`,{'class_name':classname},{headers:headers}).toPromise();
 }
 getClass(){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.get('http://localhost:3000/api/getclass',{headers:headers}).toPromise();
+  // 'http://localhost:3000/api/getclass'
+  return this.http.get( `${environment.API}/getclass`,{headers:headers}).toPromise();
 }
 getSpecificClass(data){
    
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.get(`http://localhost:3000/api/getSpecificClass/${data}`,{headers:headers}).toPromise();
+  return this.http.get(`${environment.API}/getSpecificClass/${data}`,{headers:headers}).toPromise();
 }
 updateClass(id,classname){
 let headers=new HttpHeaders();
 headers.append('Content-Type','applications/json');
-return this.http.put('http://localhost:3000/api/updateClass/'+id,{'class_name':classname},{headers:headers}).toPromise();
+// 'http://localhost:3000/api/updateClass/'+id
+return this.http.put( `${environment.API}/updateClass/${id}`,{'class_name':classname},{headers:headers}).toPromise();
 }
 deleteClass(id){
 let headers=new HttpHeaders();
 headers.append('Content-type','application/json');
 
-return this.http.delete(`http://localhost:3000/api/deleteClass/${id}`,{headers:headers}).toPromise();
+return this.http.delete(`${environment.API}/deleteClass/${id}`,{headers:headers}).toPromise();
 }
 
 AddSubject(data){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.patch(`http://localhost:3000/api/addsubject/${data.class}`,data,{headers:headers}).toPromise();
+  return this.http.patch(`${environment.API}/addsubject/${data.class}`,data,{headers:headers}).toPromise();
 }
 getSubjects(){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.get('http://localhost:3000/api/getsubject',{headers:headers}).toPromise();
+  // 'http://localhost:3000/api/getsubject'
+  return this.http.get( `${environment.API}/getsubject`,{headers:headers}).toPromise();
 }
 AddChapter(data){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.post(`http://localhost:3000/api/addchapter/${data.class}/${data.subject}`,{'chapter_name':data.chapter},{headers:headers}).toPromise();
+  return this.http.post(  `${environment.API}/addchapter/${data.class}/${data.subject}`,{'chapter_name':data.chapter},{headers:headers}).toPromise();
 }
 //for click on particular subject in student dashboard
 sendSubjectId(data){
@@ -75,7 +81,8 @@ this.chapter=data;
 getchptrSubjct(){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.get('http://localhost:3000/api/getchapters/'+this.subject,{headers:headers}).toPromise();
+  // 'http://localhost:3000/api/getchapters/'+this.subject
+  return this.http.get( `${environment.API}/getchapters/${this.subject}`,{headers:headers}).toPromise();
 }
  
 sendChapterId(Uid,Cid){
@@ -89,24 +96,27 @@ addMarks(marks){
   
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.post('http://localhost:3000/api/marks/'+this.userId+'/'+this.chapterId,{'marks':marks},{headers:headers}).toPromise();
+  // 'http://localhost:3000/api/marks/'+this.userId+'/'+this.chapterId
+  return this.http.post(`${environment.API}/marks/${this.userId}/${this.chapterId}`,{'marks':marks},{headers:headers}).toPromise();
 }
 getMarks(userId){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application.json');
-  return this.http.get('http://localhost:3000/api/marks/'+userId,{headers:headers}).toPromise();
+  // 'http://localhost:3000/api/marks/'+userId
+  return this.http.get( `${environment.API}/marks/${userId}`,{headers:headers}).toPromise();
 }
 getallStudentMarks(role){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.get('http://localhost:3000/api/allMarks/'+role,{headers:headers}).toPromise();
+  // 'http://localhost:3000/api/allMarks/'+role
+  return this.http.get( `${environment.API}/allMarks/${role}`,{headers:headers}).toPromise();
 }
 
 //add more questions in existing chapter
    addMoreQuestion(id,question){
     let headers=new HttpHeaders();
     headers.append('Content-Type','application-json');
-    return this.http.patch(`http://localhost:3000/api/addmorequestion/${id}`,question,{headers:headers}).toPromise();
+    return this.http.patch(  `${environment.API}/addmorequestion/${id}`,question,{headers:headers}).toPromise();
     // .pipe(map((res:Response)=>res));
   } 
 } 

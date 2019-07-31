@@ -16,11 +16,8 @@ export class StudentSubjectsComponent implements OnInit {
   constructor(private questionService:QuestionsService,private router:Router,private authService:AuthServiceService) { }
 
   async ngOnInit() {
-
   let response=await this.questionService.getchptrSubjct();
    this.chapters=response['res'];
-  // let response = await this.QuesService.getClass();
-  // let classes = response['res'];
   console.log("this.chapters",this.chapters);  
 }
 async sendChapter(ChapId){

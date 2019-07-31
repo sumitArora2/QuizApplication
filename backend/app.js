@@ -53,6 +53,6 @@ require('./config/passport')(passport);
 
 
 
-app.listen(port,()=>{
+app.listen(process.env.PORT||port,()=>{
 console.log('server start at port '+port);
 });
