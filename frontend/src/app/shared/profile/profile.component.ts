@@ -14,7 +14,9 @@ import {Location} from '@angular/common';
 export class ProfileComponent implements OnInit {
   userProfileForm: FormGroup;
   passwordForm: FormGroup;
+  ImgForm:FormGroup;
   submitted=false;
+  url: any;
   constructor(private profileService:ProfileServiceService,private flashMessage:FlashMessagesService, public http: HttpClient,private _location: Location) { }
 
   ngOnInit() {
@@ -35,6 +37,10 @@ export class ProfileComponent implements OnInit {
      'repassword' : new FormControl(null,[Validators.required])
   },  {validators: this.passwordConfirming('password','repassword')});
   
+this.ImgForm=new FormGroup({
+  'profileImg':new FormControl(null)
+})
+
   // get profile data
   let user=JSON.parse(localStorage.getItem('user'));
   // console.log("user id is: ",user.id);
@@ -53,14 +59,14 @@ export class ProfileComponent implements OnInit {
           'fmphone':data.data[0].fmphone,
           'location':data.data[0].location,
           'lastname':data.data[0].lastname,
-          'address':data.data[0].address 
+          'address':data.data[0].address,
         });
+        this.url= data.data[0].profileImg;
    }
    else{
      console.log("nnnnnnn");
    }
   });  
-
   }
  //Confirm Password
  passwordConfirming(password: string, repassword: string){
@@ -71,7 +77,7 @@ export class ProfileComponent implements OnInit {
       return{
        passwordConfirming: true
       };
-    }
+    } 
     return null;
   }
 }
@@ -149,5 +155,26 @@ goBack(){
   //   this.router.navigate(['studentHome']);
   // } 
   this._location.back();
+}
+SubmitImg(){
+  this.submitted=true;
+  
+  if (this.ImgForm.invalid) {
+    return;
+}
+else{
+  console.log("image path is ",this.ImgForm.value);
+  let user=JSON.parse(localStorage.getItem('user'));
+  this.profileService.updateUserProfile(this.ImgForm.value,user.id).subscribe(data=>{
+    console.log("vjhbjbj");
+    if(data.success){ 
+      console.log("updated data is: ",data);
+      this.flashMessage.show('Data is submitted successfully', { cssClass: 'alert-success', timeout: 3000 });
+      }else{
+        console.log("not send");
+        this.flashMessage.show('Data not submited', { cssClass: 'alert-danger', timeout: 3000 });
+      } 
+  });
+}
 }
 }

@@ -162,7 +162,7 @@ router.put('/profileupdate/:id', (req,res,next)=>{
     // console.log("email is ",email);
     console.log("id is ",req.params.id);
 
-    if(req.body.password != undefined){
+    if(req.body.password != undefined && req.body.profileImg == undefined){
         console.log("When body.password not null");
         
         // hash password
@@ -213,7 +213,7 @@ router.put('/profileupdate/:id', (req,res,next)=>{
     });
     });
     }
-    else{
+    else if(req.body.profileImg == undefined){
         console.log("When body.password is null");
         User.findOneAndUpdate({_id:req.params.id},
             {
@@ -225,7 +225,8 @@ router.put('/profileupdate/:id', (req,res,next)=>{
                     location:req.body.location,
                     address:req.body.address,
                     faterMotherName:req.body.faterMotherName,
-                    fmphone:req.body.fmphone
+                    fmphone:req.body.fmphone,
+                    profileImg:req.body.profileImg
                 }
             },
             function(err,data){
@@ -237,6 +238,24 @@ router.put('/profileupdate/:id', (req,res,next)=>{
             }
         });
     }
+    else{
+        console.log("When Image set");
+        User.findOneAndUpdate({_id:req.params.id},
+            {
+                $set:{
+                    profileImg:req.body.profileImg
+                }
+            },
+            function(err,data){
+            if(err){
+                res.json({success:false,msg:'fail to register'+err});
+            }
+            else{
+                res.json({success:true,msg:'user data updated: '+data});
+            }
+        });
+    }
+
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
 });
 

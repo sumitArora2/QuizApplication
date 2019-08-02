@@ -47,6 +47,9 @@ const UserSchema =mongoose.Schema({
     class:{
         type:String
     },
+    profileImg:{
+        type:String
+    },
     Marks: [{
         type: Schema.Types.ObjectId,
         ref: 'Marks'
