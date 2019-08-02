@@ -3,6 +3,7 @@ import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +18,16 @@ export class AuthServiceService {
   registerUser(user):Observable<any>{
     let headers =new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/api/signup',user,{headers:headers})
+    // 'http://localhost:3000/api/signup'
+    return this.http.post(`${environment.API}/signup`,user,{headers:headers})
     .pipe(map(res=>res));
   } 
 
   getClass():Observable<any>{
     let headers=new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/api/getclass',{headers:headers})
+    // 'http://localhost:3000/api/getclass'
+    return this.http.get( `${environment.API}/getclass`,{headers:headers})
     .pipe(map(res=>res));
   }
 
@@ -32,7 +35,8 @@ export class AuthServiceService {
   complaintStudent(student):Observable<any>{
     let headers =new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/api/complaint',student,{headers:headers})
+    // 'http://localhost:3000/api/complaint'
+    return this.http.post( `${environment.API}/complaint`,student,{headers:headers})
     .pipe(map(res=>res));
   }
 
@@ -44,7 +48,7 @@ export class AuthServiceService {
   AuthLogin(userauth):Observable<any>{ 
     let headers=new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/api/authenticate',userauth,{headers:headers})
+    return this.http.post(`${environment.API}/authenticate`,userauth,{headers:headers})
   .pipe(map(res=>res));
   }
   
@@ -93,7 +97,7 @@ export class AuthServiceService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:3000/api/profile',{ headers: headers })
+    return this.http.get('/profile',{ headers: headers })
       .pipe(map(res=>Response ));
   }  
   

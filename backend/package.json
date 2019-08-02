@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -11,6 +12,7 @@
     "bcryptjs": "*",
     "body-parser": "^1.19.0",
     "cors": "*",
+    "dotenv": "^8.0.0",
     "express": "*",
     "jsonwebtoken": "*",
     "mongoose": "^5.2.8",

@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from  'rxjs/operators';
@@ -13,13 +14,15 @@ export class ComplaintServiceService {
   complaintStudent(student):Observable<any>{
     let headers =new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/api/complaint',student,{headers:headers})
+    // 'http://localhost:3000/api/complaint'
+    return this.http.post( `${environment.API}/complaint`,student,{headers:headers})
     .pipe(map(res=>res));
   }
   getComplaint():Observable<any>{
     let headers=new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/api/getComplaint',{headers:headers})
+    // 'http://localhost:3000/api/getComplaint'
+    return this.http.get( `${environment.API}/getComplaint`,{headers:headers})
     .pipe(map(res=>res));
     
   }

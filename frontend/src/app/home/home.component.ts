@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router:Router,private authService:AuthServiceService,private toastr:ToastrService) { }
+  constructor(private router:Router,public authService:AuthServiceService,private toastr:ToastrService) { }
 
   ngOnInit() {
     console.log("this.authService.getUserDetails()",this.authService.getUserDetails());

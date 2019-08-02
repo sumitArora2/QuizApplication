@@ -11,10 +11,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class StudentHomeComponent implements OnInit {
   role: any;
-  Particularclass = {};
-  constructor(private authservice: AuthServiceService,
+  Particularclass={};
+  constructor(public authservice: AuthServiceService,
     private router: Router,
-    private toastr: ToastrService, private QuesService: QuestionsService) { }
+    private toastr: ToastrService, public QuesService: QuestionsService) { }
 
   async ngOnInit() {
     if (this.authservice.loggedIn()) {
@@ -24,12 +24,14 @@ export class StudentHomeComponent implements OnInit {
         let userclass = await this.authservice.getClassLocalStorage().class;
         let response = await this.QuesService.getClass();
         let classes = response['res'];
+        console.log("classes",classes);
+        console.log("userclass",userclass);
         for (let i = 0; i < classes.length; i++) {
           if (userclass == classes[i].class_name) {
             this.Particularclass=classes[i];
           }
         }
-        // console.log("this.class", this.Particularclass);
+        console.log("this.class", this.Particularclass);
       }
       else if (this.role === "teacher") {
         this.router.navigate(['teacherHome']);

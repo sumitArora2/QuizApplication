@@ -8,9 +8,10 @@ const passport=require('passport');
 const bcrypt=require('bcryptjs');
 const path=require('path');
 const cors=require('cors');
-
-
+const ENV=require('dotenv');
+ENV.config();
 const port=3000;
+
 
 mongoose.connect(config.database,{ useNewUrlParser:true });
 app.use(cors());
@@ -49,6 +50,9 @@ app.use(passport.session());
 
 require('./config/passport')(passport);
 
-app.listen(port,()=>{
+
+
+
+app.listen(process.env.PORT||port,()=>{
 console.log('server start at port '+port);
 });

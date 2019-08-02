@@ -1,3 +1,4 @@
+import { environment } from './../../../../environments/environment.prod';
 import { Injectable } from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
@@ -17,14 +18,16 @@ export class ProfileServiceService {
     getUserProfile(id):Observable<any>{
       let headers=new HttpHeaders();
       headers.append('Content-Type','application-json');
-      return this.http.get('http://localhost:3000/api/userprofile/'+id,{headers:headers})
+      // 'http://localhost:3000/api/userprofile/'+id
+      return this.http.get( `${environment.API}/userprofile/${id}`,{headers:headers})
       .pipe(map((res:Response)=>res));
     }
     //update user profile
     updateUserProfile(userData,id):Observable<any>{
       let headers=new HttpHeaders();
       headers.append('Content-Type','application/json');
-      return this.http.put('http://localhost:3000/api/profileupdate/'+id,userData,{headers:headers})
+      // 'http://localhost:3000/api/profileupdate/'+id
+      return this.http.put( `${environment.API}/profileupdate/${id}`,userData,{headers:headers})
       .pipe(map((res:Response)=>res));
     }
      setrole(data){
@@ -33,7 +36,8 @@ export class ProfileServiceService {
     getDetails(){ 
       let headers=new HttpHeaders();
       headers.append('Content-Type','application/json');
-      return this.http.get('http://localhost:3000/api/getDetails/'+this.role,{headers:headers}).toPromise();
+      // 'http://localhost:3000/api/getDetails/'+this.role
+      return this.http.get( `${environment.API}/getDetails/${this.role}`,{headers:headers}).toPromise();
     }
 
 } 
